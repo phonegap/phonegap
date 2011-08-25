@@ -3685,6 +3685,11 @@ var Connection = function() {
             }            
         },
         function(e) {
+            // should only fire this once
+            if (me._firstRun) {
+                me._firstRun = false;
+                PhoneGap.onPhoneGapConnectionReady.fire();
+            }            
             console.log("Error initializing Network Connection: " + e);
         });
 };
