@@ -30,7 +30,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-	<uses-sdk android:minSdkVersion="5" />
+    <uses-sdk android:minSdkVersion="5" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name"
     	android:debuggable="true">
