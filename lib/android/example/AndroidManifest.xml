@@ -30,6 +30,8 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+	<uses-sdk android:minSdkVersion="5" />
+
     <application android:icon="@drawable/icon" android:label="@string/app_name"
     	android:debuggable="true">
 		<activity android:name="cordovaExample" android:label="@string/app_name" 
@@ -45,6 +47,4 @@
         	</intent-filter>
         </activity>
     </application>
-
-	<uses-sdk android:minSdkVersion="5" />
 </manifest> 
