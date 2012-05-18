@@ -62,14 +62,15 @@
     <Compile Include="CordovaView.xaml.cs">
       <DependentUpon>CordovaView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cordova\BrowserMouseHelper.cs" />
     <Compile Include="Cordova\CommandFactory.cs" />
     <Compile Include="Cordova\Commands\BaseCommand.cs" />
-    <Compile Include="Cordova\Commands\Connection.cs" />
     <Compile Include="Cordova\Commands\DebugConsole.cs" />
     <Compile Include="Cordova\Commands\Device.cs" />
     <Compile Include="Cordova\Commands\File.cs" />
     <Compile Include="Cordova\Commands\FileTransfer.cs" />
     <Compile Include="Cordova\Commands\MimeTypeMapper.cs" />
+    <Compile Include="Cordova\Commands\NetworkStatus.cs" />
     <Compile Include="Cordova\Commands\Notification.cs" />
     <Compile Include="Cordova\CordovaCommandCall.cs" />
     <Compile Include="Cordova\DOMStorageHelper.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="Cordova\UI\AudioCaptureTask.cs" />
     <Compile Include="Cordova\UI\AudioRecorder.xaml.cs">
       <DependentUpon>AudioRecorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cordova\UI\NotificationBox.xaml.cs">
+      <DependentUpon>NotificationBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Cordova\UI\VideoCaptureTask.cs" />
     <Compile Include="Cordova\UI\VideoRecorder.xaml.cs">
@@ -121,6 +125,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Cordova\UI\AudioRecorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Cordova\UI\NotificationBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
