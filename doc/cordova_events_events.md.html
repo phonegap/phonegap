@@ -357,29 +357,43 @@ function onDeviceReady() {
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova <a href="cordova_device_device.md.html#Device">Device</a> Ready Example&lt;/title&gt;
-
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Call onDeviceReady when Cordova is loaded.
-    //
-    // At this point, the document has loaded but cordova-2.2.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
-    //
-    function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
-    }
 
-    // Cordova is loaded and it is now safe to make calls Cordova methods
-    //
-    function onDeviceReady() {
-        // Now safe to use the Cordova API
-    }
+    var app = {
+
+      // Application Constructor
+      initialize: function() {
+          this.bindEvents();
+      },
+
+      // Bind Event Listeners
+      //
+      // Bind any events that are required on startup. Common events are:
+      // 'load', 'deviceready', 'offline', and 'online'.
+      bindEvents: function() {
+          document.addEventListener('deviceready', this.onDeviceReady, false);
+      },
+
+      // deviceready Event Handler
+      //
+      // The scope of 'this' is the event. In order to call the 'receivedEvent'
+      // function, we must explicity call 'app.receivedEvent(...);'
+      onDeviceReady: function() {
+          navigator.alert('Hello Cordova!');
+          // Now safe to use the Cordova API
+      }
+    
+    };
+
+    app.initialize();
 
     &lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body onload="onLoad()"&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
