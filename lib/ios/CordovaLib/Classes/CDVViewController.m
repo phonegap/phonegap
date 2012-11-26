@@ -694,6 +694,9 @@
         }
     } else { // not iPad
         orientedLaunchImageFile = launchImageFile;
+        if (CDV_IsIPhone5()) {
+            center.y += MIN(statusBarFrame.size.width, statusBarFrame.size.height) / 2;
+        }
     }
 
     launchImage = [UIImage imageNamed:[[self class] resolveImageResource:orientedLaunchImageFile]];
