@@ -1311,13 +1311,12 @@ static NSDictionary* org_apache_cordova_contacts_defaultFields = nil;
         // get the temp directory path
         NSString* docsPath = [NSTemporaryDirectory ()stringByStandardizingPath];
         NSError* err = nil;
-        NSFileManager* fileMgr = [[NSFileManager alloc] init];
-        // generate unique file name
-        NSString* filePath;
-        int i = 1;
-        do {
-            filePath = [NSString stringWithFormat:@"%@/photo_%03d.jpg", docsPath, i++];
-        } while ([fileMgr fileExistsAtPath:filePath]);
+        NSString* filePath = [NSString stringWithFormat:@"%@/photo_XXXXX", docsPath];
+        char template[filePath.length + 1];
+        strcpy(template, [filePath cStringUsingEncoding:NSASCIIStringEncoding]);
+        char* filename = mktemp(template);
+        filePath = [NSString stringWithCString:filename encoding:NSASCIIStringEncoding];
+
         // save file
         if ([data writeToFile:filePath options:NSAtomicWrite error:&err]) {
             photos = [NSMutableArray arrayWithCapacity:1];
