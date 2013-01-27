@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -109,6 +113,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -143,11 +148,11 @@
 
 <ol>
 <li>
-<strong>Cordova 2.1.0</strong> or greater</li>
+<strong>Cordova 2.3.0</strong> or greater</li>
 <li>
 <strong>Xcode 4.5</strong> or greater</li>
 <li>
-<code>Cordova.plist</code> file (from a <a href="guide_command-line_index.md.html#Command-Line%20Usage_ios">newly created</a> Cordova project)</li>
+<code>config.xml</code> file (from a <a href="guide_command-line_index.md.html#Command-Line%20Usage_ios">newly created</a> Cordova project)</li>
 </ol>
 <h2>
 <a name="Embedding%20Cordova%20WebView%20on%20iOS_adding_cleaver_to_your_xcode_project_cordovalib_sub_project">Adding Cleaver to your Xcode project (CordovaLib sub-project)</a>
@@ -161,9 +166,9 @@
 <li>
 <strong>Navigate</strong> to the directory where you put the downloaded source above, using <strong>Terminal.app</strong>.</li>
 <li>
-<strong>Copy</strong> the <code>Cordova.plist</code> file into your project folder on disk (see <strong>Prerequisites</strong> above)</li>
+<strong>Copy</strong> the <code>config.xml</code> file into your project folder on disk (see <strong>Prerequisites</strong> above)</li>
 <li>
-<strong>Drag and drop</strong> the <code>Cordova.plist</code> file into the Project Navigator of Xcode</li>
+<strong>Drag and drop</strong> the <code>config.xml</code> file into the Project Navigator of Xcode</li>
 <li>
 <strong>Choose</strong> the radio-button <strong>"Create groups for any added folders"</strong>, select the <strong>Finish</strong> button</li>
 <li>
@@ -227,7 +232,7 @@ this if you have multiple boxes!</li>
 </code></pre>
 </li>
 <li>
-<p>Instantiate a <strong>new</strong> <code>CDVViewController</code>, and retain it somewhere: </p>
+<p>Instantiate a <strong>new</strong> <code>CDVViewController</code>, and <strong>retain it somewhere</strong> (e.g. to a property in your class): </p>
 
 <pre class="prettyprint"><code>CDVViewController* viewController = [CDVViewController new];
 </code></pre>
@@ -239,9 +244,14 @@ this if you have multiple boxes!</li>
 </code></pre>
 </li>
 <li>
-<p>(<em>OPTIONAL</em>) Set the <code>startPage</code> property (defaults to <code>"index.html"</code>):</p>
+<p>(<em>OPTIONAL</em>) Set the start page in your config.xml, the <code>&lt;content&gt;</code> tag.</p>
 
-<pre class="prettyprint"><code>viewController.startPage = @"mystartpage.html";
+<pre class="prettyprint"><code>&lt;content src="index.html" /&gt;
+</code></pre>
+
+<p>OR</p>
+
+<pre class="prettyprint"><code>&lt;content src="http://apache.org" /&gt;
 </code></pre>
 </li>
 <li>

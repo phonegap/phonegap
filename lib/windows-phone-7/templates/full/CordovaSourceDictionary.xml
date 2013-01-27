@@ -2,7 +2,7 @@
 <!-- This file is auto-generated, do not edit! -jm -->
 <CordovaSourceDictionary>
     <FilePath Value="www\js\index.js"/>
-    <FilePath Value="www\cordova-2.1.0.js"/>
+    <FilePath Value="www\cordova-2.4.0.js"/>
     <FilePath Value="www\css\index.css"/>
     <FilePath Value="www\img\cordova.png"/>
     <FilePath Value="www\index.html"/>

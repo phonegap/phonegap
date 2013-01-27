@@ -31,7 +31,7 @@ using Microsoft.Phone;
 using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     public class Camera : BaseCommand
     {

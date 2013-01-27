@@ -1,0 +1,15 @@
+{
+  "name":         "apache-cordova-ios-cli",
+  "description":  "CLI for Apache Cordova iOS",
+  "keywords":     ["apache", "cordova", "iOS", "CLI"],
+  "author":       "Apache Software Foundation",
+  "version":      "1.7.0",
+  "licenses":     [{
+    "type":       "Apache v2.0",
+    "url":        "http://www.apache.org/licenses/LICENSE-2.0.html"
+  }],
+  "dependencies" : {
+		"coffee-script" : "1.1.2",
+		"nodeunit" : "0.5.3"
+  }
+}

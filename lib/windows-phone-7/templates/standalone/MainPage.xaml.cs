@@ -32,7 +32,7 @@ using Microsoft.Phone.Controls;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
-using WP7CordovaClassLib;
+
 
 
 namespace CordovaApp

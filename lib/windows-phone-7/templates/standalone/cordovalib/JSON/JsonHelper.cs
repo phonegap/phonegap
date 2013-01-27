@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 
-namespace WP7CordovaClassLib.Cordova.JSON
+namespace WPCordovaClassLib.Cordova.JSON
 {
     /// <summary>
     /// Provides JSON serialization/deserialization functionality.

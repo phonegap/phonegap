@@ -37,6 +37,8 @@ using System.Text;
 using WPCordovaClassLib.Cordova;
 using System.Threading;
 using Microsoft.Phone.Shell;
+using WPCordovaClassLib.Cordova.JSON;
+using WPCordovaClassLib.CordovaLib;
 
 
 
@@ -72,9 +74,10 @@ namespace WPCordovaClassLib
         private NativeExecution nativeExecution;
 
         protected BrowserMouseHelper bmHelper;
-
         protected DOMStorageHelper domStorageHelper;
         protected OrientationHelper orientationHelper;
+
+        private ConfigHandler configHandler;
 
         public System.Windows.Controls.Grid _LayoutRoot
         {
@@ -156,8 +159,11 @@ namespace WPCordovaClassLib
             }
 
             // initializes native execution logic
-            this.nativeExecution = new NativeExecution(ref this.CordovaBrowser);
-            this.bmHelper = new BrowserMouseHelper(ref this.CordovaBrowser);
+            configHandler = new ConfigHandler();
+            configHandler.LoadAppPackageConfig();
+
+            nativeExecution = new NativeExecution(ref this.CordovaBrowser);
+            bmHelper = new BrowserMouseHelper(ref this.CordovaBrowser);
         }
 
 
@@ -393,9 +399,16 @@ namespace WPCordovaClassLib
 
         void GapBrowser_Navigating(object sender, NavigatingEventArgs e)
         {
+            if (!configHandler.URLIsAllowed(e.Uri.ToString()))
+            {
+                e.Cancel = true;
+                return;
+            }
+
             this.PageDidChange = true;
             // Debug.WriteLine("GapBrowser_Navigating to :: " + e.Uri.ToString());
-            // TODO: tell any running plugins to stop doing what they are doing.
+            this.nativeExecution.ResetAllCommands();
+
             // TODO: check whitelist / blacklist
             // NOTE: Navigation can be cancelled by setting :        e.Cancel = true;
         }
@@ -436,15 +449,27 @@ namespace WPCordovaClassLib
                 switch (commandCallParams.Action.ToLower())
                 {
                     case "overridebackbutton":
-                        string arg0 = WPCordovaClassLib.Cordova.JSON.JsonHelper.Deserialize<string[]>(commandCallParams.Args)[0];
+                        string arg0 = JsonHelper.Deserialize<string[]>(commandCallParams.Args)[0];
                         this.OverrideBackButton = (arg0 != null && arg0.Length > 0 && arg0.ToLower() == "true"); 
                         break;
                 }
             }
             else
             {
-                this.nativeExecution.ProcessCommand(commandCallParams);
+                if (configHandler.IsPluginAllowed(commandCallParams.Service))
+                {
+                    nativeExecution.ProcessCommand(commandCallParams);
+                }
+                else
+                {
+                    Debug.WriteLine("Error::Plugin not allowed in config.xml. " + commandCallParams.Service); 
+                }
             }
+        }
+
+        public void LoadPage(string url)
+        {
+            this.configHandler.URLIsAllowed(url);
         }
 
         private void GapBrowser_Unloaded(object sender, RoutedEventArgs e)

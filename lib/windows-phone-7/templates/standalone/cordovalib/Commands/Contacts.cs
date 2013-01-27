@@ -24,7 +24,7 @@ using System.Windows;
 using DeviceContacts = Microsoft.Phone.UserData.Contacts;
 
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     [DataContract]
     public class SearchOptions
@@ -176,7 +176,7 @@ namespace WP7CordovaClassLib.Cordova.Commands
             string[] args = JSON.JsonHelper.Deserialize<string[]>(jsonContact);
 
 
-            JSONContact contact = JSON.JsonHelper.Deserialize<JSONContact>(args[0]) ;
+            JSONContact contact = JSON.JsonHelper.Deserialize<JSONContact>(args[0]);
 
             SaveContactTask contactTask = new SaveContactTask();
 
@@ -344,7 +344,7 @@ namespace WP7CordovaClassLib.Cordova.Commands
 
                     deviceContacts.SearchAsync(displayName, FilterKind.DisplayName, task);
                 });
-                
+
 
             }
             else if (e.TaskResult == TaskResult.Cancel)
@@ -611,16 +611,22 @@ namespace WP7CordovaClassLib.Cordova.Commands
                                 "\"honorificPrefix\":\"{4}\"," +
                                 "\"honorificSuffix\":\"{5}\"";
 
-            retVal = string.Format(formatStr,
-                                   con.CompleteName.FirstName, // TODO:
+            if (con.CompleteName != null)
+            {
+                retVal = string.Format(formatStr,
+                                   con.CompleteName.FirstName + " " + con.CompleteName.LastName, // TODO: does this need suffix? middlename?
                                    con.CompleteName.LastName,
                                    con.CompleteName.FirstName,
                                    con.CompleteName.MiddleName,
                                    con.CompleteName.Title,
                                    con.CompleteName.Suffix);
+            }
+            else
+            {
+                retVal = string.Format(formatStr,"","","","","","");
+            }
 
             return "{" + retVal + "}";
-
         }
 
         private string FormatJSONContact(Contact con, string[] fields)
@@ -641,7 +647,7 @@ namespace WP7CordovaClassLib.Cordova.Commands
             string jsonContact = String.Format(contactFormatStr,
                                                con.GetHashCode(),
                                                con.DisplayName,
-                                               con.CompleteName.Nickname,
+                                               con.CompleteName != null ? con.CompleteName.Nickname : "",
                                                FormatJSONPhoneNumbers(con),
                                                FormatJSONEmails(con),
                                                FormatJSONAddresses(con),
@@ -652,7 +658,7 @@ namespace WP7CordovaClassLib.Cordova.Commands
 
             //Debug.WriteLine("jsonContact = " + jsonContact);
             // JSON requires new line characters be escaped
-            return "{" + jsonContact.Replace("\n", "\\n") +"}";
+            return "{" + jsonContact.Replace("\n", "\\n") + "}";
         }
     }
 }

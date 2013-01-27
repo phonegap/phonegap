@@ -24,7 +24,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Phone.Controls;
 using System.Diagnostics;
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     /// <summary>
     /// Implements audio record and play back functionality.

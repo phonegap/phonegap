@@ -149,14 +149,6 @@
             <fileset dir="www/ext-qnx" excludes="readme.md" />
         </copy>
 
-        <!-- copy over the webworks.js file -->
-        <copy todir="www/js" overwrite="true">
-            <fileset dir="${properties.qnx.bbwp.dir}\Framework\clientFiles">
-                <include name="webworks*.js" />
-            </fileset>
-            <globmapper from="webworks*.js" to="webworks.js" />
-        </copy>
-        
         <!-- Package the WebWorks app by zipping the widget dir. -->
         <mkdir dir="${build.dir}" />
         <zip compress="false" destfile="${build.dir}/${cod.name}.zip" basedir="${widget.dir}" excludes="**/build/**,**/.settings/**,**/.project" />
@@ -196,6 +188,8 @@
                         <arg file="${build.dir}" />
                         <arg line="${debug.flag} -b" />
                         <arg value="${build.number}" />
+                        <arg value="--loglevel" />
+                        <arg value="error" />
                     </exec>
                 </then>
                 <else>
@@ -204,6 +198,8 @@
                         <arg value="-o" />
                         <arg file="${build.dir}" />
                         <arg line="${debug.flag}" />
+                        <arg value="--loglevel" />
+                        <arg value="error" />
                     </exec>
                 </else>
             </if>

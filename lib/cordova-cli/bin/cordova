@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+var tokens = process.argv.slice(2, process.argv.length),
+    cordova= require('../cordova');
+
+// provide clean output on exceptions rather than dumping a stack trace
+process.on('uncaughtException', function(err){
+	console.error(err);
+    process.exit(1);
+});
+
+var cmd, version = false, verbose = false, current;
+
+while (current = tokens.shift()) {
+    if (current[0] == '-') {
+        if (current.indexOf('version') > -1 || current[1] == 'v') version = true;
+        if (current.indexOf('verbose') > -1 || current[1] == 'd') verbose = true;
+    } else {
+        cmd = current;
+        break;
+    }
+}
+
+if (version) {
+    console.log(require('../package').version);
+} else if (cmd === undefined) {
+    console.log(cordova.help());
+} else if (cordova.hasOwnProperty(cmd)) {
+    var opts = Array.prototype.slice.call(tokens, 0);
+    var r;
+    if (cmd == 'create' || cmd == 'docs' || cmd == 'serve') {
+        r = cordova[cmd].apply(this, opts);
+    } else if (cmd == 'emulate' || cmd == 'build') {
+        r = cordova[cmd].call(this, opts);
+    } else {
+        // platform or plugin cmds
+        if (tokens.length > 2) {
+            opts = [tokens.shift()];
+            opts.push(tokens);
+        }
+        r = cordova[cmd].apply(this, opts);
+    }
+    if (r) console.log(r);
+} else {
+    console.error('Cordova does not know ' + cmd + '; try help for a list of all the available commands.')
+}

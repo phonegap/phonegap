@@ -1,0 +1,6 @@
+# view AndroidManifest.xml #generated:60
+-keep class org.apache.cordova.DroidGap { <init>(...); }
+
+# view AndroidManifest.xml #generated:53
+-keep class org.apache.cordova.StandAlone { <init>(...); }
+

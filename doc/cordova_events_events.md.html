@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -114,6 +118,7 @@
 <option value="online_full_example">      - Full Example</option>
 <option value="online_ios_quirks">      - iOS Quirks</option>
 <option value="online_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="online_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="offline">offline</option>
 <option value="offline_details">      - Details</option>
 <option value="offline_supported_platforms">      - Supported Platforms</option>
@@ -121,6 +126,7 @@
 <option value="offline_full_example">      - Full Example</option>
 <option value="offline_ios_quirks">      - iOS Quirks</option>
 <option value="offline_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="offline_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="backbutton">backbutton</option>
 <option value="backbutton_details">      - Details</option>
 <option value="backbutton_supported_platforms">      - Supported Platforms</option>
@@ -139,7 +145,7 @@
 <option value="batterystatus">batterystatus</option>
 <option value="batterystatus_details">      - Details</option>
 <option value="batterystatus_supported_platforms">      - Supported Platforms</option>
-<option value="batterystatus_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="batterystatus_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="batterystatus_quick_example">      - Quick Example</option>
 <option value="batterystatus_full_example">      - Full Example</option>
 <option value="menubutton">menubutton</option>
@@ -189,6 +195,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -277,13 +284,9 @@
 
 <h3>iOS</h3>
 
-<h4>App/Supporting Files/Cordova.plist</h4>
+<h4>config.xml</h4>
 
-<pre class="prettyprint"><code>&lt;key&gt;Plugins&lt;/key&gt;
-&lt;dict&gt;
-    &lt;key&gt;Battery&lt;/key&gt;
-    &lt;string&gt;CDVBattery&lt;/string&gt;
-&lt;/dict&gt;
+<pre class="prettyprint"><code>&lt;plugin name="Battery" value="CDVBattery" /&gt;
 </code></pre>
 
 <h3>webOS</h3>
@@ -310,7 +313,7 @@
 
 <p>This is an event that fires when Cordova is fully loaded.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -323,7 +326,7 @@
 
 <p>The Cordova <code><a href="cordova_events_events.md.html#deviceready">deviceready</a></code> event fires once Cordova has fully loaded. After the device has fired, you can safely make calls to Cordova function.</p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once the HTML document's DOM has loaded.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once the HTML document's DOM has loaded.</p>
 
 <p>This event behaves differently from others in that any event handler registered after the event has been fired will have its callback function called immediately.</p>
 
@@ -335,7 +338,7 @@
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>Tizen</li>
 <li>Windows 8</li>
@@ -344,7 +347,7 @@
 <a name="deviceready_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
 function onDeviceReady() {
     // Now safe to use the Cordova API
@@ -360,17 +363,17 @@ function onDeviceReady() {
   &lt;head&gt;
     &lt;title&gt;Cordova <a href="cordova_device_device.md.html#Device">Device</a> Ready Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
@@ -391,7 +394,7 @@ function onDeviceReady() {
 
 <p>This is an event that fires when a Cordova application is put into the background.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#pause">pause</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#pause">pause</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -400,7 +403,7 @@ function onDeviceReady() {
 
 <p>Cordova consists of two code bases: native and JavaScript. While the native code puts the application into the background the <a href="cordova_events_events.md.html#pause">pause</a> event is fired.  </p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="pause_supported_platforms">Supported Platforms</a>
@@ -410,14 +413,14 @@ function onDeviceReady() {
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
 <a name="pause_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#pause">pause</a>", onPause, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#pause">pause</a>", onPause, false);
 
 function onPause() {
     // Handle the <a href="cordova_events_events.md.html#pause">pause</a> event
@@ -433,23 +436,23 @@ function onPause() {
   &lt;head&gt;
     &lt;title&gt;Cordova Pause Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
-        document.addEventListener("<a href="cordova_events_events.md.html#pause">pause</a>", onPause, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#pause">pause</a>", onPause, false);
     }
 
     // Handle the <a href="cordova_events_events.md.html#pause">pause</a> event
@@ -484,7 +487,7 @@ function onPause() {
 
 <p>This is an event that fires when a Cordova application is retrieved from the background.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#resume">resume</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#resume">resume</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -493,7 +496,7 @@ function onPause() {
 
 <p>Cordova consists of two code bases: native and JavaScript. While the native code pulls the application from the background the <a href="cordova_events_events.md.html#resume">resume</a> event is fired.  </p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="resume_supported_platforms">Supported Platforms</a>
@@ -503,14 +506,14 @@ function onPause() {
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
 <a name="resume_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#resume">resume</a>", onResume, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#resume">resume</a>", onResume, false);
 
 function onResume() {
     // Handle the <a href="cordova_events_events.md.html#resume">resume</a> event
@@ -526,23 +529,23 @@ function onResume() {
   &lt;head&gt;
     &lt;title&gt;Cordova Resume Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
-        document.addEventListener("<a href="cordova_events_events.md.html#resume">resume</a>", onResume, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#resume">resume</a>", onResume, false);
     }
 
     // Handle the <a href="cordova_events_events.md.html#resume">resume</a> event
@@ -576,7 +579,7 @@ function onResume() {
 
 <p>Interactive functions like alert() when the <a href="cordova_events_events.md.html#resume">resume</a> event fires will need to be wrapped in a setTimeout call with a timeout value of zero, or else the app will hang. e.g.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#resume">resume</a>", onResume, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#resume">resume</a>", onResume, false);
 function onResume() {
    setTimeout(function() {
           // TODO: do your thing!
@@ -590,7 +593,7 @@ function onResume() {
 
 <p>This is an event that fires when a Cordova application is <a href="cordova_events_events.md.html#online">online</a> (connected to the Internet).</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#online">online</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#online">online</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -599,7 +602,7 @@ function onResume() {
 
 <p>When the application's network connection changes to being <a href="cordova_events_events.md.html#online">online</a>, the <a href="cordova_events_events.md.html#online">online</a> event is fired.  </p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="online_supported_platforms">Supported Platforms</a>
@@ -609,7 +612,7 @@ function onResume() {
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Tizen</li>
 <li>Windows 8</li>
 </ul>
@@ -617,7 +620,7 @@ function onResume() {
 <a name="online_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#online">online</a>", onOnline, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#online">online</a>", onOnline, false);
 
 function onOnline() {
     // Handle the <a href="cordova_events_events.md.html#online">online</a> event
@@ -633,23 +636,23 @@ function onOnline() {
   &lt;head&gt;
     &lt;title&gt;Cordova Online Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
-        document.addEventListener("<a href="cordova_events_events.md.html#online">online</a>", onOnline, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#online">online</a>", onOnline, false);
     }
 
     // Handle the <a href="cordova_events_events.md.html#online">online</a> event
@@ -676,12 +679,18 @@ function onOnline() {
 
 <p>When running in the Emulator, the connection.status of the device is always unknown, and this event will NOT fire.</p>
 
+<h2>
+<a name="online_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<p>Emulator reports <a href="#connection%20type">connection type</a> as Cellular, and it will not change, so events will NOT fire.</p>
+
 <hr>
 <h1><a name="offline">offline</a></h1>
 
 <p>This is an event that fires when a Cordova application is <a href="cordova_events_events.md.html#offline">offline</a> (not connected to the Internet).</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#offline">offline</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#offline">offline</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -690,7 +699,7 @@ function onOnline() {
 
 <p>When the application's network connection changes to being <a href="cordova_events_events.md.html#offline">offline</a>, the <a href="cordova_events_events.md.html#offline">offline</a> event is fired.  </p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="offline_supported_platforms">Supported Platforms</a>
@@ -700,7 +709,7 @@ function onOnline() {
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Tizen</li>
 <li>Windows 8</li>
 </ul>
@@ -708,7 +717,7 @@ function onOnline() {
 <a name="offline_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#offline">offline</a>", onOffline, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#offline">offline</a>", onOffline, false);
 
 function onOffline() {
     // Handle the <a href="cordova_events_events.md.html#offline">offline</a> event
@@ -724,23 +733,23 @@ function onOffline() {
   &lt;head&gt;
     &lt;title&gt;Cordova Offline Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
-        document.addEventListener("<a href="cordova_events_events.md.html#offline">offline</a>", onOffline, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#offline">offline</a>", onOffline, false);
     }
 
     // Handle the <a href="cordova_events_events.md.html#offline">offline</a> event
@@ -767,12 +776,18 @@ function onOffline() {
 
 <p>When running in the Emulator, the connection.status of the device is always unknown, and this event will NOT fire.</p>
 
+<h2>
+<a name="offline_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<p>Emulator reports <a href="#connection%20type">connection type</a> as Cellular, and it will not change, so events will NOT fire.</p>
+
 <hr>
 <h1><a name="backbutton">backbutton</a></h1>
 
 <p>This is an event that fires when the user presses the back button.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#backbutton">backbutton</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#backbutton">backbutton</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -781,7 +796,7 @@ function onOffline() {
 
 <p>If you need to override the default back button behaviour you can register an event listener for the '<a href="cordova_events_events.md.html#backbutton">backbutton</a>' event.  It is no longer necessary to call any other method to over ride the back button behaviour.  Now, you only need to register an event listener for '<a href="cordova_events_events.md.html#backbutton">backbutton</a>'.</p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="backbutton_supported_platforms">Supported Platforms</a>
@@ -790,13 +805,13 @@ function onOffline() {
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 </ul>
 <h2>
 <a name="backbutton_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#backbutton">backbutton</a>", onBackKeyDown, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#backbutton">backbutton</a>", onBackKeyDown, false);
 
 function onBackKeyDown() {
     // Handle the back button
@@ -812,24 +827,24 @@ function onBackKeyDown() {
   &lt;head&gt;
     &lt;title&gt;Cordova Back Button Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to call Cordova methods
     //
     function onDeviceReady() {
         // Register the event listener
-        document.addEventListener("<a href="cordova_events_events.md.html#backbutton">backbutton</a>", onBackKeyDown, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#backbutton">backbutton</a>", onBackKeyDown, false);
     }
 
     // Handle the back button
@@ -849,7 +864,7 @@ function onBackKeyDown() {
 
 <p>This is an event that fires when a Cordova application detects the battery has reached the critical level threshold.</p>
 
-<pre class="prettyprint"><code>window.addEventListener("<a href="cordova_events_events.md.html#batterycritical">batterycritical</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterycritical">batterycritical</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -868,7 +883,7 @@ function onBackKeyDown() {
 <strong>isPlugged:</strong> A boolean that represents whether or not the device is plugged in or not. <em>(Boolean)</em>
 </li>
 </ul>
-<p>Typically, you will want to attach an event listener with <code>window.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="batterycritical_supported_platforms">Supported Platforms</a>
@@ -884,7 +899,7 @@ function onBackKeyDown() {
 <a name="batterycritical_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>window.addEventListener("<a href="cordova_events_events.md.html#batterycritical">batterycritical</a>", onBatteryCritical, false);
+<pre class="prettyprint"><code>window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterycritical">batterycritical</a>", onBatteryCritical, false);
 
 function onBatteryCritical(info) {
     // Handle the battery critical event
@@ -899,25 +914,25 @@ function onBatteryCritical(info) {
 <pre class="prettyprint"><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova Battery Criticaly Example&lt;/title&gt;
+    &lt;title&gt;Cordova Battery Critical Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     // 
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
-        window.addEventListener("<a href="cordova_events_events.md.html#batterycritical">batterycritical</a>", onBatteryCritical, false);
+        window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterycritical">batterycritical</a>", onBatteryCritical, false);
     }
 
     // Handle the <a href="cordova_events_events.md.html#batterycritical">batterycritical</a> event
@@ -938,7 +953,7 @@ function onBatteryCritical(info) {
 
 <p>This is an event that fires when a Cordova application detects the battery has reached the low level threshold.</p>
 
-<pre class="prettyprint"><code>window.addEventListener("<a href="cordova_events_events.md.html#batterylow">batterylow</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterylow">batterylow</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -957,7 +972,7 @@ function onBatteryCritical(info) {
 <strong>isPlugged:</strong> A boolean that represents whether or not the device is plugged in or not. <em>(Boolean)</em>
 </li>
 </ul>
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="batterylow_supported_platforms">Supported Platforms</a>
@@ -973,7 +988,7 @@ function onBatteryCritical(info) {
 <a name="batterylow_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>window.addEventListener("<a href="cordova_events_events.md.html#batterylow">batterylow</a>", onBatteryLow, false);
+<pre class="prettyprint"><code>window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterylow">batterylow</a>", onBatteryLow, false);
 
 function onBatteryLow(info) {
     // Handle the battery low event
@@ -990,23 +1005,23 @@ function onBatteryLow(info) {
   &lt;head&gt;
     &lt;title&gt;Cordova <a href="cordova_device_device.md.html#Device">Device</a> Ready Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     // 
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
-        window.addEventListener("<a href="cordova_events_events.md.html#batterylow">batterylow</a>", onBatteryLow, false);
+        window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterylow">batterylow</a>", onBatteryLow, false);
     }
 
     // Handle the <a href="cordova_events_events.md.html#batterylow">batterylow</a> event
@@ -1027,7 +1042,7 @@ function onBatteryLow(info) {
 
 <p>This is an event that fires when a Cordova application detects a change in the battery status.</p>
 
-<pre class="prettyprint"><code>window.addEventListener("<a href="cordova_events_events.md.html#batterystatus">batterystatus</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterystatus">batterystatus</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -1046,7 +1061,7 @@ function onBatteryLow(info) {
 <strong>isPlugged:</strong> A boolean that represents whether or not the device is plugged in or not. <em>(Boolean)</em>
 </li>
 </ul>
-<p>Typically, you will want to attach an event listener with <code>window.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="batterystatus_supported_platforms">Supported Platforms</a>
@@ -1056,11 +1071,11 @@ function onBatteryLow(info) {
 <li>iOS</li>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Tizen</li>
 </ul>
 <h2>
-<a name="batterystatus_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="batterystatus_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <p>The <code>level</code> property is unavailable as Windows Phone 7 does not provide
@@ -1071,7 +1086,7 @@ native APIs for determining battery level. The <code>isPlugged</code> parameter
 <a name="batterystatus_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>window.addEventListener("<a href="cordova_events_events.md.html#batterystatus">batterystatus</a>", onBatteryStatus, false);
+<pre class="prettyprint"><code>window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterystatus">batterystatus</a>", onBatteryStatus, false);
 
 function onBatteryStatus(info) {
     // Handle the <a href="cordova_events_events.md.html#online">online</a> event
@@ -1088,23 +1103,23 @@ function onBatteryStatus(info) {
   &lt;head&gt;
     &lt;title&gt;Cordova <a href="cordova_device_device.md.html#Device">Device</a> Ready Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     // 
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
-        window.addEventListener("<a href="cordova_events_events.md.html#batterystatus">batterystatus</a>", onBatteryStatus, false);
+        window.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#batterystatus">batterystatus</a>", onBatteryStatus, false);
     }
 
     // Handle the <a href="cordova_events_events.md.html#batterystatus">batterystatus</a> event
@@ -1125,16 +1140,16 @@ function onBatteryStatus(info) {
 
 <p>This is an event that fires when the user presses the menu button.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#menubutton">menubutton</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#menubutton">menubutton</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
 <a name="menubutton_details">Details</a>
 </h2>
 
-<p>If you need to override the default menu button behaviour you can register an event listenter for the '<a href="cordova_events_events.md.html#menubutton">menubutton</a>' event.</p>
+<p>If you need to override the default menu button behaviour you can register an event listener for the '<a href="cordova_events_events.md.html#menubutton">menubutton</a>' event.</p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="menubutton_supported_platforms">Supported Platforms</a>
@@ -1148,7 +1163,7 @@ function onBatteryStatus(info) {
 <a name="menubutton_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#menubutton">menubutton</a>", onMenuKeyDown, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#menubutton">menubutton</a>", onMenuKeyDown, false);
 
 function onMenuKeyDown() {
     // Handle the back button
@@ -1165,24 +1180,24 @@ function onMenuKeyDown() {
   &lt;head&gt;
     &lt;title&gt;Cordova Menu Button Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
         // Register the event listener
-        document.addEventListener("<a href="cordova_events_events.md.html#menubutton">menubutton</a>", onMenuKeyDown, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#menubutton">menubutton</a>", onMenuKeyDown, false);
     }
 
     // Handle the menu button
@@ -1202,7 +1217,7 @@ function onMenuKeyDown() {
 
 <p>This is an event that fires when the user presses the search button on Android.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#searchbutton">searchbutton</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#searchbutton">searchbutton</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -1211,7 +1226,7 @@ function onMenuKeyDown() {
 
 <p>If you need to override the default search button behaviour on Android you can register an event listener for the '<a href="cordova_events_events.md.html#searchbutton">searchbutton</a>' event.</p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="searchbutton_supported_platforms">Supported Platforms</a>
@@ -1224,7 +1239,7 @@ function onMenuKeyDown() {
 <a name="searchbutton_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#searchbutton">searchbutton</a>", onSearchKeyDown, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#searchbutton">searchbutton</a>", onSearchKeyDown, false);
 
 function onSearchKeyDown() {
     // Handle the search button
@@ -1241,24 +1256,24 @@ function onSearchKeyDown() {
   &lt;head&gt;
     &lt;title&gt;Cordova Search Button Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
         // Register the event listener
-        document.addEventListener("<a href="cordova_events_events.md.html#searchbutton">searchbutton</a>", onSearchKeyDown, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#searchbutton">searchbutton</a>", onSearchKeyDown, false);
     }
 
     // Handle the search button
@@ -1278,7 +1293,7 @@ function onSearchKeyDown() {
 
 <p>This is an event that fires when the user presses the start call button.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#startcallbutton">startcallbutton</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#startcallbutton">startcallbutton</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -1287,7 +1302,7 @@ function onSearchKeyDown() {
 
 <p>If you need to override the default start call behaviour you can register an event listener for the '<a href="cordova_events_events.md.html#startcallbutton">startcallbutton</a>' event.</p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="startcallbutton_supported_platforms">Supported Platforms</a>
@@ -1300,7 +1315,7 @@ function onSearchKeyDown() {
 <a name="startcallbutton_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#startcallbutton">startcallbutton</a>", onStartCallKeyDown, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#startcallbutton">startcallbutton</a>", onStartCallKeyDown, false);
 
 function onStartCallKeyDown() {
     // Handle the start call button
@@ -1317,24 +1332,24 @@ function onStartCallKeyDown() {
   &lt;head&gt;
     &lt;title&gt;Cordova Start Call Button Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
         // Register the event listener
-        document.addEventListener("<a href="cordova_events_events.md.html#startcallbutton">startcallbutton</a>", onStartCallKeyDown, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#startcallbutton">startcallbutton</a>", onStartCallKeyDown, false);
     }
 
     // Handle the start call button
@@ -1354,7 +1369,7 @@ function onStartCallKeyDown() {
 
 <p>This is an event that fires when the user presses the end call button.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#endcallbutton">endcallbutton</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#endcallbutton">endcallbutton</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -1363,7 +1378,7 @@ function onStartCallKeyDown() {
 
 <p>If you need to override the default end call behaviour you can register an event listener for the '<a href="cordova_events_events.md.html#endcallbutton">endcallbutton</a>' event.</p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="endcallbutton_supported_platforms">Supported Platforms</a>
@@ -1376,7 +1391,7 @@ function onStartCallKeyDown() {
 <a name="endcallbutton_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#endcallbutton">endcallbutton</a>", onEndCallKeyDown, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#endcallbutton">endcallbutton</a>", onEndCallKeyDown, false);
 
 function onEndCallKeyDown() {
     // Handle the end call button
@@ -1393,24 +1408,24 @@ function onEndCallKeyDown() {
   &lt;head&gt;
     &lt;title&gt;Cordova End Call Button Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
         // Register the event listener
-        document.addEventListener("<a href="cordova_events_events.md.html#endcallbutton">endcallbutton</a>", onEndCallKeyDown, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#endcallbutton">endcallbutton</a>", onEndCallKeyDown, false);
     }
 
     // Handle the end call button
@@ -1430,7 +1445,7 @@ function onEndCallKeyDown() {
 
 <p>This is an event that fires when the user presses the volume down button.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#volumedownbutton">volumedownbutton</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#volumedownbutton">volumedownbutton</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -1439,7 +1454,7 @@ function onEndCallKeyDown() {
 
 <p>If you need to override the default volume down behaviour you can register an event listener for the '<a href="cordova_events_events.md.html#volumedownbutton">volumedownbutton</a>' event.</p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="volumedownbutton_supported_platforms">Supported Platforms</a>
@@ -1452,7 +1467,7 @@ function onEndCallKeyDown() {
 <a name="volumedownbutton_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#volumedownbutton">volumedownbutton</a>", onVolumeDownKeyDown, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#volumedownbutton">volumedownbutton</a>", onVolumeDownKeyDown, false);
 
 function onVolumeDownKeyDown() {
     // Handle the volume down button
@@ -1469,24 +1484,24 @@ function onVolumeDownKeyDown() {
   &lt;head&gt;
     &lt;title&gt;Cordova Volume Down Button Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
         // Register the event listener
-        document.addEventListener("<a href="cordova_events_events.md.html#volumedownbutton">volumedownbutton</a>", onVolumeDownKeyDown, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#volumedownbutton">volumedownbutton</a>", onVolumeDownKeyDown, false);
     }
 
     // Handle the volume down button
@@ -1506,7 +1521,7 @@ function onVolumeDownKeyDown() {
 
 <p>This is an event that fires when the user presses the volume up button.</p>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#volumeupbutton">volumeupbutton</a>", yourCallbackFunction, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#volumeupbutton">volumeupbutton</a>", yourCallbackFunction, false);
 </code></pre>
 
 <h2>
@@ -1515,7 +1530,7 @@ function onVolumeDownKeyDown() {
 
 <p>If you need to override the default volume up behaviour you can register an event listener for the '<a href="cordova_events_events.md.html#volumeupbutton">volumeupbutton</a>' event.</p>
 
-<p>Typically, you will want to attach an event listener with <code>document.addEventListener</code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
+<p>Typically, you will want to attach an event listener with <code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> once you receive the Cordova '<a href="cordova_events_events.md.html#deviceready">deviceready</a>' event.</p>
 
 <h2>
 <a name="volumeupbutton_supported_platforms">Supported Platforms</a>
@@ -1528,7 +1543,7 @@ function onVolumeDownKeyDown() {
 <a name="volumeupbutton_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>document.addEventListener("<a href="cordova_events_events.md.html#volumeupbutton">volumeupbutton</a>", onVolumeUpKeyDown, false);
+<pre class="prettyprint"><code>document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#volumeupbutton">volumeupbutton</a>", onVolumeUpKeyDown, false);
 
 function onVolumeUpKeyDown() {
     // Handle the volume up button
@@ -1545,24 +1560,24 @@ function onVolumeUpKeyDown() {
   &lt;head&gt;
     &lt;title&gt;Cordova Volume Up Button Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Call onDeviceReady when Cordova is loaded.
     //
-    // At this point, the document has loaded but cordova-2.3.0.js has not.
+    // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `<a href="cordova_events_events.md.html#deviceready">deviceready</a>`.
     //
     function onLoad() {
-        document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
         // Register the event listener
-        document.addEventListener("<a href="cordova_events_events.md.html#volumeupbutton">volumeupbutton</a>", onVolumeUpKeyDown, false);
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#volumeupbutton">volumeupbutton</a>", onVolumeUpKeyDown, false);
     }
 
     // Handle the volume up button

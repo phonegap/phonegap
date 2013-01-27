@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.phonegap.plugins.childbrowser"
+    version="3.0.0">
+
+    <name>Test Plugin</name>
+
+    <asset src="www/test.js" target="test.js" />
+    <platform name="android">
+    </platform>
+    <platform name="ios">
+        <plugins-plist key="TestPlugin" string="Test" />
+    </platform>
+    <platform name="blackberry">
+    </platform>
+</plugin>
+

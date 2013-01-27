@@ -13,7 +13,7 @@
     Background="Black"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     shell:SystemTray.IsVisible="True" d:DesignHeight="768" d:DesignWidth="480" 
-    xmlns:my="clr-namespace:WP7CordovaClassLib">
+    xmlns:my="clr-namespace:WPCordovaClassLib">
     <Grid x:Name="LayoutRoot" Background="Transparent" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

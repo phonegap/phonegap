@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -97,26 +101,31 @@
 <option value="globalization.getPreferredLanguage_supported_platforms">      - Supported Platforms</option>
 <option value="globalization.getPreferredLanguage_quick_example">      - Quick Example</option>
 <option value="globalization.getPreferredLanguage_full_example">      - Full Example</option>
+<option value="globalization.getPreferredLanguage_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="globalization.getLocaleName">globalization.getLocaleName</option>
 <option value="globalization.getLocaleName_description">      - Description</option>
 <option value="globalization.getLocaleName_supported_platforms">      - Supported Platforms</option>
 <option value="globalization.getLocaleName_quick_example">      - Quick Example</option>
 <option value="globalization.getLocaleName_full_example">      - Full Example</option>
+<option value="globalization.getLocaleName_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="globalization.dateToString">globalization.dateToString</option>
 <option value="globalization.dateToString_description">      - Description</option>
 <option value="globalization.dateToString_supported_platforms">      - Supported Platforms</option>
 <option value="globalization.dateToString_quick_example">      - Quick Example</option>
 <option value="globalization.dateToString_full_example">      - Full Example</option>
+<option value="globalization.dateToString_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="globalization.stringToDate">globalization.stringToDate</option>
 <option value="globalization.stringToDate_description">      - Description</option>
 <option value="globalization.stringToDate_supported_platforms">      - Supported Platforms</option>
 <option value="globalization.stringToDate_quick_example">      - Quick Example</option>
 <option value="globalization.stringToDate_full_example">      - Full Example</option>
+<option value="globalization.stringToDate_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="globalization.getDatePattern">globalization.getDatePattern</option>
 <option value="globalization.getDatePattern_description">      - Description</option>
 <option value="globalization.getDatePattern_supported_platforms">      - Supported Platforms</option>
 <option value="globalization.getDatePattern_quick_example">      - Quick Example</option>
 <option value="globalization.getDatePattern_full_example">      - Full Example</option>
+<option value="globalization.getDatePattern_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="globalization.getDateNames">globalization.getDateNames</option>
 <option value="globalization.getDateNames_description">      - Description</option>
 <option value="globalization.getDateNames_supported_platforms">      - Supported Platforms</option>
@@ -147,6 +156,7 @@
 <option value="globalization.getNumberPattern_supported_platforms">      - Supported Platforms</option>
 <option value="globalization.getNumberPattern_quick_example">      - Quick Example</option>
 <option value="globalization.getNumberPattern_full_example">      - Full Example</option>
+<option value="globalization.getNumberPattern_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="globalization.getCurrencyPattern">globalization.getCurrencyPattern</option>
 <option value="globalization.getCurrencyPattern_description">      - Description</option>
 <option value="globalization.getCurrencyPattern_supported_platforms">      - Supported Platforms</option>
@@ -175,6 +185,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -270,6 +281,7 @@ properties object as a parameter. That object should have a <code>value</code> p
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getPreferredLanguage_quick_example">Quick Example</a>
@@ -291,7 +303,7 @@ properties object as a parameter. That object should have a <code>value</code> p
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkLanguage() {
@@ -308,6 +320,13 @@ properties object as a parameter. That object should have a <code>value</code> p
 &lt;/html&gt;
 </code></pre>
 
+<h2>
+<a name="globalization.getPreferredLanguage_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<ul>
+<li>Returns the ISO 639-1 two-letter code for the current language.</li>
+</ul>
 <hr>
 <h1><a name="globalization.getLocaleName">globalization.getLocaleName</a></h1>
 
@@ -333,6 +352,7 @@ properties object as a parameter. That object should have a <code>value</code> p
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getLocaleName_quick_example">Quick Example</a>
@@ -354,7 +374,7 @@ properties object as a parameter. That object should have a <code>value</code> p
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkLocale() {
@@ -371,6 +391,13 @@ properties object as a parameter. That object should have a <code>value</code> p
 &lt;/html&gt;
 </code></pre>
 
+<h2>
+<a name="globalization.getLocaleName_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<ul>
+<li>Returns the two-letter code defined in ISO 3166 for the current country/region.</li>
+</ul>
 <hr>
 <h1><a name="globalization.dateToString">globalization.dateToString</a></h1>
 
@@ -403,6 +430,7 @@ The <code>options</code> parameter is optional.</p>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.dateToString_quick_example">Quick Example</a>
@@ -426,7 +454,7 @@ The <code>options</code> parameter is optional.</p>
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkDateString() {
@@ -445,6 +473,14 @@ The <code>options</code> parameter is optional.</p>
 &lt;/html&gt;
 </code></pre>
 
+<h2>
+<a name="globalization.dateToString_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<ul>
+<li>
+<code>formatLength</code> option supports only short and full values</li>
+</ul>
 <hr>
 <h1><a name="globalization.stringToDate">globalization.stringToDate</a></h1>
 
@@ -488,6 +524,7 @@ The options parameter is optional.</p>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.stringToDate_quick_example">Quick Example</a>
@@ -513,7 +550,7 @@ The options parameter is optional.</p>
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkStringDate() {
@@ -535,6 +572,14 @@ The options parameter is optional.</p>
 &lt;/html&gt;
 </code></pre>
 
+<h2>
+<a name="globalization.stringToDate_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<ul>
+<li>
+<code>formatLength</code> option supports only short and full values</li>
+</ul>
 <hr>
 <h1><a name="globalization.getDatePattern">globalization.getDatePattern</a></h1>
 
@@ -572,6 +617,7 @@ The options parameter is optional.</p>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getDatePattern_quick_example">Quick Example</a>
@@ -596,7 +642,7 @@ The options parameter is optional.</p>
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkDatePattern() {
@@ -615,6 +661,20 @@ The options parameter is optional.</p>
 &lt;/html&gt;
 </code></pre>
 
+<h2>
+<a name="globalization.getDatePattern_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<ul>
+<li>
+<code>formatLength</code> option supports only short and full values.</li>
+<li>
+<code>pattern</code> property for <code>date and time</code> pattern returns only full datetime format.</li>
+<li>
+<code>timezone</code> property returns full time zone name</li>
+<li>
+<code>dst_offset</code> returned property is not supported and always returns zero.</li>
+</ul>
 <hr>
 <h1><a name="globalization.getDateNames">globalization.getDateNames</a></h1>
 
@@ -645,6 +705,7 @@ The options parameter is optional.</p>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getDateNames_quick_example">Quick Example</a>
@@ -671,7 +732,7 @@ The options parameter is optional.</p>
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkDateNames() {
@@ -720,6 +781,7 @@ The options parameter is optional.</p>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.isDayLightSavingsTime_quick_example">Quick Example</a>
@@ -742,7 +804,7 @@ The options parameter is optional.</p>
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkDayLightSavings() {
@@ -785,6 +847,7 @@ The options parameter is optional.</p>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getFirstDayOfWeek_quick_example">Quick Example</a>
@@ -806,7 +869,7 @@ The options parameter is optional.</p>
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkFirstDay() {
@@ -850,6 +913,7 @@ The options parameter is optional.</p>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.numberToString_quick_example">Quick Example</a>
@@ -873,7 +937,7 @@ The options parameter is optional.</p>
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkNumber() {
@@ -920,6 +984,7 @@ The default options are <code>{type:'decimal'}</code>. The <code>options</code> 
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.stringToNumber_quick_example">Quick Example</a>
@@ -943,7 +1008,7 @@ The default options are <code>{type:'decimal'}</code>. The <code>options</code> 
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkNumber() {
@@ -1001,6 +1066,7 @@ The default options are <code>{type:'decimal'}</code>. The <code>options</code> 
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
+<li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getNumberPattern_quick_example">Quick Example</a>
@@ -1042,7 +1108,7 @@ grouping: ,
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkPattern() {
@@ -1068,6 +1134,16 @@ grouping: ,
 &lt;/html&gt;
 </code></pre>
 
+<h2>
+<a name="globalization.getNumberPattern_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<ul>
+<li>
+<code>pattern</code> property is not supported; empty string is always returned.</li>
+<li>
+<code>fraction</code> property is not supported; zero is always returned.</li>
+</ul>
 <hr>
 <h1><a name="globalization.getCurrencyPattern">globalization.getCurrencyPattern</a></h1>
 
@@ -1141,7 +1217,7 @@ grouping: ,
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkPattern() {
@@ -1226,7 +1302,7 @@ grouping: ,
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Cordova&lt;/title&gt;
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function successCB(date) {

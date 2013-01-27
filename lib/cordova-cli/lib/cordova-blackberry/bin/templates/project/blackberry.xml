@@ -1,0 +1,456 @@
+<project default="help">
+<!-- 
+       Licensed to the Apache Software Foundation (ASF) under one
+       or more contributor license agreements.  See the NOTICE file
+       distributed with this work for additional information
+       regarding copyright ownership.  The ASF licenses this file
+       to you under the Apache License, Version 2.0 (the
+       "License"); you may not use this file except in compliance
+       with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing,
+       software distributed under the License is distributed on an
+       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+       KIND, either express or implied.  See the License for the
+       specific language governing permissions and limitations
+       under the License.
+-->    
+    <!-- LOAD PROPERTIES -->
+    
+    <property prefix="properties" file="project.properties" />
+    <property name="build.dir"    location="build" />
+    <property name="widget.dir"   location="${build.dir}/widget" />
+    <property name="code.sign"    value="false" />
+    <property name="generate.ext" value="cod" />
+    <property name="globalization" value="false" />
+    
+    <!-- BlackBerry WebWorks Packager directory is required. -->
+    <fail unless="properties.blackberry.bbwp.dir" message="Please specify BlackBerry WebWorks Packager directory using 'blackberry.bbwp.dir' in your 'project.properties' file." />
+
+    <!-- OS identification -->
+    <condition property="isMacOSX" else="false">
+        <and>
+            <os family="mac" />
+            <os family="unix" />
+        </and>
+    </condition>
+
+    <condition property="javaloader" value="${properties.blackberry.bbwp.dir}/bin/javaloader" else="${properties.blackberry.bbwp.dir}/bin/JavaLoader.exe">
+        <equals arg1="${isMacOSX}" arg2="true" />
+    </condition>
+
+    <condition property="bbwp" value="${properties.blackberry.bbwp.dir}/bbwp" else="${properties.blackberry.bbwp.dir}/bbwp.exe">
+        <equals arg1="${isMacOSX}" arg2="true" />
+    </condition>
+
+
+    <!-- LOAD DEVICE -->
+    
+    <target name="load-device" depends="package-app">
+        <bbwp code-sign="true" />
+        <exec executable="${javaloader}" dir="." failonerror="true">
+            <arg value="-u" />
+            <arg value="-w${properties.blackberry.sim.password}" />
+            <arg value="load" />
+            <arg file="${build.dir}/StandardInstall/${cod.name}.cod" />
+        </exec>
+    </target>
+
+    <!-- DEBUG-LOAD DEVICE -->
+    
+    <target name="debug-device" depends="package-app">
+        <bbwp code-sign="true" debug="true" />
+        <exec executable="${javaloader}" dir="." failonerror="true">
+            <arg value="-u" />
+            <arg value="-w${properties.blackberry.sim.password}" />
+            <arg value="load" />
+            <arg file="${build.dir}/StandardInstall/${cod.name}.cod" />
+        </exec>
+    </target>
+
+    <!-- LOAD SIMULATOR -->
+    
+    <target name="load-simulator" depends="build">
+    
+        <!-- Find the simulator directory -->
+        <set-simulator-dir />
+
+        <!-- Locate BBWP simulator directory. There may be multiple, so choose the first. -->
+        <path id="bbwp.sim.path">
+            <first>
+                <fileset dir="${properties.blackberry.bbwp.dir}/simpack">
+                    <include name="**/handhelds.manifest.txt" />
+                </fileset>
+            </first>
+        </path>
+        <dirname property="bbwp.sim.dir" file="${toString:bbwp.sim.path}" />
+
+        <!-- Simulator directory: Use sim.dir property if set in project.properties file. 
+             Otherwise, use bbwp simulator directory. -->
+        <condition 
+            property="simulator.dir" 
+            value="${properties.blackberry.sim.dir}" 
+            else="${bbwp.sim.dir}">
+                <available file="${properties.blackberry.sim.dir}" type="dir" />
+        </condition>
+        <echo message="Simulator directory=${simulator.dir}" />
+
+        <!-- Simulator binary: Use sim.bin property if set in project.properties file  
+             or try setting to 'defaultSimulator.bat' in simulator directory. -->
+        <condition 
+            property="sim.bin" 
+            value="${properties.blackberry.sim.bin}" 
+            else="defaultSimulator.bat">
+                <available file="${simulator.dir}/${properties.blackberry.sim.bin}"/>
+        </condition>
+
+        <!-- If simulator executable does not exist, use the first device listed 
+             in the 'handhelds.manifest.txt' file in the simulator directory. -->
+        <loadfile 
+            property="device.list"
+            srcFile="${simulator.dir}/handhelds.manifest.txt">
+            <filterchain>
+                <tokenFilter>
+                    <stringtokenizer/>
+                </tokenFilter>
+            </filterchain>
+        </loadfile>
+
+        <propertyregex property="device"
+            input="${device.list}"
+            regexp="^\d{4}"
+            select="\0"
+            override="true" />
+        <property name="device.bin" value="${device}.bat" />
+
+        <condition
+            property="simulator.bin" 
+            value="${sim.bin}"
+            else="${device.bin}">
+                <available file="${simulator.dir}/${sim.bin}" />
+        </condition>
+        
+        <echo message="Simulator executable=${simulator.dir}/${simulator.bin}" />
+
+        <!-- Close running simulators -->
+        <echo message="Closing all running simulators..." />
+        <exec executable="${simulator.dir}/fledgecontroller.exe" dir="${simulator.dir}" spawn="false">
+            <arg value="/execute=kill" />
+        </exec>
+
+        <!-- MDS directory: Use mds.dir property if set in project.properties file. 
+             Otherwise, use bbwp MDS directory. -->
+        <condition 
+            property="mds.dir" 
+            value="${properties.blackberry.mds.dir}" 
+            else="${properties.blackberry.bbwp.dir}/mds">
+                <available file="${properties.blackberry.mds.dir}" type="dir" />
+        </condition>
+        <echo message="MDS directory=${mds.dir}" />
+        
+        <copy todir="${simulator.dir}">
+            <fileset dir="${build.dir}/StandardInstall" includes="*.cod, *.cso, *.csl, *.alx" />
+        </copy>
+        <exec executable="${mds.dir}/run.bat" dir="${mds.dir}" spawn="true" />
+        <exec executable="${simulator.dir}/${simulator.bin}" dir="${simulator.dir}" spawn="true" />
+
+        <!-- Only invoke FledgeHook.exe if it is found. Newer versions of the
+             WebWorks SDK do not include it. -->
+        <if>
+            <available file="${properties.blackberry.bbwp.dir}/FledgeHook.exe" />
+            <then>
+                <exec executable="${properties.blackberry.bbwp.dir}/FledgeHook.exe" dir="${properties.blackberry.bbwp.dir}" spawn="true" />
+            </then>
+        </if>
+    </target>
+
+    <target name="debug-simulator" depends="package-app">
+        <bbwp code-sign="false" debug="true" />
+    
+        <!-- Find the simulator directory -->
+        <set-simulator-dir />
+
+        <!-- Locate BBWP simulator directory. There may be multiple, so choose the first. -->
+        <path id="bbwp.sim.path">
+            <first>
+                <fileset dir="${properties.blackberry.bbwp.dir}/simpack">
+                    <include name="**/handhelds.manifest.txt" />
+                </fileset>
+            </first>
+        </path>
+        <dirname property="bbwp.sim.dir" file="${toString:bbwp.sim.path}" />
+
+        <!-- Simulator directory: Use sim.dir property if set in project.properties file. 
+             Otherwise, use bbwp simulator directory. -->
+        <condition 
+            property="simulator.dir" 
+            value="${properties.blackberry.sim.dir}" 
+            else="${bbwp.sim.dir}">
+                <available file="${properties.blackberry.sim.dir}" type="dir" />
+        </condition>
+        <echo message="Simulator directory=${simulator.dir}" />
+
+        <!-- Simulator binary: Use sim.bin property if set in project.properties file  
+             or try setting to 'defaultSimulator.bat' in simulator directory. -->
+        <condition 
+            property="sim.bin" 
+            value="${properties.blackberry.sim.bin}" 
+            else="defaultSimulator.bat">
+                <available file="${simulator.dir}/${properties.blackberry.sim.bin}"/>
+        </condition>
+
+        <!-- If simulator executable does not exist, use the first device listed 
+             in the 'handhelds.manifest.txt' file in the simulator directory. -->
+        <loadfile 
+            property="device.list"
+            srcFile="${simulator.dir}/handhelds.manifest.txt">
+            <filterchain>
+                <tokenFilter>
+                    <stringtokenizer/>
+                </tokenFilter>
+            </filterchain>
+        </loadfile>
+
+        <propertyregex property="device"
+            input="${device.list}"
+            regexp="^\d{4}"
+            select="\0"
+            override="true" />
+        <property name="device.bin" value="${device}.bat" />
+
+        <condition
+            property="simulator.bin" 
+            value="${sim.bin}"
+            else="${device.bin}">
+                <available file="${simulator.dir}/${sim.bin}" />
+        </condition>
+        
+        <echo message="Simulator executable=${simulator.dir}/${simulator.bin}" />
+
+        <!-- Close running simulators -->
+        <echo message="Closing all running simulators..." />
+        <exec executable="${simulator.dir}/fledgecontroller.exe" dir="${simulator.dir}" spawn="false">
+            <arg value="/execute=kill" />
+        </exec>
+
+        <!-- MDS directory: Use mds.dir property if set in project.properties file. 
+             Otherwise, use bbwp MDS directory. -->
+        <condition 
+            property="mds.dir" 
+            value="${properties.blackberry.mds.dir}" 
+            else="${properties.blackberry.bbwp.dir}/mds">
+                <available file="${properties.blackberry.mds.dir}" type="dir" />
+        </condition>
+        <echo message="MDS directory=${mds.dir}" />
+        
+        <copy todir="${simulator.dir}">
+            <fileset dir="${build.dir}/StandardInstall" includes="*.cod, *.cso, *.csl, *.alx" />
+        </copy>
+        <exec executable="${mds.dir}/run.bat" dir="${mds.dir}" spawn="true" />
+        <exec executable="${simulator.dir}/${simulator.bin}" dir="${simulator.dir}" spawn="true" />
+
+        <!-- Only invoke FledgeHook.exe if it is found. Newer versions of the
+             WebWorks SDK do not include it. -->
+        <if>
+            <available file="${properties.blackberry.bbwp.dir}/FledgeHook.exe" />
+            <then>
+                <exec executable="${properties.blackberry.bbwp.dir}/FledgeHook.exe" dir="${properties.blackberry.bbwp.dir}" spawn="true" />
+            </then>
+        </if>
+    </target>
+    
+    <!-- PACKAGE-APP -->
+    
+    <target name="package-app" depends="generate-cod-name, clean">
+        <!-- Copy the WebWorks application -->
+        <mkdir dir="${widget.dir}" />
+        <copy todir="${widget.dir}" overwrite="true">
+            <fileset dir="www" >
+                <exclude name="ext-air/**"/>
+                <exclude name="ext-qnx/**"/>
+                <exclude name="res/resourceBundles/**" unless="${globalization}"/>
+            </fileset>
+        </copy>
+        
+        <!-- Package the WebWorks app by zipping the widget dir. -->
+        <mkdir dir="${build.dir}" />
+        <zip compress="false" destfile="${build.dir}/${cod.name}.zip" basedir="${widget.dir}" excludes="**/build/**,**/.settings/**,**/.project" />
+    </target>
+    
+    <!-- BUILD -->
+
+    <target name="build" depends="package-app">
+        <bbwp code-sign="${code.sign}" />
+    </target>
+
+    <!-- BBWP MACRO -->
+
+    <macrodef name="bbwp">
+        <attribute name="code-sign" default="false" />
+        <attribute name="debug" default="false" />
+        <sequential>
+            <!-- check if debug flag was passed in and set an appropriate flag for CLI exec of bbwp -->
+            <if>
+                <equals arg1="@{debug}" arg2="true" />
+                <then>
+                    <property name="debug.flag" value="/d" />
+                </then>
+                <else>
+                    <property name="debug.flag" value="" />
+                </else>
+            </if>
+
+            <!-- Ensure bbwp executable exists. -->
+            <property name="properties.blackberry.bbwp.bin" location="${bbwp}" /> 
+            <available file="${properties.blackberry.bbwp.bin}" property="properties.blackberry.bbwp.exists" />
+            <fail unless="properties.blackberry.bbwp.exists" message="Cannot find ${properties.blackberry.bbwp.bin}. Please edit 'blackberry.bbwp.dir' in your 'project.properties' file." />
+
+            <if>
+                <equals arg1="@{code-sign}" arg2="true" />
+                <then>
+                    <exec executable="${properties.blackberry.bbwp.bin}">
+                        <arg file="${build.dir}/${cod.name}.zip" />
+                        <arg value="/g" />
+                        <arg value="${properties.blackberry.sigtool.password}" />
+                        <arg line="${debug.flag} /o" />
+                        <arg file="${build.dir}" />
+                    </exec>
+                </then>
+                <else>
+                    <exec executable="${properties.blackberry.bbwp.bin}">
+                        <arg file="${build.dir}/${cod.name}.zip" />
+                        <arg line="${debug.flag} /o" />
+                        <arg file="${build.dir}" />
+                    </exec>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <!-- CLEAN -->
+    
+    <target name="clean">
+        <delete dir="${build.dir}" />
+        <delete dir="${widget.dir}" />
+    </target>
+    
+    <!-- CLEAN DEVICE -->
+    
+    <target name="clean-device" depends="generate-cod-name">
+        <exec executable="${javaloader}">
+            <arg value="-usb" />
+            <arg value="erase" />
+            <arg value="-f" />
+            <arg value="${cod.name}.cod" />
+        </exec>
+    </target>
+    
+    <!-- CLEAN SIMULATOR -->
+    
+    <target name="clean-simulator">
+        <!-- Find the simulator directory -->
+        <set-simulator-dir />
+        
+        <exec executable="${simulator.dir}/clean.bat" dir="${simulator.dir}" />
+        
+        <delete>
+            <fileset dir="${simulator.dir}" includes="*.cod,*.csl,*.cso,*.debug,*.jar" />
+        </delete>
+    </target>
+    
+        <!-- HELPER TASKS -->
+    
+    <target name="generate-cod-name">
+        <xmlproperty file="www/config.xml" prefix="config.xml" />
+        <propertyregex property="cod.name"
+                       input="${config.xml.widget.name}"
+                       regexp="(\W+)"
+                       replace=""
+                       casesensitive="false"
+                       global="true"
+                       defaultValue="${config.xml.widget.name}" />
+        <echo message="Generated name: ${cod.name}.cod" />
+    </target>
+    
+        <!-- MACRO: SET SIMULATOR DIRECTORY -->
+    
+    <macrodef name="set-simulator-dir">
+        <sequential>
+            <!-- Locate BBWP simulator directory. There may be multiple, so choose the first. -->
+            <path id="bbwp.sim.path">
+                <first>
+                    <fileset dir="${properties.blackberry.bbwp.dir}/simpack">
+                        <include name="**/handhelds.manifest.txt" />
+                    </fileset>
+                </first>
+            </path>
+            <dirname property="bbwp.sim.dir" file="${toString:bbwp.sim.path}" />
+
+            <!-- Simulator directory: Use sim.dir property if set in project.properties file.
+                 Otherwise, use bbwp simulator directory. -->
+            <condition
+                property="simulator.dir"
+                value="${properties.blackberry.sim.dir}"
+                else="${bbwp.sim.dir}">
+                    <available file="${properties.blackberry.sim.dir}" type="dir" />
+            </condition>
+            <echo message="Simulator directory=${simulator.dir}" />
+        </sequential>
+    </macrodef>
+	
+	    <!-- HELP -->
+    
+    <target name="help">
+        <echo>
+NAME
+  ${ant.project.name}
+
+SYNOPSIS
+  ant TARGET COMMAND [-D&lt;argument&gt;=&lt;value&gt;]...
+
+DESCRIPTION
+  You can build and deploy your project to a device or simulator.
+  
+TARGETS
+  blackberry ........ Builds a cod file and deploys to a device or simulator
+ 
+  playbook .......... Builds a bar file and deploys to a device or simulator
+
+COMMANDS
+  help .............. Show this help menu.
+                        ant, ant help
+
+  load-device ....... Builds and deploys project to a connected USB device.
+                        ant load-device
+
+  load-simulator .... Builds and deploys project to default simulator.
+                        ant load-simulator
+
+  build ............. Compiles and packages the project for deployment.
+                        ant build
+                                              
+  clean ............. Remove all files from the build/ directory.
+                        ant clean
+
+  clean-device ...... Remove this project from the connected USB device.
+                        ant clean-device
+
+  clean-simulator ... Remove this project from the simulator (takes a while).
+                        ant clean-simulator
+
+GETTING STARTED
+  1. Edit project.properties
+
+  2. &lt;ant load-simulator&gt; to run the project on the simulator
+
+  3. Customize your project by editing www/config.xml
+
+  4. To run the project on a BlackBerry device, you will need to obtain
+     code signing keys from RIM. Once you have the key, a project is
+     installed by connecting a BlackBerry via USB and running
+     &lt;ant load-device&gt;.
+        </echo>
+    </target>
+</project>

@@ -1,0 +1,50 @@
+{
+  "name": "cordova",
+  "version": "2.4.0",
+  "preferGlobal": "true",
+  "description": "Cordova command line interface tool",
+  "main": "cordova",
+  "bin": {
+    "cordova": "./bin/cordova"
+  },
+  "scripts": {
+    "test": "./node_modules/jasmine-node/bin/jasmine-node --color spec",
+    "install": "node bootstrap.js && ./bin/notice"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-wip-us.apache.org/repos/asf/cordova-cli.git"
+  },
+  "keywords": [
+    "cordova",
+    "client",
+    "cli"
+  ],
+  "dependencies": {
+    "colors":">=0.6.0",
+    "elementtree":"0.1.3",
+    "plugman":"git://github.com/filmaj/plugman.git#0.5.5",
+    "plist":"git://github.com/filmaj/node-plist.git",
+    "xcode":"0.5.1",
+    "express":"3.0",
+    "shelljs":"0.0.8",
+    "ncallbacks":"1.0.0",
+    "request":"2.11.4",
+    "semver":"1.1.0",
+    "prompt":"0.2.7"
+  },
+  "devDependencies": {
+    "jasmine-node":">=1.0.0"
+  },
+  "author": "Anis Kadri",
+  "contributors": [
+    {"name": "Brian LeRoux","email": "b@brian.io"},
+    {"name": "Fil Maj", "email": "maj.fil@gmail.com"},
+    {"name": "Mike Reinstein", "email":"reinstein.mike@gmail.com"},
+    {"name": "Darry Pogue", "email":"darryl@dpogue.ca"},
+    {"name": "Michael Brooks", "email":"michael@michaelbrooks.ca"},
+    {"name": "Braden Shepherdson", "email":"braden@chromium.org"},
+    {"name": "Gord Tanner", "email":"gtanner@gmail.com"}
+  ],
+  "license": "Apache version 2.0"
+}

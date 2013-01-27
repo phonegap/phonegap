@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
   <Identity Name="f0eea4fc-197b-4c4e-8590-5d9b2b964f5b" Version="1.0.0.0" Publisher="CN=Jesse" />
   <Properties>
-    <DisplayName>MetroTestApp</DisplayName>
+    <DisplayName>CordovaTestApp</DisplayName>
     <PublisherDisplayName>Jesse</PublisherDisplayName>
     <Logo>images\storelogo.png</Logo>
   </Properties>

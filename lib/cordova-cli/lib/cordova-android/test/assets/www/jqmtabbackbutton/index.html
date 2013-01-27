@@ -1,0 +1,67 @@
+<!--
+         Licensed to the Apache Software Foundation (ASF) under one$
+         or more contributor license agreements.  See the NOTICE file$
+         distributed with this work for additional information$
+         regarding copyright ownership.  The ASF licenses this file$
+         to you under the Apache License, Version 2.0 (the$
+         "License"); you may not use this file except in compliance$
+         with the License.  You may obtain a copy of the License at$
+$
+           http://www.apache.org/licenses/LICENSE-2.0$
+$
+         Unless required by applicable law or agreed to in writing,$
+         software distributed under the License is distributed on an$
+         "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY$
+         KIND, either express or implied.  See the License for the$
+         specific language governing permissions and limitations$
+         under the License.$
+-->
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>Backbutton</title> 
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+<script type="text/javascript" src="../cordova.js"></script>
+
+<script>
+document.addEventListener("deviceready", onDeviceReady, false);
+
+// Without backbutton handler, each tab loaded will be popped off history until history is empty, then it will exit app.
+function handleBackButton() {
+    alert("Back Button Pressed! - exiting app");
+    navigator.app.exitApp();
+}
+
+function onDeviceReady() {
+    console.log("onDeviceReady()");
+    document.addEventListener("backbutton", handleBackButton, false);
+}
+
+
+</script>
+</head> 
+<body>
+<div data-role="page" id="tabTab">
+    <div data-role="header">
+        <h1>Main</h1>
+    </div>
+    <div data-role="content" id="tabContent">
+        To test, press several tabs.<br>
+        The "backbutton" can be pressed any time to exit app.
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="tab1.html" data-transition="none">Tab 1</a>
+                </li>
+                <li><a href="tab2.html" data-transition="none">Tab 2</a>
+                </li>
+                <li><a href="tab3.html" data-transition="none">Tab 3</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

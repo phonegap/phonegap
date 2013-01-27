@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -102,7 +106,7 @@
 <option value="capture.captureAudio_full_example">      - Full Example</option>
 <option value="capture.captureAudio_blackberry_webworks_quirks">      - BlackBerry WebWorks Quirks</option>
 <option value="capture.captureAudio_ios_quirks">      - iOS Quirks</option>
-<option value="capture.captureAudio_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="capture.captureAudio_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="CaptureAudioOptions">CaptureAudioOptions</option>
 <option value="CaptureAudioOptions_properties">      - Properties</option>
 <option value="CaptureAudioOptions_quick_example">      - Quick Example</option>
@@ -179,6 +183,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -272,7 +277,7 @@ var capture = navigator.device.capture;
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -316,13 +321,9 @@ var capture = navigator.device.capture;
 
 <h3>iOS</h3>
 
-<h4>App/Supporting Files/Cordova.plist</h4>
+<h4>config.xml</h4>
 
-<pre class="prettyprint"><code>&lt;key&gt;Plugins&lt;/key&gt;
-&lt;dict&gt;
-    &lt;key&gt;<a href="cordova_media_capture_capture.md.html#Capture">Capture</a>&lt;/key&gt;
-    &lt;string&gt;CDVCapture&lt;/string&gt;
-&lt;/dict&gt;
+<pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_media_capture_capture.md.html#Capture">Capture</a>" value="CDVCapture" /&gt;
 </code></pre>
 
 <h3>webOS</h3>
@@ -373,7 +374,7 @@ var capture = navigator.device.capture;
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -407,7 +408,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_media_capture_capture.md.html#Capture">Capture</a> Audio&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8" src="json2.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -476,7 +477,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
 <li>iOS does not have a default audio recording application so a simple user interface is provided.</li>
 </ul>
 <h2>
-<a name="capture.captureAudio_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="capture.captureAudio_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <ul>
@@ -565,7 +566,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 2.x</li>
 <li>Windows 8</li>
 </ul>
@@ -607,7 +608,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_media_capture_capture.md.html#Capture">Capture</a> Image&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8" src="json2.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -775,7 +776,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 2.x</li>
 <li>Windows 8</li>
 </ul>
@@ -810,7 +811,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_media_capture_capture.md.html#Capture">Capture</a> Video&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8" src="json2.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -1167,7 +1168,7 @@ for each (var mode in imageModes) {
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>

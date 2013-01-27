@@ -1,0 +1,127 @@
+#!/usr/bin/python
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+"""
+Converts a project's Cordova.plist file into a config.xml one. This conversion is required for Cordova 2.3.
+
+Usage:
+  plist2xml.py path/to/project
+"""
+
+import StringIO
+import fileinput
+import plistlib
+import os
+import re
+import sys
+from xml.dom import minidom
+from xml.etree import ElementTree
+
+
+def Usage():
+  sys.stderr.write(__doc__)
+  sys.exit(1)
+
+
+def ValueToElement(node_name, key, value):
+  if isinstance(value, bool):
+    value = str(value).lower()
+  return ElementTree.Element(node_name, attrib={'name':key, 'value':str(value)})
+
+
+def AppendDict(d, node, name, ignore=()):
+  for key in sorted(d):
+    if key not in ignore:
+      node.append(ValueToElement(name, key, d[key]))
+
+
+def FindProjectFile(path):
+  # Do an extra abspath here to strip off trailing / if present.
+  path = os.path.abspath(path)
+  if path.endswith('.pbxproj'):
+    return path
+  elif path.endswith('.xcodeproj'):
+    return os.path.join(path, 'project.pbxproj')
+  for f in os.listdir(path):
+    if f.endswith('.xcodeproj'):
+      return os.path.join(path, f, 'project.pbxproj')
+  raise Exception('Invalid project path. Please provide the path to your .xcodeproj directory')
+
+
+def FindPlistFile(search_path):
+  for root, unused_dirnames, file_names in os.walk(search_path):
+    for file_name in file_names:
+      if file_name == 'Cordova.plist':
+        return os.path.join(root, file_name)
+  raise Exception('Could not find a file named "Cordova.plist" within ' + search_path)
+
+
+def ConvertPlist(src_path, dst_path):
+  # Run it through plutil to ensure it's not a binary plist.
+  os.system("plutil -convert xml1 '%s'" % src_path)
+  plist = plistlib.readPlist(src_path)
+  root = ElementTree.Element('cordova')
+
+  AppendDict(plist, root, 'preference', ignore=('Plugins', 'ExternalHosts'))
+
+  plugins = ElementTree.Element('plugins')
+  root.append(plugins)
+  AppendDict(plist['Plugins'], plugins, 'plugin')
+
+  for value in sorted(plist['ExternalHosts']):
+    root.append(ElementTree.Element('access', attrib={'origin':value}))
+
+  tree = ElementTree.ElementTree(root)
+  s = StringIO.StringIO()
+  tree.write(s, encoding='UTF-8')
+  mini_dom = minidom.parseString(s.getvalue())
+  with open(dst_path, 'w') as out:
+    out.write(mini_dom.toprettyxml(encoding='UTF-8'))
+
+
+def UpdateProjectFile(path):
+  file_handle = fileinput.input(path, inplace=1)
+  for line in file_handle:
+    if 'Cordova.plist' in line:
+      line = line.replace('Cordova.plist', 'config.xml')
+      line = line.replace('lastKnownFileType = text.plist.xml', 'lastKnownFileType = text.xml')
+    print line,
+  file_handle.close()
+
+
+def main(argv):
+  if len(argv) != 1:
+    Usage();
+
+  project_file = FindProjectFile(argv[0])
+  plist_file = FindPlistFile(os.path.dirname(os.path.dirname(project_file)))
+
+  config_file = os.path.join(os.path.dirname(plist_file), 'config.xml')
+  sys.stdout.write('Converting %s to %s.\n' % (plist_file, config_file))
+  ConvertPlist(plist_file, config_file)
+
+  sys.stdout.write('Updating references in %s\n' % project_file)
+  UpdateProjectFile(project_file)
+
+  os.unlink(plist_file)
+  sys.stdout.write('Updates Complete.\n')
+
+
+if __name__ == '__main__':
+  main(sys.argv[1:])

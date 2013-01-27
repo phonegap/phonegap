@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "io.cordova.hello-cordova"
+        version   = "2.0.0">
+    <name>Hello Cordova</name>
+
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+
+    <author href="http://cordova.io" email="callback-dev@incubator.apache.org">
+        Apache Cordova Team
+    </author>
+
+    <icon src="res/icon/cordova_512.png"        width="512" height="512" />
+    <icon src="res/icon/cordova_android_96.png" width="96"  height="96"  gap:platform="android" />
+    <icon src="res/icon/cordova_bb_80.png"      width="80"  height="80"  gap:platform="blackberry" />
+    <icon src="res/icon/cordova_ios_144.png"    width="144" height="144" gap:platform="ios" />
+
+    <gap:splash src="res/screen/android_hdpi_landscape.png"      width="800"  height="480"  gap:platform="android" />
+    <gap:splash src="res/screen/android_hdpi_portrait.png"       width="480"  height="800"  gap:platform="android" />
+    <gap:splash src="res/screen/android_ldpi_landscape.png"      width="320"  height="200"  gap:platform="android" />
+    <gap:splash src="res/screen/android_ldpi_portrait.png"       width="200"  height="320"  gap:platform="android" />
+    <gap:splash src="res/screen/android_mdpi_landscape.png"      width="480"  height="320"  gap:platform="android" />
+    <gap:splash src="res/screen/android_mdpi_portrait.png"       width="320"  height="480"  gap:platform="android" />
+    <gap:splash src="res/screen/android_xhdpi_landscape.png"     width="1280" height="720"  gap:platform="android" />
+    <gap:splash src="res/screen/android_xhdpi_portrait.png"      width="720"  height="1280" gap:platform="android" />
+    <gap:splash src="res/screen/blackberry_transparent_300.png"  width="300"  height="300"  gap:platform="blackberry" />
+    <gap:splash src="res/screen/blackberry_transparent_400.png"  width="200"  height="200"  gap:platform="blackberry" />
+    <gap:splash src="res/screen/ipad_landscape.png"              width="1024" height="748"  gap:platform="ios" />
+    <gap:splash src="res/screen/ipad_portrait.png"               width="768"  height="1004" gap:platform="ios" />
+    <gap:splash src="res/screen/ipad_retina_landscape.png"       width="2048" height="1496" gap:platform="ios" />
+    <gap:splash src="res/screen/ipad_retina_portrait.png"        width="1536" height="2008" gap:platform="ios" />
+    <gap:splash src="res/screen/iphone_landscape.png"            width="480"  height="320"  gap:platform="ios" />
+    <gap:splash src="res/screen/iphone_portrait.png"             width="320"  height="480"  gap:platform="ios" />
+    <gap:splash src="res/screen/iphone_retina_landscape.png"     width="960"  height="640"  gap:platform="ios" />
+    <gap:splash src="res/screen/iphone_retina_portrait.png"      width="640"  height="960"  gap:platform="ios" />
+    <gap:splash src="res/screen/windows_phone_portrait.jpg"      width="480"  height="800"  gap:platform="winphone" />
+
+    <feature name="http://api.phonegap.com/1.0/device" />
+
+    <preference name="phonegap-version" value="1.9.0" />
+    <preference name="orientation"      value="default" />
+    <preference name="target-device"    value="universal" />
+    <preference name="fullscreen"       value="false" />
+
+    <access origin="*" />
+</widget>

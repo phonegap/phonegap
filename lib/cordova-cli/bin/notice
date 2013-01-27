@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "************************************************************************";
+echo "* Please NOTE: it is highly recommended to run the command:            *";
+echo "*     sudo chown -R <yourusername> /usr/local/lib/node_modules/cordova *";
+echo "* This will allow you to run this tool globally without root.          *";
+echo "************************************************************************";

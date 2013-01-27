@@ -26,7 +26,7 @@ using System.Windows.Media;
 using System;
 using System.Collections.Generic;
 
-namespace WP7CordovaClassLib
+namespace WPCordovaClassLib
 {
 
     /// <summary>

@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -105,6 +109,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -181,13 +186,11 @@
 
 <p>h. <strong>AllowInlineMediaPlayback (boolean, defaults to false)</strong> - set to true to allow inline HTML5 media playback, also, the video element in the HTML document must also include the webkit-playsinline attribute</p>
 
-<p>i. <strong>OpenAllWhitelistURLsInWebView (boolean, defaults to false)</strong> - set to true to open all white-listed URLs in the main WebView</p>
+<p>i. <strong>BackupWebStorage (string, defaults to 'cloud')</strong> - valid values are 'none', 'cloud' and 'local'. Set to 'cloud' to allow the web storage data to be backed up to iCloud, and set to 'local' to only allow local backups (iTunes sync). Set to 'none' to not allow any backups of web storage.</p>
 
-<p>j. <strong>BackupWebStorage (string, defaults to 'cloud')</strong> - valid values are 'none', 'cloud' and 'local'. Set to 'cloud' to allow the web storage data to be backed up to iCloud, and set to 'local' to only allow local backups (iTunes sync). Set to 'none' to not allow any backups of web storage.</p>
+<p>j. <strong>KeyboardDisplayRequiresUserAction (boolean, defaults to true)</strong> - set to false to open the keyboard when form elements get focus via the JavaScript focus() call.</p>
 
-<p>k. <strong>KeyboardDisplayRequiresUserAction (boolean, defaults to true)</strong> - set to false to open the keyboard when form elements get focus via the JavaScript focus() call.</p>
-
-<p>l. <strong>SuppressesIncrementalRendering (boolean, defaults to false)</strong> - set to true to wait until all new view content has been received before it is rendered.</p>
+<p>k. <strong>SuppressesIncrementalRendering (boolean, defaults to false)</strong> - set to true to wait until all new view content has been received before it is rendered.</p>
 </li>
 </ol>
 </div>

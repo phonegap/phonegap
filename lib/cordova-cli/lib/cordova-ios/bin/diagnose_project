@@ -1,0 +1,216 @@
+#!/usr/bin/python
+"""
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+"""
+"""
+Prints out information regarding a Cordova project for diagnostic purposes.
+Currently this only reports information but does not give any recommendations yet.
+
+Usage: CordovaVersion/bin/diagnose_project path/to/your/app.xcodeproj
+"""
+
+import os
+import sys
+import plistlib
+import shutil
+import tempfile
+import pprint
+
+def Usage():
+  print __doc__
+  sys.exit(1)
+
+def AbsParentPath(path):
+  return os.path.abspath(os.path.join(path, os.path.pardir))
+
+def AbsProjectPath(relative_path):
+  # Do an extra abspath here to strip off trailing / if present.
+  project_path = os.path.abspath(relative_path)
+  if project_path.endswith('.pbxproj'):
+    project_path = AbsParentPath(project_path)
+  elif project_path.endswith('.xcodeproj'):
+    pass
+  else:
+    raise Exception('The following is not a valid path to an XCode project: %s' % project_path)
+  return project_path
+
+def getXcodePlist(pbxPath):
+	tmpfile = tempfile.mktemp (".xml")
+	os.system("plutil -convert xml1 -o %s %s" % (tmpfile, pbxPath))
+
+	return plistlib.readPlist( tmpfile )
+	
+def getTargetBuildSettings(diagKeys, xcodePlist):
+	allObjects = xcodePlist['objects']
+	rootObj = allObjects[ xcodePlist['rootObject'] ]
+	
+	buildSettings = {};
+	
+	targetguids = rootObj['targets']
+	for targetguid in targetguids:
+		target = allObjects[ targetguid ]
+		targetname = target['name']
+		targetSettings = {}
+		bclist = allObjects[ target['buildConfigurationList'] ]['buildConfigurations']
+		for conflist in bclist:
+			cl = allObjects[conflist];
+			clname = cl.get("name", 'no name')
+			targetSettings[clname] = {}
+			for key in diagKeys:
+				val = cl['buildSettings'].get(key, '(not found)')
+				targetSettings[clname][key] = val
+		buildSettings[targetname] = targetSettings
+
+	return buildSettings
+
+def getProjectBuildSettings(diagKeys, xcodePlist):
+	allObjects = xcodePlist['objects']
+	rootObj = allObjects[ xcodePlist['rootObject'] ]
+	
+	buildSettings = {};
+
+	bclist = allObjects[ rootObj['buildConfigurationList'] ]['buildConfigurations']
+	for conflist in bclist:
+		cl = allObjects[conflist];
+		clname = cl.get("name", 'no name')
+		buildSettings[clname] = {}
+		for key in diagKeys:
+			val = cl['buildSettings'].get(key, '(not found)')
+			buildSettings[clname][key] = val
+	
+	return buildSettings
+	
+def getXcodeBuildSettings(diagKeys, xcodePlist):
+	projectSettings = getProjectBuildSettings(diagKeys, xcodePlist)
+	targetSettings = getTargetBuildSettings(diagKeys, xcodePlist)
+
+	settings = {}
+	settings['Project'] = projectSettings
+	settings['Targets'] = targetSettings
+	
+	return settings
+  
+def main(argv):
+	if len(argv) != 2:
+		Usage()
+
+	project_path = AbsProjectPath(argv[1])
+	parent_project_path = AbsParentPath(project_path)
+
+	projPbx = os.path.join(project_path, 'project.pbxproj')
+
+	buildSettingsKeys = ['HEADER_SEARCH_PATHS', 'ARCHS', 'USER_HEADER_SEARCH_PATHS', 'IPHONEOS_DEPLOYMENT_TARGET', 'OTHER_LDFLAGS', 'GCC_VERSION']
+
+	projPlist = getXcodePlist(projPbx)
+	allObjects = projPlist['objects']
+	rootObj = allObjects[ projPlist['rootObject'] ]
+
+	print "\n\n-------------------------------------BEGIN--------------------------------------"
+	print "Inspecting project: %s" % (projPbx) 
+
+	print "\n\n--------------------------------------------------------------------------------"
+	print "Finding your project's sub-projects...\n"
+
+	subprojKeys = ['name', 'path', 'sourceTree']
+	subprojValues = []
+
+	subprojRef = rootObj['projectReferences']
+	for subproj in subprojRef:
+	  sp = {}
+	  subprojGroup = allObjects[ subproj['ProjectRef'] ]
+	  for key in subprojKeys:
+	  	val = subprojGroup.get(key, "(not found)")
+	  	sp[key] = val;
+	  print "Sub-project:", sp
+	  subprojValues.append(sp)
+  	
+  
+	print "\n\n--------------------------------------------------------------------------------"
+	print "Inspecting your project's Build Settings...\n"
+
+	buildSettings = getXcodeBuildSettings(buildSettingsKeys, projPlist)
+	pp = pprint.PrettyPrinter(indent=4)
+
+	for key in buildSettings:
+	  print key, ":" 
+	  pp.pprint(buildSettings[key])
+	
+	print "\n\n--------------------------------------------------------------------------------"
+	print "Inspecting Xcode Preferences...\n"
+
+	xcodeBinaryPrefsPath = os.path.join( os.path.expanduser("~"), "Library", "Preferences", "com.apple.dt.Xcode.plist" );
+	xcodePrefsPlist = getXcodePlist(xcodeBinaryPrefsPath)
+
+	xcodeCordovaLib = xcodePrefsPlist['IDEApplicationwideBuildSettings'].get("CORDOVALIB", "(not found)")
+	print "CORDOVALIB:", xcodeCordovaLib
+	print "Build Location Style:", xcodePrefsPlist.get('IDEBuildLocationStyle', "(unknown)")
+
+	print "\n\n--------------------------------------------------------------------------------"
+	print "Inspecting your CordovaLib's Build Settings...\n"
+
+	cdvlibPath = None
+	cdvlibProjName = 'CordovaLib.xcodeproj'
+	
+	for sp in subprojValues:
+	  if cdvlibProjName in sp['path']:
+	  	if 'CORDOVALIB' in sp['sourceTree']:
+			print "Your project *IS* using the CORDOVALIB Xcode variable (source tree)."
+	  		cdvlibPath = os.path.join( xcodeCordovaLib, cdvlibProjName)
+	  	else:
+			print "Your project is *NOT* using the CORDOVALIB Xcode variable (source tree)."
+	  		cdvlibPath = sp['path']
+  	
+	cdvlibNormalizedPath = os.path.normpath( os.path.join(parent_project_path, cdvlibPath) )
+	cdvlibPbx = os.path.join( cdvlibNormalizedPath , 'project.pbxproj' )
+
+	print "Path is:", cdvlibNormalizedPath, "\n"
+
+	cdvPlist = getXcodePlist(cdvlibPbx)
+	cdvBuildSettingsKeys = ['PUBLIC_HEADERS_FOLDER_PATH', 'ARCHS', 'ARCHS[sdk=iphoneos*]', 'ARCHS[sdk=iphoneos6.*]', 'ARCHS[sdk=iphonesimulator*]', 'USER_HEADER_SEARCH_PATHS', 'IPHONEOS_DEPLOYMENT_TARGET', 'OTHER_LDFLAGS', 'GCC_VERSION']
+
+	cdvBuildSettings = getXcodeBuildSettings(cdvBuildSettingsKeys, cdvPlist)
+	pp.pprint( cdvBuildSettings )
+
+	print "\n\n--------------------------------------------------------------------------------"
+	print "Inspecting CordovaLib Version...\n"
+  
+	cdvlibFolder = AbsParentPath(cdvlibNormalizedPath)
+	cdvlibVersionFile = os.path.join( cdvlibFolder, "VERSION")
+
+	try:
+		vf = open(cdvlibVersionFile, 'r')
+	  	print "VERSION file:", vf.readline()
+	  	vf.close()
+	except:
+		print "VERSION file not found at:", cdvlibVersionFile
+
+	cdvlibAvailabilityFile = os.path.join( cdvlibFolder, "Classes", "CDVAvailability.h" )
+	try:
+	    af = open(cdvlibAvailabilityFile, 'r')
+	    match = "#define CORDOVA_VERSION_MIN_REQUIRED"
+	    for line in af:
+	  		if match in line:
+	  			print "CDVAvailability.h version:", line.strip().replace(match, ""),
+	    af.close()
+	except:
+		print "CDVAvailability.h file not found at:", cdvlibAvailabilityFile, 
+
+	print "\n\n--------------------------------------END---------------------------------------"
+
+if __name__ == '__main__':
+  main(sys.argv)

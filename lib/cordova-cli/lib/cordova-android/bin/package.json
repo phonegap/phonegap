@@ -1,0 +1,22 @@
+{
+  "name":         "cordova-android-cli",
+  "description":  "CLI tooling for the cordova-android project",
+  "version":      "0.0.1",
+  "licenses":     [{
+    "type":       "APL 2.0",
+    "url":        "http://www.apache.org/licenses/LICENSE-2.0"
+  }],
+  "main" : "./create",
+  "bin":          {
+    "create":   "./create",
+    "bench":    "./bench",
+    "autotest": "./autotest",
+    "BOOM":     "./BOOM",
+    "test":     "./test"
+  },
+  "homepage":     "http://incubator.apache.org/cordova",
+  "repository":   {
+    "type": "git",
+    "url": "http://git-wip-us.apache.org/repos/asf/incubator-cordova-android.git"
+  }
+}

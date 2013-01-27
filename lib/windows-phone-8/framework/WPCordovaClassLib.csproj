@@ -167,6 +167,9 @@
     <Compile Include="..\templates\standalone\cordovalib\Commands\ImageExifHelper.cs">
       <Link>CordovaLib\Commands\ImageExifHelper.cs</Link>
     </Compile>
+    <Compile Include="..\templates\standalone\cordovalib\Commands\InAppBrowser.cs">
+      <Link>CordovaLib\Commands\InAppBrowser.cs</Link>
+    </Compile>
     <Compile Include="..\templates\standalone\cordovalib\Commands\Media.cs">
       <Link>CordovaLib\Commands\Media.cs</Link>
     </Compile>
@@ -178,6 +181,9 @@
     </Compile>
     <Compile Include="..\templates\standalone\cordovalib\Commands\Notification.cs">
       <Link>CordovaLib\Commands\Notification.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\cordovalib\ConfigHandler.cs">
+      <Link>CordovaLib\ConfigHandler.cs</Link>
     </Compile>
     <Compile Include="..\templates\standalone\cordovalib\CordovaCommandCall.cs">
       <Link>CordovaLib\CordovaCommandCall.cs</Link>

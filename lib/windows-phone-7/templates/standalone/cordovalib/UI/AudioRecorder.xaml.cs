@@ -21,10 +21,10 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows;
 using System.Windows.Threading;
-using WP7CordovaClassLib.Cordova.Commands;
-using AudioResult = WP7CordovaClassLib.Cordova.UI.AudioCaptureTask.AudioResult;
+using WPCordovaClassLib.Cordova.Commands;
+using AudioResult = WPCordovaClassLib.Cordova.UI.AudioCaptureTask.AudioResult;
 
-namespace WP7CordovaClassLib.Cordova.UI
+namespace WPCordovaClassLib.Cordova.UI
 {
     /// <summary>
     /// Implements Audio Recording application

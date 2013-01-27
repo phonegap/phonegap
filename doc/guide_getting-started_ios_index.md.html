@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -88,17 +92,14 @@
         <div id="subheader">
             <h1>Getting Started with iOS</h1>
             <small><select><option value="Getting%2520Started%2520with%2520iOS">Getting Started with iOS</option>
-<option value="Getting%20Started%20with%20iOS_requirements">      - Requirements</option>
-<option value="Getting%20Started%20with%20iOS_install_the_ios_sdk_and_apache_cordova">      - Install the iOS SDK and Apache Cordova</option>
-<option value="Getting%20Started%20with%20iOS_install_cordovalib">      - Install CordovaLib </option>
-<option value="Getting%20Started%20with%20iOS_create_a_new_project">      - Create a New Project</option>
-<option value="Getting%20Started%20with%20iOS_deploy_to_simulator">      - Deploy to Simulator</option>
-<option value="Getting%20Started%20with%20iOS_deploy_to_device">      - Deploy to Device
-</option>
+<option value="Getting%20Started%20with%20iOS_introduction">      - Introduction</option>
+<option value="Getting%20Started%20with%20iOS_install_cordova">      - Install Cordova</option>
+<option value="Getting%20Started%20with%20iOS_project_creation">      - Project Creation</option>
+<option value="Getting%20Started%20with%20iOS_running_the_application">      - Running the Application</option>
 <option value="Getting%20Started%20with%20iOS_results">      - Results</option>
-<option value="Getting%20Started%20with%20iOS_problems_in_xcode">      - Problems in Xcode</option>
-<option value="Getting%20Started%20with%20iOS_build_your_app">      - Build Your App</option>
-<option value="Getting%20Started%20with%20iOS_problems_in_the_command_line_tools">      - Problems in the Command Line Tools</option></select></small>
+<option value="Getting%20Started%20with%20iOS_common_problems">      - Common Problems</option>
+<option value="Getting%20Started%20with%20iOS_next_steps">      - Next Steps</option>
+<option value="Getting%20Started%20with%20iOS_resources">      - Resources</option></select></small>
         </div>
 
         <div id="sidebar">
@@ -116,6 +117,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -138,151 +140,378 @@
             <div id="content">
                 <h1><a name="Getting%20Started%20with%20iOS">Getting Started with iOS</a></h1>
 
-<p>This guide describes how to set up your development environment for Apache Cordova and run a sample Apache Cordova application.</p>
-
 <h2>
-<a name="Getting%20Started%20with%20iOS_requirements">Requirements</a>
+<a name="Getting%20Started%20with%20iOS_introduction">Introduction</a>
 </h2>
 
-<ul>
-<li>Xcode 4.5+ (iOS 6.x SDK)</li>
-<li>Xcode Command Line Tools </li>
-<li>Intel-based computer with Mac OS X Lion or greater (10.7.4+)</li>
-<li>Necessary for installing on device:
-<ul>
-<li>Apple iOS 5.x device (iPhone 3GS or greater, iPad, iPod Touch 3rd Gen or greater)</li>
-<li>iOS developer certificate</li>
-</ul>
-</li>
-</ul>
-<h2>
-<a name="Getting%20Started%20with%20iOS_install_the_ios_sdk_and_apache_cordova">Install the iOS SDK and Apache Cordova</a>
-</h2>
+<p>Apache Cordova is a library used to create native mobile applications using Web technologies.  The application is created using HTML, CSS and JavaScript and compiled for each specific platform using the platform native tools.  Cordova provides a standard set of JavaScript APIs to access device features on all supported platforms. This document describes how to get started using Apache Cordova for the iOS platform.</p>
+
+<h3>Requirements</h3>
 
 <ul>
-<li>Install <strong>Xcode</strong> from the <a class="external" href="http://itunes.apple.com/us/app/xcode/id497799835?mt=12">Mac App Store</a> or <a class="external" href="http://developer.apple.com/downloads">Apple Developer Downloads</a>
-</li>
-<li>Install the <strong>Xcode Command Line Tools</strong> (<strong>Xcode Preferences -&gt; Downloads -&gt; Components -&gt; Command Line Tools -&gt; Install</strong>).</li>
-<li>Download the latest release of <a class="external" href="http://phonegap.com/download">Apache Cordova</a>
+<li>
+<strong>Intel-based Computer with Mac® OS X® Lion or greater (10.7.4+)</strong> 
+The Apple® tools required for building iOS applications run only on the OS X operating system. The version of the development environment required, Xcode® 4.5, runs only on Mac OS X version 10.7 (Lion) or greater.   </li>
+<li>
+<p><strong>Xcode 4.5 and iOS 6 SDK</strong>
+     To submit apps to the Apple App Store℠, you must be using the latest versions of the Apple tools. Currently the latest versions are Xcode 4.5.2 and the iOS 6 SDK (Software Development Kit). The download of Xcode 4.5.2 includes the iOS 6 SDK.  </p>
+
 <ul>
-<li>extract its contents</li>
-<li>Apache Cordova iOS is found under <code>lib/ios</code>
-</li>
+<li>Download from the <a class="external" href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">App Store</a> (https://itunes.apple.com/us/app/xcode/id497799835?mt=12).  </li>
+<li>Download from <a class="external" href="https://developer.apple.com/downloads/index.action">Apple Developer Downloads</a> (https://developer.apple.com/downloads/index.action).  Note:  This link requires Apple Developer registration.</li>
 </ul>
+</li>
+<li>
+<p><strong>Xcode Command Line Tools</strong></p>
+
+<p>Cordova uses the command line to create a new application project.  To access the Xcode tools from the command line an additional download is required.  The tools are downloaded from within Xcode. </p>
+
+<ol>
+<li>Open Xcode</li>
+<li>Select the following via the Xcode Menus:  <strong>Xcode Preferences&gt; Downloads&gt;Command Line Tools</strong>.  This will download and install copies of the core command line tools and system headers into system folders on your computer.</li>
+</ol>
+</li>
+<li>
+<p><strong>iOS <a href="cordova_device_device.md.html#Device">Device</a></strong></p>
+
+<p>You can test many of the Cordova features using the iOS simulator that is installed with the iOS SDK and Xcode, but you will need an actual device to fully test all of the device features used in your applications before submitting to the App Store.  The device must have at least iOS 5.x installed - this is the minimum iOS version supported as of Cordova 2.3.  Devices that support at least iOS 5 include all iPad® models, iPhone® 3GS and above, and iPod® Touch 3rd Generation or later.           In addition, to install apps onto a device, you must be a member of the <a class="external" href="https://developer.apple.com/programs/ios/">iOS Developer Program</a> from Apple.  The program costs $99 per year. This Getting Started guide documents deploying the application to the iOS simulator so registration with the developer program is not required.</p>
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20iOS_install_cordovalib">Install CordovaLib </a>
+<a name="Getting%20Started%20with%20iOS_install_cordova">Install Cordova</a>
 </h2>
+
+<h3>Download Cordova</h3>
+
+<p>Download the latest version of <a class="external" href="http://www.apache.org/dist/cordova/">Apache Cordova</a> from http://www.apache.org/dist/incubator/cordova/.  Click on the Download icon and select cordova-X.Y.Z -incubating-src.zip to download to your machine. The X, Y and Z represent the version number of Cordova, for example 2.4.0.  The download includes the code for all of the Apache Cordova supported platforms.   </p>
+
+<h3>Extract Cordova</h3>
+
+<p>To access the code it will need to be extracted from the archive (.zip) file.</p>
+
+<ol>
+<li><p>Navigate to the folder where you downloaded the code.  Find the cordova-X.Y.Z-incubating-src.zip file.   
+Note: The file names change with each new version of Cordova.  The file name will be different if you are using an updated or newer version of Cordova. </p></li>
+<li><p>Using the Finder® app, double click the file to extract. This will create a directory named, cordova-X.Y.Z.   </p></li>
+<li><p>Expand this folder and locate the incubator-cordova-ios.zip file and double click to extract it.   </p></li>
+<li><p>The code for iOS is within the incubator-cordova-ios directory structure.</p></li>
+</ol>
+<h2>
+<a name="Getting%20Started%20with%20iOS_project_creation">Project Creation</a>
+</h2>
+
+<p>Xcode projects for Cordova are created by invoking a script file via the command line. The following steps explain how to create the necessary directory structure, open and use the Terminal application to create a new project, and execute the create script.  </p>
+
+<h3>Determine Project Location</h3>
+
+<p>Determine where on your system you will locate the Xcode project files for your application.  For this tutorial I created a CordovaXY directory under my Documents folder:  ~/Documents/CordovaXY  where the X and Y refer the to Cordova version #. </p>
+
+<ol>
+<li><p>In Finder navigate to the Documents Directory.  </p></li>
+<li><p>Create a directory called CordovaXY within the Documents directory where the X and Y represent the Cordova version number (23, for example).  You can use a different directory name or location if you wish but you will need to remember this directory location and name for subsequent steps. </p></li>
+</ol>
+<h3>Open Terminal</h3>
+
+<ol>
+<li><p>In Finder, navigate to the Applications Folder. Find and expand the Utilities Folder. </p></li>
+<li><p>Locate the Terminal app and double click to open it.  </p></li>
+<li>
+<p>In Finder, navigate to the incubator-cordova-ios directory from the downloaded and extracted Cordova code and expand it if necessary.   Highlight the bin directory as shown:</p>
+
+<p><img src="img/guide/getting-started/ios/bin_dir_listing.png" alt="" title=""></p>
+
+<p><strong>Note:</strong> This screen capture was from the Cordova-2.3.0 download, your listing will vary based on the actual Cordova version installed.</p>
+</li>
+<li><p>Drag this directory to the open Terminal icon in the dock.  This will open up a default terminal window with the path set to the bin directory.</p></li>
+</ol>
+<h3>Create New Project</h3>
+
+<h4>Command Line Syntax</h4>
 
 <ol>
 <li>
-<strong>Download</strong> the Cordova source</li>
-<li>
-<strong>Extract</strong> to source to their final permanent location on your hard drive (for example, to ~/Documents/CordovaLib-2.X.X)</li>
-<li>There is no step 3</li>
-</ol>
-<h2>
-<a name="Getting%20Started%20with%20iOS_create_a_new_project">Create a New Project</a>
-</h2>
+<p>Determine Required Parameters</p>
 
-<ul>
-<li>Launch <strong>Terminal.app</strong>
+<p>There are 3 ordered, required parameters for creating a Cordova project from the command line: </p>
+
+<ol>
+<li>
+<p><strong>project location</strong></p>
+
+<p>This is the directory where the Xcode project and files for the application will be located. This tutorial is using ~/Documents/CordovaXY as the base location and the application name as the project directory.  Thus the location for our project will be  ~/Documents/CordovaXY/HelloWorld, where HelloWorld is the project name  (note that the X and Y represent the Cordova version, for example 22 for version 2.2).  The final directory, HelloWorld in this example, must not already exist as it will be created during execution of the command.</p>
 </li>
-<li>Drag the <strong>bin</strong> folder (located in the permanent folder location of Cordova, from the <strong>"Install CordovaLib"</strong> section above) to the <strong>Terminal.app</strong> icon in your Dock, it should launch a new Terminal window</li>
 <li>
-<p>Type in <code>./create &lt;project_folder_path&gt; &lt;package_name&gt; &lt;project_name&gt;</code> then press <strong>"Enter"</strong></p>
+<p><strong>package name</strong></p>
 
-<pre class="prettyprint"><code>&lt;project_folder_path&gt; is the path to your new Cordova iOS project (it must be empty if it exists)
-&lt;package_name&gt; is the package name, following reverse-domain style convention
-&lt;project_name&gt; is the project name
+<p>When submitting apps to the App Store, this must be the reverse domain name App ID that is created via the Apple Provisioning Portal (described in the Deploy to <a href="cordova_device_device.md.html#Device">Device</a> section).  The Provisioning Portal is accessible once you have paid for and signed into your iOS Developer Account.   Since you will not be submitting this sample app, this tutorial uses org.apache.Cordova plus the app name, HelloWorld:   org.apache.cordova.HelloWorld </p>
+</li>
+<li>
+<p><strong>project name</strong></p>
+
+<p>This is the name of the actual project.  Most developers make the project name and the application name the same.  In this example the project name is HelloWorld. </p>
+</li>
+</ol>
+</li>
+<li>
+<p>Execute the Command</p>
+
+<p>In the terminal app with bin as the current directory, enter the 3 pieces of information via the following command:
+   <code>./create ~/Documents/CordovaXY/HelloWorld org.apache.cordova.HelloWorld HelloWorld</code></p>
+
+<p><img src="img/guide/getting-started/ios/create.png" alt="" title=""></p>
+</li>
+<li>
+<p>Fix Common Problems</p>
+
+<p><strong>No Developer Directory Found</strong></p>
+
+<p>The “Error: No developer directory found at /Developer” message is displayed if the create script can not find the location of the command line tools within Xcode. This can occur if more than one version of Xcode is installed on the system or when upgrading from older versions of Xcode.  The solution is to run the xcode-select command to set the location.  If you have installed Xcode in the default location the command to execute is: </p>
+
+<pre class="prettyprint"><code>    sudo /usr/bin/xcode-select -switch /Applications/Xcode.app/Contents/Developer 
 </code></pre>
 
-<p><img src="img/guide/getting-started/ios/bin_create_project.png" alt="" title=""></p>
+<p>See <a class="external" href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcode-select.1.html">http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcode-select.1.html</a> for more information on the xcode-select command if you have installed Xcode in a different location.</p>
 </li>
-<li><p><strong>Locate</strong> your new project folder that you just created</p></li>
+</ol>
+<h4>Optional Features</h4>
+
+<ul>
 <li>
-<strong>Launch</strong> the .xcodeproj file in the folder</li>
+<p><strong>Additional Parameters</strong></p>
+
+<p>The default create script copies the necessary common library files from the Cordova distribution directory into your Xcode project directory.  These files will appear within the CordovaLib directory of your project structure.  Some development organizations prefer to have developers reference the common Cordova library files from a fixed location.  A common location helps to insure that all developers are using the exact same copy of the CordovaLib code.  This is accomplished by adding the --shared parameter to the create command.  The following command will create a project that references the CordovaLib directory from the iOS directory location where the create script is executed: </p>
+
+<pre class="prettyprint"><code>./create --shared ~/Documents/CordovaXY/HelloWorld org.apache.cordova.HelloWorld HelloWorld 
+</code></pre>
+
+<p>   The Xcode project is still created in the ~/Documents/CordovaXY/HelloWorld directory, but it references the CordovaLib files from the fixed location of the Cordova distribution rather than a copy of these files within the project directory.  </p>
+</li>
+<li>
+<p><strong>Additional Scripts</strong></p>
+
+<p>Within the incubator-cordova-ios/bin directory there is an additional script that changes the location of the CordovaLib directory to refer to a shared location after the project has been created, </p>
+
+<pre class="prettyprint"><code> ./update_cordova_subproject path/to/your/project 
+</code></pre>
+
+<p>Most users will be satisfied with the default project creation procedure and do not need this additional script. This script uses the location of CordovaLib directory at the same directory level as the bin directory from which it is run as the shared location for CordovaLib. To modify the newly created HelloWorld project to use a shared location for CordovaLib, execute the following command from the bin directory: </p>
+
+<pre class="prettyprint"><code>./update_cordova_subproject ~/Documents/CordovaXY/HelloWorld 
+</code></pre>
+</li>
 </ul>
-<p><strong>Note:</strong>
-Starting with Cordova 2.2, the project will have a copy of CordovaLib within it instead of having
-a dependency on the copy of CordovaLib from your Cordova installation.</p>
-
-<p>If you would like your project to depend directly on your Cordova installation's version of CordovaLib, you can use:
-<code>./create --shared</code>, or change the project reference after creation using:
-<code>./update_cordova_subproject path/to/you/project</code>.</p>
-
 <h2>
-<a name="Getting%20Started%20with%20iOS_deploy_to_simulator">Deploy to Simulator</a>
+<a name="Getting%20Started%20with%20iOS_running_the_application">Running the Application</a>
 </h2>
 
+<h3>Open the Project</h3>
+
+<p>Using the Finder app, navigate to the location where you created the project. This guide uses ~/Documents/CordovaXY/HelloWorld.  Double click the HelloWorld.xcodeproj file to open the project in Xcode.</p>
+
+<p>Your screen should look similar to:</p>
+
+<p><img src="img/guide/getting-started/ios/helloworld_project.png" alt="" title=""><strong>Note:</strong> this screen capture shows a project that was created with the name as HelloWorld23.    </p>
+
+<h3>Deploy to the Simulator</h3>
+
+<ol>
+<li>In the upper left hand corner of Xcode, click on the Scheme drop down and select the project name, HelloWorld, as the target.   </li>
+<li><p>Click the device section and select an iOS Simulator such as iPhone 6.0 Simulator as shown:   
+<img src="img/guide/getting-started/ios/select_xcode_scheme.png" alt="" title=""></p></li>
+<li><p>Click the ￼<strong>Run</strong> button in your project window's toolbar to build, deploy and run the application in the simulator.  </p></li>
+</ol>
+<h3>Deploy to the <a href="cordova_device_device.md.html#Device">Device</a>
+</h3>
+
+<h4>Requirements</h4>
+
+<p>There are several requirements to deploy to a device. Since this information is not related directly to Cordova, please refer to the Apple Configuring Development and Distribution Assets section of the <a class="external" href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">Tools Workflow Guide for iOS</a> documentation for complete details. </p>
+
 <ul>
-<li>Change the <strong>Target</strong> in the <strong>Scheme</strong> drop-down menu on the toolbar to <strong>"HelloWorld"</strong> (your project name)</li>
+<li><p>Join the Apple iOS Developer Program </p></li>
+<li><p>Create a Provisioning Profile within the <a class="external" href="https://developer.apple.com/ios/manage/overview/index.action">iOS Provisioning Portal</a>.   You can use the Development Provisioning Assistant within the Provisioning Portal to create and install the profile and certificate for use within Xcode. </p></li>
+<li><p>Verify that the Code Signing Identity in the Code Signing sections of the Hello World Xcode project settings has been set with your provisioning profile name.    </p></li>
+</ul>
+<h4>Deployment Steps</h4>
+
+<ol>
+<li>Plug your device into your Mac via the USB Cable. </li>
 <li>
-<p>Change the <strong>Active SDK</strong> in the <strong>Scheme</strong> drop-down menu on the toolbar to <strong>iOS [version] Simulator</strong></p>
+<p>Select the Target and device</p>
 
-<p><img src="img/guide/getting-started/ios/active_scheme_simulator.png" alt="" title=""></p>
+<ol>
+<li>In the upper left hand corner of Xcode, click the Scheme drop down and select the project name, HelloWorld, as the target. </li>
+<li>Click the device section and select your device from the list.  If your device is plugged in via the USB but not visible in the device list, click the ￼<strong>Organizer</strong> button to determine any errors. </li>
+</ol>
 </li>
-<li><p>Select the <strong>Run</strong> button in your project window's toolbar</p></li>
-</ul>
-<h2>
-<a name="Getting%20Started%20with%20iOS_deploy_to_device">Deploy to Device
-</a>
-</h2>
-
-<ul>
-<li>Open <code>HelloWorld-Info.plist</code>, under the <strong>Resources</strong> group</li>
-<li>Change <strong>BundleIdentifier</strong> to the identifier provided by Apple or your own bundle identifier
-<ul>
-<li>If you have a developer license, you can run the <a class="external" href="http://developer.apple.com/iphone/manage/overview/index.action">Assistant</a> to register your app</li>
-</ul>
-</li>
-<li>Change the <strong>Target</strong> in the <strong>Scheme</strong> drop-down menu on the toolbar to <strong>"HelloWorld"</strong> (your project name)</li>
-<li>
-<p>Change the <strong>Active SDK</strong> in the Scheme drop-down menu on the toolbar to <strong>[Your <a href="cordova_device_device.md.html#Device">Device</a> Name]</strong></p>
-
-<ul>
-<li>You will need to have your device connected via USB</li>
-</ul>
-<p></p>
-<p><img src="img/guide/getting-started/ios/active_scheme_device.png" alt="" title=""></p>
-</li>
-<li><p>Select the <strong>Run</strong> button in your project window's toolbar</p></li>
-</ul>
+<li><p>Click the ￼<strong>run</strong> button to build, deploy and run the application on your device.</p></li>
+</ol>
 <h2>
 <a name="Getting%20Started%20with%20iOS_results">Results</a>
 </h2>
 
-<ul>
-<li>
-<p>You should see the screen below, with a pulsating green <strong>"device is ready"</strong> message</p>
+<p>The running HelloWorld app is shown below.  The <a href="cordova_device_device.md.html#Device">Device</a> is Ready line should be slowly pulsating.</p>
 
 <p><img src="img/guide/getting-started/ios/HelloWorldStandard.png" alt="" title=""></p>
+
+<h2>
+<a name="Getting%20Started%20with%20iOS_common_problems">Common Problems</a>
+</h2>
+
+<h3>Deprecation Warnings</h3>
+
+<p>When an application programming interface (API) has been changed or replaced by another API, it is marked as “deprecated.”  The API will still work in the near term but will be removed in a future version of the code library.  Apache Cordova contains some of these deprecated interfaces.  When you build and deploy an application, Xcode will issue warnings about these deprecated APIs.  The ‘invokeString’ method that Xcode is warning about represents functionality to invoke the app from a custom URL. The process for loading from a custom URL has changed but this code is included to provide backwards functionality for apps created with older versions of Cordova.  The sample app does not use this functionality so the references to the items causing the warnings can be ignored.</p>
+
+<p>If you wish to remove the warnings you can remove the code that is referencing the invokeString deprecated API.  </p>
+
+<ol>
+<li>Navigate to the MainViewController.m file in the Classes folder. </li>
+<li>
+<p>Find and comment out the following code by surrounding it with the begin, /*,  and end, */, comment characters as highlighted in the code snippet below.</p>
+
+<pre class="prettyprint"><code>(void)webViewDidFinishLoad:(UIWebView*)theWebView
+{
+// only valid if ___PROJECTNAME__-Info.plist specifies a protocol to handle
+/*
+if (self.invokeString) {
+  // this is passed before the <a href="cordova_events_events.md.html#deviceready">deviceready</a> event is fired, so you can access it in js when you receive <a href="cordova_events_events.md.html#deviceready">deviceready</a>
+  NSLog(@"DEPRECATED: window.invokeString - use the window.handleOpenURL(url) function instead, which is always called when the app is launched through a custom scheme url.");
+  NSString* jsString = [NSString stringWithFormat:@"var invokeString = \"%@\";", self.invokeString];
+  [theWebView stringByEvaluatingJavaScriptFromString:jsString];
+}
+*/
+// Black base color for background matches the native apps
+theWebView.backgroundColor = [UIColor blackColor];
+
+
+return [super webViewDidFinishLoad:theWebView];
+}
+</code></pre>
+</li>
+<li><p>Press Command s to save the file.  </p></li>
+<li><p>Navigate to the AppViewDelegate.m file in the Classes Folder.</p></li>
+<li>
+<p>Comment out the following line by placing a double slash at the beginning of line 73 as shown below: </p>
+
+<pre class="prettyprint"><code>//self.viewController.invokeString = invokeString; 
+</code></pre>
+</li>
+<li><p>Press Command-s to save the file.</p></li>
+<li><p>Press Command-b to rebuild the project and eliminate the warnings. </p></li>
+</ol>
+<h3>Missing Headers</h3>
+
+<p>Some users have encountered compilation errors relating to missing headers.  This refers to a problem in the build location and is fixed via Xcode preferences.  </p>
+
+<ol>
+<li>Within the Xcode menus select <strong>Xcode&gt;Preferences&gt;Locations</strong>.  </li>
+<li>
+<p>In the Derived Data section click the Advanced button and select Unique as the Build Location as shown:  
+<img src="img/guide/getting-started/ios/xcode_build_location.png" alt="" title=""></p>
+
+<p>This is the default setting for a new Xcode install but it may have been set differently if you upgraded from an older version of Xcode.</p>
+</li>
+</ol>
+<h2>
+<a name="Getting%20Started%20with%20iOS_next_steps">Next Steps</a>
+</h2>
+
+<h3>Building Your Own Applications</h3>
+
+<p><strong>Include Cordova</strong></p>
+
+<p>All of the code for the sample application is contained within the www directory in the Xcode project structure.  The starting page is named index.html.  Any page that uses Cordova must include the cordova-*.js file for the associated Cordova version and platform.  The format of the JavaScript file name is cordova-x.y.z where x represents the major version number, y the minor version and z any point release.  For example, the Cordova 2.2.0 file was named cordova-2.2.0.js.   The sample HelloWorld application includes this file from index.html.</p>
+
+<pre class="prettyprint"><code>  &lt;script type="text/javascript" src="cordova-2.2.0.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="js/index.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+          app.initialize();
+  &lt;/script&gt;
+</code></pre>
+
+<p><strong>Wait for deviceReady Event</strong></p>
+
+<p>When loading a page, Cordova’s deviceReady event must fire before you can access any of the platform features via the Cordova JavaScript APIs.  Within the sample application this is set up within the app object found within the js/index.js file. The app.initialze() call at the bottom of the index.html file (visible in the previous code example) sets in motion the binding of events to receive and respond to the deviceReady event.</p>
+
+<p>Another common method of initializing a page is to add an event listener for the deviceReady event within the handler for the body onload event as shown in the code snippet below:</p>
+
+<pre class="prettyprint"><code>  &lt;head&gt;
+    &lt;script type="text/javascript" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      function onLoad() {
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>(
+      ‘<a href="cordova_events_events.md.html#deviceready">deviceready</a>’, onDeviceReady, false);
+    }
+    function onDeviceReady() {
+      // do Something!
+      // example: display a Cordova Alert
+      // see docs.cordova.io for full details
+      navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>(
+        'Cordova is ready!',       // message
+        function() {//do something},  // callback
+        'Congratulations',            // title
+        'Done'                      // buttonName
+       );
+    }
+    &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body onload=”onLoad();”&gt;
+    .....
+</code></pre>
+
+<h3>Code Your Application</h3>
+
+<p>Replace the sample code in the www directory of a new project with the HTML, JavaScript and CSS code for your application.  The name of the initial file to load when the app is launched should be index.html (advanced users can change this if necessary).  As demonstrated in the HelloWorld sample application, subdirectories within the www directory are permitted.  Note that the www directory is readonly, you can not write information to this directory during app execution.  If you need to store information use the Cordova <a href="cordova_file_file.md.html#File">File</a> or <a href="cordova_storage_storage.md.html#Storage">Storage</a> APIs.</p>
+
+<p>You can use many mobile JavaScript frameworks with Cordova  to create the UI and page navigation of your application.  Popular ones include:</p>
+
+<ul>
+<li>JQuery Mobile</li>
+<li>Dojo Mobile</li>
+<li>Sencha Touch</li>
+</ul>
+<h3>Modify <a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a>
+</h3>
+
+<p>There are many additional considerations to make your application unique.  The sample HelloWorld application is set up to run in all iOS environments, iPhone, iPod, and iPad.  You can design an app for a single device type by modifying the build settings within Xcode.</p>
+
+<p>You should customize the application with your own icons and splash screens.  The sample application includes Cordova specific images in the Apple required sizes and resolutions as examples.  The Cordova Specific settings are located in the config.xml file and documented in the Cordova <a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a> Guide. Refer to the Resources section for more Apple specific information about building iOS Apps.</p>
+
+<h2>
+<a name="Getting%20Started%20with%20iOS_resources">Resources</a>
+</h2>
+
+<h3>Apple</h3>
+
+<p>Some of these references are within the Apple iOS Developer Reference and require an iOS Developer License. </p>
+
+<ul>
+<li>
+<a class="external" href="http://developer.apple.com/library/ios/#referencelibrary/GettingStarted/RoadMapiOS/index.html#//apple_ref/doc/uid/TP40011343">Start Developing iOS Apps Today</a> provides a quick overview of steps for developing iOS Apps. </li>
+<li>
+<a class="external" href="https://developer.apple.com/membercenter/index.action">Member Center home page</a> provides links to several iOS technical resources including technical resources, the provisioning portal, distribution guides and community forums.  </li>
+<li>
+<a class="external" href="http://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/ios_development_workflow/00-About_the_iOS_Application_Development_Workflow/introduction.html#//apple_ref/doc/uid/TP40007959">Tools Workflow Guide for iOS</a>  </li>
+<li>
+<a class="external" href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215">Xcode 4 User Guide</a>  </li>
+<li>
+<a class="external" href="https://developer.apple.com/videos/wwdc/2012/">Session Videos</a> from the Apple World Wide Developer Conference 2012 (WWDC2012)</li>
+</ul>
+<h3>Apache Cordova</h3>
+
+<p>The <a class="external" href="http://cordova.apache.org/">Apache Cordova home page</a> contains all of the links below and more.</p>
+
+<ul>
+<li>Cordova API documentation is available at <a class="external" href="http://docs.cordova.io">http://docs.cordova.io</a> </li>
+<li>
+<a class="external" href="https://groups.google.com/forum/?fromgroups=%23!forum/phonegap">PhoneGap google group</a> to discuss and ask questions about Cordova.  This forum is monitored by Cordova developers as well as users.  When posting please include the platform, device type, Cordova version and as many details as possible about the error or problem.  </li>
+<li>
+<a href="cordova_file_file.md.html#File">File</a> Cordova bugs at <a class="external" href="https://issues.apache.org/jira/browse/CB">https://issues.apache.org/jira/browse/CB</a>
 </li>
 </ul>
-<h2>
-<a name="Getting%20Started%20with%20iOS_problems_in_xcode">Problems in Xcode</a>
-</h2>
+<h3>Credits</h3>
 
-<p>If you have compilation problems related to missing headers, the build products should <strong>build into the same build directory</strong>. You may need to set the preference <strong>"Xcode Preferences -&gt; Locations -&gt; Derived Data -&gt; Advanced…"</strong> to <strong>"Unique"</strong>. This is the default setting for Xcode on a fresh new install, if you upgraded from older versions of Xcode, you might have a legacy preference in there that you need to update.</p>
-
-<h2>
-<a name="Getting%20Started%20with%20iOS_build_your_app">Build Your App</a>
-</h2>
-
-<p>You now have an Xcode project setup and you can build and run on the Simulator and device.
-It is important to understand that you do not need to use Xcode to write your web application.
-You can use your favourite text editor and simply rebuild your project using Xcode, or the <a href="guide_command-line_index.md.html#Command-Line%20Usage">command-line tools</a> in your project folder (under the <strong>cordova</strong> sub-folder)
-Xcode will automatically detect the files that are changed in <code>www</code>.</p>
-
-<h2>
-<a name="Getting%20Started%20with%20iOS_problems_in_the_command_line_tools">Problems in the Command Line Tools</a>
-</h2>
-
-<p>If you see this error: <strong>"Error: No developer directory found at /Developer. Run /usr/bin/xcode-select to update the developer directory path."</strong> Run this to set your Developer folder:</p>
-
-<pre class="prettyprint"><code>    sudo /usr/bin/xcode-select -switch /Applications/Xcode.app/Contents/Developer
-</code></pre>
+<p>Mac®, OS X®, Apple®, Xcode®, App Store℠, iPad®, iPhone®, iPod® and  Finder® are Trademarks of Apple Inc.</p>
 
             </div>
         </div>

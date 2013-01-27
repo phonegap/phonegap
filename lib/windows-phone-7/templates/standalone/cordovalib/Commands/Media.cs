@@ -18,7 +18,7 @@ using System.Runtime.Serialization;
 using System.Windows;
 using System.Diagnostics;
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     /// <summary>
     /// Provides the ability to record and play back audio files on a device. 

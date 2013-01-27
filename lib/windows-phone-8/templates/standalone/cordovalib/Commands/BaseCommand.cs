@@ -103,6 +103,15 @@ namespace WPCordovaClassLib.Cordova.Commands
             }
         }
 
+
+        /// <summary>
+        /// Occurs when the application is being deactivated.
+        /// </summary>        
+        public virtual void OnReset()
+        {
+        }
+
+
         /// <summary>
         /// Occurs when the application is being deactivated.
         /// </summary>        

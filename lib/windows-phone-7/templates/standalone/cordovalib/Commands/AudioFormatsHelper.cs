@@ -16,7 +16,7 @@
 using System;
 using System.IO;
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     /// <summary>
     /// Provides extra functionality to support different audio formats.

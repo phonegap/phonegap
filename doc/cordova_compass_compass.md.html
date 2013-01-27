@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -115,7 +119,7 @@
 <option value="compassError_example">      - Example</option>
 <option value="compassOptions">compassOptions</option>
 <option value="compassOptions_options">      - Options</option>
-<option value="compassOptions_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="compassOptions_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="compassOptions_bada_quirks">      - Bada Quirks</option>
 <option value="compassOptions_tizen_quirks">      - Tizen Quirks</option>
 <option value="compassHeading">compassHeading</option>
@@ -144,6 +148,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -216,13 +221,9 @@
 
 <h3>iOS</h3>
 
-<h4>App/Supporting Files/Cordova.plist</h4>
+<h4>config.xml</h4>
 
-<pre class="prettyprint"><code>&lt;key&gt;Plugins&lt;/key&gt;
-&lt;dict&gt;
-    &lt;key&gt;<a href="cordova_compass_compass.md.html#Compass">Compass</a>&lt;/key&gt;
-    &lt;string&gt;CDVLocation&lt;/string&gt;
-&lt;/dict&gt;
+<pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_compass_compass.md.html#Compass">Compass</a>" value="CDVLocation" /&gt;
 </code></pre>
 
 <h3>webOS</h3>
@@ -269,7 +270,7 @@
 <ul>
 <li>Android</li>
 <li>iPhone</li>
-<li>Windows Phone 7 ( if available in hardware )</li>
+<li>Windows Phone 7 and 8 ( if available in hardware )</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -299,12 +300,12 @@ navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">co
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_compass_compass.md.html#Compass">Compass</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -358,7 +359,7 @@ navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">co
 <ul>
 <li>Android</li>
 <li>iPhone</li>
-<li>Windows Phone 7 ( if available in hardware )</li>
+<li>Windows Phone 7 and 8 ( if available in hardware )</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -391,7 +392,7 @@ var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHe
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_compass_compass.md.html#Compass">Compass</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // The watch id references the current `watchHeading`
@@ -399,7 +400,7 @@ var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHe
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -476,7 +477,7 @@ var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHe
 <ul>
 <li>Android</li>
 <li>iPhone</li>
-<li>Windows Phone 7 ( if available in hardware )</li>
+<li>Windows Phone 7 and 8 ( if available in hardware )</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -502,7 +503,7 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_compass_compass.md.html#Compass">Compass</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // The watch id references the current `watchHeading`
@@ -510,7 +511,7 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -635,7 +636,7 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
 <li>filter is not supported.</li>
 </ul>
 <h2>
-<a name="compassOptions_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="compassOptions_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <ul>

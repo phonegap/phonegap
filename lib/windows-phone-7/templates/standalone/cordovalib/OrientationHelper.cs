@@ -24,7 +24,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
-namespace WP7CordovaClassLib.Cordova
+namespace WPCordovaClassLib.Cordova
 {
     public class OrientationHelper
     {

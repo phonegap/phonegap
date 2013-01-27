@@ -101,10 +101,12 @@
     <Compile Include="cordovalib\Commands\FileTransfer.cs" />
     <Compile Include="cordovalib\Commands\GeoLocation.cs" />
     <Compile Include="cordovalib\Commands\ImageExifHelper.cs" />
+    <Compile Include="cordovalib\Commands\InAppBrowser.cs" />
     <Compile Include="cordovalib\Commands\Media.cs" />
     <Compile Include="cordovalib\Commands\MimeTypeMapper.cs" />
     <Compile Include="cordovalib\Commands\NetworkStatus.cs" />
     <Compile Include="cordovalib\Commands\Notification.cs" />
+    <Compile Include="cordovalib\ConfigHandler.cs" />
     <Compile Include="cordovalib\CordovaCommandCall.cs" />
     <Compile Include="cordovalib\CordovaView.xaml.cs">
       <DependentUpon>CordovaView.xaml</DependentUpon>
@@ -165,8 +167,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.xml" />
     <Content Include="resources\notification-beep.wav" />
-    <Content Include="www\cordova-2.3.0.js" />
+    <Content Include="www\cordova-2.4.0.js" />
     <Content Include="www\img\logo.png" />
     <Content Include="www\js\index.js" />
     <None Include="VERSION" />

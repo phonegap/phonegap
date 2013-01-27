@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+<meta name="generator" content="joDoc">
+<title>Apache Cordova API Documentation</title>
+<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+<link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+</head>
+<body>
+        <div id="header">
+            <h1><a href="index.html">Apache <strong>Cordova</strong> Documentation</a></h1>
+            <small>
+                <select><optgroup label="English" value="en">
+<option value="edge">edge</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
+<option value="2.2.0rc2">2.2.0rc2</option>
+<option value="2.2.0rc1">2.2.0rc1</option>
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0rc2">2.1.0rc2</option>
+<option value="2.1.0rc1">2.1.0rc1</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0rc1">2.0.0rc1</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0rc1">1.9.0rc1</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.8.0rc1">1.8.0rc1</option>
+<option value="1.8.0">1.8.0</option>
+<option value="1.7.0rc1">1.7.0rc1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="1.6.1">1.6.1</option>
+<option value="1.6.0rc1">1.6.0rc1</option>
+<option value="1.6.0">1.6.0</option>
+<option value="1.5.0rc1">1.5.0rc1</option>
+<option value="1.5.0">1.5.0</option>
+<option value="1.4.1">1.4.1</option>
+<option value="1.4.0rc1">1.4.0rc1</option>
+<option value="1.4.0">1.4.0</option>
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+<option value="1.0.0rc3">1.0.0rc3</option>
+<option value="1.0.0rc2">1.0.0rc2</option>
+<option value="1.0.0rc1">1.0.0rc1</option>
+<option value="1.0.0">1.0.0</option>
+<option value="0.9.6">0.9.6</option>
+<option value="0.9.5.1">0.9.5.1</option>
+<option value="0.9.5">0.9.5</option>
+<option value="0.9.4">0.9.4</option>
+<option value="0.9.3">0.9.3</option>
+<option value="0.9.2">0.9.2</option>
+</optgroup>
+<optgroup label="Español" value="es"><option value="1.0.0">1.0.0</option></optgroup>
+<optgroup label="Français" value="fr">
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+</optgroup>
+<optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="0.9.5">0.9.5</option>
+</optgroup>
+<optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
+        </div>
+        <div id="subheader">
+            <h1>Getting Started with Windows Phone 8</h1>
+            <small><select><option value="Getting%2520Started%2520with%2520Windows%2520Phone%25208">Getting Started with Windows Phone 8</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_1_system_requirements">      - 1. System Requirements</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_2_install_sdk_cordova">      - 2. Install SDK + Cordova</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_2_1_building_the_template">      - 2.1. Building the template</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_2_2_about_the_different_templates">      - 2.2 About the different templates</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_3_setup_new_project">      - 3. Setup New Project</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_4_review_the_project_structure">      - 4. Review the project structure</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_5_build_and_deploy_to_emulator">      - 5. Build and Deploy to Emulator</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_6_build_your_project_for_the_device">      - 6. Build your project for the device</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_done">      - Done!</option>
+<option value="Getting%20Started%20with%20Windows%20Phone%208_further_reading">      - Further Reading </option></select></small>
+        </div>
+
+        <div id="sidebar">
+            <div class="vertical_divider"></div>
+        <h1>API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+<li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
+<li><a href="cordova_storage_storage.md.html#Storage">Storage</a></li>
+</ul>
+<h1>Guides</h1>
+<ul>
+<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
+<li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
+<li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
+<li><a href="guide_whitelist_index.md.html#Domain%20Whitelist%20Guide">Domain Whitelist Guide</a></li>
+<li><a href="guide_cordova-webview_index.md.html#Embedding%20WebView">Embedding WebView</a></li>
+<li><a href="_index.html">Keyword Index</a></li>
+</ul>
+</div>
+
+        <div id="scrollable">
+            <div id="content">
+                <h1><a name="Getting%20Started%20with%20Windows%20Phone%208">Getting Started with Windows Phone 8</a></h1>
+
+<p>This guide describes how to set up your development environment for Cordova and run a sample application.  Note that Cordova used to be called PhoneGap, so some of the sites still use the old PhoneGap name.</p>
+
+<p>Note: Applications built with Apache Cordova for Windows Phone 8 will only run on Windows Phone 8 devices. If you are looking to target both 7.5 AND 8 devices, then you should be using Apache Cordova for Windows Phone 7, which does not have all the new shiny features included in IE10, but implements the same APIs.</p>
+
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_1_system_requirements">1. System Requirements</a>
+</h2>
+
+<ul>
+<li>
+<p>Operating System: </p>
+
+<ul>
+<li>Windows 8, Windows 8 Pro</li>
+</ul>
+</li>
+<li>
+<p>Hardware:</p>
+
+<ul>
+<li>6.5 GB of free hard disk space</li>
+<li>4 GB RAM</li>
+<li>64-bit (x64) CPU</li>
+</ul>
+</li>
+<li>
+<p>Windows Phone 8 Emulator:</p>
+
+<ul>
+<li>Windows 8 Pro edition or greater</li>
+<li>Requires a processor that supports Second Level Address Translation (SLAT)</li>
+</ul>
+</li>
+<li>
+<p>SDK + IDE ( Visual Studio )</p>
+
+<ul>
+<li>VS Express for Windows Phone ( included in the SDK )</li>
+<li>Visual Studio Professional, Premium, or Ultimate</li>
+</ul>
+</li>
+</ul>
+<p>Note: Running in Virtual Machine might present some challenges. You can read this blog post that gives insight on the solutions to develop for Windows Phone on a Mac: http://aka.ms/BuildaWP8apponaMac</p>
+
+<p>Necessary for Installing on <a href="cordova_device_device.md.html#Device">Device</a> and Submitting to Market Place:</p>
+
+<ul>
+<li>•   Register for the <a class="external" href="http://dev.windowsphone.com/en-us/publish">Windows Phone Developer Center</a>
+</li>
+</ul>
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_2_install_sdk_cordova">2. Install SDK + Cordova</a>
+</h2>
+
+<ul>
+<li>Download and install <a class="external" href="http://www.microsoft.com/en-us/download/details.aspx?id=35471">Windows Phone  SDK</a>
+</li>
+<li>Download the latest copy of <a class="external" href="http://phonegap.com/download">Cordova</a> and extract its contents. We will be working with the subfolder: lib\windows-phone-8\</li>
+<li>copy the file CordovaWP8AppFull-x.x.x.zip to the folder : \My Documents\Visual Studio 2012\Templates\ProjectTemplates\</li>
+</ul>
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_2_1_building_the_template">2.1. Building the template</a>
+</h2>
+
+<p>Note: this step may not be required.  If the lib\windows-phone directory already contains a file CordovaStarter-x.x.x.zip then you may skip this step )
+In order to simplify the development process, Cordova comes with a Visual Studio template that allows creating a Cordova application rapidly. This template can be modified if needed and the below steps indicate how to proceed if you want to modify and re-generate the template.</p>
+
+<ul>
+<li>Open the file lib\windows-phone\templates\standalone\CordovaSolution.sln in Visual Studio Express for Windows Phone</li>
+<li>From the file menu, select 'Export Template...' </li>
+<li>Choose template type 'Project template'</li>
+<li>Give the exported template a name, ex. CordovaStarter-2.1.0 will produce CordovaStarter-2.1.0.zip</li>
+<li>Optionally, you may add a description, icon image, and Preview image.  These are what is displayed in Visual Studio in the 'New Project' dialog.- </li>
+<li>Note: If you select ( 'Automatically import the template ... ') then you will not need to copy the .zip file over as outlined in step 2.</li>
+<li>Press 'Finish'</li>
+</ul>
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_2_2_about_the_different_templates">2.2 About the different templates</a>
+</h2>
+
+<p>Apache Cordova for Windows Phone 8 supports 2 different types of templates. <br>
+The 'Full' template includes a pre-built dll containing all the framework code for Apache Cordova.  This template will create a project that is easy to update, as you can simply replace the JavaScript and .dll in your project and rebuild when a new version comes out. The downside of this approach is that because the dll contains ALL of the Cordova API, it requires all available permissions even if the APIs are not called.  When you submit an app to the App store, Microsoft will run a static analyzer against your application, and detect that you require all available permissions, and place a disclaimer on you app that is presented to the user when they choose to install your app.  Users may be discouraged if they see a required permission that does not make sense ( ie, why does this drawing program need access to my media library and contacts ).</p>
+
+<p>The 'Stand-Alone' template includes ALL the source code for Apache Cordova.  This project is easier to fine-tune to use just the features you need, thereby working around the permissions issues of the 'Full' template, however this type of project will be more difficult to update, as you will need to update individual files within your project and manage any dependancies yourself.  In order to exclude an API you are not using, you can simply right-click-select the Command class file in Visual Studio and choose 'do not include in project'.</p>
+
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_3_setup_new_project">3. Setup New Project</a>
+</h2>
+
+<ul>
+<li>Open Visual Studio Express for Windows Phone and choose <strong>New Project</strong>.</li>
+<li>Select <strong>CordovaWP8AppFull</strong> or <strong>CordovaWP8AppStandalone</strong>. ( the version number will be displayed in the template description )</li>
+<li>Give your project a name, and select OK.</li>
+</ul>
+<p><img src="img/guide/getting-started/windows-phone-8/FullTemplate.PNG" alt="" title=""><img src="img/guide/getting-started/windows-phone-8/StandAloneTemplate.PNG" alt="" title=""></p>
+
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_4_review_the_project_structure">4. Review the project structure</a>
+</h2>
+
+<ul>
+<li>The 'www' folder contains your Cordova html/js/css and any other resources included in your app.</li>
+<li>Any content that you add here needs to be a part of the Visual Studio project, and it must be set as content. </li>
+</ul>
+<p><img src="img/guide/getting-started/windows-phone-8/projectStructure.PNG" alt="" title=""></p>
+
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_5_build_and_deploy_to_emulator">5. Build and Deploy to Emulator</a>
+</h2>
+
+<ul>
+<li>Make sure to have <strong>Windows Phone Emulator</strong> selected in the top drop-down menu.</li>
+<li>Hit the green <strong>play button</strong> beside the Windows Phone Emulator drop-down menu to start debugging or press F5.</li>
+</ul>
+<p><img src="img/guide/getting-started/windows-phone-8/BuildEmulator.PNG" alt="" title=""></p>
+
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_6_build_your_project_for_the_device">6. Build your project for the device</a>
+</h2>
+
+<p>In order to test your application on a device, the device must be registered. Click <a class="external" href="http://msdn.microsoft.com/en-us/library/gg588378(v=VS.92">here</a>.aspx) to read documentation on deploying and testing on your Windows Phone 8.</p>
+
+<ul>
+<li>Make sure your phone is connected, and the screen is unlocked</li>
+<li>In Visual Studio, select '<a href="cordova_device_device.md.html#Device">Device</a>' from the top drop-down menu.</li>
+<li>Hit the green <strong>play button</strong> beside the drop-down menu to start debugging or press F5.</li>
+</ul>
+<p><img src="img/guide/getting-started/windows-phone-8/BuildDevice.PNG" alt="" title=""></p>
+
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_done">Done!</a>
+</h2>
+
+<h2>
+<a name="Getting%20Started%20with%20Windows%20Phone%208_further_reading">Further Reading </a>
+</h2>
+
+<p>For more details on the specific differences between IE10 and WebKit browsers, and how to support both MS has a helpful <a class="external" href="http://blogs.windows.com/windows_phone/b/wpdev/archive/2012/11/15/adapting-your-webkit-optimized-site-for-internet-explorer-10.aspx">guide here</a></p>
+
+            </div>
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script><script type="text/javascript" src="prettify/prettify.js"></script>
+</body>
+</html>

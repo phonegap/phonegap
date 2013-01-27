@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="ca.filmaj.AndroidPlugin"
+    version="4.2.0">
+
+    <name>Android Plugin</name>
+
+    <asset src="www/android.js" target="android.js" />
+    <platform name="android">
+    </platform>
+</plugin>
+
+

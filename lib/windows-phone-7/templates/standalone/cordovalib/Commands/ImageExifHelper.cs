@@ -18,7 +18,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     public class ImageExifOrientation
     {
@@ -135,7 +135,7 @@ namespace WP7CordovaClassLib.Cordova.Commands
                 // Get the data length
                 ushort dLen = BitConverter.ToUInt16(reader.ReadBytes(2), 0);
                 // skip along
-                reader.BaseStream.Seek(dLen - 2, SeekOrigin.Current);
+                reader.ReadBytes(dLen - 2);
                 start = reader.ReadByte();
                 index = reader.ReadByte();
             }

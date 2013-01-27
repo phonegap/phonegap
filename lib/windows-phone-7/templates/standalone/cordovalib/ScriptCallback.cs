@@ -27,10 +27,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using WP7CordovaClassLib.Cordova.JSON;
+using WPCordovaClassLib.Cordova.JSON;
 using System.Diagnostics;
 
-namespace WP7CordovaClassLib.Cordova
+namespace WPCordovaClassLib.Cordova
 {
     /// <summary>
     /// Represents client script function to execute

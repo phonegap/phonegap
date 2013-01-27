@@ -17,7 +17,7 @@ using System.Reflection;
 using Microsoft.Phone.Shell;
 using System.Diagnostics;
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     public abstract class BaseCommand : IDisposable
     {
@@ -103,6 +103,15 @@ namespace WP7CordovaClassLib.Cordova.Commands
             }
         }
 
+
+        /// <summary>
+        /// Occurs when the application is being deactivated.
+        /// </summary>        
+        public virtual void OnReset()
+        {
+        }
+
+
         /// <summary>
         /// Occurs when the application is being deactivated.
         /// </summary>        
@@ -129,7 +138,7 @@ namespace WP7CordovaClassLib.Cordova.Commands
         public static string GetBaseURL()
         {
 #if CORDOVA_CLASSLIB
-            return "/WP7CordovaClassLib;component/";
+            return "/WPCordovaClassLib;component/";
 #else
             return "./";
 #endif

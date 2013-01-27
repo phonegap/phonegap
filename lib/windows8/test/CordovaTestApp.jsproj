@@ -95,7 +95,7 @@
     <Content Include="camera\index.html" />
     <Content Include="compass\index.html" />
     <Content Include="contacts\index.html" />
-    <Content Include="cordova-2.2.0.js" />
+    <Content Include="cordova-2.4.0.js" />
     <Content Include="cordova.js" />
     <Content Include="events\index.html" />
     <Content Include="images\logo.png" />

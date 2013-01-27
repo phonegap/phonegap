@@ -1,0 +1,122 @@
+<!--
+         Licensed to the Apache Software Foundation (ASF) under one$
+         or more contributor license agreements.  See the NOTICE file$
+         distributed with this work for additional information$
+         regarding copyright ownership.  The ASF licenses this file$
+         to you under the Apache License, Version 2.0 (the$
+         "License"); you may not use this file except in compliance$
+         with the License.  You may obtain a copy of the License at$
+$
+           http://www.apache.org/licenses/LICENSE-2.0$
+$
+         Unless required by applicable law or agreed to in writing,$
+         software distributed under the License is distributed on an$
+         "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY$
+         KIND, either express or implied.  See the License for the$
+         specific language governing permissions and limitations$
+         under the License.$
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Lifecycle Page 2</title>
+<link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title">
+<script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+    function onLoad() {
+        console.log("Page2: onload");
+        log("Page2: onload @ " + new Date().toLocaleTimeString());
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    function onUnLoaded() {
+        console.log("Page2: onunload");
+        log("Page2: onunload @ " + new Date().toLocaleTimeString());
+    }
+
+    function onDeviceReady() {
+        // Register the event listener
+        document.getElementById("platform").innerHTML = device.platform;
+        document.getElementById("version").innerHTML = device.version;
+        document.getElementById("uuid").innerHTML = device.uuid;
+        document.getElementById("name").innerHTML = device.name;
+        document.getElementById("width").innerHTML = screen.width;
+        document.getElementById("height").innerHTML = screen.height;
+        document.getElementById("colorDepth").innerHTML = screen.colorDepth;
+
+        document.addEventListener("pause", onPause, false);
+        document.addEventListener("resume", onResume, false);
+
+        window.setInterval(function() {
+            log("Page2: Running");
+        }, 2000);
+    }
+
+    function onPause() {
+        console.log("Page2: onpause");
+        log("Page2: onpause @ " + new Date().toLocaleTimeString());
+    }
+
+    function onResume() {
+        console.log("Page2: onresume");
+        log("Page2: onresume @ " + new Date().toLocaleTimeString());
+    }
+
+    function log(s) {
+        var el = document.getElementById('status');
+        var status = el.innerHTML + s + "<br>";
+        el.innerHTML = status;
+        localStorage.lifecyclestatus = status;
+    }
+    
+    function clearStatus() {
+        console.log("clear()");
+        localStorage.lifecyclestatus = "";
+        document.getElementById('status').innerHTML = "";
+    }
+        
+</script>
+</head>
+<body onload="onLoad()" onunload="onUnLoaded()"  id="stage" class="theme">
+    <h1>Events</h1>
+    <div id="info">
+        <h4>
+            Platform: <span id="platform"> &nbsp;</span>, Version: <span
+                id="version">&nbsp;</span>
+        </h4>
+        <h4>
+            UUID: <span id="uuid"> &nbsp;</span>, Name: <span id="name">&nbsp;</span>
+        </h4>
+        <h4>
+            Width: <span id="width"> &nbsp;</span>, Height: <span id="height">&nbsp;
+            </span>, Color Depth: <span id="colorDepth"></span>
+        </h4>
+    </div>
+    <div id="info">
+       You should see<br>
+       <ul>
+        <li>Page1: onunload</li>
+        <li>Page2: onload</li>
+        <li>Page2: Running</li>
+       </ul>
+       Press "backbutton" to return to Page 1.
+    </div>
+    <div id="info">
+       <h4>Info for event testing:</h4>
+       <div id="status"></div>
+    </div>
+    
+    <a href="index.html" class="btn large" >Load new page</a>
+    <a href="javascript:" class="btn large" onclick="clearStatus();">Clear status</a>
+    
+    <script>
+    document.getElementById('status').innerHTML = localStorage.lifecyclestatus;
+    </script>
+</body>
+</html>
+
+

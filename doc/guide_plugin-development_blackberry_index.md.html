@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -110,6 +114,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -138,9 +143,9 @@
 
 <p>In this article, we will explore how to develop the Echo plugin on BlackBerry. If you haven't read the
 top level article about the JavaScript part of the plugin, it would be best if you read that first
-and then this article. In addition, please download the <a class="external" href="https://git-wip-us.apache.org/repos/asf?p=incubator-cordova-blackberry-webworks.git;a=summary">Cordova Blackberry repo</a>.</p>
+and then this article. In addition, please download the <a class="external" href="https://git-wip-us.apache.org/repos/asf?p=cordova-blackberry-webworks.git;a=summary">Cordova Blackberry repo</a>.</p>
 
-<p>To note, the Corodova-BlackBerry project allows you to deploy to BlackBerry devices like the 
+<p>To note, the Cordova-BlackBerry project allows you to deploy to BlackBerry devices like the
 Torch, Bold, etc and as well as the Playbook. There exists a distinction between deploying to
 normal BlackBerry hand held devices (ie, Torch and Bold) and the Playbook. The code base between
 the two are separate so when you develop for one, you have to duplicate your efforts for the other!
@@ -179,7 +184,7 @@ Cordova will know how to map the "Echo" argument of <code>cordova.exec</code> to
 </h2>
 
 <p>If you notice the structure of the value attribute, you'll see a defined path that leads to the Echo
-plugin. In the root folder of the Cordova BlackBerry Webworks repo, look for a folder called framework.
+plugin. In the root folder of the Cordova BlackBerry WebWorks repo, look for a folder called framework.
 This folder contains all of the source code that runs natively on the BlackBerry. cd into the folder 
 structure until you reach the path: <code>framework/ext/src/org/apache/cordova</code>. At this point, you'll see
 all of the plugin folders and inside each folder is the plugins' source code. So, we will add
@@ -251,7 +256,7 @@ callback in JavaScript. </p>
 </h2>
 
 <p>The addition of the Echo.java needs to be updated in your project so to build the .jar file, cd
-to the root directory of the BlackBerry Webworks repo. Use the ant command:</p>
+to the root directory of the BlackBerry WebWorks repo. Use the ant command:</p>
 
 <pre class="prettyprint"><code>ant update -Dproject.path="~/path_to_my_project"
 </code></pre>

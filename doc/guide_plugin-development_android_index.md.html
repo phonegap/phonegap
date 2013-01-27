@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -110,6 +114,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -150,7 +155,7 @@ Plugins with long-running requests, background activity (e.g. playing media), li
 <pre class="prettyprint"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
 </code></pre>
 
-<p>This will marshall a request from the WebView to the Android native
+<p>This will marshal a request from the WebView to the Android native
 side, more or less boiling down to calling the <code>action</code> method on the
 <code>service</code> class, with the arguments passed in the <code>args</code> Array.</p>
 
@@ -314,9 +319,9 @@ a new Android <code>Intent</code>. The <code>CordovaInterface</code> allows plug
 </h2>
 
 <p>One of the best ways to prepare yourself to write your own plugin is to
-have a <a class="external" href="https://github.com/apache/incubator-cordova-android/tree/master/framework/src/org/apache/cordova">look at other plugins that already exist</a>.</p>
+have a <a class="external" href="https://github.com/apache/cordova-android/tree/master/framework/src/org/apache/cordova">look at other plugins that already exist</a>.</p>
 
-<p>You should also read through the comments in <a class="external" href="https://github.com/apache/incubator-cordova-android/blob/master/framework/src/org/apache/cordova/api/CordovaPlugin.java">CordovaPlugin.java</a>.</p>
+<p>You should also read through the comments in <a class="external" href="https://github.com/apache/cordova-android/blob/master/framework/src/org/apache/cordova/api/CordovaPlugin.java">CordovaPlugin.java</a>.</p>
 
             </div>
         </div>

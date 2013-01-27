@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -120,13 +124,13 @@
 <option value="SQLResultSet_supported_platforms">      - Supported Platforms</option>
 <option value="SQLResultSet_execute_sql_quick_example">      - Execute SQL Quick Example</option>
 <option value="SQLResultSet_full_example">      - Full Example</option>
-<option value="SQLResultSetList">SQLResultSetList</option>
-<option value="SQLResultSetList_properties">      - Properties</option>
-<option value="SQLResultSetList_methods">      - Methods</option>
-<option value="SQLResultSetList_details">      - Details</option>
-<option value="SQLResultSetList_supported_platforms">      - Supported Platforms</option>
-<option value="SQLResultSetList_execute_sql_quick_example">      - Execute SQL Quick Example</option>
-<option value="SQLResultSetList_full_example">      - Full Example</option>
+<option value="SQLResultSetRowList">SQLResultSetRowList</option>
+<option value="SQLResultSetRowList_properties">      - Properties</option>
+<option value="SQLResultSetRowList_methods">      - Methods</option>
+<option value="SQLResultSetRowList_details">      - Details</option>
+<option value="SQLResultSetRowList_supported_platforms">      - Supported Platforms</option>
+<option value="SQLResultSetRowList_execute_sql_quick_example">      - Execute SQL Quick Example</option>
+<option value="SQLResultSetRowList_full_example">      - Full Example</option>
 <option value="SQLError">SQLError</option>
 <option value="SQLError_properties">      - Properties</option>
 <option value="SQLError_constants">      - Constants</option>
@@ -159,6 +163,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -212,7 +217,7 @@
 <li><a href="cordova_storage_storage.md.html#Database">Database</a></li>
 <li><a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a></li>
 <li><a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a></li>
-<li><a href="cordova_storage_storage.md.html#SQLResultSetList">SQLResultSetList</a></li>
+<li><a href="cordova_storage_storage.md.html#SQLResultSetRowList">SQLResultSetRowList</a></li>
 <li><a href="cordova_storage_storage.md.html#SQLError">SQLError</a></li>
 <li><a href="cordova_storage_storage.md.html#localStorage">localStorage</a></li>
 </ul>
@@ -302,12 +307,12 @@
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_storage_storage.md.html#Storage">Storage</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -416,12 +421,12 @@ db.changeVersion("1.0", "1.1");
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_storage_storage.md.html#Storage">Storage</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -522,12 +527,12 @@ db.transaction(populateDB, errorCB, successCB);
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_storage_storage.md.html#Storage">Storage</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -581,13 +586,13 @@ db.transaction(populateDB, errorCB, successCB);
 <li>
 <strong>rowsAffected</strong>: the number of rows that were changed by the SQL statement.  If the statement did not affect any rows then it is set to 0. </li>
 <li>
-<strong>rows</strong>: a SQLResultSetRowList representing the rows returned.  If no rows are returned the object will be empty.</li>
+<strong>rows</strong>: a <a href="cordova_storage_storage.md.html#SQLResultSetRowList">SQLResultSetRowList</a> representing the rows returned.  If no rows are returned the object will be empty.</li>
 </ul>
 <h2>
 <a name="SQLResultSet_details">Details</a>
 </h2>
 
-<p>When you call the <a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a> executeSql method its callback methods will be called with a <a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a> object.  The result object has three properties.  The first is the <code>insertId</code> which will return the row number of a success SQL insert statement.  If the SQL statement is not an insert then the <code>insertId</code> is not set.  The <code>rowsAffected</code> is always 0 for a SQL select statement.  For insert or update statements it returns the number of rows that have been modified.  The final property is of type <a href="cordova_storage_storage.md.html#SQLResultSetList">SQLResultSetList</a> and it contains the data returned from a SQL select statement.</p>
+<p>When you call the <a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a> executeSql method its callback methods will be called with a <a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a> object.  The result object has three properties.  The first is the <code>insertId</code> which will return the row number of a success SQL insert statement.  If the SQL statement is not an insert then the <code>insertId</code> is not set.  The <code>rowsAffected</code> is always 0 for a SQL select statement.  For insert or update statements it returns the number of rows that have been modified.  The final property is of type SQLResultSetList and it contains the data returned from a SQL select statement.</p>
 
 <h2>
 <a name="SQLResultSet_supported_platforms">Supported Platforms</a>
@@ -636,12 +641,12 @@ db.transaction(queryDB, errorCB);
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_storage_storage.md.html#Storage">Storage</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Populate the database 
     //
@@ -701,12 +706,12 @@ db.transaction(queryDB, errorCB);
 </code></pre>
 
 <hr>
-<h1><a name="SQLResultSetList">SQLResultSetList</a></h1>
+<h1><a name="SQLResultSetRowList">SQLResultSetRowList</a></h1>
 
 <p>One of the properties of the <a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a> containing the rows returned from a SQL query.</p>
 
 <h2>
-<a name="SQLResultSetList_properties">Properties</a>
+<a name="SQLResultSetRowList_properties">Properties</a>
 </h2>
 
 <ul>
@@ -714,7 +719,7 @@ db.transaction(queryDB, errorCB);
 <strong>length</strong>: the number of rows returned by the SQL query</li>
 </ul>
 <h2>
-<a name="SQLResultSetList_methods">Methods</a>
+<a name="SQLResultSetRowList_methods">Methods</a>
 </h2>
 
 <ul>
@@ -722,13 +727,13 @@ db.transaction(queryDB, errorCB);
 <strong>item</strong>: returns the row at the specified index represented by a JavaScript object.</li>
 </ul>
 <h2>
-<a name="SQLResultSetList_details">Details</a>
+<a name="SQLResultSetRowList_details">Details</a>
 </h2>
 
-<p>The <a href="cordova_storage_storage.md.html#SQLResultSetList">SQLResultSetList</a> contains the data returned from a SQL select statement.  The object contains a length property letting you know how many rows the select statement has been returned.  To get a row of data you would call the <code>item</code> method specifing an index.  The item method returns a JavaScript Object who's properties are the columns of the database the select statement was executed against.</p>
+<p>The <a href="cordova_storage_storage.md.html#SQLResultSetRowList">SQLResultSetRowList</a> contains the data returned from a SQL select statement.  The object contains a length property letting you know how many rows the select statement has been returned.  To get a row of data you would call the <code>item</code> method specifying an index.  The item method returns a JavaScript Object who's properties are the columns of the database the select statement was executed against.</p>
 
 <h2>
-<a name="SQLResultSetList_supported_platforms">Supported Platforms</a>
+<a name="SQLResultSetRowList_supported_platforms">Supported Platforms</a>
 </h2>
 
 <ul>
@@ -739,7 +744,7 @@ db.transaction(queryDB, errorCB);
 <li>Tizen</li>
 </ul>
 <h2>
-<a name="SQLResultSetList_execute_sql_quick_example">Execute SQL Quick Example</a>
+<a name="SQLResultSetRowList_execute_sql_quick_example">Execute SQL Quick Example</a>
 </h2>
 
 <pre class="prettyprint"><code>function queryDB(tx) {
@@ -763,7 +768,7 @@ db.transaction(queryDB, errorCB);
 </code></pre>
 
 <h2>
-<a name="SQLResultSetList_full_example">Full Example</a>
+<a name="SQLResultSetRowList_full_example">Full Example</a>
 </h2>
 
 <pre class="prettyprint"><code>&lt;!DOCTYPE html&gt;
@@ -771,12 +776,12 @@ db.transaction(queryDB, errorCB);
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_storage_storage.md.html#Storage">Storage</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Populate the database 
     //
@@ -907,7 +912,7 @@ db.transaction(queryDB, errorCB);
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 6.0 and higher)</li>
 <li>iPhone</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>webOS</li>
 <li>Tizen</li>
 </ul>
@@ -956,12 +961,12 @@ db.transaction(queryDB, errorCB);
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_storage_storage.md.html#Storage">Storage</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -992,7 +997,7 @@ db.transaction(queryDB, errorCB);
 </h2>
 
 <ul>
-<li>dot notation is NOT available on Windows Phone. Be sure to use : window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.setItem/getItem, and not the w3 spec defined calls to window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.someKey = 'someValue';</li>
+<li>dot notation is NOT available on Windows Phone 7. Be sure to use : window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.setItem/getItem, and not the w3 spec defined calls to window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.someKey = 'someValue';</li>
 </ul>
 </div>
         </div>

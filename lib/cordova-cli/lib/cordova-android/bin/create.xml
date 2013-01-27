@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+       Licensed to the Apache Software Foundation (ASF) under one
+       or more contributor license agreements.  See the NOTICE file
+       distributed with this work for additional information
+       regarding copyright ownership.  The ASF licenses this file
+       to you under the Apache License, Version 2.0 (the
+       "License"); you may not use this file except in compliance
+       with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing,
+       software distributed under the License is distributed on an
+       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+       KIND, either express or implied.  See the License for the
+       specific language governing permissions and limitations
+       under the License.
+-->
+
+<project name="cordova" default="create" basedir="../">
+
+	<property name="project.path" value="${basedir}/example"/>
+	<property name="package" value="org.apache.cordova.example"/>
+	<property name="activity" value="cordovaExample"/>
+
+	<target name="create">
+
+		<!-- this stuff is seriously stupid -->
+		<echo file="tmp/package.tmp">package-as-path=${package}</echo>
+		<replace file="tmp/package.tmp" token="." value="\\" />
+		<property file="tmp/package.tmp" />
+
+		<property name="activity.path" value="${project.path}/src/${package-as-path}/${activity}.java" />
+		<property name="manifest.path" value="${project.path}/AndroidManifest.xml" />
+
+		<!-- get the highest target on this machine -->
+		<!-- this stuff is also seriously stupid -->
+		<exec executable="cmd" osfamily="windows" output="tmp/target.list.tmp">
+			<arg line="/c android.bat list targets"/>
+		</exec>
+		<exec executable="android" osfamily="mac" output="tmp/target.list.tmp">
+			<arg line="list targets"/>
+		</exec>
+		<replaceregexp file="tmp/target.list.tmp" match=".*id:\s([0-9]).*" replace="target=\1" flags="s" />
+		<property file="tmp/target.list.tmp" />
+
+		<!-- var VERSION=read('VERSION').replace(/\r\n/,'').replace(/\n/,''); -->
+		<copy file="VERSION" tofile="tmp/VERSION.tmp" overwrite="true" />
+		<replaceregexp file="tmp/VERSION.tmp" match="^" replace="version=" />
+		<replaceregexp file="tmp/VERSION.tmp" match="\r\n" replace="" />
+		<property file="tmp/VERSION.tmp" />
+
+		<!-- clobber any existing example -->
+
+		<!-- create the project -->
+		<exec executable="cmd" osfamily="windows">
+			<arg line="/c android.bat create project --target ${target} --path ${project.path} --package ${package} --activity ${activity}"/>
+		</exec>
+		<exec executable="android" osfamily="mac">
+			<arg line="create project --target ${target} --path ${project.path} --package ${package} --activity ${activity}"/>
+		</exec>
+
+		<!-- update the framework dir -->
+		<exec executable="cmd" osfamily="windows">
+			<arg line="/c android.bat update project --target ${target} --path ${basedir}/framework"/>
+		</exec>
+		<exec executable="android" osfamily="mac">
+			<arg line="update project --target ${target} --path ${basedir}/framework"/>
+		</exec>
+
+		<!-- compile cordova.js and cordova.jar -->
+		<!--	// if you see an error about "Unable to resolve target" then you may need to 
+				// update your android tools or install an additional Android platform version -->
+		<ant antfile="${basedir}/framework/build.xml" useNativeBasedir="true" inheritAll="false" />
+
+		<!-- copy in the project template -->
+		<copy todir="${project.path}" overwrite="true">
+			<fileset dir="${basedir}/bin/templates/project"/>
+		</copy>
+
+		<!-- copy in cordova.js -->
+		<copy file="${basedir}/framework/assets/www/cordova-${version}.js" todir="${project.path}/assets/www/" />
+
+		<!-- copy in cordova.jar -->
+		<copy file="${basedir}/framework/cordova-${version}.jar" todir="${project.path}/libs/" />
+
+		<!-- copy in default activity -->
+		<copy file="${basedir}/bin/templates/Activity.java" tofile="${activity.path}" overwrite="true" />
+
+		<!-- interpolate the activity name and package -->
+		<replaceregexp file="${activity.path}" match="__ACTIVITY__" replace="${activity}" />
+		<replaceregexp file="${activity.path}" match="__ID__" replace="${package}" />
+
+		<replaceregexp file="${manifest.path}" match="__ACTIVITY__" replace="${activity}" />
+		<replaceregexp file="${manifest.path}" match="__PACKAGE__" replace="${package}" />
+	</target>
+</project>

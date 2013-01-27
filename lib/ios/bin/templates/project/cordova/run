@@ -20,31 +20,33 @@
 
 set -e
 
-CORDOVA_PATH=$( cd "$( dirname "$0" )" && pwd )
-PROJECT_PATH=$CORDOVA_PATH/..
+XCODE_VER=$(xcodebuild -version | head -n 1 | sed -e 's/Xcode //')
+XCODE_MIN_VERSION="4.5"
 
-function getAppPath() {
-	for file in "$( find "$PROJECT_PATH" -type d -name '*.xcodeproj' | sort )"; do
-	  PROJECT_NAME=$(basename "$file" .xcodeproj)
-	done;
-	APP=build/$PROJECT_NAME.app
-	APP_PATH="$PROJECT_PATH/$APP"
-}
+if [[ "$XCODE_VER" < "$XCODE_MIN_VERSION" ]]; then
+	echo "Cordova can only run in Xcode version $XCODE_MIN_VERSION or greater."
+	exit 1
+fi
+
+CORDOVA_PATH=$( cd "$( dirname "$0" )" && pwd -P)
+PROJECT_PATH="$(dirname "$CORDOVA_PATH")"
+XCODEPROJ=$( ls "$PROJECT_PATH" | grep .xcodeproj  )
+PROJECT_NAME=$(basename "$XCODEPROJ" .xcodeproj)
 
 APP_PATH=$1
 
 if [ $# -lt 1 ]; then
-	getAppPath
+	APP_PATH="$PROJECT_PATH/build/$PROJECT_NAME.app"
 fi
 
 if [ ! -d "$APP_PATH" ]; then
 	echo "Project '$APP_PATH' is not built. Building."
-  $CORDOVA_PATH/debug || exit $?
+    $CORDOVA_PATH/build || exit $?
 fi
 
 if [ ! -d "$APP_PATH" ]; then
-		echo "$APP_PATH not found to emulate."
-		exit 1
+	echo "$APP_PATH not found to emulate."
+	exit 1
 fi
 
 # launch using ios-sim

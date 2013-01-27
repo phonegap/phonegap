@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -97,7 +101,7 @@
 <option value="device.name_quick_example">      - Quick Example</option>
 <option value="device.name_full_example">      - Full Example</option>
 <option value="device.name_android_quirks">      - Android Quirks</option>
-<option value="device.name_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="device.name_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="device.name_bada_quirks">      - Bada Quirks</option>
 <option value="device.name_tizen_quirks">      - Tizen Quirks</option>
 <option value="device.cordova">device.cordova</option>
@@ -111,13 +115,14 @@
 <option value="device.platform_full_example">      - Full Example</option>
 <option value="device.platform_blackberry_quirks">      - BlackBerry Quirks</option>
 <option value="device.platform_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="device.platform_windows_phone_8_quirks">      - Windows Phone 8 Quirks</option>
 <option value="device.uuid">device.uuid</option>
 <option value="device.uuid_description">      - Description</option>
 <option value="device.uuid_supported_platforms">      - Supported Platforms</option>
 <option value="device.uuid_quick_example">      - Quick Example</option>
 <option value="device.uuid_full_example">      - Full Example</option>
 <option value="device.uuid_ios_quirk">      - iOS Quirk</option>
-<option value="device.uuid_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="device.uuid_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="device.version">device.version</option>
 <option value="device.version_supported_platforms">      - Supported Platforms</option>
 <option value="device.version_quick_example">      - Quick Example</option>
@@ -139,6 +144,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -175,6 +181,7 @@
 <li><a href="cordova_device_device.md.html#device.platform">device.platform</a></li>
 <li><a href="cordova_device_device.md.html#device.uuid">device.uuid</a></li>
 <li><a href="cordova_device_device.md.html#device.version">device.version</a></li>
+<li><a href="cordova_device_device.model.md.html#device.model">device.model</a></li>
 </ul>
 <h2>
 <a name="Device_variable_scope">Variable Scope</a>
@@ -262,6 +269,8 @@ var phoneName = <a href="cordova_device_device.md.html#device.name">device.name<
 <hr>
 <h1><a name="device.name">device.name</a></h1>
 
+<p>WARNING: <a href="cordova_device_device.md.html#device.name">device.name</a> is deprecated as of version 2.3.0, use <a href="cordova_device_device.model.md.html#device.model">device.model</a> instead</p>
+
 <p>Get the device's model name.</p>
 
 <pre class="prettyprint"><code>var string = <a href="cordova_device_device.md.html#device.name">device.name</a>;
@@ -281,7 +290,7 @@ var phoneName = <a href="cordova_device_device.md.html#device.name">device.name<
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -308,12 +317,12 @@ var name = <a href="cordova_device_device.md.html#device.name">device.name</a>;
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_device_device.md.html#Device">Device</a> Properties Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -324,6 +333,7 @@ var name = <a href="cordova_device_device.md.html#device.name">device.name</a>;
                             '<a href="cordova_device_device.md.html#Device">Device</a> Cordova: '  + <a href="cordova_device_device.md.html#device.cordova">device.cordova</a> + '&lt;br /&gt;' + 
                             '<a href="cordova_device_device.md.html#Device">Device</a> Platform: ' + <a href="cordova_device_device.md.html#device.platform">device.platform</a> + '&lt;br /&gt;' + 
                             '<a href="cordova_device_device.md.html#Device">Device</a> UUID: '     + <a href="cordova_device_device.md.html#device.uuid">device.uuid</a>     + '&lt;br /&gt;' + 
+                            '<a href="cordova_device_device.md.html#Device">Device</a> Model: '    + <a href="cordova_device_device.model.md.html#device.model">device.model</a>     + '&lt;br /&gt;' + 
                             '<a href="cordova_device_device.md.html#Device">Device</a> Version: '  + <a href="cordova_device_device.md.html#device.version">device.version</a>  + '&lt;br /&gt;';
     }
 
@@ -348,7 +358,7 @@ var name = <a href="cordova_device_device.md.html#device.name">device.name</a>;
 </li>
 </ul>
 <h2>
-<a name="device.name_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="device.name_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <ul>
@@ -366,7 +376,7 @@ var name = <a href="cordova_device_device.md.html#device.name">device.name</a>;
 </h2>
 
 <ul>
-<li>returns the device model assigned by the vendor. For example 'TIZEN'</li>
+<li>returns the <a href="#device%20model">device model</a> assigned by the vendor. For example 'TIZEN'</li>
 </ul>
 <hr>
 <h1><a name="device.cordova">device.cordova</a></h1>
@@ -390,7 +400,7 @@ var name = <a href="cordova_device_device.md.html#device.name">device.name</a>;
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>Tizen</li>
 <li>Windows 8</li>
@@ -411,12 +421,12 @@ var name = <a href="cordova_device_device.md.html#device.name">device.name</a>;
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_device_device.md.html#Device">Device</a> Properties Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -454,7 +464,7 @@ var name = <a href="cordova_device_device.md.html#device.name">device.name</a>;
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -483,12 +493,12 @@ var devicePlatform = <a href="cordova_device_device.md.html#device.platform">dev
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_device_device.md.html#Device">Device</a> Properties Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -522,6 +532,12 @@ var devicePlatform = <a href="cordova_device_device.md.html#device.platform">dev
 
 <p>Windows Phone 7 devices report platform as 'WinCE'</p>
 
+<h2>
+<a name="device.platform_windows_phone_8_quirks">Windows Phone 8 Quirks</a>
+</h2>
+
+<p>Windows Phone 8 devices report platform as 'Win32NT'</p>
+
 <hr>
 <h1><a name="device.uuid">device.uuid</a></h1>
 
@@ -544,7 +560,7 @@ var devicePlatform = <a href="cordova_device_device.md.html#device.platform">dev
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -583,12 +599,12 @@ var deviceID = <a href="cordova_device_device.md.html#device.uuid">device.uuid</
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_device_device.md.html#Device">Device</a> Properties Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -617,10 +633,10 @@ var deviceID = <a href="cordova_device_device.md.html#device.uuid">device.uuid</
 <p>The uuid for iOS is not unique for a device, but is unique per application per install. This will change if you delete the app and re-install, and possibly also when you upgrade your iOS version, or even upgrade your app per version (as we've seen in iOS 5.1). Not a reliable value.</p>
 
 <h2>
-<a name="device.uuid_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="device.uuid_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
-<p>The uuid for Windows Phone 7 requires the permission ID<em>CAP</em>IDENTITY_DEVICE.  Microsoft will likely be deprecating this property in the near future.  If the capablility is not available, the application generates a persistent guid, that will be maintained for the install-lifetime of the application on the device.</p>
+<p>The uuid for Windows Phone 7 requires the permission ID<em>CAP</em>IDENTITY_DEVICE.  Microsoft will likely be deprecating this property in the near future.  If the capability is not available, the application generates a persistent guid, that will be maintained for the install-lifetime of the application on the device.</p>
 
 <hr>
 <h1><a name="device.version">device.version</a></h1>
@@ -638,7 +654,7 @@ var deviceID = <a href="cordova_device_device.md.html#device.uuid">device.uuid</
 <li>Android 2.1+</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -671,12 +687,12 @@ var deviceVersion = <a href="cordova_device_device.md.html#device.version">devic
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_device_device.md.html#Device">Device</a> Properties Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //

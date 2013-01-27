@@ -35,7 +35,7 @@ using System.Windows.Resources;
 using WPCordovaClassLib;
 
 
-namespace GapExample
+namespace $safeprojectname$
 {
     public partial class MainPage : PhoneApplicationPage
     {

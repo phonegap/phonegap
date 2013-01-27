@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -95,8 +99,7 @@
 <option value="notification.alert_supported_platforms">      - Supported Platforms</option>
 <option value="notification.alert_quick_example">      - Quick Example</option>
 <option value="notification.alert_full_example">      - Full Example</option>
-<option value="notification.alert_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
-<option value="notification.alert_windows_8_app_quirks">      - Windows 8 App Quirks</option>
+<option value="notification.alert_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="notification.alert_bada_2_x_quirks">      - Bada 2.x Quirks</option>
 <option value="notification.confirm">notification.confirm</option>
 <option value="notification.confirm_description">      - Description</option>
@@ -104,7 +107,7 @@
 <option value="notification.confirm_supported_platforms">      - Supported Platforms</option>
 <option value="notification.confirm_quick_example">      - Quick Example</option>
 <option value="notification.confirm_full_example">      - Full Example</option>
-<option value="notification.confirm_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="notification.confirm_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="notification.confirm_bada_2_x_quirks">      - Bada 2.x Quirks</option>
 <option value="notification.confirm_bada_1_2_quirks">      - Bada 1.2 Quirks</option>
 <option value="notification.beep">notification.beep</option>
@@ -113,7 +116,7 @@
 <option value="notification.beep_full_example">      - Full Example</option>
 <option value="notification.beep_android_quirks">      - Android Quirks</option>
 <option value="notification.beep_iphone_quirks">      - iPhone Quirks</option>
-<option value="notification.beep_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="notification.beep_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="notification.beep_tizen_quirks">      - Tizen Quirks</option>
 <option value="notification.vibrate">notification.vibrate</option>
 <option value="notification.vibrate_supported_platforms">      - Supported Platforms</option>
@@ -137,6 +140,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -212,13 +216,9 @@
 
 <h3>iOS</h3>
 
-<h4>App/Supporting Files/Cordova.plist</h4>
+<h4>config.xml</h4>
 
-<pre class="prettyprint"><code>&lt;key&gt;Plugins&lt;/key&gt;
-&lt;dict&gt;
-    &lt;key&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a>&lt;/key&gt;
-    &lt;string&gt;CDVNotification&lt;/string&gt;
-&lt;/dict&gt;
+<pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_notification_notification.md.html#Notification">Notification</a>" value="CDVNotification" /&gt;
 </code></pre>
 
 <h3>webOS</h3>
@@ -268,7 +268,7 @@
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -301,12 +301,12 @@ navigator.<a href="cordova_notification_notification.md.html#notification.alert"
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -339,22 +339,12 @@ navigator.<a href="cordova_notification_notification.md.html#notification.alert"
 </code></pre>
 
 <h2>
-<a name="notification.alert_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="notification.alert_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <ul>
-<li>Ignores button names, always uses 'OK'</li>
 <li>There is no built in browser alert, so if you want to just write alert('foo'); you can assign window.alert = navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>;</li>
-<li>alert + confirm calls are non-blocking, and result is only available asyncronously.</li>
-</ul>
-<h2>
-<a name="notification.alert_windows_8_app_quirks">Windows 8 App Quirks</a>
-</h2>
-
-<ul>
-<li>In the other platforms, messages "stack up" - e.g. issue two <strong>alert</strong> requests and you'll get two messages overlaid. In Windows 8 apps, 
-you only get the last message.</li>
-<li>There is no built in browser alert, so if you want to just write alert('foo'); you can assign window.alert = navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>;</li>
+<li>alert + confirm calls are non-blocking, and result is only available asynchronously.</li>
 </ul>
 <h2>
 <a name="notification.alert_bada_2_x_quirks">Bada 2.x Quirks</a>
@@ -403,7 +393,7 @@ you only get the last message.</li>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>Tizen</li>
 <li>Windows 8</li>
@@ -438,12 +428,12 @@ function showConfirm() {
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -476,17 +466,16 @@ function showConfirm() {
 </code></pre>
 
 <h2>
-<a name="notification.confirm_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="notification.confirm_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <ul>
-<li>Ignores button names, always <code>'OK|Cancel'</code>.</li>
 <li>There is no built-in browser function for <code>window.confirm</code>
 <ul>
 <li>You can bind <code>window.confirm</code> by assigning <code>window.confirm = navigator.<a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a>;</code>.</li>
 </ul>
 </li>
-<li>Calls to <code>alert</code> and <code>confirm</code> are non-blocking and result is only available asyncronously.</li>
+<li>Calls to <code>alert</code> and <code>confirm</code> are non-blocking and result is only available asynchronously.</li>
 </ul>
 <h2>
 <a name="notification.confirm_bada_2_x_quirks">Bada 2.x Quirks</a>
@@ -523,7 +512,7 @@ function showConfirm() {
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
-<li>Windows Phone 7 ( Mango )</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 <li>Tizen</li>
 </ul>
@@ -544,12 +533,12 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -611,11 +600,11 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
 </li>
 </ul>
 <h2>
-<a name="notification.beep_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="notification.beep_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <ul>
-<li>WP7 Cordova lib includes a generic beep file that is used. </li>
+<li>Cordova lib includes a generic beep file that is used. </li>
 </ul>
 <h2>
 <a name="notification.beep_tizen_quirks">Tizen Quirks</a>
@@ -623,7 +612,7 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
 
 <ul>
 <li>Tizen implements beep by playing an audio file via the media API.</li>
-<li>This beep file must be short, named <code>beep.wav</code> and has to be located in a 'sounds' sub-directory of the application root disctory.</li>
+<li>This beep file must be short, named <code>beep.wav</code> and has to be located in a 'sounds' sub-directory of the application root directory.</li>
 </ul>
 <hr>
 <h1><a name="notification.vibrate">notification.vibrate</a></h1>
@@ -645,7 +634,7 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iPhone</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2 &amp; 2.x</li>
 </ul>
 <h2>
@@ -666,12 +655,12 @@ navigator.<a href="cordova_notification_notification.md.html#notification.vibrat
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //

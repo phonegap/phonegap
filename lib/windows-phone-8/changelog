@@ -2,3 +2,9 @@
 Windows Phone 8 
 ---
 
+d9bd6ab reorg so InAppBrowser is accessible to all projects + ConfigHandler, added config.xml to all templates
+bef9a81 2.4.0rc1 release prep
+224c484 more consolidation of props between wp7+wp8
+0799dc0 consolidation of commands with wp7
+51480ff updates for CLI project creation
+5089d5a Empty contact sanity check

@@ -21,14 +21,14 @@ using System.Windows.Media.Imaging;
 using Microsoft.Phone;
 using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
-using WP7CordovaClassLib.Cordova.UI;
-using AudioResult = WP7CordovaClassLib.Cordova.UI.AudioCaptureTask.AudioResult;
-using VideoResult = WP7CordovaClassLib.Cordova.UI.VideoCaptureTask.VideoResult;
+using WPCordovaClassLib.Cordova.UI;
+using AudioResult = WPCordovaClassLib.Cordova.UI.AudioCaptureTask.AudioResult;
+using VideoResult = WPCordovaClassLib.Cordova.UI.VideoCaptureTask.VideoResult;
 using System.Windows;
 using System.Diagnostics;
 using Microsoft.Phone.Controls;
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     /// <summary>
     /// Provides access to the audio, image, and video capture capabilities of the device

@@ -90,6 +90,7 @@
     <rim:permit>access_shared</rim:permit>
     <rim:permit>read_geolocation</rim:permit>
     <rim:permit>record_audio</rim:permit> 
+    <rim:permit>access_pimdomain_contacts</rim:permit> 
   </rim:permissions>
 
 </widget>

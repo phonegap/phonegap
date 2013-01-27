@@ -21,7 +21,7 @@ using System.Security;
 using System.Text;
 using System.Diagnostics;
 
-namespace WP7CordovaClassLib.Cordova.Commands
+namespace WPCordovaClassLib.Cordova.Commands
 {
     /// <summary>
     /// Provides access to isolated storage
@@ -348,11 +348,11 @@ namespace WP7CordovaClassLib.Cordova.Commands
 
                     try
                     {
-                        this.FullPath = filePath;// new Uri(filePath).LocalPath;
+                        this.FullPath = filePath.Replace('\\', '/'); // new Uri(filePath).LocalPath;
                     }
                     catch (Exception)
                     {
-                          
+                        this.FullPath = filePath;
                     }
                 }
             }
@@ -627,6 +627,53 @@ namespace WP7CordovaClassLib.Cordova.Commands
             }
         }
 
+        /// <summary>
+        /// Reads application resource as a text
+        /// </summary>
+        /// <param name="options">Path to a resource</param>
+        public void readResourceAsText(string options)
+        {
+            string pathToResource;
+            try 
+            {
+                string[] optStrings = JSON.JsonHelper.Deserialize<string[]>(options);
+                pathToResource = optStrings[0];
+            }
+            catch (Exception)
+            {
+                DispatchCommandResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
+                return;
+            }
+            
+            try
+            {
+                if (pathToResource.StartsWith("/"))
+                {
+                    pathToResource = pathToResource.Remove(0, 1);
+                }
+                
+                var resource = System.Windows.Application.GetResourceStream(new Uri(pathToResource, UriKind.Relative));
+                
+                if (resource == null)
+                {
+                    DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, NOT_FOUND_ERR));
+                    return;
+                }
+
+                string text;
+                StreamReader streamReader = new StreamReader(resource.Stream);
+                text = streamReader.ReadToEnd();
+                
+                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, text));
+            }
+            catch (Exception ex)
+            {
+                if (!this.HandleException(ex))
+                {
+                    DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, NOT_READABLE_ERR));
+                }
+            }
+        }
 
         public void truncate(string options)
         {
@@ -1226,6 +1273,12 @@ namespace WP7CordovaClassLib.Cordova.Commands
                             DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, INVALID_MODIFICATION_ERR));
                             return;
                         }
+                        else if (isoFile.DirectoryExists(newPath)) 
+                        {
+                            // there is already a folder with the same name, operation is not allowed
+                            DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, INVALID_MODIFICATION_ERR));
+                            return;
+                        }
                         else if (isoFile.FileExists(newPath))
                         {   // remove destination file if exists, in other case there will be exception
                             isoFile.DeleteFile(newPath);
@@ -1348,7 +1401,6 @@ namespace WP7CordovaClassLib.Cordova.Commands
             }
         }
 
-        // TODO: this is NOT working, object is not valid ...
         private void GetFileOrDirectory(string options, bool getDirectory)
         {
             FileOptions fOptions = new FileOptions();
@@ -1406,8 +1458,10 @@ namespace WP7CordovaClassLib.Cordova.Commands
                             return;
                         }
 
+
                         // need to make sure the parent exists
                         // it is an error to create a directory whose immediate parent does not yet exist
+			// see issue: https://issues.apache.org/jira/browse/CB-339
                         string[] pathParts = path.Split('/');
                         string builtPath = pathParts[0];
                         for (int n = 1; n < pathParts.Length - 1; n++)

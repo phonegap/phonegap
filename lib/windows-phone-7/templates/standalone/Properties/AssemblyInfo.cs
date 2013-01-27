@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Apache Cordova")]
 [assembly: AssemblyProduct("CordovaAppProj")]
-[assembly: AssemblyCopyright("Copyright © Apache Cordova 2012")]
+[assembly: AssemblyCopyright("Copyright © Apache Cordova 2013")]
 [assembly: AssemblyTrademark("Apache Cordova")]
 [assembly: AssemblyCulture("")]
 

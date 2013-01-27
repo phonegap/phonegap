@@ -50,7 +50,7 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="cordova-2.3.0.js" />
+    <Content Include="cordova-2.4.0.js" />
     <Content Include="cordova.js" />
     <Content Include="images\logo.png" />
     <Content Include="images\smalllogo.png" />

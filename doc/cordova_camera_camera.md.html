@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -109,7 +113,7 @@
 <option value="cameraOptions_blackberry_quirks">      - BlackBerry Quirks</option>
 <option value="cameraOptions_webos_quirks">      - webOS Quirks</option>
 <option value="cameraOptions_ios_quirks">      - iOS Quirks</option>
-<option value="cameraOptions_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
+<option value="cameraOptions_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="cameraOptions_bada_1_2_quirks">      - Bada 1.2 Quirks</option>
 <option value="cameraOptions_tizen_quirks">      - Tizen Quirks</option>
 <option value="CameraPopoverOptions">CameraPopoverOptions</option>
@@ -132,6 +136,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -212,13 +217,9 @@
 
 <h3>iOS</h3>
 
-<h4>App/Supporting Files/Cordova.plist</h4>
+<h4>config.xml</h4>
 
-<pre class="prettyprint"><code>&lt;key&gt;Plugins&lt;/key&gt;
-&lt;dict&gt;
-    &lt;key&gt;<a href="cordova_camera_camera.md.html#Camera">Camera</a>&lt;/key&gt;
-    &lt;string&gt;CDVCamera&lt;/string&gt;
-&lt;/dict&gt;
+<pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_camera_camera.md.html#Camera">Camera</a>" value="CDVCamera" /&gt;
 </code></pre>
 
 <h3>webOS</h3>
@@ -231,7 +232,6 @@
 <h4>Properties/WPAppManifest.xml</h4>
 
 <pre class="prettyprint"><code>&lt;Capabilities&gt;
-    &lt;Capability Name="ID_CAP_CAMERA" /&gt;
     &lt;Capability Name="ID_CAP_ISV_CAMERA" /&gt;
     &lt;Capability Name="ID_HW_FRONTCAMERA" /&gt;
 &lt;/Capabilities&gt;
@@ -289,7 +289,7 @@
 <li>Android</li>
 <li>Blackberry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7</li>
+<li>Windows Phone 7 and 8</li>
 <li>Bada 1.2</li>
 <li>webOS</li>
 <li>Tizen</li>
@@ -299,7 +299,7 @@
 <a name="camera.getPicture_ios_quirks">iOS Quirks</a>
 </h2>
 
-<p>Including a JavaScript alert() in either of the callback functions can cause problems.  Wrap the alert in a setTimeout() to allow the iOS image picker or popover to fully close before the alert is displayed: </p>
+<p>Including a JavaScript alert() in either of the callback functions can cause problems.  Wrap the alert in a setTimeout() to allow the iOS image picker or popover to fully <a href="cordova_inappbrowser_inappbrowser.md.html#close">close</a> before the alert is displayed: </p>
 
 <pre class="prettyprint"><code>setTimeout(function() { 
     // do your thing here!
@@ -363,7 +363,7 @@ function onFail(message) {
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_media_capture_capture.md.html#Capture">Capture</a> Photo&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     var pictureSource;   // picture source
@@ -371,7 +371,7 @@ function onFail(message) {
 
     // Wait for Cordova to connect with the device
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>",onDeviceReady,false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>",onDeviceReady,false);
 
     // Cordova is ready to be used!
     //
@@ -600,7 +600,7 @@ function cameraCallback(imageData) {
 <li>Ignores the <code>quality</code> parameter.</li>
 <li>Ignores the <code>sourceType</code> parameter.</li>
 <li>Ignores the <code>allowEdit</code> parameter.</li>
-<li>Application must have key injection permissions to close native <a href="cordova_camera_camera.md.html#Camera">Camera</a> application after photo is taken.</li>
+<li>Application must have key injection permissions to <a href="cordova_inappbrowser_inappbrowser.md.html#close">close</a> native <a href="cordova_camera_camera.md.html#Camera">Camera</a> application after photo is taken.</li>
 <li>Using Large image sizes may result in inability to encode image on later model devices with high resolution cameras (e.g. Torch 9800).</li>
 <li>
 <a href="cordova_camera_camera.md.html#Camera">Camera</a>.MediaType is not supported.</li>
@@ -628,7 +628,7 @@ function cameraCallback(imageData) {
 <li>When <code>destinationType.FILE_URI</code> is used, photos are saved in the application's temporary directory.  Developers may delete the contents of this directory using the navigator.fileMgr APIs if storage space is a concern.</li>
 </ul>
 <h2>
-<a name="cameraOptions_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
+<a name="cameraOptions_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <ul>

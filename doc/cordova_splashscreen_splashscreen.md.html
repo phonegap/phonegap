@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -119,6 +123,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -166,10 +171,9 @@
 
 <h3>iOS</h3>
 
-<h4>Cordova.plist</h4>
+<h4>config.xml</h4>
 
-<pre class="prettyprint"><code>    Add an entry under the Plugins dictionary - with the key "SplashScreen" and value "CDVSplashScreen". 
-    New projects should already have this key.
+<pre class="prettyprint"><code>&lt;plugin name="SplashScreen" value="CDVSplashScreen" /&gt;
 </code></pre>
 
 <h2>
@@ -194,7 +198,7 @@
 <p>In the onCreate method of the class that extends DroidGap add the following two lines:</p>
 
 <pre class="prettyprint"><code>super.setIntegerProperty("splashscreen", R.drawable.splash);
-super.loadUrl("file:///android_asset/www/index.html", 10000);
+super.loadUrl(Config.getStartUrl(), 10000);
 </code></pre>
 
 <p>The first line 'super.setIntegerProperty' sets the image to be displayed as the splashscreen. If you have named your image anything other than splash.png you will have to modify this line.
@@ -256,12 +260,12 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -315,12 +319,12 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
     //
-    document.addEventListener("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Cordova is ready
     //
@@ -341,7 +345,7 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
 </h2>
 
 <ol>
-<li><p>In your Cordova.plist, you need to <a href="guide_project-settings_index.md.html#Project%20Settings">modify the value</a> for <strong>"AutoHideSplashScreen”</strong> to false</p></li>
+<li><p>In your <strong>config.xml</strong>, you need to <a href="guide_project-settings_index.md.html#Project%20Settings">modify the value</a> for <strong>"AutoHideSplashScreen”</strong> to false</p></li>
 <li>
 <p>Then, if you want to delay hiding the splash screen for 2 seconds, you can do this in your <strong><a href="cordova_events_events.md.html#deviceready">deviceready</a></strong> event handler:</p>
 

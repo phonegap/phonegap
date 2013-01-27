@@ -2,8 +2,12 @@
 Windows Phone 7 
 ---
 
-41de5f5 update version files, and standalone template
-115a04f update to 2.3.0rc1 and fix issue with File upload
-d3cc114 update cordova-js to 2.3.0rc1
-a481d78 Merge branch 'master' of github.com:purplecabbage/incubator-cordova-wp7
-7979288 [CB-339] Should not be able to create a file or directory if the parent directory does not exist.
+73ffd3f addition of config.xml to projects
+651c4fc removed dll
+093d654 removing dll, build it
+2a94c12 adding config.xml, and inappbrowser support
+8dac142 rc1 prep
+e718a04 code cleanup
+2ff76c6 consolidation of commands with wp8
+8043c07 update bad ref to WP7CordovaClassLib
+39918f9 Updated bad reference to old class name WP7CordovaClassLib=>WPCordovaClassLib

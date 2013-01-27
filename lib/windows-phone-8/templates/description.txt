@@ -1,4 +1,8 @@
-CordovaStarter
+CordovaWP8AppFull
+Apache Cordova 2.4.0 Windows Phone 8 App using a pre-built dll.
 
-Starter project for building a Cordova app for Windows Phone version: 2.2.0rc2
+CordovaWP8AppStandalone
+Apache Cordova 2.4.0 Windows Phone 8 App including all framework source code.
+
+
 

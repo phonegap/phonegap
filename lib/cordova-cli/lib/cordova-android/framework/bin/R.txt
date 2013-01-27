@@ -1,0 +1,7 @@
+int drawable icon 0x7f020000
+int drawable splash 0x7f020001
+int id appView 0x7f060000
+int layout main 0x7f030000
+int string app_name 0x7f050000
+int string go 0x7f050001
+int xml config 0x7f040000

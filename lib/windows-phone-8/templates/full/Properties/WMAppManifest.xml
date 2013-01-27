@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{7ef9ba5e-4a8e-435f-a00f-5c1f5b6ef147}" Title="GapExample" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GapExample author" BitsPerPixel="32" Description="PhoneGap for Windows Phone" Publisher="GapExample" PublisherID="{b93a0d8e-5aa9-4d9b-b232-17e2d852e779}">
+  <App xmlns="" ProductID="{$guid1$}" Title="$projectname$" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="$projectname$ author" BitsPerPixel="32" Description="Apache Cordova for Windows Phone" Publisher="CordovaExample" PublisherID="{b93a0d8e-5aa9-4d9b-b232-17e2d852e779}">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
@@ -24,12 +24,12 @@
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="GapExampleToken" TaskName="_default">
+      <PrimaryToken TokenID="$safeprojectname$Token" TaskName="_default">
         <TemplateFlip>
           <SmallImageURI IsResource="false" IsRelative="true">Background.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsResource="false" IsRelative="true">Background.png</BackgroundImageURI>
-          <Title>GapExample</Title>
+          <Title>$projectname$</Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>

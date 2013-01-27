@@ -32,7 +32,10 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
-<option selected value="2.3.0rc1">2.3.0rc1</option>
+<option selected value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
 <option value="2.2.0rc2">2.2.0rc2</option>
 <option value="2.2.0rc1">2.2.0rc1</option>
 <option value="2.2.0">2.2.0</option>
@@ -77,6 +80,7 @@
 <option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
+<option value="2.1.0">2.1.0</option>
 <option value="2.0.0">2.0.0</option>
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
@@ -114,6 +118,7 @@
 <li><a href="cordova_file_file.md.html#File">File</a></li>
 <li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
 <li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
 <li><a href="cordova_media_media.md.html#Media">Media</a></li>
 <li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
 <li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
@@ -138,7 +143,7 @@
 
 <p>A plugin is an Objective-C class that extends the <code>CDVPlugin</code> class.</p>
 
-<p>Each plugin class must be registered using the Cordova.plist file, under the Plugins key.</p>
+<p>Each plugin class must be registered using the config.xml file, as a &lt;plugin&gt; tag under the &lt;plugins&gt; key.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_plugin_class_mapping">Plugin Class Mapping</a>
@@ -149,14 +154,13 @@
 <pre class="prettyprint"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
 </code></pre>
 
-<p>This will marshall a request from the UIWebView to the iOS native side, more or less boiling down to calling the <code>action</code> method on the <code>service</code> class, with the arguments passed in the <code>args</code> Array. </p>
+<p>This will marshal a request from the UIWebView to the iOS native side, more or less boiling down to calling the <code>action</code> method on the <code>service</code> class, with the arguments passed in the <code>args</code> Array. </p>
 
 <p>Plugins with long-running requests, background activity (e.g. playing media), listeners or internal state should implement the <code>onReset</code> method and stop or clean up those activities. This method is run when the <code>UIWebView</code> navigates to a new page or refreshes, which reloads the Javascript.</p>
 
-<p>The plugin must be added to <code>Plugins</code> key (a Dictionary) of the <code>Cordova.plist</code> file in your Cordova-iOS application's project folder.</p>
+<p>The plugin must be added under the <code>&lt;plugins&gt;</code> tag of the <code>config.xml</code> file in your Cordova-iOS application's project folder.</p>
 
-<pre class="prettyprint"><code>&lt;key&gt;service_name&lt;/key&gt;
-&lt;string&gt;PluginClassName&lt;/string&gt;
+<pre class="prettyprint"><code>&lt;plugin name="service_name" value="PluginClassName" /&gt;
 </code></pre>
 
 <p>The key <code>service_name</code> should match what you use in the JavaScript <code>exec</code> call, and the value will be the name of the Objective-C class of the plugin. Without this added, the plugin may compile but will not be reachable by Cordova.</p>
@@ -165,7 +169,7 @@
 <a name="Developing%20a%20Plugin%20on%20iOS_writing_an_ios_cordova_plugin">Writing an iOS Cordova Plugin</a>
 </h2>
 
-<p>We have JavaScript fire off a plugin request to the native side. We have the iOS Objective-C plugin mapped properly via the <code>Cordova.plist</code> file. So what does the final iOS Objective-C Plugin class look like?</p>
+<p>We have JavaScript fire off a plugin request to the native side. We have the iOS Objective-C plugin mapped properly via the <code>config.xml</code> file. So what does the final iOS Objective-C Plugin class look like?</p>
 
 <p>What gets dispatched to the plugin via JavaScript's <code>exec</code> function gets passed into the corresponding Plugin class's <code>action</code> method. A plugin method has this signature:</p>
 
@@ -184,9 +188,9 @@
 </code></pre>
 
 <ol>
-<li><a class="external" href="https://github.com/apache/incubator-cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h">CDVInvokedUrlCommand.h</a></li>
-<li><a class="external" href="https://github.com/apache/incubator-cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h">CDVPluginResult.h</a></li>
-<li><a class="external" href="https://github.com/apache/incubator-cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h">CDVCommandDelegate.h</a></li>
+<li><a class="external" href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVInvokedUrlCommand.h">CDVInvokedUrlCommand.h</a></li>
+<li><a class="external" href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPluginResult.h">CDVPluginResult.h</a></li>
+<li><a class="external" href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVCommandDelegate.h">CDVCommandDelegate.h</a></li>
 </ol>
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_plugin_signatures">Plugin Signatures</a>
@@ -208,10 +212,9 @@
 <a name="Developing%20a%20Plugin%20on%20iOS_echo_plugin_ios_plugin">Echo Plugin iOS Plugin</a>
 </h2>
 
-<p>We would add the following to the <code>Plugins</code> key (a Dictionary) of the project's <code>Cordova.plist</code> file:</p>
+<p>We would add the following to the <code>&lt;plugins&gt;</code> tag of the project's <code>config.xml</code> file:</p>
 
-<pre class="prettyprint"><code>&lt;key&gt;Echo&lt;/key&gt;
-&lt;string&gt;Echo&lt;/string&gt;
+<pre class="prettyprint"><code>&lt;plugin name="Echo" value="Echo" /&gt;
 </code></pre>
 
 <p>Then we would add the following files (<code>Echo.h</code> and <code>Echo.m</code>) to the Plugins folder inside our Cordova-iOS
@@ -285,8 +288,8 @@ application folder:</p>
 <p>See other methods that you can override in:</p>
 
 <ol>
-<li><a class="external" href="https://github.com/apache/incubator-cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></li>
-<li><a class="external" href="https://github.com/apache/incubator-cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></li>
+<li><a class="external" href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></li>
+<li><a class="external" href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></li>
 </ol>
 <p>For example, you can hook into the <a href="cordova_events_events.md.html#pause">pause</a>, <a href="cordova_events_events.md.html#resume">resume</a>, app terminate and handleOpenURL events.</p>
 
@@ -294,7 +297,7 @@ application folder:</p>
 <a name="Developing%20a%20Plugin%20on%20iOS_debugging_plugins">Debugging Plugins</a>
 </h2>
 
-<p>To debug the Objective-C side, you would use Xcode's built in debugger. For JavaScript, on iOS 5.0 you can use <a class="external" href="https://github.com/apache/incubator-cordova-weinre">Weinre, an Apache Cordova Project</a> or <a class="external" href="http://www.iwebinspector.com/">iWebInspector, a third-party utility</a></p>
+<p>To debug the Objective-C side, you would use Xcode's built in debugger. For JavaScript, on iOS 5.0 you can use <a class="external" href="https://github.com/apache/cordova-weinre">Weinre, an Apache Cordova Project</a> or <a class="external" href="http://www.iwebinspector.com/">iWebInspector, a third-party utility</a></p>
 
 <p>For iOS 6, you would use Safari 6.0 to simply attach to your app running in the iOS 6 Simulator.</p>
 
@@ -303,7 +306,7 @@ application folder:</p>
 </h2>
 
 <ul>
-<li>Don't forget to add your plugin's mapping to Cordova.plist - if you forgot, an error will be printed to the Xcode console log</li>
+<li>Don't forget to add your plugin's mapping to config.xml - if you forgot, an error will be printed to the Xcode console log</li>
 <li>Don't forget to add any hosts you connect to in the <a href="guide_whitelist_index.md.html#Domain%20Whitelist%20Guide">whitelist</a> - if you forgot, an error will be printed to the Xcode console log</li>
 </ul>
 <h2>

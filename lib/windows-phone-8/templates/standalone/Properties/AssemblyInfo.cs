@@ -11,11 +11,12 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Apache Cordova")]
 [assembly: AssemblyProduct("CordovaAppProj")]
-[assembly: AssemblyCopyright("Copyright © Apache Cordova 2012")]
+[assembly: AssemblyCopyright("Copyright © Apache Cordova 2013")]
 [assembly: AssemblyTrademark("Apache Cordova")]
 [assembly: AssemblyCulture("")]
 
-[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
+
+[assembly: NeutralResourcesLanguageAttribute("en-US")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

@@ -69,7 +69,7 @@ Device::SetDeviceInfo() {
 
     if(r == E_SUCCESS) {
     	String res;
-    	res.Format(1024, L"window.device={platform:'bada',version:'%S',name:'n/a',cordova:'2.3.0',uuid:'%S'}", platformVersion.GetPointer(), imei.GetPointer());
+    	res.Format(1024, L"window.device={platform:'bada',version:'%S',name:'n/a',cordova:'2.4.0',uuid:'%S'}", platformVersion.GetPointer(), imei.GetPointer());
     	//AppLogDebug("%S", res.GetPointer());
     	pWeb->EvaluateJavascriptN(res);
     }

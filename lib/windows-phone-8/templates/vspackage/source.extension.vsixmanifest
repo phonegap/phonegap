@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
 	<Identifier Id="d5c0d96c-110c-41a0-8224-51bcba658426">
-		<Name>Apache Cordova for Windows Phone 7</Name>
+		<Name>Apache Cordova for Windows Phone 8</Name>
 		<Author>Microsoft</Author>
 		<Version>1.0</Version>
-		<Description xml:space="preserve">Apache Cordova fow Windows Phone 7  Project Template</Description>
+		<Description xml:space="preserve">Apache Cordova fow Windows Phone 8  Project Template</Description>
 		<Locale>1033</Locale>
-		<MoreInfoUrl>https://github.com/apache/incubator-cordova-wp7</MoreInfoUrl>
+		<MoreInfoUrl>https://github.com/apache/cordova-wp8</MoreInfoUrl>
 		<GettingStartedGuide>http://create.msdn.com/en-us/home/getting_started</GettingStartedGuide>
 		<Icon>pg_templateIcon.png</Icon>
 		<PreviewImage>pg_templatePreview.jpg</PreviewImage>
