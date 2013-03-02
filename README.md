@@ -9,18 +9,6 @@ Get Started
 
 [Getting Started Guides](http://docs.phonegap.com/guide_getting-started_index.md.html)
 
-
-How to add PhoneGap in Visual Studio project templates
-------------------------------------------------------
-This distribution includes a ready to use Visual Studio project template.
-
-However, is still required a bit of manual operations:
-- Locate the folder where you expanded the PhoneGap distribution, that is cordova-X.Y.Z
-  (where X, Y and Z represent the version number of your Cordova).
-- Zip the all content of the \lib\windows8\template sub folder.
-- Move this zip file to \path\to\your\Documents\Visual Studio 2012\Templates\ProjectTemplates\JavaScript\ folder.
-When you open a new instance of Visual Studio 2012 and select File->New->Project, you will see the PhoneGap project template.
-
 Community
 ---------
 
