@@ -30,8 +30,8 @@ Directory Structure
 	  | |-blackberry/
 	  | |-cordova-cli/
 	  | |-ios/
-          | |-windows-phone-7
-          | |-windows-phone-8
+          | |-windows-phone-7/
+          | |-windows-phone-8/
 	  | |-windows8/
 	  |-changelog ..... a changelog compiled from comments and authors
 	  |-license ....... the Apache Software License v2
