@@ -31,7 +31,7 @@ static NSSet* org_apache_cordova_validArrowDirections;
 @interface CDVCamera ()
 
 @property (readwrite, assign) BOOL hasPendingOperation;
-
+-(void)processPickedImage:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info;
 @end
 
 @implementation CDVCamera
@@ -246,100 +246,20 @@ static NSSet* org_apache_cordova_validArrowDirections;
         [cameraPicker.popoverController dismissPopoverAnimated:YES];
         cameraPicker.popoverController.delegate = nil;
         cameraPicker.popoverController = nil;
+	      [self processPickedImage:cameraPicker didFinishPickingMediaWithInfo:info];
     } else {
         if ([cameraPicker respondsToSelector:@selector(presentingViewController)]) {
-            [[cameraPicker presentingViewController] dismissModalViewControllerAnimated:YES];
+          [[cameraPicker presentingViewController] dismissViewControllerAnimated:YES
+                                                                      completion:^{
+                                                                        [self processPickedImage:cameraPicker didFinishPickingMediaWithInfo:info];
+                                                                      }];
         } else {
-            [[cameraPicker parentViewController] dismissModalViewControllerAnimated:YES];
+          [[cameraPicker parentViewController] dismissViewControllerAnimated:YES
+                                                                  completion:^{
+                                                                    [self processPickedImage:cameraPicker didFinishPickingMediaWithInfo:info];
+                                                                  }];
         }
     }
-
-    CDVPluginResult* result = nil;
-
-    NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    // IMAGE TYPE
-    if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
-        if (cameraPicker.returnType == DestinationTypeNativeUri) {
-            NSString* nativeUri = [(NSURL*)[info objectForKey:UIImagePickerControllerReferenceURL] absoluteString];
-            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nativeUri];
-        } else {
-            // get the image
-            UIImage* image = nil;
-            if (cameraPicker.allowsEditing && [info objectForKey:UIImagePickerControllerEditedImage]) {
-                image = [info objectForKey:UIImagePickerControllerEditedImage];
-            } else {
-                image = [info objectForKey:UIImagePickerControllerOriginalImage];
-            }
-
-            if (cameraPicker.saveToPhotoAlbum) {
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-            }
-
-            if (cameraPicker.correctOrientation) {
-                image = [self imageCorrectedForCaptureOrientation:image];
-            }
-
-            UIImage* scaledImage = nil;
-
-            if ((cameraPicker.targetSize.width > 0) && (cameraPicker.targetSize.height > 0)) {
-                // if cropToSize, resize image and crop to target size, otherwise resize to fit target without cropping
-                if (cameraPicker.cropToSize) {
-                    scaledImage = [self imageByScalingAndCroppingForSize:image toSize:cameraPicker.targetSize];
-                } else {
-                    scaledImage = [self imageByScalingNotCroppingForSize:image toSize:cameraPicker.targetSize];
-                }
-            }
-
-            NSData* data = nil;
-
-            if (cameraPicker.encodingType == EncodingTypePNG) {
-                data = UIImagePNGRepresentation(scaledImage == nil ? image : scaledImage);
-            } else {
-                data = UIImageJPEGRepresentation(scaledImage == nil ? image : scaledImage, cameraPicker.quality / 100.0f);
-
-                /* splice loc */
-                CDVJpegHeaderWriter* exifWriter = [[CDVJpegHeaderWriter alloc] init];
-                NSString* headerstring = [exifWriter createExifAPP1:[info objectForKey:@"UIImagePickerControllerMediaMetadata"]];
-                data = [exifWriter spliceExifBlockIntoJpeg:data withExifBlock:headerstring];
-            }
-
-            if (cameraPicker.returnType == DestinationTypeFileUri) {
-                // write to temp directory and return URI
-                // get the temp directory path
-                NSString* docsPath = [NSTemporaryDirectory()stringByStandardizingPath];
-                NSError* err = nil;
-                NSFileManager* fileMgr = [[NSFileManager alloc] init]; // recommended by apple (vs [NSFileManager defaultManager]) to be threadsafe
-                // generate unique file name
-                NSString* filePath;
-
-                int i = 1;
-                do {
-                    filePath = [NSString stringWithFormat:@"%@/%@%03d.%@", docsPath, CDV_PHOTO_PREFIX, i++, cameraPicker.encodingType == EncodingTypePNG ? @"png":@"jpg"];
-                } while ([fileMgr fileExistsAtPath:filePath]);
-
-                // save file
-                if (![data writeToFile:filePath options:NSAtomicWrite error:&err]) {
-                    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_IO_EXCEPTION messageAsString:[err localizedDescription]];
-                } else {
-                    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[NSURL fileURLWithPath:filePath] absoluteString]];
-                }
-            } else {
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[data base64EncodedString]];
-            }
-        }
-    }
-    // NOT IMAGE TYPE (MOVIE)
-    else {
-        NSString* moviePath = [[info objectForKey:UIImagePickerControllerMediaURL] absoluteString];
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:moviePath];
-    }
-
-    if (result) {
-        [self.commandDelegate sendPluginResult:result callbackId:cameraPicker.callbackId];
-    }
-
-    self.hasPendingOperation = NO;
-    self.pickerController = nil;
 }
 
 // older api calls newer didFinishPickingMediaWithInfo
@@ -550,7 +470,94 @@ static NSSet* org_apache_cordova_validArrowDirections;
 
     self.hasPendingOperation = NO;
 }
-
+-(void)processPickedImage:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info{
+  CDVPluginResult* result = nil;
+  
+  NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+  // IMAGE TYPE
+  if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
+    if (cameraPicker.returnType == DestinationTypeNativeUri) {
+      NSString* nativeUri = [(NSURL*)[info objectForKey:UIImagePickerControllerReferenceURL] absoluteString];
+      result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nativeUri];
+    } else {
+      // get the image
+      UIImage* image = nil;
+      if (cameraPicker.allowsEditing && [info objectForKey:UIImagePickerControllerEditedImage]) {
+        image = [info objectForKey:UIImagePickerControllerEditedImage];
+      } else {
+        image = [info objectForKey:UIImagePickerControllerOriginalImage];
+      }
+      
+      if (cameraPicker.saveToPhotoAlbum) {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+      }
+      
+      if (cameraPicker.correctOrientation) {
+        image = [self imageCorrectedForCaptureOrientation:image];
+      }
+      
+      UIImage* scaledImage = nil;
+      
+      if ((cameraPicker.targetSize.width > 0) && (cameraPicker.targetSize.height > 0)) {
+        // if cropToSize, resize image and crop to target size, otherwise resize to fit target without cropping
+        if (cameraPicker.cropToSize) {
+          scaledImage = [self imageByScalingAndCroppingForSize:image toSize:cameraPicker.targetSize];
+        } else {
+          scaledImage = [self imageByScalingNotCroppingForSize:image toSize:cameraPicker.targetSize];
+        }
+      }
+      
+      NSData* data = nil;
+      
+      if (cameraPicker.encodingType == EncodingTypePNG) {
+        data = UIImagePNGRepresentation(scaledImage == nil ? image : scaledImage);
+      } else {
+        data = UIImageJPEGRepresentation(scaledImage == nil ? image : scaledImage, cameraPicker.quality / 100.0f);
+        
+        /* splice loc */
+        CDVJpegHeaderWriter* exifWriter = [[CDVJpegHeaderWriter alloc] init];
+        NSString* headerstring = [exifWriter createExifAPP1:[info objectForKey:@"UIImagePickerControllerMediaMetadata"]];
+        data = [exifWriter spliceExifBlockIntoJpeg:data withExifBlock:headerstring];
+      }
+      
+      if (cameraPicker.returnType == DestinationTypeFileUri) {
+        // write to temp directory and return URI
+        // get the temp directory path
+        NSString* docsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+        NSError* err = nil;
+        NSFileManager* fileMgr = [[NSFileManager alloc] init]; // recommended by apple (vs [NSFileManager defaultManager]) to be threadsafe
+        // generate unique file name
+        NSString* filePath;
+        
+        int i = 1;
+        do {
+          filePath = [NSString stringWithFormat:@"%@/%@%03d.%@", docsPath, CDV_PHOTO_PREFIX, i++, cameraPicker.encodingType == EncodingTypePNG ? @"png":@"jpg"];
+        } while ([fileMgr fileExistsAtPath:filePath]);
+        
+        // save file
+        if (![data writeToFile:filePath options:NSAtomicWrite error:&err]) {
+          result = [CDVPluginResult resultWithStatus:CDVCommandStatus_IO_EXCEPTION messageAsString:[err localizedDescription]];
+        } else {
+          result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[NSURL fileURLWithPath:filePath] absoluteString]];
+        }
+      } else {
+        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[data base64EncodedString]];
+      }
+    }
+  }
+  // NOT IMAGE TYPE (MOVIE)
+  else {
+    NSString* moviePath = [[info objectForKey:UIImagePickerControllerMediaURL] absoluteString];
+    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:moviePath];
+  }
+  
+  if (result) {
+    [self.commandDelegate sendPluginResult:result callbackId:cameraPicker.callbackId];
+  }
+  
+  self.hasPendingOperation = NO;
+  self.pickerController = nil;
+}
 @end
 
 @implementation CDVCameraPicker
