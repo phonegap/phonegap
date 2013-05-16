@@ -21,19 +21,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
 <meta name="generator" content="joDoc">
-<title>Apache Cordova API Documentation</title>
+<title>PhoneGap API Documentation</title>
 <link rel="stylesheet" type="text/css" href="index.css">
 <link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
 <link rel="stylesheet" type="text/css" href="prettify/prettify.css">
 </head>
 <body>
         <div id="header">
-            <h1><a href="index.html">Apache <strong>Cordova</strong> Documentation</a></h1>
+            <h1><a href="index.html">PhoneGap Documentation</a></h1>
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.7.0rc1">2.7.0rc1</option>
+<option selected value="2.7.0">2.7.0</option>
+<option value="2.6.0rc1">2.6.0rc1</option>
+<option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
-<option selected value="2.5.0">2.5.0</option>
+<option value="2.5.0">2.5.0</option>
 <option value="2.4.0rc1">2.4.0rc1</option>
 <option value="2.4.0">2.4.0</option>
 <option value="2.3.0rc2">2.3.0rc2</option>
@@ -59,6 +63,28 @@
 <option value="1.6.0">1.6.0</option>
 <option value="1.5.0rc1">1.5.0rc1</option>
 <option value="1.5.0">1.5.0</option>
+<option value="1.4.1">1.4.1</option>
+<option value="1.4.0rc1">1.4.0rc1</option>
+<option value="1.4.0">1.4.0</option>
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+<option value="1.0.0rc3">1.0.0rc3</option>
+<option value="1.0.0rc2">1.0.0rc2</option>
+<option value="1.0.0rc1">1.0.0rc1</option>
+<option value="1.0.0">1.0.0</option>
+<option value="0.9.6">0.9.6</option>
+<option value="0.9.5.1">0.9.5.1</option>
+<option value="0.9.5">0.9.5</option>
+<option value="0.9.4">0.9.4</option>
+<option value="0.9.3">0.9.3</option>
+<option value="0.9.2">0.9.2</option>
+</optgroup>
+<optgroup label="Español" value="es"><option value="1.0.0">1.0.0</option></optgroup>
+<optgroup label="Français" value="fr">
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
 <option value="2.2.0">2.2.0</option>
@@ -67,6 +93,7 @@
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
 <option value="1.7.0">1.7.0</option>
+<option value="0.9.5">0.9.5</option>
 </optgroup>
 <optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
         </div>
@@ -91,6 +118,13 @@
 <option value="notification.confirm_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="notification.confirm_bada_2_x_quirks">      - Bada 2.x Quirks</option>
 <option value="notification.confirm_bada_1_2_quirks">      - Bada 1.2 Quirks</option>
+<option value="notification.prompt">notification.prompt</option>
+<option value="notification.prompt_description">      - Description</option>
+<option value="notification.prompt_promptcallback">      - promptCallback</option>
+<option value="notification.prompt_supported_platforms">      - Supported Platforms</option>
+<option value="notification.prompt_quick_example">      - Quick Example</option>
+<option value="notification.prompt_full_example">      - Full Example</option>
+<option value="notification.prompt_android_quirks">      - Android Quirks</option>
 <option value="notification.beep">notification.beep</option>
 <option value="notification.beep_supported_platforms">      - Supported Platforms</option>
 <option value="notification.beep_quick_example">      - Quick Example</option>
@@ -155,6 +189,7 @@
 <ul>
 <li><a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a></li>
 <li><a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a></li>
+<li><a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a></li>
 <li><a href="cordova_notification_notification.md.html#notification.beep">notification.beep</a></li>
 <li><a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a></li>
 </ul>
@@ -282,7 +317,7 @@ navigator.<a href="cordova_notification_notification.md.html#notification.alert"
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
@@ -409,7 +444,7 @@ function showConfirm() {
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
@@ -474,6 +509,127 @@ function showConfirm() {
 <li>Ignore button names, always <code>'OK|Cancel'</code>.</li>
 </ul>
 <hr>
+<h1><a name="notification.prompt">notification.prompt</a></h1>
+
+<p>Shows a customizable prompt dialog box.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a>(message, promptCallback, [title], [buttonLabels])
+</code></pre>
+
+<ul>
+<li>
+<strong>message:</strong> Dialog message (<code>String</code>)</li>
+<li>
+<strong>promptCallback:</strong> - Callback to invoke when a button is pressed (<code>Function</code>)</li>
+<li>
+<strong>title:</strong> Dialog title (<code>String</code>) (Optional, Default: "Prompt")</li>
+<li>
+<strong>buttonLabels:</strong> Array of strings for the button labels (<code>Array</code>) (Optional, Default: ["OK","Cancel"])</li>
+</ul>
+<h2>
+<a name="notification.prompt_description">Description</a>
+</h2>
+
+<p>Function <code><a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a></code> displays a native dialog box that is more customizable than the browser's <code>prompt</code> function.</p>
+
+<h2>
+<a name="notification.prompt_promptcallback">promptCallback</a>
+</h2>
+
+<p>The <code>promptCallback</code> is called when the user has pressed one of the buttons on the prompt dialog box.</p>
+
+<p>The callback takes the argument <code>results</code> which contains the following properties:</p>
+
+<ul>
+<li>
+<strong>buttonIndex:</strong> (<code>Number</code>), which is the index of the pressed button. It's important to note that the index uses one-based indexing, so the value will be <code>1</code>, <code>2</code>, <code>3</code>, etc.</li>
+<li>
+<strong>input1:</strong> (<code>String</code>), which is the text entered in the prompt dialog box.</li>
+</ul>
+<h2>
+<a name="notification.prompt_supported_platforms">Supported Platforms</a>
+</h2>
+
+<ul>
+<li>Android</li>
+<li>iPhone</li>
+</ul>
+<h2>
+<a name="notification.prompt_quick_example">Quick Example</a>
+</h2>
+
+<pre class="prettyprint"><code>// process the promp dialog results
+function onPrompt(results) {
+    alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+}
+
+// Show a custom prompt dialog
+//
+function showPrompt() {
+    navigator.<a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a>(
+        'Please enter your name',  // message
+        onPrompt,                  // callback to invoke
+        'Registration',            // title
+        ['Ok','Exit']              // buttonLabels
+    );
+}
+</code></pre>
+
+<h2>
+<a name="notification.prompt_full_example">Full Example</a>
+</h2>
+
+<pre class="prettyprint"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Prompt Dialog Example&lt;/title&gt;
+
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+
+    // Wait for Cordova to load
+    //
+    document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        // Empty
+    }
+
+    // process the promptation dialog result
+    function onPrompt(results) {
+        alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+    }
+
+    // Show a custom prompt dialog
+    //
+    function showPrompt() {
+        navigator.<a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a>(
+            'Please enter your name',  // message
+            onPrompt,                  // callback to invoke
+            'Registration',            // title
+            ['Ok','Exit']              // buttonLabels
+        );
+    }
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;&lt;a href="#" onclick="showPrompt(); return false;"&gt;Show Prompt&lt;/a&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>
+<a name="notification.prompt_android_quirks">Android Quirks</a>
+</h2>
+
+<ul>
+<li>Android supports up to a maximum of 3 buttons.  Additional button labels over 3 are ignored.</li>
+<li>On Android 3.0 and later, the buttons will be displayed in reverse order for devices using the Holo theme.</li>
+</ul>
+<hr>
 <h1><a name="notification.beep">notification.beep</a></h1>
 
 <p>The device will play a beep sound.</p>
@@ -514,7 +670,7 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
@@ -636,7 +792,7 @@ navigator.<a href="cordova_notification_notification.md.html#notification.vibrat
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_notification_notification.md.html#Notification">Notification</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load

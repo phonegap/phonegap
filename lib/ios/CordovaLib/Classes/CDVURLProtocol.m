@@ -31,7 +31,7 @@
 @property (nonatomic) NSInteger statusCode;
 @end
 
-static CDVWhitelist * gWhitelist = nil;
+static CDVWhitelist* gWhitelist = nil;
 // Contains a set of NSNumbers of addresses of controllers. It doesn't store
 // the actual pointer to avoid retaining.
 static NSMutableSet* gRegisteredControllers = nil;
@@ -159,12 +159,12 @@ static CDVViewController *viewControllerForRequest(NSURLRequest* request)
         [self sendResponseWithResponseCode:200 data:nil mimeType:nil];
         return;
     } else if ([[url absoluteString] hasPrefix:kCDVAssetsLibraryPrefix]) {
-        ALAssetsLibraryAssetForURLResultBlock resultBlock = ^(ALAsset * asset) {
+        ALAssetsLibraryAssetForURLResultBlock resultBlock = ^(ALAsset* asset) {
             if (asset) {
                 // We have the asset!  Get the data and send it along.
                 ALAssetRepresentation* assetRepresentation = [asset defaultRepresentation];
-                NSString* MIMEType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass ((__bridge CFStringRef)[assetRepresentation UTI], kUTTagClassMIMEType);
-                Byte* buffer = (Byte*)malloc ([assetRepresentation size]);
+                NSString* MIMEType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)[assetRepresentation UTI], kUTTagClassMIMEType);
+                Byte* buffer = (Byte*)malloc([assetRepresentation size]);
                 NSUInteger bufferSize = [assetRepresentation getBytes:buffer fromOffset:0.0 length:[assetRepresentation size] error:nil];
                 NSData* data = [NSData dataWithBytesNoCopy:buffer length:bufferSize freeWhenDone:YES];
                 [self sendResponseWithResponseCode:200 data:data mimeType:MIMEType];
@@ -173,7 +173,7 @@ static CDVViewController *viewControllerForRequest(NSURLRequest* request)
                 [self sendResponseWithResponseCode:404 data:nil mimeType:nil];
             }
         };
-        ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError * error) {
+        ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError* error) {
             // Retrieving the asset failed for some reason.  Send an error.
             [self sendResponseWithResponseCode:401 data:nil mimeType:nil];
         };
@@ -202,7 +202,7 @@ static CDVViewController *viewControllerForRequest(NSURLRequest* request)
     if (mimeType == nil) {
         mimeType = @"text/plain";
     }
-    NSString* encodingName = [@"text/plain" isEqualToString:mimeType] ? @"UTF-8" : nil;
+    NSString* encodingName = [@"text/plain" isEqualToString : mimeType] ? @"UTF-8" : nil;
     CDVHTTPURLResponse* response =
         [[CDVHTTPURLResponse alloc] initWithURL:[[self request] URL]
                                        MIMEType:mimeType

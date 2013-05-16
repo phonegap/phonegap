@@ -52,7 +52,7 @@
     } else if ([elementName isEqualToString:@"plugin"]) {
         NSString* name = [attributeDict[@"name"] lowercaseString];
         pluginsDict[name] = attributeDict[@"value"];
-        if ([@"true" isEqualToString:attributeDict[@"onload"]]) {
+        if ([@"true" isEqualToString : attributeDict[@"onload"]]) {
             [self.startupPluginNames addObject:name];
         }
     } else if ([elementName isEqualToString:@"access"]) {

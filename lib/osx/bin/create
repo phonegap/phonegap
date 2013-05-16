@@ -1,0 +1,139 @@
+#! /bin/sh
+
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+#
+# create a Cordova/OS X project
+#
+# USAGE
+#   ./create <path_to_new_project> <package_name> <project_name>
+#
+# EXAMPLE
+#  ./create ~/Desktop/radness org.apache.cordova.radness Radness
+#
+set -e
+
+function usage() {
+  echo "Usage: $0 [--shared] <path_to_new_project> <package_name> <project_name>"
+  echo "	--shared (optional): Link directly against the shared copy of the CordovaFramework instead of a copy of it."
+  echo "	<path_to_new_project>: Path to your new Cordova OS X project"
+  echo "	<package_name>: Package name, following reverse-domain style convention"
+  echo "	<project_name>: Project name"
+  exit 1
+}
+
+USE_SHARED=0
+if [[ $1 == "--shared" ]]; then
+    USE_SHARED=1
+    shift;
+fi
+
+# check whether it is a proper create command (at least 3 arguments)
+if [ $# -lt 3 ]; then
+	usage
+fi
+
+# the two lines below are to get the current folder, and resolve symlinks
+SCRIPT="$0"
+# need this for relative symlinks
+while [ -h "$SCRIPT" ] ; do
+   SCRIPT=`readlink "$SCRIPT"`
+done
+
+BINDIR=$( cd "$( dirname "$SCRIPT" )" && pwd )
+CORDOVAFRAMEWORK_DIR="$BINDIR/../CordovaFramework"
+CDV_VER=$(cat $CORDOVAFRAMEWORK_DIR/VERSION)
+
+PROJECT_PATH=$1
+PACKAGE=$2
+PROJECT_NAME=$3
+
+# check whether the project path exists and is not empty
+if [ -d "$PROJECT_PATH" ]; then
+	if [ "$(ls -1A "$PROJECT_PATH")" ]; then
+		echo "\033[31mError: $PROJECT_PATH is not empty. Please specify an empty folder.\033[m"
+		exit 1
+	fi
+fi
+
+# copy the files in; then modify them
+cp -r "$BINDIR/templates/project/" "$PROJECT_PATH"
+
+# Copy in the JS.
+cp "$CORDOVAFRAMEWORK_DIR/cordova.osx.js" "$PROJECT_PATH/www/cordova-$CDV_VER.js"
+# Change the filename reference in the html from cordova.osx.js -> cordova-VERSION.js.
+/usr/bin/sed -i "" "s/src[ 	]*=[ 	]*[\\'\"]cordova.osx.js[\\'\"]/src=\"cordova-${CDV_VER}.js\"/g" "$PROJECT_PATH/www/index.html"
+
+# I've tried to be thorough in my documentation of the manual actions below...
+# on first brush it would seem that the right solution would be to brute force
+# recurse the directory tree renaming instances of __ID__ and __TESTING__ ...however this is a little blunt
+# and while so the below is too being very manual it was/is easier to test, fucking manually, and sort out the automation
+
+# rename the folders/files:
+#
+# - ./__TESTING__.xcodeproj/
+# - ./__TESTING__/
+# - ./__TESTING__/__TESTING__-info.plist
+# - ./__TESTING__/__TESTING__-Prefix.plist
+# - ./__TESTING__/Resources/__TESTING__.icns
+mv "$PROJECT_PATH/__TESTING__.xcodeproj" "$PROJECT_PATH/$PROJECT_NAME.xcodeproj"
+mv "$PROJECT_PATH/__TESTING__" "$PROJECT_PATH/$PROJECT_NAME"
+mv "$PROJECT_PATH/$PROJECT_NAME/__TESTING__-Info.plist" "$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME-Info.plist"
+mv "$PROJECT_PATH/$PROJECT_NAME/__TESTING__-Prefix.pch" "$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME-Prefix.pch"
+mv "$PROJECT_PATH/$PROJECT_NAME/Resources/__TESTING__.icns" "$PROJECT_PATH/$PROJECT_NAME/Resources/$PROJECT_NAME.icns"
+
+# lets store a reference to the root
+R=$PROJECT_PATH/$PROJECT_NAME
+
+# replace __TESTING__ and --ID-- with ACTIVITY and ID strings, respectively, in:
+#
+# - ./__TESTING__.xcodeproj/project.pbxproj
+# - ./__TESTING__/Classes/AppDelegate.h
+# - ./__TESTING__/Classes/AppDelegate.m
+# - ./__TESTING__/Resources/main.m
+# - ./__TESTING__/Resources/__TESTING__-info.plist
+# - ./__TESTING__/Resources/__TESTING__-Prefix.plist
+# - ./__TESTING__/Resources/en.lproj/MainViewController.xib
+
+"$BINDIR/replaces" "$R.xcodeproj/project.pbxproj" __TESTING__ "$PROJECT_NAME"
+"$BINDIR/replaces" "$R/Classes/AppDelegate.h"     __TESTING__ "$PROJECT_NAME"
+"$BINDIR/replaces" "$R/Classes/AppDelegate.m"     __TESTING__ "$PROJECT_NAME"
+"$BINDIR/replaces" "$R/Classes/MainViewController.h" __TESTING__ "$PROJECT_NAME"
+"$BINDIR/replaces" "$R/Classes/MainViewController.m" __TESTING__ "$PROJECT_NAME"
+"$BINDIR/replaces" "$R/main.m"                    __TESTING__ "$PROJECT_NAME"
+"$BINDIR/replaces" "$R/$PROJECT_NAME-Info.plist"  __TESTING__ "$PROJECT_NAME"
+"$BINDIR/replaces" "$R/$PROJECT_NAME-Prefix.pch"  __TESTING__ "$PROJECT_NAME"
+"$BINDIR/replaces" "$R/$PROJECT_NAME-Info.plist" --ID-- $PACKAGE
+"$BINDIR/replaces" "$R/Resources/en.lproj/MainViewController.xib"  __TESTING__ "$PROJECT_NAME"
+
+if [[ $USE_SHARED = 1 ]]; then
+    # Make the sub-project reference to Cordova have the correct path.
+    "$BINDIR/update_cordova_subproject" "$R.xcodeproj/project.pbxproj"
+else
+    # Copy in the CordovaFramework directory.
+    mkdir -p "$PROJECT_PATH/CordovaFramework/CordovaFramework.xcodeproj"
+    mkdir -p "$PROJECT_PATH/CordovaFramework/CordovaFramework/"
+    cp -r "$BINDIR/../CordovaFramework/CordovaFramework/" "$PROJECT_PATH/CordovaFramework/CordovaFramework/"
+    cp "$BINDIR/../CordovaFramework/VERSION" "$PROJECT_PATH/CordovaFramework"
+    cp "$BINDIR/../CordovaFramework/CordovaFramework.xcodeproj/project.pbxproj" "$PROJECT_PATH/CordovaFramework/CordovaFramework.xcodeproj"
+    # Make the sub-project reference to Cordova have the correct path.
+    "$BINDIR/update_cordova_subproject" "$R.xcodeproj/project.pbxproj" "$PROJECT_PATH/CordovaFramework/CordovaFramework.xcodeproj/project.pbxproj" > /dev/null
+fi
+

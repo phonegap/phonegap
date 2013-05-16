@@ -77,26 +77,26 @@
     CDVAddressBookHelper* abHelper = [[CDVAddressBookHelper alloc] init];
     CDVContacts* __weak weakSelf = self;  // play it safe to avoid retain cycles
 
-    [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError * errCode) {
-            if (addrBook == NULL) {
-                // permission was denied or other error just return (no error callback)
-                return;
-            }
-            CDVNewContactsController* npController = [[CDVNewContactsController alloc] init];
-            npController.addressBook = addrBook; // a CF retaining assign
-            CFRelease (addrBook);
+    [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError* errCode) {
+        if (addrBook == NULL) {
+            // permission was denied or other error just return (no error callback)
+            return;
+        }
+        CDVNewContactsController* npController = [[CDVNewContactsController alloc] init];
+        npController.addressBook = addrBook;     // a CF retaining assign
+        CFRelease(addrBook);
 
-            npController.newPersonViewDelegate = self;
-            npController.callbackId = callbackId;
+        npController.newPersonViewDelegate = self;
+        npController.callbackId = callbackId;
 
-            UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:npController];
+        UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:npController];
 
-            if ([weakSelf.viewController respondsToSelector:@selector(presentViewController:::)]) {
-                [weakSelf.viewController presentViewController:navController animated:YES completion:nil];
-            } else {
-                [weakSelf.viewController presentModalViewController:navController animated:YES];
-            }
-        }];
+        if ([weakSelf.viewController respondsToSelector:@selector(presentViewController:::)]) {
+            [weakSelf.viewController presentViewController:navController animated:YES completion:nil];
+        } else {
+            [weakSelf.viewController presentModalViewController:navController animated:YES];
+        }
+    }];
 }
 
 - (void)newPersonViewController:(ABNewPersonViewController*)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person
@@ -130,48 +130,48 @@
     CDVAddressBookHelper* abHelper = [[CDVAddressBookHelper alloc] init];
     CDVContacts* __weak weakSelf = self;  // play it safe to avoid retain cycles
 
-    [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError * errCode) {
-            if (addrBook == NULL) {
-                // permission was denied or other error - return error
-                CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageToErrorObject:errCode ? errCode.errorCode:UNKNOWN_ERROR];
-                [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
-                return;
-            }
-            ABRecordRef rec = ABAddressBookGetPersonWithRecordID (addrBook, recordID);
+    [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError* errCode) {
+        if (addrBook == NULL) {
+            // permission was denied or other error - return error
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageToErrorObject:errCode ? errCode.errorCode:UNKNOWN_ERROR];
+            [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+            return;
+        }
+        ABRecordRef rec = ABAddressBookGetPersonWithRecordID(addrBook, recordID);
 
-            if (rec) {
-                CDVDisplayContactViewController* personController = [[CDVDisplayContactViewController alloc] init];
-                personController.displayedPerson = rec;
-                personController.personViewDelegate = self;
-                personController.allowsEditing = NO;
+        if (rec) {
+            CDVDisplayContactViewController* personController = [[CDVDisplayContactViewController alloc] init];
+            personController.displayedPerson = rec;
+            personController.personViewDelegate = self;
+            personController.allowsEditing = NO;
 
-                // create this so DisplayContactViewController will have a "back" button.
-                UIViewController* parentController = [[UIViewController alloc] init];
-                UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:parentController];
+            // create this so DisplayContactViewController will have a "back" button.
+            UIViewController* parentController = [[UIViewController alloc] init];
+            UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:parentController];
 
-                [navController pushViewController:personController animated:YES];
+            [navController pushViewController:personController animated:YES];
 
-                if ([self.viewController respondsToSelector:@selector(presentViewController:::)]) {
-                    [self.viewController presentViewController:navController animated:YES completion:nil];
-                } else {
-                    [self.viewController presentModalViewController:navController animated:YES];
-                }
-
-                if (bEdit) {
-                    // create the editing controller and push it onto the stack
-                    ABPersonViewController* editPersonController = [[ABPersonViewController alloc] init];
-                    editPersonController.displayedPerson = rec;
-                    editPersonController.personViewDelegate = self;
-                    editPersonController.allowsEditing = YES;
-                    [navController pushViewController:editPersonController animated:YES];
-                }
+            if ([self.viewController respondsToSelector:@selector(presentViewController:::)]) {
+                [self.viewController presentViewController:navController animated:YES completion:nil];
             } else {
-                // no record, return error
-                CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:UNKNOWN_ERROR];
-                [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+                [self.viewController presentModalViewController:navController animated:YES];
             }
-            CFRelease (addrBook);
-        }];
+
+            if (bEdit) {
+                // create the editing controller and push it onto the stack
+                ABPersonViewController* editPersonController = [[ABPersonViewController alloc] init];
+                editPersonController.displayedPerson = rec;
+                editPersonController.personViewDelegate = self;
+                editPersonController.allowsEditing = YES;
+                [navController pushViewController:editPersonController animated:YES];
+            }
+        } else {
+            // no record, return error
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:UNKNOWN_ERROR];
+            [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+        }
+        CFRelease(addrBook);
+    }];
 }
 
 - (BOOL)personViewController:(ABPersonViewController*)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person
@@ -284,95 +284,95 @@
     NSDictionary* findOptions = [command.arguments objectAtIndex:1 withDefault:[NSNull null]];
 
     [self.commandDelegate runInBackground:^{
-            // from Apple:  Important You must ensure that an instance of ABAddressBookRef is used by only one thread.
-            // which is why address book is created within the dispatch queue.
-            // more details here: http: //blog.byadrian.net/2012/05/05/ios-addressbook-framework-and-gcd/
-            CDVAddressBookHelper* abHelper = [[CDVAddressBookHelper alloc] init];
-            CDVContacts* __weak weakSelf = self; // play it safe to avoid retain cycles
-            // it gets uglier, block within block.....
-            [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError * errCode) {
-                    if (addrBook == NULL) {
-                        // permission was denied or other error - return error
-                        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageToErrorObject:errCode ? errCode.errorCode:UNKNOWN_ERROR];
-                        [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
-                        return;
-                    }
+        // from Apple:  Important You must ensure that an instance of ABAddressBookRef is used by only one thread.
+        // which is why address book is created within the dispatch queue.
+        // more details here: http: //blog.byadrian.net/2012/05/05/ios-addressbook-framework-and-gcd/
+        CDVAddressBookHelper* abHelper = [[CDVAddressBookHelper alloc] init];
+        CDVContacts* __weak weakSelf = self;     // play it safe to avoid retain cycles
+        // it gets uglier, block within block.....
+        [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError* errCode) {
+            if (addrBook == NULL) {
+                // permission was denied or other error - return error
+                CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageToErrorObject:errCode ? errCode.errorCode:UNKNOWN_ERROR];
+                [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+                return;
+            }
 
-                    NSArray* foundRecords = nil;
-                    // get the findOptions values
-                    BOOL multiple = NO; // default is false
-                    NSString* filter = nil;
-                    if (![findOptions isKindOfClass:[NSNull class]]) {
-                        id value = nil;
-                        filter = (NSString*)[findOptions objectForKey:@"filter"];
-                        value = [findOptions objectForKey:@"multiple"];
-                        if ([value isKindOfClass:[NSNumber class]]) {
-                            // multiple is a boolean that will come through as an NSNumber
-                            multiple = [(NSNumber*) value boolValue];
-                            // NSLog(@"multiple is: %d", multiple);
+            NSArray* foundRecords = nil;
+            // get the findOptions values
+            BOOL multiple = NO;         // default is false
+            NSString* filter = nil;
+            if (![findOptions isKindOfClass:[NSNull class]]) {
+                id value = nil;
+                filter = (NSString*)[findOptions objectForKey:@"filter"];
+                value = [findOptions objectForKey:@"multiple"];
+                if ([value isKindOfClass:[NSNumber class]]) {
+                    // multiple is a boolean that will come through as an NSNumber
+                    multiple = [(NSNumber*)value boolValue];
+                    // NSLog(@"multiple is: %d", multiple);
+                }
+            }
+
+            NSDictionary* returnFields = [[CDVContact class] calcReturnFields:fields];
+
+            NSMutableArray* matches = nil;
+            if (!filter || [filter isEqualToString:@""]) {
+                // get all records
+                foundRecords = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople(addrBook);
+                if (foundRecords && ([foundRecords count] > 0)) {
+                    // create Contacts and put into matches array
+                    // doesn't make sense to ask for all records when multiple == NO but better check
+                    int xferCount = multiple == YES ? [foundRecords count] : 1;
+                    matches = [NSMutableArray arrayWithCapacity:xferCount];
+
+                    for (int k = 0; k < xferCount; k++) {
+                        CDVContact* xferContact = [[CDVContact alloc] initFromABRecord:(__bridge ABRecordRef)[foundRecords objectAtIndex:k]];
+                        [matches addObject:xferContact];
+                        xferContact = nil;
+                    }
+                }
+            } else {
+                foundRecords = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople(addrBook);
+                matches = [NSMutableArray arrayWithCapacity:1];
+                BOOL bFound = NO;
+                int testCount = [foundRecords count];
+
+                for (int j = 0; j < testCount; j++) {
+                    CDVContact* testContact = [[CDVContact alloc] initFromABRecord:(__bridge ABRecordRef)[foundRecords objectAtIndex:j]];
+                    if (testContact) {
+                        bFound = [testContact foundValue:filter inFields:returnFields];
+                        if (bFound) {
+                            [matches addObject:testContact];
                         }
+                        testContact = nil;
                     }
+                }
+            }
+            NSMutableArray* returnContacts = [NSMutableArray arrayWithCapacity:1];
 
-                    NSDictionary* returnFields = [[CDVContact class] calcReturnFields:fields];
+            if ((matches != nil) && ([matches count] > 0)) {
+                // convert to JS Contacts format and return in callback
+                // - returnFields  determines what properties to return
+                @autoreleasepool {
+                    int count = multiple == YES ? [matches count] : 1;
 
-                    NSMutableArray* matches = nil;
-                    if (!filter || [filter isEqualToString:@""]) {
-                        // get all records
-                        foundRecords = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople (addrBook);
-                        if (foundRecords && [foundRecords count] > 0) {
-                            // create Contacts and put into matches array
-                            // doesn't make sense to ask for all records when multiple == NO but better check
-                            int xferCount = multiple == YES ? [foundRecords count]:1;
-                            matches = [NSMutableArray arrayWithCapacity:xferCount];
-
-                            for (int k = 0; k < xferCount; k++) {
-                                CDVContact* xferContact = [[CDVContact alloc] initFromABRecord:(__bridge ABRecordRef)[foundRecords objectAtIndex:k]];
-                                [matches addObject:xferContact];
-                                xferContact = nil;
-                            }
-                        }
-                    } else {
-                        foundRecords = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople (addrBook);
-                        matches = [NSMutableArray arrayWithCapacity:1];
-                        BOOL bFound = NO;
-                        int testCount = [foundRecords count];
-
-                        for (int j = 0; j < testCount; j++) {
-                            CDVContact* testContact = [[CDVContact alloc] initFromABRecord:(__bridge ABRecordRef)[foundRecords objectAtIndex:j]];
-                            if (testContact) {
-                                bFound = [testContact foundValue:filter inFields:returnFields];
-                                if (bFound) {
-                                    [matches addObject:testContact];
-                                }
-                                testContact = nil;
-                            }
-                        }
+                    for (int i = 0; i < count; i++) {
+                        CDVContact* newContact = [matches objectAtIndex:i];
+                        NSDictionary* aContact = [newContact toDictionary:returnFields];
+                        [returnContacts addObject:aContact];
                     }
-                    NSMutableArray* returnContacts = [NSMutableArray arrayWithCapacity:1];
+                }
+            }
+            // return found contacts (array is empty if no contacts found)
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:returnContacts];
+            [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+            // NSLog(@"findCallback string: %@", jsString);
 
-                    if (matches != nil && [matches count] > 0) {
-                        // convert to JS Contacts format and return in callback
-                        // - returnFields  determines what properties to return
-                        @autoreleasepool {
-                            int count = multiple == YES ? [matches count]:1;
-
-                            for (int i = 0; i < count; i++) {
-                                CDVContact* newContact = [matches objectAtIndex:i];
-                                NSDictionary* aContact = [newContact toDictionary:returnFields];
-                                [returnContacts addObject:aContact];
-                            }
-                        }
-                    }
-                    // return found contacts (array is empty if no contacts found)
-                    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:returnContacts];
-                    [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
-                    // NSLog(@"findCallback string: %@", jsString);
-
-                    if (addrBook) {
-                        CFRelease (addrBook);
-                    }
-                }];
-        }]; // end of workQueue block
+            if (addrBook) {
+                CFRelease(addrBook);
+            }
+        }];
+    }];     // end of workQueue block
 
     return;
 }
@@ -383,70 +383,70 @@
     NSDictionary* contactDict = [command.arguments objectAtIndex:0];
 
     [self.commandDelegate runInBackground:^{
-            CDVAddressBookHelper* abHelper = [[CDVAddressBookHelper alloc] init];
-            CDVContacts* __weak weakSelf = self; // play it safe to avoid retain cycles
+        CDVAddressBookHelper* abHelper = [[CDVAddressBookHelper alloc] init];
+        CDVContacts* __weak weakSelf = self;     // play it safe to avoid retain cycles
 
-            [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError * errorCode) {
-                    CDVPluginResult* result = nil;
-                    if (addrBook == NULL) {
-                        // permission was denied or other error - return error
-                        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:errorCode ? errorCode.errorCode:UNKNOWN_ERROR];
-                        [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
-                        return;
-                    }
+        [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError* errorCode) {
+            CDVPluginResult* result = nil;
+            if (addrBook == NULL) {
+                // permission was denied or other error - return error
+                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:errorCode ? errorCode.errorCode:UNKNOWN_ERROR];
+                [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+                return;
+            }
 
-                    bool bIsError = FALSE, bSuccess = FALSE;
-                    BOOL bUpdate = NO;
-                    CDVContactError errCode = UNKNOWN_ERROR;
-                    CFErrorRef error;
-                    NSNumber* cId = [contactDict valueForKey:kW3ContactId];
-                    CDVContact* aContact = nil;
-                    ABRecordRef rec = nil;
-                    if (cId && ![cId isKindOfClass:[NSNull class]]) {
-                        rec = ABAddressBookGetPersonWithRecordID (addrBook, [cId intValue]);
-                        if (rec) {
-                            aContact = [[CDVContact alloc] initFromABRecord:rec];
-                            bUpdate = YES;
-                        }
-                    }
-                    if (!aContact) {
-                        aContact = [[CDVContact alloc] init];
-                    }
+            bool bIsError = FALSE, bSuccess = FALSE;
+            BOOL bUpdate = NO;
+            CDVContactError errCode = UNKNOWN_ERROR;
+            CFErrorRef error;
+            NSNumber* cId = [contactDict valueForKey:kW3ContactId];
+            CDVContact* aContact = nil;
+            ABRecordRef rec = nil;
+            if (cId && ![cId isKindOfClass:[NSNull class]]) {
+                rec = ABAddressBookGetPersonWithRecordID(addrBook, [cId intValue]);
+                if (rec) {
+                    aContact = [[CDVContact alloc] initFromABRecord:rec];
+                    bUpdate = YES;
+                }
+            }
+            if (!aContact) {
+                aContact = [[CDVContact alloc] init];
+            }
 
-                    bSuccess = [aContact setFromContactDict:contactDict asUpdate:bUpdate];
-                    if (bSuccess) {
-                        if (!bUpdate) {
-                            bSuccess = ABAddressBookAddRecord (addrBook, [aContact record], &error);
-                        }
-                        if (bSuccess) {
-                            bSuccess = ABAddressBookSave (addrBook, &error);
-                        }
-                        if (!bSuccess) { // need to provide error codes
-                            bIsError = TRUE;
-                            errCode = IO_ERROR;
-                        } else {
-                            // give original dictionary back?  If generate dictionary from saved contact, have no returnFields specified
-                            // so would give back all fields (which W3C spec. indicates is not desired)
-                            // for now (while testing) give back saved, full contact
-                            NSDictionary* newContact = [aContact toDictionary:[CDVContact defaultFields]];
-                            // NSString* contactStr = [newContact JSONRepresentation];
-                            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:newContact];
-                        }
-                    } else {
-                        bIsError = TRUE;
-                        errCode = IO_ERROR;
-                    }
-                    CFRelease (addrBook);
+            bSuccess = [aContact setFromContactDict:contactDict asUpdate:bUpdate];
+            if (bSuccess) {
+                if (!bUpdate) {
+                    bSuccess = ABAddressBookAddRecord(addrBook, [aContact record], &error);
+                }
+                if (bSuccess) {
+                    bSuccess = ABAddressBookSave(addrBook, &error);
+                }
+                if (!bSuccess) {         // need to provide error codes
+                    bIsError = TRUE;
+                    errCode = IO_ERROR;
+                } else {
+                    // give original dictionary back?  If generate dictionary from saved contact, have no returnFields specified
+                    // so would give back all fields (which W3C spec. indicates is not desired)
+                    // for now (while testing) give back saved, full contact
+                    NSDictionary* newContact = [aContact toDictionary:[CDVContact defaultFields]];
+                    // NSString* contactStr = [newContact JSONRepresentation];
+                    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:newContact];
+                }
+            } else {
+                bIsError = TRUE;
+                errCode = IO_ERROR;
+            }
+            CFRelease(addrBook);
 
-                    if (bIsError) {
-                        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:errCode];
-                    }
+            if (bIsError) {
+                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:errCode];
+            }
 
-                    if (result) {
-                        [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
-                    }
-                }];
-        }]; // end of  queue
+            if (result) {
+                [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+            }
+        }];
+    }];     // end of  queue
 }
 
 - (void)remove:(CDVInvokedUrlCommand*)command
@@ -457,60 +457,60 @@
     CDVAddressBookHelper* abHelper = [[CDVAddressBookHelper alloc] init];
     CDVContacts* __weak weakSelf = self;  // play it safe to avoid retain cycles
 
-    [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError * errorCode) {
-            CDVPluginResult* result = nil;
-            if (addrBook == NULL) {
-                // permission was denied or other error - return error
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:errorCode ? errorCode.errorCode:UNKNOWN_ERROR];
-                [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
-                return;
-            }
+    [abHelper createAddressBook: ^(ABAddressBookRef addrBook, CDVAddressBookAccessError* errorCode) {
+        CDVPluginResult* result = nil;
+        if (addrBook == NULL) {
+            // permission was denied or other error - return error
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:errorCode ? errorCode.errorCode:UNKNOWN_ERROR];
+            [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+            return;
+        }
 
-            bool bIsError = FALSE, bSuccess = FALSE;
-            CDVContactError errCode = UNKNOWN_ERROR;
-            CFErrorRef error;
-            ABRecordRef rec = nil;
-            if (cId && ![cId isKindOfClass:[NSNull class]] && ([cId intValue] != kABRecordInvalidID)) {
-                rec = ABAddressBookGetPersonWithRecordID (addrBook, [cId intValue]);
-                if (rec) {
-                    bSuccess = ABAddressBookRemoveRecord (addrBook, rec, &error);
+        bool bIsError = FALSE, bSuccess = FALSE;
+        CDVContactError errCode = UNKNOWN_ERROR;
+        CFErrorRef error;
+        ABRecordRef rec = nil;
+        if (cId && ![cId isKindOfClass:[NSNull class]] && ([cId intValue] != kABRecordInvalidID)) {
+            rec = ABAddressBookGetPersonWithRecordID(addrBook, [cId intValue]);
+            if (rec) {
+                bSuccess = ABAddressBookRemoveRecord(addrBook, rec, &error);
+                if (!bSuccess) {
+                    bIsError = TRUE;
+                    errCode = IO_ERROR;
+                } else {
+                    bSuccess = ABAddressBookSave(addrBook, &error);
                     if (!bSuccess) {
                         bIsError = TRUE;
                         errCode = IO_ERROR;
                     } else {
-                        bSuccess = ABAddressBookSave (addrBook, &error);
-                        if (!bSuccess) {
-                            bIsError = TRUE;
-                            errCode = IO_ERROR;
-                        } else {
-                            // set id to null
-                            // [contactDict setObject:[NSNull null] forKey:kW3ContactId];
-                            // result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: contactDict];
-                            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-                            // NSString* contactStr = [contactDict JSONRepresentation];
-                        }
+                        // set id to null
+                        // [contactDict setObject:[NSNull null] forKey:kW3ContactId];
+                        // result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: contactDict];
+                        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                        // NSString* contactStr = [contactDict JSONRepresentation];
                     }
-                } else {
-                    // no record found return error
-                    bIsError = TRUE;
-                    errCode = UNKNOWN_ERROR;
                 }
             } else {
-                // invalid contact id provided
+                // no record found return error
                 bIsError = TRUE;
-                errCode = INVALID_ARGUMENT_ERROR;
+                errCode = UNKNOWN_ERROR;
             }
+        } else {
+            // invalid contact id provided
+            bIsError = TRUE;
+            errCode = INVALID_ARGUMENT_ERROR;
+        }
 
-            if (addrBook) {
-                CFRelease (addrBook);
-            }
-            if (bIsError) {
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:errCode];
-            }
-            if (result) {
-                [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
-            }
-        }];
+        if (addrBook) {
+            CFRelease(addrBook);
+        }
+        if (bIsError) {
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:errCode];
+        }
+        if (result) {
+            [weakSelf.commandDelegate sendPluginResult:result callbackId:callbackId];
+        }
+    }];
     return;
 }
 
@@ -569,24 +569,24 @@
             addressBook = ABAddressBookCreateWithOptions(NULL, &error);
             // NSLog(@"addressBook access: %lu", status);
             ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-                // callback can occur in background, address book must be accessed on thread it was created on
-                dispatch_sync (dispatch_get_main_queue (), ^{
+                    // callback can occur in background, address book must be accessed on thread it was created on
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         if (error) {
-                            workerBlock (NULL, [[CDVAddressBookAccessError alloc] initWithCode:UNKNOWN_ERROR]);
+                            workerBlock(NULL, [[CDVAddressBookAccessError alloc] initWithCode:UNKNOWN_ERROR]);
                         } else if (!granted) {
-                            workerBlock (NULL, [[CDVAddressBookAccessError alloc] initWithCode:PERMISSION_DENIED_ERROR]);
+                            workerBlock(NULL, [[CDVAddressBookAccessError alloc] initWithCode:PERMISSION_DENIED_ERROR]);
                         } else {
                             // access granted
-                            workerBlock (addressBook, [[CDVAddressBookAccessError alloc] initWithCode:UNKNOWN_ERROR]);
+                            workerBlock(addressBook, [[CDVAddressBookAccessError alloc] initWithCode:UNKNOWN_ERROR]);
                         }
                     });
-            });
+                });
         } else
 #endif
     {
         // iOS 4 or 5 no checks needed
-        addressBook = ABAddressBookCreate ();
-        workerBlock (addressBook, NULL);
+        addressBook = ABAddressBookCreate();
+        workerBlock(addressBook, NULL);
     }
 }
 

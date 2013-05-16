@@ -64,7 +64,7 @@ namespace WPCordovaClassLib.Cordova
 
             // sanity check for illegal names
             // was failing with ::
-            // CordovaCommandResult :: 1, Device1, {"status":1,"message":"{\"name\":\"XD.....
+            // 1, Device1, {"status":1,"message":"{\"name\":\"XD.....
             if (commandCallParameters.Service.IndexOfAny(new char[] { '@', ':', ',', '!', ' ' }) > -1)
             {
                 return null;

@@ -34,8 +34,8 @@
 + (void)__fixupDatabaseLocationsWithBackupType:(NSString*)backupType;
 // Visible for testing.
 + (BOOL)__verifyAndFixDatabaseLocationsWithAppPlistDict:(NSMutableDictionary*)appPlistDict
-    bundlePath                                          :(NSString*)bundlePath
-   fileManager                                         :(NSFileManager*)fileManager;
+                                             bundlePath:(NSString*)bundlePath
+                                            fileManager:(NSFileManager*)fileManager;
 @end
 
 @interface CDVBackupInfo : NSObject

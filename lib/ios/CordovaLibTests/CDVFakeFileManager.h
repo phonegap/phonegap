@@ -19,7 +19,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef BOOL (^CDVFileExistsBlock)(NSString*);
+typedef BOOL (^ CDVFileExistsBlock)(NSString*);
 
 // Used in place of an NSFileManager for unit tests. It implements only those functions
 // which are required by the tests that use it.

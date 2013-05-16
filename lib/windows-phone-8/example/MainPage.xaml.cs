@@ -41,12 +41,12 @@ namespace CordovaExample
         public MainPage()
         {
             InitializeComponent();
-            this.PGView.Loaded += GapBrowser_Loaded;
+            this.CordovaView.Loaded += CordovaView_Loaded;
         }
 
-        private void GapBrowser_Loaded(object sender, RoutedEventArgs e)
+        private void CordovaView_Loaded(object sender, RoutedEventArgs e)
         {
-            this.PGView.Loaded -= GapBrowser_Loaded;
+            this.CordovaView.Loaded -= CordovaView_Loaded;
             Storyboard _storyBoard = new Storyboard();
             DoubleAnimation animation = new DoubleAnimation()
             {

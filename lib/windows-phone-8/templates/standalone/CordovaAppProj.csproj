@@ -125,26 +125,7 @@
     </Compile>
     <Compile Include="cordovalib\BrowserMouseHelper.cs" />
     <Compile Include="cordovalib\CommandFactory.cs" />
-    <Compile Include="cordovalib\Commands\Accelerometer.cs" />
-    <Compile Include="cordovalib\Commands\AudioFormatsHelper.cs" />
-    <Compile Include="cordovalib\Commands\AudioPlayer.cs" />
     <Compile Include="cordovalib\Commands\BaseCommand.cs" />
-    <Compile Include="cordovalib\Commands\Battery.cs" />
-    <Compile Include="cordovalib\Commands\Camera.cs" />
-    <Compile Include="cordovalib\Commands\Capture.cs" />
-    <Compile Include="cordovalib\Commands\Compass.cs" />
-    <Compile Include="cordovalib\Commands\Contacts.cs" />
-    <Compile Include="cordovalib\Commands\DebugConsole.cs" />
-    <Compile Include="cordovalib\Commands\Device.cs" />
-    <Compile Include="cordovalib\Commands\File.cs" />
-    <Compile Include="cordovalib\Commands\FileTransfer.cs" />
-    <Compile Include="cordovalib\Commands\GeoLocation.cs" />
-    <Compile Include="cordovalib\Commands\ImageExifHelper.cs" />
-    <Compile Include="cordovalib\Commands\InAppBrowser.cs" />
-    <Compile Include="cordovalib\Commands\Media.cs" />
-    <Compile Include="cordovalib\Commands\MimeTypeMapper.cs" />
-    <Compile Include="cordovalib\Commands\NetworkStatus.cs" />
-    <Compile Include="cordovalib\Commands\Notification.cs" />
     <Compile Include="cordovalib\ConfigHandler.cs" />
     <Compile Include="cordovalib\CordovaCommandCall.cs" />
     <Compile Include="cordovalib\CordovaView.xaml.cs">
@@ -156,20 +137,7 @@
     <Compile Include="cordovalib\OrientationHelper.cs" />
     <Compile Include="cordovalib\PluginResult.cs" />
     <Compile Include="cordovalib\ScriptCallback.cs" />
-    <Compile Include="cordovalib\UI\AudioCaptureTask.cs" />
-    <Compile Include="cordovalib\UI\AudioRecorder.xaml.cs">
-      <DependentUpon>AudioRecorder.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="cordovalib\UI\ImageCapture.xaml.cs">
-      <DependentUpon>ImageCapture.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="cordovalib\UI\NotificationBox.xaml.cs">
-      <DependentUpon>NotificationBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="cordovalib\UI\VideoCaptureTask.cs" />
-    <Compile Include="cordovalib\UI\VideoRecorder.xaml.cs">
-      <DependentUpon>VideoRecorder.xaml</DependentUpon>
-    </Compile>
+   
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -184,19 +152,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="cordovalib\UI\AudioRecorder.xaml">
+
+    <Page Include="Plugins\UI\AudioRecorder.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="cordovalib\UI\ImageCapture.xaml">
+    <Page Include="Plugins\UI\ImageCapture.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="cordovalib\UI\NotificationBox.xaml">
+    <Page Include="Plugins\UI\NotificationBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="cordovalib\UI\VideoRecorder.xaml">
+    <Page Include="Plugins\UI\VideoRecorder.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -205,26 +174,15 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+
   <ItemGroup>
+    <Content Include="www\**" />
     <Content Include="config.xml" />
+    <Content Include="Images\**" />
+
     <Content Include="resources\notification-beep.wav" />
-    <Content Include="www\cordova-2.5.0.js" />
-    <Content Include="www\img\logo.png" />
-    <Content Include="www\js\index.js" />
     <None Include="VERSION" />
-    <Resource Include="cordovalib\Images\appbar.back.rest.png" />
-    <Resource Include="cordovalib\Images\appbar.close.rest.png" />
-    <Resource Include="cordovalib\Images\appbar.feature.video.rest.png" />
-    <Resource Include="cordovalib\Images\appbar.next.rest.png" />
-    <Resource Include="cordovalib\Images\appbar.save.rest.png" />
-    <Resource Include="cordovalib\Images\appbar.stop.rest.png" />
-    <Content Include="cordovalib\resources\notification-beep.wav" />
-    <Content Include="www\css\index.css" />
-    <Content Include="www\index.html">
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="cordova\debug.bat" />
-    <None Include="cordova\emulate.bat" />
+
     <None Include="Properties\AppManifest.xml">
       <SubType>Designer</SubType>
     </None>
@@ -248,7 +206,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Plugins\" />
+      <Compile Include="Plugins\*" />
+      <Compile Include="Plugins\UI\*.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

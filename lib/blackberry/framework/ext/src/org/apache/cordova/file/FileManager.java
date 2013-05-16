@@ -96,7 +96,6 @@ public class FileManager extends Plugin {
      * @return A PluginResult object with a status and message.
      */
     public PluginResult execute(String action, JSONArray args, String callbackId) {
-
         // perform specified action
         if (ACTION_READ_AS_TEXT.equals(action)) {
             // get file path
@@ -547,11 +546,11 @@ public class FileManager extends Plugin {
     protected static PluginResult resolveFileSystemURI(String uri) {
         PluginResult result = null;
         Entry entry = null;
-
         try {
             entry = getEntryFromURI(uri);
         }
         catch (IllegalArgumentException e) {
+            Logger.log(e.toString());
             return new PluginResult(
                     PluginResult.Status.JSON_EXCEPTION,
                     ENCODING_ERR);
@@ -565,6 +564,7 @@ public class FileManager extends Plugin {
             result = new PluginResult(PluginResult.Status.OK,
                     entry.toJSONObject());
         }
+
         return result;
     }
 
@@ -887,6 +887,13 @@ public class FileManager extends Plugin {
         String path = (filePath == null) ? null : filePath.trim();
         if (path == null || path.length() < 1) {
             throw new IllegalArgumentException("Invalid URI.");
+        }
+
+        //check for query string
+        int queryIndex = filePath.indexOf('?');
+        if (queryIndex > 0) {
+            path = filePath.substring(0, queryIndex); // discard the query string
+            Logger.log(FileManager.class.getName() + ": found query string when resolving URI = " + filePath.substring(queryIndex));
         }
 
         // create a file system entry

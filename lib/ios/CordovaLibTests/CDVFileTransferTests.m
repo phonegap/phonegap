@@ -140,15 +140,15 @@ static NSData *readStream(NSInputStream* stream)
 - (void)testEscapePathComponentForUrlString
 {
     STAssertTrue([@"" isEqualToString:
-            [_fileTransfer escapePathComponentForUrlString:@""]], nil);
+        [_fileTransfer escapePathComponentForUrlString:@""]], nil);
     STAssertTrue([@"foo" isEqualToString:
-            [_fileTransfer escapePathComponentForUrlString:@"foo"]], nil);
+        [_fileTransfer escapePathComponentForUrlString:@"foo"]], nil);
     STAssertTrue([@"http://a.org/spa%20ce%25" isEqualToString:
-            [_fileTransfer escapePathComponentForUrlString:@"http://a.org/spa ce%"]], nil);
+        [_fileTransfer escapePathComponentForUrlString:@"http://a.org/spa ce%"]], nil);
     STAssertTrue([@"http://a.org/spa%20ce%25/" isEqualToString:
-            [_fileTransfer escapePathComponentForUrlString:@"http://a.org/spa ce%/"]], nil);
+        [_fileTransfer escapePathComponentForUrlString:@"http://a.org/spa ce%/"]], nil);
     STAssertTrue([@"http://a.org/%25/%25/" isEqualToString:
-            [_fileTransfer escapePathComponentForUrlString:@"http://a.org/%/%/"]], nil);
+        [_fileTransfer escapePathComponentForUrlString:@"http://a.org/%/%/"]], nil);
 }
 
 - (void)testUpload_invalidServerUrl
@@ -208,7 +208,7 @@ static NSData *readStream(NSInputStream* stream)
 {
     [self setChunkedModeArg:NO];
     [self setHeaders:[NSDictionary dictionaryWithObjectsAndKeys:@"val1", @"key1",
-            [NSArray arrayWithObjects:@"val2a", @"val2b", nil], @"key2", [NSNull null], @"X-Requested-With", nil]];
+    [NSArray arrayWithObjects:@"val2a", @"val2b", nil], @"key2", [NSNull null], @"X-Requested-With", nil]];
     NSURLRequest* request = [self requestForUpload];
     STAssertTrue([@"val1" isEqualToString:[request valueForHTTPHeaderField:@"key1"]], nil);
     STAssertTrue([@"val2a,val2b" isEqualToString:[request valueForHTTPHeaderField:@"key2"]], nil);

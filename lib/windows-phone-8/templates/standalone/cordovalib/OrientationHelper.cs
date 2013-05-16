@@ -28,27 +28,27 @@ namespace WPCordovaClassLib.Cordova
 {
     public class OrientationHelper
     {
-        protected WebBrowser gapBrowser;
-        protected PhoneApplicationPage page;
+        protected WebBrowser CordovaBrowser;
+        protected PhoneApplicationPage Page;
         // private PageOrientation CurrentOrientation = PageOrientation.PortraitUp;
         //private PageOrientation[] SupportedOrientations; // TODO:
 
-        public OrientationHelper(WebBrowser gapBrowser, PhoneApplicationPage gapPage)
+        public OrientationHelper(WebBrowser browser, PhoneApplicationPage page)
         {
-            this.gapBrowser = gapBrowser;
-            page = gapPage;
+            CordovaBrowser = browser;
+            Page = page;
 
-            page.OrientationChanged += new EventHandler<OrientationChangedEventArgs>(page_OrientationChanged);
-            gapBrowser.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(gapBrowser_LoadCompleted);
+            Page.OrientationChanged += new EventHandler<OrientationChangedEventArgs>(page_OrientationChanged);
+            CordovaBrowser.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(browser_LoadCompleted);
 
 
         }
 
-        void gapBrowser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        void browser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             int i = 0;
 
-            switch (this.page.Orientation)
+            switch (Page.Orientation)
             {
                 case PageOrientation.Portrait: // intentional fall through
                 case PageOrientation.PortraitUp:
@@ -70,7 +70,7 @@ namespace WPCordovaClassLib.Cordova
 
             try
             {
-                gapBrowser.InvokeScript("execScript", jsCallback);
+                CordovaBrowser.InvokeScript("execScript", jsCallback);
             }
             catch (Exception)
             {
@@ -104,14 +104,14 @@ namespace WPCordovaClassLib.Cordova
             try
             {
 
-                gapBrowser.InvokeScript("execScript", jsCallback);
+                CordovaBrowser.InvokeScript("execScript", jsCallback);
 
                 jsCallback = "var evt = document.createEvent('HTMLEvents');";
                 jsCallback += "evt.initEvent( 'orientationchange', true, false );";
                 jsCallback += "window.dispatchEvent(evt);";
                 jsCallback += "if(window.onorientationchange){window.onorientationchange(evt);}";
 
-                gapBrowser.InvokeScript("execScript", jsCallback);
+                CordovaBrowser.InvokeScript("execScript", jsCallback);
             }
             catch (Exception)
             {

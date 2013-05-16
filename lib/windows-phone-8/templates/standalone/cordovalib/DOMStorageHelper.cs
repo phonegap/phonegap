@@ -39,9 +39,9 @@ namespace WPCordovaClassLib
     {
         protected WebBrowser webBrowser1;
 
-        public DOMStorageHelper(WebBrowser gapBrowser)
+        public DOMStorageHelper(WebBrowser aBrowser)
         {
-            this.webBrowser1 = gapBrowser;
+            this.webBrowser1 = aBrowser;
             // always clear session at creation
             UserSettings["sessionStorage"] = new Dictionary<string, string>();
 

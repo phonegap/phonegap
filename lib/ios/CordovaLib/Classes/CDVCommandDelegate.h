@@ -30,7 +30,6 @@
 
 - (NSString*)pathForResource:(NSString*)resourcepath;
 - (id)getCommandInstance:(NSString*)pluginName;
-- (void)registerPlugin:(CDVPlugin*)plugin withClassName:(NSString*)className CDV_DEPRECATED(2.2, "Use CDVViewController to register plugins, or use config.xml.");
 
 // Plugins should not be using this interface to call other plugins since it
 // will result in bogus callbacks being made.

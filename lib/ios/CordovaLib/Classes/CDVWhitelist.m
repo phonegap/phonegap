@@ -20,12 +20,12 @@
 #import "CDVWhitelist.h"
 
 NSString* const kCDVDefaultWhitelistRejectionString = @"ERROR whitelist rejection: url='%@'";
+NSString* const kCDVDefaultSchemeName = @"cdv-default-scheme";
 
 @interface CDVWhitelist ()
 
 @property (nonatomic, readwrite, strong) NSArray* whitelist;
-@property (nonatomic, readwrite, strong) NSArray* expandedWhitelist;
-@property (nonatomic, readwrite, assign) BOOL allowAll;
+@property (nonatomic, readwrite, strong) NSDictionary* expandedWhitelists;
 
 - (void)processWhitelist;
 
@@ -33,15 +33,14 @@ NSString* const kCDVDefaultWhitelistRejectionString = @"ERROR whitelist rejectio
 
 @implementation CDVWhitelist
 
-@synthesize whitelist, expandedWhitelist, allowAll, whitelistRejectionFormatString;
+@synthesize whitelist, expandedWhitelists, whitelistRejectionFormatString;
 
 - (id)initWithArray:(NSArray*)array
 {
     self = [super init];
     if (self) {
         self.whitelist = array;
-        self.expandedWhitelist = nil;
-        self.allowAll = NO;
+        self.expandedWhitelists = nil;
         self.whitelistRejectionFormatString = kCDVDefaultWhitelistRejectionString;
         [self processWhitelist];
     }
@@ -94,6 +93,17 @@ NSString* const kCDVDefaultWhitelistRejectionString = @"ERROR whitelist rejectio
     }
 }
 
+- (NSString*)extractSchemeFromUrlString:(NSString*)url
+{
+    NSURL* aUrl = [NSURL URLWithString:url];
+
+    if ((aUrl != nil) && ([aUrl scheme] != nil)) { // found scheme
+        return [aUrl scheme];
+    } else {
+        return kCDVDefaultSchemeName;
+    }
+}
+
 - (void)processWhitelist
 {
     if (self.whitelist == nil) {
@@ -101,70 +111,91 @@ NSString* const kCDVDefaultWhitelistRejectionString = @"ERROR whitelist rejectio
         return;
     }
 
-    NSMutableArray* expanded = [NSMutableArray arrayWithCapacity:[self.whitelist count]];
-
-    // iterate through settings ExternalHosts, check for equality
-    NSEnumerator* enumerator = [self.whitelist objectEnumerator];
-    id externalHost = nil;
+    NSMutableDictionary* _expandedWhitelists = [@{kCDVDefaultSchemeName: [NSMutableArray array]} mutableCopy];
 
     // only allow known TLDs (since Aug 23rd 2011), and two character country codes
     // does not match internationalized domain names with non-ASCII characters
     NSString* tld_match = @"(aero|asia|arpa|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|xxx|[a-z][a-z])";
 
-    while (externalHost = [enumerator nextObject]) {
-        NSString* regex = [self extractHostFromUrlString:externalHost];
-        BOOL is_ip = [self isIPv4Address:regex];
+    // iterate through settings ExternalHosts, check for equality
+    for (NSString* externalHost in self.whitelist) {
+        NSString* host = [self extractHostFromUrlString:externalHost];
+        NSString* scheme = [self extractSchemeFromUrlString:externalHost];
 
         // check for single wildcard '*', if found set allowAll to YES
-        if ([regex isEqualToString:@"*"]) {
-            self.allowAll = YES;
-            self.expandedWhitelist = [NSArray arrayWithObject:regex];
-            break;
+        if ([host isEqualToString:@"*"]) {
+            [_expandedWhitelists setObject:[NSArray arrayWithObject:host] forKey:scheme];
+            continue;
+        }
+
+        // if this is the first value for this scheme, create a new entry
+        if ([_expandedWhitelists objectForKey:scheme] == nil) {
+            [_expandedWhitelists setObject:[NSMutableArray array] forKey:scheme];
         }
 
         // starts with wildcard match - we make the first '.' optional (so '*.org.apache.cordova' will match 'org.apache.cordova')
         NSString* prefix = @"*.";
-        if ([regex hasPrefix:prefix]) {
+        if ([host hasPrefix:prefix]) {
             // replace the first two characters '*.' with our regex
-            regex = [regex stringByReplacingCharactersInRange:NSMakeRange(0, [prefix length]) withString:@"(\\s{0}|*.)"]; // the '*' and '.' will be substituted later
+            host = [host stringByReplacingCharactersInRange:NSMakeRange(0, [prefix length]) withString:@"(\\s{0}|*.)"]; // the '*' and '.' will be substituted later
         }
 
         // ends with wildcard match for TLD
-        if (!is_ip && [regex hasSuffix:@".*"]) {
+        if (![self isIPv4Address:host] && [host hasSuffix:@".*"]) {
             // replace * with tld_match
-            regex = [regex stringByReplacingCharactersInRange:NSMakeRange([regex length] - 1, 1) withString:tld_match];
+            host = [host stringByReplacingCharactersInRange:NSMakeRange([host length] - 1, 1) withString:tld_match];
         }
         // escape periods - since '.' means any character in regex
-        regex = [regex stringByReplacingOccurrencesOfString:@"." withString:@"\\."];
+        host = [host stringByReplacingOccurrencesOfString:@"." withString:@"\\."];
         // wildcard is match 1 or more characters (to make it simple, since we are not doing verification whether the hostname is valid)
-        regex = [regex stringByReplacingOccurrencesOfString:@"*" withString:@".*"];
+        host = [host stringByReplacingOccurrencesOfString:@"*" withString:@".*"];
 
-        [expanded addObject:regex];
+        [[_expandedWhitelists objectForKey:scheme] addObject:host];
     }
 
-    self.expandedWhitelist = expanded;
+    self.expandedWhitelists = _expandedWhitelists;
 }
 
 - (BOOL)schemeIsAllowed:(NSString*)scheme
 {
-    return [scheme isEqualToString:@"http"] ||
-           [scheme isEqualToString:@"https"] ||
-           [scheme isEqualToString:@"ftp"] ||
-           [scheme isEqualToString:@"ftps"];
+    if ([scheme isEqualToString:@"http"] ||
+        [scheme isEqualToString:@"https"] ||
+        [scheme isEqualToString:@"ftp"] ||
+        [scheme isEqualToString:@"ftps"]) {
+        return YES;
+    }
+
+    return (self.expandedWhitelists != nil) && ([self.expandedWhitelists objectForKey:scheme] != nil);
 }
 
 - (BOOL)URLIsAllowed:(NSURL*)url
 {
-    if (self.expandedWhitelist == nil) {
+    NSString* scheme = [url scheme];
+
+    // http[s] and ftp[s] should also validate against the common set in the kCDVDefaultSchemeName list
+    if ([scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"ftp"] || [scheme isEqualToString:@"ftps"]) {
+        NSURL* newUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", kCDVDefaultSchemeName, [url host]]];
+        // If it is allowed, we are done.  If not, continue to check for the actual scheme-specific list
+        if ([self URLIsAllowed:newUrl]) {
+            return YES;
+        }
+    }
+
+    // Check that the scheme is supported
+    if (![self schemeIsAllowed:scheme]) {
         return NO;
     }
 
-    if (self.allowAll) {
+    NSArray* expandedWhitelist = [self.expandedWhitelists objectForKey:scheme];
+
+    // Are we allowing everything for this scheme?
+    // TODO: consider just having a static sentinel value for the "allow all" list, so we can use object equality
+    if (([expandedWhitelist count] == 1) && [[expandedWhitelist objectAtIndex:0] isEqualToString:@"*"]) {
         return YES;
     }
 
     // iterate through settings ExternalHosts, check for equality
-    NSEnumerator* enumerator = [self.expandedWhitelist objectEnumerator];
+    NSEnumerator* enumerator = [expandedWhitelist objectEnumerator];
     id regex = nil;
     NSString* urlHost = [url host];
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+
+-->
+
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximum-scale=1.0,initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"> <!-- ISO-8859-1 -->
+    <title>Cordova Mobile Spec</title>
+    <link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+
+<script>
+    var exec = cordova.require('cordova/exec'),
+        deviceReady = false;
+
+    function appLog(message) {
+        if (window.console) {
+            console.log(message);
+        }
+        if (typeof message != 'string') {
+            message = JSON.stringify(message);
+        }
+        document.getElementById('app-logs').innerText += message + '\n';
+    }
+
+    function benchExec() {
+        var echo = cordova.require('cordova/plugin/echo'),
+            startTime = +new Date,
+            callCount = 0,
+            durationMs = parseInt(document.getElementById('test-duration').value, 10) * 1000,
+            payloadSize = (+document.getElementById('payload-size').value),
+            payload = new ArrayBuffer(payloadSize);
+
+        var payloadView = new Uint8Array(payload);
+        for (var i=0; i<payloadView.length; i++) {
+            payloadView[i] = i;
+        }
+
+        function compareArrayBuffers(arr1, arr2) {
+            arr1 = new Uint8Array(arr1);
+            arr2 = new Uint8Array(arr2);
+            if (arr1.length != arr2.length)
+                return false;
+            for (var i = 0; i < arr1.length; ++i) {
+                if (arr1[i] != arr2[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function win(result) {
+            callCount++;
+            if (!compareArrayBuffers(result, payload)) {
+                appLog('Wrong echo data!');
+                return;
+            }
+            var elapsedMs = new Date - startTime;
+            if (elapsedMs >= durationMs) {
+                var callsPerSecond = callCount * 1000 / elapsedMs;
+                appLog('Calls per second: ' + callsPerSecond);
+                return;
+            }
+            echoMessage();
+        }
+        function fail() {
+            appLog('Call failed!');
+        }
+        function echoMessage() {
+            setTimeout(function() {
+                echo(win, fail, payload);
+            });
+        }
+
+        appLog('Started exec benchmark with payload length: ' + payloadView.length);
+        echoMessage();
+        setTimeout(function() {
+            if (!callCount) {
+                alert('Echo plugin did not respond');
+            }
+        }, 500);
+    }
+
+    document.addEventListener("deviceready", function() {
+        deviceReady = true;
+        appLog("Device = " + device.platform + " " + device.version);
+    }, false);
+
+    window.onload = function() {
+        window.setTimeout(function() {
+            if (!deviceReady) {
+                alert("Error: Cordova did not initialize.  Demo will not run correctly.");
+            }
+        }, 1000);
+    };
+
+</script>
+
+  </head>
+  <body id="stage" class="theme">
+    <h1>ArrayBuffer Benchmark</h1>
+    <fieldset>
+        <legend>Settings</legend>
+        <label>Test Duration: <select id="test-duration"><option>1 Second</option><option>5 Seconds</option></select><br></label>
+        <label>Payload size (in bytes) <input id="payload-size" value="1024" style="width:100px"></label><br>
+        <button onclick="benchExec()">Benchmark exec</button><br>
+    </fieldset>
+    <h2>&nbsp</h2><a href="javascript:" class="backBtn" onclick="backHome();">Back</a><br>
+    <div>Results:</div>
+    <pre id="app-logs" style="white-space:pre-wrap;line-height:initial"></pre>
+  </body>
+</html>

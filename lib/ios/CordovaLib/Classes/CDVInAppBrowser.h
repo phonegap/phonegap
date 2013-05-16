@@ -20,33 +20,29 @@
 #import "CDVPlugin.h"
 #import "CDVInvokedUrlCommand.h"
 #import "CDVScreenOrientationDelegate.h"
+#import "CDVWebViewDelegate.h"
 
 @class CDVInAppBrowserViewController;
 
-@protocol CDVInAppBrowserNavigationDelegate <NSObject>
-
-- (void)browserLoadStart:(NSURL*)url;
-- (void)browserLoadStop:(NSURL*)url;
-- (void)browserExit;
-
-@end
-
-@interface CDVInAppBrowser : CDVPlugin <CDVInAppBrowserNavigationDelegate>
+@interface CDVInAppBrowser : CDVPlugin {
+    BOOL _injectedIframeBridge;
+}
 
 @property (nonatomic, retain) CDVInAppBrowserViewController* inAppBrowserViewController;
 @property (nonatomic, copy) NSString* callbackId;
 
 - (void)open:(CDVInvokedUrlCommand*)command;
 - (void)close:(CDVInvokedUrlCommand*)command;
+- (void)injectScriptCode:(CDVInvokedUrlCommand*)command;
 
 @end
 
 @interface CDVInAppBrowserViewController : UIViewController <UIWebViewDelegate>{
     @private
-    NSURL* _requestedURL;
     NSString* _userAgent;
     NSString* _prevUserAgent;
     NSInteger _userAgentLockToken;
+    CDVWebViewDelegate* _webViewDelegate;
 }
 
 @property (nonatomic, strong) IBOutlet UIWebView* webView;
@@ -58,7 +54,8 @@
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 
 @property (nonatomic, weak) id <CDVScreenOrientationDelegate> orientationDelegate;
-@property (nonatomic, weak) id <CDVInAppBrowserNavigationDelegate> navigationDelegate;
+@property (nonatomic, weak) CDVInAppBrowser* navigationDelegate;
+@property (nonatomic) NSURL* currentURL;
 
 - (void)close;
 - (void)navigateTo:(NSURL*)url;

@@ -1,1 +1,0 @@
-Apache Cordova Symbian has been deprecated. The latest source code is available at: https://github.com/phonegap/phonegap-symbian.wrt/tree/a779600377f17511f2ff94beb0ab9e8a357860e1

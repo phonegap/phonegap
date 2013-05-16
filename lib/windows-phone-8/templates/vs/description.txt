@@ -1,0 +1,8 @@
+CordovaWP8_2_6_0_Full
+Apache Cordova 2.7.0 Windows Phone 8 App using a pre-built dll.
+
+CordovaWP8_2_6_0_StandAlone
+Apache Cordova 2.7.0 Windows Phone 8 App including all framework source code.
+
+
+

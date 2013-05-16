@@ -25,10 +25,14 @@ set -e
 
 if [ -n "$1" ] && [ "$1" == "-h" ]
 then
-    echo 'usage: create path package appname'
-    echo 'After you have created your application, make sure to customize the project.properties file inside your app directory with your environment specifics!'
-    exit 0
+  echo "Usage: $0 <path_to_new_project> <package_name> <project_name>"
+  echo "    <path_to_new_project>: Path to your new Cordova iOS project"
+  echo "    <package_name>: Package name, following reverse-domain style convention (ignored on BlackBerry platforms)"
+  echo "    <project_name>: Project name"
+  echo 'After you have created your application, make sure to customize the project.properties file inside your app directory with your environment specifics!'
+  exit 0;
 fi
+
 
 BUILD_PATH="$( cd "$( dirname "$0" )/.." && pwd )"
 VERSION=$(cat "$BUILD_PATH/VERSION")
@@ -56,6 +60,19 @@ function on_error {
     [ -d "$PROJECT_PATH" ] && rm -rf "$PROJECT_PATH"
 }
 
+function replace {
+    local pattern=$1
+    local filename=$2
+    # Mac OS X requires -i argument
+    if [[ "$OSTYPE" =~ "darwin" ]]
+    then
+        /usr/bin/sed -i '' -e $pattern "$filename"
+    elif [[ "$OSTYPE" =~ "linux" ]]
+    then
+        /bin/sed -i -e $pattern "$filename"
+    fi
+}
+
 # we do not want the script to silently fail
 trap on_error ERR
 trap on_exit EXIT
@@ -76,16 +93,16 @@ then
     fi
     
 	echo "Creating BlackBerry project..."
-	(cd "$BUILD_PATH" && "$ANT" create -Dproject.path="$PROJECT_PATH" &> /dev/null )
+	("$ANT" create -Dproject.path="$PROJECT_PATH" -f "$BUILD_PATH/build.xml" &> /dev/null)
     # interpolate the activity and package into config.xml
     echo "Updating config.xml ..."
-    sed -i '' -e "s/__NAME__/${NAME}/g" "$MANIFEST_PATH"
-    sed -i '' -e "s/__PACKAGE__/${PACKAGE}/g" "$MANIFEST_PATH"
+    replace "s/__NAME__/${NAME}/g" "$MANIFEST_PATH"
+    replace "s/__PACKAGE__/${PACKAGE}/g" "$MANIFEST_PATH"
 else
 	# copy project template if in distribution
 	echo "Copying assets and resources ..."
 	cp -r "$BUILD_PATH/sample/." "$PROJECT_PATH"
     echo "Updating config.xml ..."
-    sed -i '' -e "s/cordovaExample/${NAME}/g" "$MANIFEST_PATH"
-    sed -i '' -e "s/org.apache.cordova.example/${PACKAGE}/g" "$MANIFEST_PATH"
+    replace "s/cordovaExample/${NAME}/g" "$MANIFEST_PATH"
+    replace "s/org.apache.cordova.example/${PACKAGE}/g" "$MANIFEST_PATH"
 fi

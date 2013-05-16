@@ -591,17 +591,17 @@
 - (NSString*)JSONRepresentation
 {
     return [NSString stringWithFormat:
-        @"{ timestamp: %.00f, \
+           @"{ timestamp: %.00f, \
             coords: { latitude: %f, longitude: %f, altitude: %.02f, heading: %.02f, speed: %.02f, accuracy: %.02f, altitudeAccuracy: %.02f } \
             }",
-        [self.timestamp timeIntervalSince1970] * 1000.0,
-        self.coordinate.latitude,
-        self.coordinate.longitude,
-        self.altitude,
-        self.course,
-        self.speed,
-        self.horizontalAccuracy,
-        self.verticalAccuracy
+           [self.timestamp timeIntervalSince1970] * 1000.0,
+           self.coordinate.latitude,
+           self.coordinate.longitude,
+           self.altitude,
+           self.course,
+           self.speed,
+           self.horizontalAccuracy,
+           self.verticalAccuracy
     ];
 }
 
@@ -614,9 +614,9 @@
 - (NSString*)JSONRepresentation
 {
     return [NSString stringWithFormat:
-        @"{ code: %d, message: '%@'}",
-        self.code,
-        [self localizedDescription]
+           @"{ code: %d, message: '%@'}",
+           self.code,
+           [self localizedDescription]
     ];
 }
 

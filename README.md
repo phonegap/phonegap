@@ -27,13 +27,11 @@ Directory Structure
 	  |-doc/ ........... source documentation
 	  |-lib/ ........... platform code for supported operating systems
 	  | |-android/
-	  | |-bada/
 	  | |-blackberry/
+	  | |-cordova-cli/
 	  | |-ios/
-	  | |-symbian/
-	  | |-webos/
-      | |-windows-phone-7
-      | |-windows-phone-8
+          | |-windows-phone-7
+          | |-windows-phone-8
 	  | |-windows8/
 	  |-changelog ..... a changelog compiled from comments and authors
 	  |-license ....... the Apache Software License v2

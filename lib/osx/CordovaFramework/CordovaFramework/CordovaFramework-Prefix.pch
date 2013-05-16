@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'CordovaFramework' target in the 'CordovaFramework' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

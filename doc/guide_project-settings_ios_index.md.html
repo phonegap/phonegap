@@ -21,19 +21,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
 <meta name="generator" content="joDoc">
-<title>Apache Cordova API Documentation</title>
+<title>PhoneGap API Documentation</title>
 <link rel="stylesheet" type="text/css" href="index.css">
 <link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
 <link rel="stylesheet" type="text/css" href="prettify/prettify.css">
 </head>
 <body>
         <div id="header">
-            <h1><a href="index.html">Apache <strong>Cordova</strong> Documentation</a></h1>
+            <h1><a href="index.html">PhoneGap Documentation</a></h1>
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.7.0rc1">2.7.0rc1</option>
+<option selected value="2.7.0">2.7.0</option>
+<option value="2.6.0rc1">2.6.0rc1</option>
+<option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
-<option selected value="2.5.0">2.5.0</option>
+<option value="2.5.0">2.5.0</option>
 <option value="2.4.0rc1">2.4.0rc1</option>
 <option value="2.4.0">2.4.0</option>
 <option value="2.3.0rc2">2.3.0rc2</option>
@@ -59,6 +63,28 @@
 <option value="1.6.0">1.6.0</option>
 <option value="1.5.0rc1">1.5.0rc1</option>
 <option value="1.5.0">1.5.0</option>
+<option value="1.4.1">1.4.1</option>
+<option value="1.4.0rc1">1.4.0rc1</option>
+<option value="1.4.0">1.4.0</option>
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+<option value="1.0.0rc3">1.0.0rc3</option>
+<option value="1.0.0rc2">1.0.0rc2</option>
+<option value="1.0.0rc1">1.0.0rc1</option>
+<option value="1.0.0">1.0.0</option>
+<option value="0.9.6">0.9.6</option>
+<option value="0.9.5.1">0.9.5.1</option>
+<option value="0.9.5">0.9.5</option>
+<option value="0.9.4">0.9.4</option>
+<option value="0.9.3">0.9.3</option>
+<option value="0.9.2">0.9.2</option>
+</optgroup>
+<optgroup label="Español" value="es"><option value="1.0.0">1.0.0</option></optgroup>
+<optgroup label="Français" value="fr">
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
 <option value="2.2.0">2.2.0</option>
@@ -67,6 +93,7 @@
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
 <option value="1.7.0">1.7.0</option>
+<option value="0.9.5">0.9.5</option>
 </optgroup>
 <optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
         </div>
@@ -145,9 +172,9 @@ The <code>config.xml</code> file is located in your <code>&lt;project folder&gt;
 <p>Various preferences (as <strong>&lt;preference&gt;</strong> tags) default on not breaking existing apps. The available preferences are:</p>
 
 <ol>
-<li><p><strong>UIWebViewBounce (boolean, defaults to true)</strong> - set to false if you don't want the WebView to rubber-band</p></li>
+<li><p><strong>DisallowOverscroll (boolean, defaults to false)</strong> - set to true if you don't want the WebView to rubber-band</p></li>
 <li><p><strong>TopActivityIndicator (string, defaults to 'gray')</strong> - this is the top spinning throbber in the status/battery bar, valid values are "whiteLarge", "white" and "gray"</p></li>
-<li><p><strong>EnableLocation (boolean, defaults to false)</strong> - set to true, to initialize the <a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a> plugin at start-up (so the fix on your location can be more accurate)</p></li>
+<li><p><strong>EnableLocation (boolean, defaults to false)</strong> - set to true, to initialize the <a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a> plugin at start-up (so the fix on your location can be more accurate) <strong>DEPRECATED</strong>: please set the <strong>onload</strong> attribute of the <strong><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></strong> plugin to <strong>true</strong> instead.</p></li>
 <li><p><strong>EnableViewportScale (boolean, defaults to false)</strong> - set to true to prevent viewport scaling through a meta tag</p></li>
 <li><p><strong>AutoHideSplashScreen (boolean, defaults to true)</strong> - set to false to control when the splashscreen is hidden through a JavaScript API</p></li>
 <li><p><strong>FadeSplashScreen (boolean, defaults to true)</strong> - set to false to prevent the splash-screen to fade in and out when showing/hiding it.</p></li>
@@ -158,6 +185,8 @@ The <code>config.xml</code> file is located in your <code>&lt;project folder&gt;
 <li><p><strong>BackupWebStorage (string, defaults to 'cloud')</strong> - valid values are 'none', 'cloud' and 'local'. Set to 'cloud' to allow the web storage data to be backed up to iCloud, and set to 'local' to only allow local backups (iTunes sync). Set to 'none' to not allow any backups of web storage.</p></li>
 <li><p><strong>KeyboardDisplayRequiresUserAction (boolean, defaults to true)</strong> - set to false to open the keyboard when form elements get focus via the JavaScript focus() call.</p></li>
 <li><p><strong>SuppressesIncrementalRendering (boolean, defaults to false)</strong> - set to true to wait until all new view content has been received before it is rendered.</p></li>
+<li><p><strong>HideKeyboardFormAccessoryBar (boolean, defaults to false)</strong> - set to true to <a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a> the additional toolbar that is on top of the keyboard (this is the toolbar that has the Prev, Next and Done buttons)</p></li>
+<li><p><strong>KeyboardShrinksView (boolean, defaults to false)</strong> -  set to true to shrink the WebView when the keyboard comes up. The WebView shrinks instead of the viewport shrinking and the page scrollable. This applies to apps that position their elements relative to the bottom of the WebView. This is the default behaviour on Android, and makes a lot of sense when building apps as opposed to webpages.</p></li>
 </ol>
 </div>
         </div>

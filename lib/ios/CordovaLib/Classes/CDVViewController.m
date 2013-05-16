@@ -19,7 +19,6 @@
 
 #import <objc/message.h>
 #import "CDV.h"
-#import "CDVCommandQueue.h"
 #import "CDVCommandDelegateImpl.h"
 #import "CDVConfigParser.h"
 #import "CDVUserAgentUtil.h"
@@ -101,6 +100,48 @@
     self = [super init];
     [self __init];
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(keyboardWillShowOrHide:)
+               name:UIKeyboardWillShowNotification
+             object:nil];
+    [nc addObserver:self
+           selector:@selector(keyboardWillShowOrHide:)
+               name:UIKeyboardWillHideNotification
+             object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [nc removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWillShowOrHide:(NSNotification*)notif
+{
+    if (![@"true" isEqualToString : self.settings[@"KeyboardShrinksView"]]) {
+        return;
+    }
+    BOOL showEvent = [notif.name isEqualToString:UIKeyboardWillShowNotification];
+
+    CGRect keyboardFrame = [notif.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
+
+    CGRect newFrame = self.view.bounds;
+    if (showEvent) {
+        newFrame.size.height -= keyboardFrame.size.height;
+    }
+    self.webView.frame = newFrame;
+    self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, -keyboardFrame.size.height, 0);
 }
 
 - (void)printDeprecationNotice
@@ -208,9 +249,6 @@
     id backupWebStorage = self.settings[@"BackupWebStorage"];
     if ([backupWebStorage isKindOfClass:[NSString class]]) {
         backupWebStorageType = backupWebStorage;
-    } else if ([backupWebStorage isKindOfClass:[NSNumber class]]) {
-        NSLog(@"Deprecated: BackupWebStorage boolean property is a string property now (none, local, cloud). A boolean value of 'true' will be mapped to 'cloud'. Consult the docs: http://docs.cordova.io/en/edge/guide_project-settings_ios_index.md.html#Project%%20Settings%%20for%%20iOS");
-        backupWebStorageType = [(NSNumber*) backupWebStorage boolValue] ? @"cloud" : @"none";
     }
     self.settings[@"BackupWebStorage"] = backupWebStorageType;
 
@@ -231,6 +269,10 @@
     if ([self.settings objectForKey:@"MediaPlaybackRequiresUserAction"]) {
         mediaPlaybackRequiresUserAction = [(NSNumber*)[settings objectForKey:@"MediaPlaybackRequiresUserAction"] boolValue];
     }
+    BOOL hideKeyboardFormAccessoryBar = NO;  // default value
+    if ([self.settings objectForKey:@"HideKeyboardFormAccessoryBar"]) {
+        hideKeyboardFormAccessoryBar = [(NSNumber*)[settings objectForKey:@"HideKeyboardFormAccessoryBar"] boolValue];
+    }
 
     self.webView.scalesPageToFit = [enableViewportScale boolValue];
 
@@ -239,14 +281,26 @@
      */
 
     if ([enableLocation boolValue]) {
+        NSLog(@"Deprecated: The 'EnableLocation' boolean property is deprecated in 2.5.0, and will be removed in 3.0.0. Use the 'onload' boolean attribute (of the CDVLocation plugin.");
         [[self.commandDelegate getCommandInstance:@"Geolocation"] getLocation:[CDVInvokedUrlCommand new]];
+    }
+
+    if (hideKeyboardFormAccessoryBar) {
+        __weak CDVViewController* weakSelf = self;
+        [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
+                                                          object:nil
+                                                           queue:[NSOperationQueue mainQueue]
+                                                      usingBlock:^(NSNotification* notification) {
+            // we can't hide it here because the accessory bar hasn't been created yet, so we delay on the queue
+            [weakSelf performSelector:@selector(hideKeyboardFormAccessoryBar) withObject:nil afterDelay:0];
+        }];
     }
 
     /*
      * Fire up CDVLocalStorage to work-around WebKit storage limitations: on all iOS 5.1+ versions for local-only backups, but only needed on iOS 5.1 for cloud backup.
      */
     if (IsAtLeastiOSVersion(@"5.1") && (([backupWebStorageType isEqualToString:@"local"]) ||
-            ([backupWebStorageType isEqualToString:@"cloud"] && !IsAtLeastiOSVersion(@"6.0")))) {
+        ([backupWebStorageType isEqualToString:@"cloud"] && !IsAtLeastiOSVersion(@"6.0")))) {
         [self registerPlugin:[[CDVLocalStorage alloc] initWithWebView:self.webView] withClassName:NSStringFromClass([CDVLocalStorage class])];
     }
 
@@ -260,12 +314,19 @@
         self.webView.mediaPlaybackRequiresUserAction = NO;
     }
 
-    // UIWebViewBounce property - defaults to true
-    NSNumber* bouncePreference = [self.settings objectForKey:@"UIWebViewBounce"];
-    BOOL bounceAllowed = (bouncePreference == nil || [bouncePreference boolValue]);
+    // By default, overscroll bouncing is allowed.
+    // UIWebViewBounce has been renamed to DisallowOverscroll, but both are checked.
+    BOOL bounceAllowed = YES;
+    NSNumber* disallowOverscroll = [self.settings objectForKey:@"DisallowOverscroll"];
+    if (disallowOverscroll == nil) {
+        NSNumber* bouncePreference = [self.settings objectForKey:@"UIWebViewBounce"];
+        bounceAllowed = (bouncePreference == nil || [bouncePreference boolValue]);
+    } else {
+        bounceAllowed = ![disallowOverscroll boolValue];
+    }
 
     // prevent webView from bouncing
-    // based on UIWebViewBounce key in config.xml
+    // based on the DisallowOverscroll/UIWebViewBounce key in config.xml
     if (!bounceAllowed) {
         if ([self.webView respondsToSelector:@selector(scrollView)]) {
             ((UIScrollView*)[self.webView scrollView]).bounces = NO;
@@ -307,8 +368,16 @@
         }
     }
 
-    for (NSString* pluginName in self.startupPluginNames) {
-        [self getCommandInstance:pluginName];
+    if ([self.startupPluginNames count] > 0) {
+        [CDVTimer start:@"TotalPluginStartup"];
+
+        for (NSString* pluginName in self.startupPluginNames) {
+            [CDVTimer start:pluginName];
+            [self getCommandInstance:pluginName];
+            [CDVTimer stop:pluginName];
+        }
+
+        [CDVTimer stop:@"TotalPluginStartup"];
     }
 
     // TODO: Remove this explicit instantiation once we move to cordova-CLI.
@@ -318,16 +387,44 @@
 
     // /////////////////
     [CDVUserAgentUtil acquireLock:^(NSInteger lockToken) {
-            _userAgentLockToken = lockToken;
-            [CDVUserAgentUtil setUserAgent:self.userAgent lockToken:lockToken];
-            if (!loadErr) {
-                NSURLRequest* appReq = [NSURLRequest requestWithURL:appURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0];
-                [self.webView loadRequest:appReq];
-            } else {
-                NSString* html = [NSString stringWithFormat:@"<html><body> %@ </body></html>", loadErr];
-                [self.webView loadHTMLString:html baseURL:nil];
+        _userAgentLockToken = lockToken;
+        [CDVUserAgentUtil setUserAgent:self.userAgent lockToken:lockToken];
+        if (!loadErr) {
+            NSURLRequest* appReq = [NSURLRequest requestWithURL:appURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0];
+            [self.webView loadRequest:appReq];
+        } else {
+            NSString* html = [NSString stringWithFormat:@"<html><body> %@ </body></html>", loadErr];
+            [self.webView loadHTMLString:html baseURL:nil];
+        }
+    }];
+}
+
+- (void)hideKeyboardFormAccessoryBar
+{
+    NSArray* windows = [[UIApplication sharedApplication] windows];
+
+    for (UIWindow* window in windows) {
+        for (UIView* view in window.subviews) {
+            if ([[view description] hasPrefix:@"<UIPeripheralHostView"]) {
+                for (UIView* peripheralView in view.subviews) {
+                    // hides the accessory bar
+                    if ([[peripheralView description] hasPrefix:@"<UIWebFormAccessory"]) {
+                        // remove the extra scroll space for the form accessory bar
+                        CGRect newFrame = self.webView.scrollView.frame;
+                        newFrame.size.height += peripheralView.frame.size.height;
+                        self.webView.scrollView.frame = newFrame;
+
+                        // remove the form accessory bar
+                        [peripheralView removeFromSuperview];
+                    }
+                    // hides the thin grey line used to adorn the bar (iOS 6)
+                    if ([[peripheralView description] hasPrefix:@"<UIImageView"]) {
+                        [[peripheralView layer] setOpacity:0.0];
+                    }
+                }
             }
-        }];
+        }
+    }
 }
 
 - (NSArray*)parseInterfaceOrientations:(NSArray*)orientations
@@ -518,12 +615,6 @@
     // It's safe to release the lock even if this is just a sub-frame that's finished loading.
     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
 
-    // The .onNativeReady().fire() will work when cordova.js is already loaded.
-    // The _nativeReady = true; is used when this is run before cordova.js is loaded.
-    NSString* nativeReady = @"try{cordova.require('cordova/channel').onNativeReady.fire();}catch(e){window._nativeReady = true;}";
-    // Don't use [commandDelegate evalJs] here since it relies on cordova.js being loaded already.
-    [self.webView stringByEvaluatingJavaScriptFromString:nativeReady];
-
     /*
      * Hide the Top Activity THROBBER in the Battery Bar
      */
@@ -531,7 +622,7 @@
 
     [self processOpenUrl];
 
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPageDidLoadNotification object:nil]];
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPageDidLoadNotification object:self.webView]];
 }
 
 - (void)webView:(UIWebView*)theWebView didFailLoadWithError:(NSError*)error
@@ -660,6 +751,22 @@
     [plugin pluginInitialize];
 }
 
+- (void)registerPlugin:(CDVPlugin*)plugin withPluginName:(NSString*)pluginName
+{
+    if ([plugin respondsToSelector:@selector(setViewController:)]) {
+        [plugin setViewController:self];
+    }
+
+    if ([plugin respondsToSelector:@selector(setCommandDelegate:)]) {
+        [plugin setCommandDelegate:_commandDelegate];
+    }
+
+    NSString* className = NSStringFromClass([plugin class]);
+    [self.pluginObjects setObject:plugin forKey:className];
+    [self.pluginsMap setValue:className forKey:[pluginName lowercaseString]];
+    [plugin pluginInitialize];
+}
+
 /**
  Returns an instance of a CordovaCommand object, based on its name.  If one exists already, it is returned.
  */
@@ -678,7 +785,7 @@
 
     id obj = [self.pluginObjects objectForKey:className];
     if (!obj) {
-        obj = [[NSClassFromString (className)alloc] initWithWebView:webView];
+        obj = [[NSClassFromString(className)alloc] initWithWebView:webView];
 
         if (obj != nil) {
             [self registerPlugin:obj withClassName:className];
@@ -814,13 +921,8 @@
 - (void)dealloc
 {
     [CDVURLProtocol unregisterViewController:self];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSCurrentLocaleDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CDVPluginHandleOpenURLNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     self.webView.delegate = nil;
     self.webView = nil;
     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];

@@ -31,8 +31,9 @@
 set -e
 
 function usage() {
-  echo "Usage: $0 [--shared] <path_to_new_project> <package_name> <project_name>"
+  echo "Usage: $0 [--shared] [--arc] <path_to_new_project> <package_name> <project_name>"
   echo "	--shared (optional): Link directly against the shared copy of the CordovaLib instead of a copy of it."
+  echo "	--arc (optional): Enable ARC."
   echo "	<path_to_new_project>: Path to your new Cordova iOS project"
   echo "	<package_name>: Package name, following reverse-domain style convention"
   echo "	<project_name>: Project name"
@@ -40,8 +41,13 @@ function usage() {
 }
 
 USE_SHARED=0
+USE_ARC=0
 if [[ $1 == "--shared" ]]; then
     USE_SHARED=1
+    shift;
+fi
+if [[ $1 == "--arc" ]]; then
+    USE_ARC=1
     shift;
 fi
 
@@ -59,7 +65,7 @@ done
 
 BINDIR=$( cd "$( dirname "$SCRIPT" )" && pwd )
 CORDOVALIB_DIR="$BINDIR/../CordovaLib"
-CDV_VER=$(cat $CORDOVALIB_DIR/VERSION)
+CDV_VER=$(cat "$CORDOVALIB_DIR/VERSION")
 
 PROJECT_PATH=$1
 PACKAGE=$2
@@ -134,3 +140,6 @@ else
     "$BINDIR/update_cordova_subproject" "$R.xcodeproj/project.pbxproj" "$PROJECT_PATH/CordovaLib/CordovaLib.xcodeproj/project.pbxproj" > /dev/null
 fi
 
+if [[ $USE_ARC = 1 ]]; then
+    /usr/bin/sed -i '' 's/CLANG_ENABLE_OBJC_ARC = NO/CLANG_ENABLE_OBJC_ARC = YES/' "$R.xcodeproj/project.pbxproj" > /dev/null
+fi

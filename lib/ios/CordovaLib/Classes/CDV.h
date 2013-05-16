@@ -33,7 +33,6 @@
 #import "CDVContact.h"
 #import "CDVContacts.h"
 #import "CDVDebug.h"
-#import "CDVDebugConsole.h"
 #import "CDVDevice.h"
 #import "CDVFile.h"
 #import "CDVFileTransfer.h"
@@ -47,6 +46,7 @@
 #import "CDVLocalStorage.h"
 #import "CDVInAppBrowser.h"
 #import "CDVScreenOrientationDelegate.h"
+#import "CDVTimer.h"
 
 #import "NSArray+Comparisons.h"
 #import "NSData+Base64.h"

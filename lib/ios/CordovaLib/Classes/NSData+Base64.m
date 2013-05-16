@@ -249,13 +249,10 @@ char *CDVNewBase64Encode(
 //
 + (NSData*)dataFromBase64String:(NSString*)aString
 {
-    NSData* data = [aString dataUsingEncoding:NSASCIIStringEncoding];
-    size_t outputLength;
-    void* outputBuffer = CDVNewBase64Decode([data bytes], [data length], &outputLength);
-    NSData* result = [NSData dataWithBytes:outputBuffer length:outputLength];
+    size_t outputLength = 0;
+    void* outputBuffer = CDVNewBase64Decode([aString UTF8String], [aString length], &outputLength);
 
-    free(outputBuffer);
-    return result;
+    return [NSData dataWithBytesNoCopy:outputBuffer length:outputLength freeWhenDone:YES];
 }
 
 //
@@ -273,13 +270,11 @@ char *CDVNewBase64Encode(
     char* outputBuffer =
         CDVNewBase64Encode([self bytes], [self length], true, &outputLength);
 
-    NSString* result =
-        [[NSString alloc]
-        initWithBytes:outputBuffer
-               length:outputLength
-             encoding:NSASCIIStringEncoding];
+    NSString* result = [[NSString alloc] initWithBytesNoCopy:outputBuffer
+                                                      length:outputLength
+                                                    encoding:NSASCIIStringEncoding
+                                                freeWhenDone:YES];
 
-    free(outputBuffer);
     return result;
 }
 

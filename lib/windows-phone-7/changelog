@@ -2,31 +2,24 @@
 Windows Phone 7 
 ---
 
-b1f4e54 Merge pull request #5 from purplecabbage/2.5.0_ReleasePrep
-66e2337 update versions
-fd3b790 Merge pull request #4 from bennmapes/scripting
-2a0b166 Added development scripts
-2c2b582 merger of cli tooling
-bdead5b updated built js
-896f3cb 2.5.0 release prep
-d037ab8 [CB-2403] Added scripts for distribution build.
-11cf614 merge, cleanup
-b3c7b81 CB2444 - events not fired
-bdc5243 Merge pull request #3 from purplecabbage/CB-2323
-451850c <cordova> becomes <widget>
-68d024a Merge branch 'topic' of git://github.com/bennmapes/cordova-wp7
-249cfe0 Fixed null pointer exception when this.player.Source is null in the startPlaying method of Audio player. Error callback now works multiple times.
-59c3e55 Brand: WebKit
-f2b5a6b Spelling: the rest
-4a4d7be Spelling: targeting
-724e4f2 Spelling: sentinel
-33a50f8 Spelling: preferred
-c88f414 Spelling: overridden
-3f5dcd9 Spelling: notify
-bc930a0 Spelling: initialization
-bbf08ab Spelling: information
-6a8d6ba Spelling: indeterminate
-be3b21f Spelling: explicitly
-ed37b95 Spelling: determines
-2fc7c46 Spelling: compiler
-e22f3f8 Spelling: beginning
+e4a2884 2.7.0 version change
+7557167 re-applied fix to old file fml (cherry picked from commit 43deeaa88dddc7b34a9b5581eba6820fd5ac887c)
+97e195a [CB-3406] InAppBrowser script not enabled in time (cherry picked from commit ca5a6e4e6c2d968c357d77ce66ca5fcd39cc53d6)
+ee19e9c updated cordova-js
+6116de3 preping for 2.7.x
+9acef80 pre-2.7.0 prep
+eab9e15 CB-2541 notification.confirm native side buttonLabels takes string[] or s,t,r,i,n,g
+0b107ab Merge pull request #17 from bennmapes/update
+1266d3a rename project and solution on create
+4551e1e Updated project structure and moved all commands to the plugin folder for future splitting out
+68922b9 Merge pull request #16 from purplecabbage/2.7Reorg
+2eef9a5 Merge pull request #15 from bennmapes/reorg
+84a683a Moved cordova scripts to remaining template, added cli support
+bbf6934 Merge branch 'master' of github.com:purplecabbage/cordova-wp7 into 2.7Reorg
+1dd6d99 Merge pull request #14 from purplecabbage/CB2959
+fa0662a fix for csproj wildcard www inclusion
+7179d3f remove full template, all projects will be 'StandAlone'
+84261e8 Merge pull request #13 from bennmapes/tooling
+d1b3ff8 tooling and cli scripts update
+7de2a08 Merge pull request #11 from bennmapes/CB-2736
+ab9ac6e [CB-2736] Fixed error when resolving file uri from getPicture

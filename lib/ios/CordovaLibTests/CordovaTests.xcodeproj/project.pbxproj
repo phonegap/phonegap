@@ -41,6 +41,8 @@
 		68A32D7D141030E4006B237C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686357AE141002F100DF4CF2 /* CoreGraphics.framework */; };
 		68A32D7E141030EB006B237C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686357AA141002F100DF4CF2 /* UIKit.framework */; };
 		68A32D7F141030F3006B237C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686357AC141002F100DF4CF2 /* Foundation.framework */; };
+		8220B5C216D541BD00EC3921 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8220B5C116D541BD00EC3921 /* AssetsLibrary.framework */; };
+		8220B5C616D542F500EC3921 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8220B5C116D541BD00EC3921 /* AssetsLibrary.framework */; };
 		EB3B34E9161B5532003DBE7D /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB3B34E6161B5454003DBE7D /* libCordova.a */; };
 		EB89634A15FE66EA00E12277 /* CDVInvokedUrlCommandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB89634915FE66EA00E12277 /* CDVInvokedUrlCommandTests.m */; };
 		EB96677216ADBCF500D86CDF /* CDVUserAgentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EB96677116ADBCF500D86CDF /* CDVUserAgentTest.m */; };
@@ -104,6 +106,7 @@
 		686357D414100AF200DF4CF2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		686357DC14100B1600DF4CF2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		68A32D7414103017006B237C /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		8220B5C116D541BD00EC3921 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		EB37018115D18B2D00BEBC43 /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = ../CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		EB89634915FE66EA00E12277 /* CDVInvokedUrlCommandTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVInvokedUrlCommandTests.m; sourceTree = "<group>"; };
 		EB96677116ADBCF500D86CDF /* CDVUserAgentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVUserAgentTest.m; sourceTree = "<group>"; };
@@ -120,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB3B34E9161B5532003DBE7D /* libCordova.a in Frameworks */,
+				8220B5C216D541BD00EC3921 /* AssetsLibrary.framework in Frameworks */,
 				30F8AE0C152125B6006625B3 /* MobileCoreServices.framework in Frameworks */,
 				30F8AE0515212587006625B3 /* AddressBook.framework in Frameworks */,
 				30F8AE0615212587006625B3 /* AddressBookUI.framework in Frameworks */,
@@ -139,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68A32D7514103017006B237C /* AddressBook.framework in Frameworks */,
+				8220B5C616D542F500EC3921 /* AssetsLibrary.framework in Frameworks */,
 				68A32D7614103078006B237C /* CoreMedia.framework in Frameworks */,
 				68A32D7714103082006B237C /* AudioToolbox.framework in Frameworks */,
 				68A32D781410308B006B237C /* AVFoundation.framework in Frameworks */,
@@ -181,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				68A32D7414103017006B237C /* AddressBook.framework */,
+				8220B5C116D541BD00EC3921 /* AssetsLibrary.framework */,
 				686357DC14100B1600DF4CF2 /* CoreMedia.framework */,
 				686357CE14100ADA00DF4CF2 /* AudioToolbox.framework */,
 				686357CF14100ADB00DF4CF2 /* AVFoundation.framework */,

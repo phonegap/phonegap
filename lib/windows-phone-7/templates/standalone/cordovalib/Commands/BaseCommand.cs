@@ -71,7 +71,7 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         }
 
-
+        [Obsolete]
         public void InvokeCustomScript(ScriptCallback script, bool removeHandler)
         {
             if (this.OnCustomScript != null)
@@ -109,6 +109,14 @@ namespace WPCordovaClassLib.Cordova.Commands
         /// </summary>        
         public virtual void OnReset()
         {
+        }
+
+        /// <summary>
+        /// Occurs when the application is being loaded, and the config.xml has an autoload entry
+        /// </summary>    
+        public virtual void OnInit()
+        {
+
         }
 
 

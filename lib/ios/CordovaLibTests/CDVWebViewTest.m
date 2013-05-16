@@ -110,8 +110,8 @@
 - (void)waitForPageLoad
 {
     [self waitForConditionName:@"PageLoad" block:^{
-            return [@"true" isEqualToString:[self evalJs:@"window.pageIsLoaded"]];
-        }];
+        return [@"true" isEqualToString :[self evalJs:@"window.pageIsLoaded"]];
+    }];
 }
 
 - (NSString*)evalJs:(NSString*)code

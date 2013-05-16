@@ -82,8 +82,8 @@
 
     NSString* getUserAgentCode = @"navigator.userAgent";
     [self waitForConditionName:@"getting user-agents" block:^{
-            return (BOOL)(rootVc.vc1.webView.request != nil && rootVc.vc2.webView.request != nil);
-        }];
+        return (BOOL)(rootVc.vc1.webView.request != nil && rootVc.vc2.webView.request != nil);
+    }];
     NSString* ua1 = [rootVc.vc1.webView stringByEvaluatingJavaScriptFromString:getUserAgentCode];
     NSString* ua2 = [rootVc.vc2.webView stringByEvaluatingJavaScriptFromString:getUserAgentCode];
 

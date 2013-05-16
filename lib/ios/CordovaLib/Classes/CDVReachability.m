@@ -61,18 +61,18 @@ static void CDVPrintReachabilityFlags(SCNetworkReachabilityFlags flags, const ch
 {
 #if kShouldPrintReachabilityFlags
         NSLog(@"Reachability Flag Status: %c%c %c%c%c%c%c%c%c %s\n",
-        (flags & kSCNetworkReachabilityFlagsIsWWAN)               ? 'W' : '-',
-        (flags & kSCNetworkReachabilityFlagsReachable)            ? 'R' : '-',
+            (flags & kSCNetworkReachabilityFlagsIsWWAN)               ? 'W' : '-',
+            (flags & kSCNetworkReachabilityFlagsReachable)            ? 'R' : '-',
 
-        (flags & kSCNetworkReachabilityFlagsTransientConnection)  ? 't' : '-',
-        (flags & kSCNetworkReachabilityFlagsConnectionRequired)   ? 'c' : '-',
-        (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic)  ? 'C' : '-',
-        (flags & kSCNetworkReachabilityFlagsInterventionRequired) ? 'i' : '-',
-        (flags & kSCNetworkReachabilityFlagsConnectionOnDemand)   ? 'D' : '-',
-        (flags & kSCNetworkReachabilityFlagsIsLocalAddress)       ? 'l' : '-',
-        (flags & kSCNetworkReachabilityFlagsIsDirect)             ? 'd' : '-',
-        comment
-        );
+            (flags & kSCNetworkReachabilityFlagsTransientConnection)  ? 't' : '-',
+            (flags & kSCNetworkReachabilityFlagsConnectionRequired)   ? 'c' : '-',
+            (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic)  ? 'C' : '-',
+            (flags & kSCNetworkReachabilityFlagsInterventionRequired) ? 'i' : '-',
+            (flags & kSCNetworkReachabilityFlagsConnectionOnDemand)   ? 'D' : '-',
+            (flags & kSCNetworkReachabilityFlagsIsLocalAddress)       ? 'l' : '-',
+            (flags & kSCNetworkReachabilityFlagsIsDirect)             ? 'd' : '-',
+            comment
+            );
 #endif
 }
 
@@ -90,7 +90,7 @@ static void CDVReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRe
         return;
     }
 
-    if (![(__bridge NSObject*) info isKindOfClass:[CDVReachability class]]) {
+    if (![(__bridge NSObject*)info isKindOfClass :[CDVReachability class]]) {
         NSLog(@"info was wrong class in ReachabilityCallback");
         return;
     }
@@ -214,7 +214,7 @@ static void CDVReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRe
     }
 
     if ((((flags & kSCNetworkReachabilityFlagsConnectionOnDemand) != 0) ||
-            ((flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0))) {
+        ((flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0))) {
         // ... and the connection is on-demand (or on-traffic) if the
         //     calling application is using the CFSocketStream or higher APIs
 

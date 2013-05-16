@@ -2,57 +2,55 @@
 iOS 
 ---
 
-b8796d1 [CB-2556] Update JavaScript for iOS (2.5.0)
-d9b5ee7 Updated Release Notes for 2.5.0
-addb867 [CB-2544] Document "onload" attribute of <plugin> element in Plugin Upgrade Guide
-91332c2 [CB-2510] [1/2] Updated Plugin Upgrade Guide for 2.4.0 -> 2.5.0
-d7d815d [CB-2516] Additional Plugin Note on Upgrading from 2.3.0 to 2.4.0
-dfc6a99 [CB-2411] Added camera popover repositioning.
-b706341 CDVWebViewDelegate header was not public.
-474088f Fixes CB-571 Media updates
-43c3a45 Updated cordova.ios.js to latest 2.5.0rc1 tag
-0005897 Implement useSplashScreen without using a setting
-1bfff2d [CB-2389] Distinguish top-level from sub-frame navigations.
-7d64f65 Updated version to 2.5.0rc1
-0fad4fd [CB-2469] Update JavaScript for iOS (2.5.0rc1)
-0e711f8 [CB=2324] iOS config.xml document should use <widget> instead of <cordova>
-57c3c08 [CB-2342] Media API allows non-whitelisted audio to be played
-96c587b Change default value of splash screen fade to be quicker.
-c5d3c00 [CB-2276] Move Splashscreen logic out of CDVViewController
-fa03d93 Add a notification so plugins will know when page loads occur.
-8bfa788 Make CDVLocalStorage use onReset
-45de648 [CB-1693] Allow plugins to be loaded on start-up.
-b55609e [CB-2443] Removed classSettings initializer from CDVPlugin
-fadf267 [CB-2443] Add pluginInitialize method to CDVPlugin.
-8d22b4c [CB-1547] Take two: Ignore iframe navigations in webview delegate methods
-a24f146 [CB-1547] Ignore iframe navigations in webview delegate methods
-09d5c8f [CB-2276] Remove CDVViewController CDVCapture
-53a839c [CB-2276] Remove CDVViewController from CDVSound
-70af80b [CB-2276] Remove CDVViewController from CDVLocation
-a606ee2 [CB-2276] Add whitelist method to CommandDelegate
-81e3332 [CB-2433] Deprecation notice for window.Settings
-4001ae1 [CB-2275] Add NSURLCache to app template.
-299a324 function name was wrong (case sensitive)
-3c3b0c0 CB-2207 Use a custom script for www/ copying.
-587d663 Merge branch 'master' of https://git-wip-us.apache.org/repos/asf/cordova-ios
-40e350e Don't call onReset for iframe navigation
-fb49c5d Add option for ipad/iphone in cordova/emulate
-7f29bed Fix /bin/create script to work with GNU sed in path
-6e19115 Use correct MIME-type for asset-library responses.
-4fd9731 Uncrustify CDVFile and CDVFileTransfer
-9614ceb [CB-2213] Added native URI request handling.
-c71f9e6 [CB-2213] Skipped image scaling when possible.
-5b09c79 [CB-2213] Added NATIVE_URI to FileTransfer.upload.
-8149df9 [CB-2213] Updated a NATIVE_URI error (getParent).
-2f6bb31 [CB-2213] Updated errors for write and truncate.
-e9a1f8e [CB-2213] Added NATIVE_URI to copyTo and moveTo.
-b3ed4ef [CB-2213] Added the AssetsLibrary framework.
-2cf8369 [CB-2213] Added NATIVE_URI to three methods.
-2af83b1 [CB-2213] Added NATIVE_URI to getMetadata.
-5adf243 [CB-2213] Added NATIVE_URI to readAsDataURL.
-3a09ca2 [CB-2213] Added NATIVE_URI to getFileMetadata.
-c3df2af [CB-2334] Add "body" property to FileTransferError object on iOS
-923b2fd [CB-2379] Update CordovaLib Project Settings according to Xcode 4.6 recommendations
-6fe71ae Run uncrustify on CDVPlugin.m
-ae46724 [CB-2280, CB-2281] SplashScreen fade and rotation
-9e39f7e [CB-2395] Fix CDVViewController UserAgent lock
+60f9348 Updated RELEASENOTES for 2.7.0
+8c5a8e0 [CB-3254] Update www/ Application for iOS
+3348bda Updated VERSION to 2.7.0
+c164681 Updated cordova-js for 2.7.0
+3a5d577 [CB-3295] Send InAppBrowser loadstart events when redirects occur (cherry picked from commit 3ac92e817c59996bb5a046081e3a39256dfc0358)
+1e26f40 [CB-2698] Fix load detection when pages have redirects. (cherry picked from commit 7e0a32892a540295e7de5da6a4832dfdaf337ac0)
+2f21c6e Typo for CORDOVA_2_7_0
+d5186c1 Updated RELEASENOTES for 2.7.0rc1
+8598461 Updated VERSION to 2.7.0rc1
+6303f93 Update tagged 2.7.0rc1 cordova-js
+cce2cdd Fix FileTransfer unit test. HTTP Method was being set to null.
+c8f31c3 Update JS snapshot
+75ed2bb [CB-3067] Revert CDVURLProtocol to not whitelist file urls
+d8d9f3b [CB-3066] Fire onNativeReady from JS, as bridge is available immediately
+ee35807 [CB-3067]: fixing ios5 whitelist of file url
+df1d295 InAppBrowser: Don't inject iframe bridge until necessary.
+0376206 [CB-3069] Fix InAppBrowser load events (for non-redirecting pages)
+c6e7114 [CB-3048] Add --arc flag to create script, support arc in template.
+c017fda [CB-3052] iOS Exif SubIFD offsets incorrect
+fbef36b [CB-3039] iOS Exif date length mismtach
+a691bd6 CB-3032: Add whitelist support for custom schemes.
+d7fb7bf [CB-2911] Updated resolveLocalFileSystemURI.
+5e8e269 Interim .js for the deleted 'Debug Console' plugin
+9facafb [CB-3021] Can no longer import CDVPlugin.h from plugin Objective-C++ code
+27de7de [CB-2960] Changing the volume of a sound already playing
+1b22bd8 [CB-2725] follow links in www copy script
+064239b [CB-2824] Remove DebugConsole plugin
+c9f2332 [CB-2653] Delay executeScript/insertCSS callback until resources have loaded; pass JS results to callback
+d2ffc92 Updated cordova.js to 2.6.0
+d7ecb8e Updated VERSION to 2.6.0
+60eb7f1 [CB-2732] Only set camera device when allowed.
+997359f [CB-2902] re-added long/short tags to template dict, fixed subExifIFD offset
+355b3ac Merge remote-tracking branch 'apache/master'
+850c4bd [CB-2849] Fix bin/create when CordovaLib parent dir has a space
+deb60d8 [CB-2896] fixed error in exif subifd offset calculation for tag 8769
+c08e414 [CB-2848] ShowSplashScreenSpinner not used
+7d6d985 CB-2725: Fix www deploy issues with symlinks
+cb01eab Merge remote-tracking branch 'apache/master'
+a0d8dc7 [CB-2896] split writing of working tags off here, multipart tags not supported
+bd48a6b Style fixups (uncrustify 0.6.0)
+5addd3d [CB-2587] Added plugin timing for plugins that are loaded on startup (plugin 'onload' attribute)
+cb8e66c [CB-2788] add ./bin/check_reqs script to iOS
+5d8a01a Added updated 2.6.0rc1 cordova.js
+42f48fb [CB-1518] Request content length in parallel with download for gzipped content
+7aa2607 [CB-2190] Allow FileTransfer uploads to continue in background
+43edb03 [CB-51] Added httpMethod for file transfer options (defaults to POST)
+d6a3576 [CB-2537] Implement streaming downloads for FileTransfer
+3e007c3 [CB-2790] removed old splice code, replaced with JpegHeaderWriter api calls
+e078f62 [CB-2790] added splice function to header writer: accepts jpeg as NSData, and splices in exif data specified by a string
+9a6a689 [CB-2653] Simplify InAppBrowser.injectScriptCode.
+40c98b8 Fix NPE in InAppBrowser's error callback.
+452db15 [CB-2305] Add InAppBrowser injectSriptCode command to support InAppBrowser.executeScript and InAppBrowser.insertCSS APIs

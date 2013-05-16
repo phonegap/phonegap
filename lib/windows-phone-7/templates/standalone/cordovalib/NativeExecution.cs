@@ -61,15 +61,23 @@ namespace WPCordovaClassLib.Cordova
             CommandFactory.ResetAllCommands();
         }
 
+        public void AutoLoadCommand(string commandService)
+        {
+            BaseCommand bc = CommandFactory.CreateByServiceName(commandService);
+            if (bc != null)
+            {
+                bc.OnInit();
+            }
+
+        }
+
         /// <summary>
         /// Executes command and returns result back.
         /// </summary>
         /// <param name="commandCallParams">Command to execute</param>
-        
         public void ProcessCommand(CordovaCommandCall commandCallParams)
         {
 
-            
             if (commandCallParams == null)
             {
                 throw new ArgumentNullException("commandCallParams");
@@ -90,7 +98,6 @@ namespace WPCordovaClassLib.Cordova
                     this.OnCommandResult(commandCallParams.CallbackId, res);
                 };
 
-                bc.OnCommandResult -= OnCommandResultHandler;
                 bc.OnCommandResult += OnCommandResultHandler;
 
                 EventHandler<ScriptCallback> OnCustomScriptHandler = delegate(object o, ScriptCallback script)
@@ -98,14 +105,12 @@ namespace WPCordovaClassLib.Cordova
                     this.InvokeScriptCallback(script);
                 };
 
-                bc.OnCustomScript -= OnCustomScriptHandler;
+
                 bc.OnCustomScript += OnCustomScriptHandler;
 
-                // TODO: alternative way is using thread pool (ThreadPool.QueueUserWorkItem) instead of 
-                // new thread for every command call; but num threads are not sufficient - 2 threads per CPU core
-
-                Thread thread = new Thread(func =>
+                ThreadStart methodInvocation = () =>
                 {
+
                     try
                     {
                         bc.InvokeMethodNamed(commandCallParams.Action, commandCallParams.Args);
@@ -122,14 +127,25 @@ namespace WPCordovaClassLib.Cordova
 
                         return;
                     }
-                });
+                };
 
-                thread.Start();
+                if ((bc is File) || (bc is Accelerometer))
+                {
+                    // Due to some issues with the IsolatedStorage in current version of WP8 SDK we have to run all File Api commands synchronously.
+                    // TODO: test this in WP8 RTM
+                    methodInvocation.Invoke();
+                }
+                else
+                {
+                    new Thread(methodInvocation).Start();
+                }
+
+                    
             }
             catch (Exception ex)
             {
                 // ERROR
-                Debug.WriteLine(String.Format("ERROR: Unable to execute command :: {0}:{1}:{3} ",
+                Debug.WriteLine(String.Format("ERROR: Unable to execute command :: {0}:{1}:{2} ",
                     commandCallParams.Service, commandCallParams.Action, ex.Message));
 
                 this.OnCommandResult(commandCallParams.CallbackId, new PluginResult(PluginResult.Status.ERROR));
@@ -160,21 +176,27 @@ namespace WPCordovaClassLib.Cordova
 
             #endregion
 
-            string status = ((int)result.Result).ToString();
             string jsonResult = result.ToJSONString();
 
-            ScriptCallback scriptCallback = null;
+            string callback;
+            string args = string.Format("('{0}',{1});", callbackId, jsonResult);
 
-            if (String.IsNullOrEmpty(result.Cast))
+            if (result.Result == PluginResult.Status.NO_RESULT ||
+               result.Result == PluginResult.Status.OK)
             {
-                scriptCallback = new ScriptCallback("CordovaCommandResult", new string[] { status, callbackId, jsonResult });
+                callback = @"(function(callbackId,args) {
+                try { args.message = JSON.parse(args.message); } catch (ex) { }
+                cordova.callbackSuccess(callbackId,args);
+                })" + args;
             }
             else
             {
-                scriptCallback = new ScriptCallback("CordovaCommandResult", new string[] { status, callbackId, jsonResult, result.Cast });
+                callback = @"(function(callbackId,args) {
+                try { args.message = JSON.parse(args.message); } catch (ex) { }
+                cordova.callbackError(callbackId,args);
+                })" + args;
             }
-
-            this.InvokeScriptCallback(scriptCallback);
+            this.InvokeScriptCallback(new ScriptCallback("eval", new string[] { callback }));
 
         }
 
@@ -197,7 +219,6 @@ namespace WPCordovaClassLib.Cordova
             //Debug.WriteLine("INFO:: About to invoke ::" + script.ScriptName + " with args ::" + script.Args[0]);
             this.webBrowser.Dispatcher.BeginInvoke((ThreadStart)delegate()
             {
-
                 try
                 {
                     //Debug.WriteLine("INFO:: InvokingScript::" + script.ScriptName + " with args ::" + script.Args[0]);

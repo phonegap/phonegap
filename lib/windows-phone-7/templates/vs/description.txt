@@ -1,4 +1,4 @@
 CordovaStarter
 
-Starter project for building a Cordova app for Windows Phone version: 2.5.0
+Starter project for building a Cordova app for Windows Phone version: 2.6.0
 

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows 8
+# Visual Studio 2012
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaTestApp", "CordovaTestApp.jsproj", "{F0EEA4FC-197B-4C4E-8590-5D9B2B964F5B}"
 EndProject
 Global

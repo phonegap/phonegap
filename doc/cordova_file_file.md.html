@@ -21,19 +21,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
 <meta name="generator" content="joDoc">
-<title>Apache Cordova API Documentation</title>
+<title>PhoneGap API Documentation</title>
 <link rel="stylesheet" type="text/css" href="index.css">
 <link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
 <link rel="stylesheet" type="text/css" href="prettify/prettify.css">
 </head>
 <body>
         <div id="header">
-            <h1><a href="index.html">Apache <strong>Cordova</strong> Documentation</a></h1>
+            <h1><a href="index.html">PhoneGap Documentation</a></h1>
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.7.0rc1">2.7.0rc1</option>
+<option selected value="2.7.0">2.7.0</option>
+<option value="2.6.0rc1">2.6.0rc1</option>
+<option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
-<option selected value="2.5.0">2.5.0</option>
+<option value="2.5.0">2.5.0</option>
 <option value="2.4.0rc1">2.4.0rc1</option>
 <option value="2.4.0">2.4.0</option>
 <option value="2.3.0rc2">2.3.0rc2</option>
@@ -59,6 +63,28 @@
 <option value="1.6.0">1.6.0</option>
 <option value="1.5.0rc1">1.5.0rc1</option>
 <option value="1.5.0">1.5.0</option>
+<option value="1.4.1">1.4.1</option>
+<option value="1.4.0rc1">1.4.0rc1</option>
+<option value="1.4.0">1.4.0</option>
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+<option value="1.0.0rc3">1.0.0rc3</option>
+<option value="1.0.0rc2">1.0.0rc2</option>
+<option value="1.0.0rc1">1.0.0rc1</option>
+<option value="1.0.0">1.0.0</option>
+<option value="0.9.6">0.9.6</option>
+<option value="0.9.5.1">0.9.5.1</option>
+<option value="0.9.5">0.9.5</option>
+<option value="0.9.4">0.9.4</option>
+<option value="0.9.3">0.9.3</option>
+<option value="0.9.2">0.9.2</option>
+</optgroup>
+<optgroup label="Español" value="es"><option value="1.0.0">1.0.0</option></optgroup>
+<optgroup label="Français" value="fr">
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
 </optgroup>
 <optgroup label="Japanese" value="jp">
 <option value="2.2.0">2.2.0</option>
@@ -67,6 +93,7 @@
 <option value="1.9.0">1.9.0</option>
 <option value="1.8.1">1.8.1</option>
 <option value="1.7.0">1.7.0</option>
+<option value="0.9.5">0.9.5</option>
 </optgroup>
 <optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
         </div>
@@ -93,6 +120,10 @@
 <option value="FileReader_abort_quick_example">      - Abort Quick Example</option>
 <option value="FileReader_full_example">      - Full Example</option>
 <option value="FileReader_ios_quirks">      - iOS Quirks</option>
+<option value="FileReader_read_as_binary_string">      - Read As Binary String</option>
+<option value="FileReader_quick_example">      - Quick Example</option>
+<option value="FileReader_read_as_array_buffer">      - Read As Array Buffer</option>
+<option value="FileReader_quick_example">      - Quick Example</option>
 <option value="FileWriter">FileWriter</option>
 <option value="FileWriter_properties">      - Properties</option>
 <option value="FileWriter_methods">      - Methods</option>
@@ -139,6 +170,7 @@ File System Quick Example</option>
 <option value="DirectoryEntry_getdirectory">      - getDirectory</option>
 <option value="DirectoryEntry_getfile">      - getFile</option>
 <option value="DirectoryEntry_removerecursively">      - removeRecursively</option>
+<option value="DirectoryEntry_blackberry_quirks">      - BlackBerry Quirks</option>
 <option value="DirectoryReader">DirectoryReader</option>
 <option value="DirectoryReader_methods">      - Methods</option>
 <option value="DirectoryReader_supported_platforms">      - Supported Platforms</option>
@@ -437,11 +469,15 @@ var slice3 = file.slice(120, 135);
 
 <ul>
 <li>
-<strong>abort</strong>: Aborts reading file. </li>
+<strong>abort</strong>: Aborts reading file.</li>
 <li>
 <strong>readAsDataURL</strong>: Read file and return data as a base64 encoded data url.</li>
 <li>
 <strong>readAsText</strong>: Reads text file.</li>
+<li>
+<strong>readAsBinaryString</strong>: Reads file as binary and returns a binary string.</li>
+<li>
+<strong>readAsArrayBuffer</strong>: Reads file as an ArrayBuffer.</li>
 </ul>
 <h2>
 <a name="FileReader_details">Details</a>
@@ -547,7 +583,7 @@ entry.file(win, fail);
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_file_file.md.html#FileReader">FileReader</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
@@ -614,6 +650,64 @@ entry.file(win, fail);
 <li>
 <strong>encoding</strong> parameter is not supported, UTF8 encoding is always used.</li>
 </ul>
+<h2>
+<a name="FileReader_read_as_binary_string">Read As Binary String</a>
+</h2>
+
+<p>Currently supported on iOS and Android only.</p>
+
+<p><strong>Parameters:</strong>
+- file - the file object to read</p>
+
+<h2>
+<a name="FileReader_quick_example">Quick Example</a>
+</h2>
+
+<pre class="prettyprint"><code>function win(file) {
+    var reader = new <a href="cordova_file_file.md.html#FileReader">FileReader</a>();
+    reader.onloadend = function(evt) {
+        console.log("read success");
+        console.log(evt.target.result);
+    };
+    reader.readAsBinaryString(file);
+};
+
+var fail = function(evt) {
+    console.log(error.code);
+};
+
+entry.file(win, fail);
+</code></pre>
+
+<h2>
+<a name="FileReader_read_as_array_buffer">Read As Array Buffer</a>
+</h2>
+
+<p>Currently supported on iOS and Android only.</p>
+
+<p><strong>Parameters:</strong>
+- file - the file object to read</p>
+
+<h2>
+<a name="FileReader_quick_example">Quick Example</a>
+</h2>
+
+<pre class="prettyprint"><code>function win(file) {
+    var reader = new <a href="cordova_file_file.md.html#FileReader">FileReader</a>();
+    reader.onloadend = function(evt) {
+        console.log("read success");
+        console.log(new Uint8Array(evt.target.result));
+    };
+    reader.readAsArrayBuffer(file);
+};
+
+var fail = function(evt) {
+    console.log(error.code);
+};
+
+entry.file(win, fail);
+</code></pre>
+
 <hr>
 <h1><a name="FileWriter">FileWriter</a></h1>
 
@@ -785,7 +879,7 @@ entry.createWriter(win, fail);
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_file_file.md.html#FileWriter">FileWriter</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
@@ -892,7 +986,7 @@ window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">Loc
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_file_file.md.html#File">File</a> System Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load
@@ -1793,6 +1887,26 @@ function fail(error) {
 entry.removeRecursively(success, fail);
 </code></pre>
 
+<h2>
+<a name="DirectoryEntry_blackberry_quirks">BlackBerry Quirks</a>
+</h2>
+
+<p>May fail with a ControlledAccessException in the following cases:</p>
+
+<ul>
+<li>Access is attempted on an directory created by a previous installation of an application.</li>
+</ul>
+<blockquote>
+  <p>solution: insure temporary directories are cleaned manually, or by the application before reinstall</p>
+</blockquote>
+
+<ul>
+<li>if device is connected by usb</li>
+</ul>
+<blockquote>
+  <p>solution: disconnect usb cable from device and run again</p>
+</blockquote>
+
 <hr>
 <h1><a name="DirectoryReader">DirectoryReader</a></h1>
 
@@ -1959,7 +2073,7 @@ ft.upload(fileURI, encodeURI("http://some.server.com/upload.php"), win, fail, op
 &lt;head&gt;
     &lt;title&gt;<a href="cordova_file_file.md.html#File">File</a> Transfer Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
         // Wait for Cordova to load
@@ -2072,6 +2186,8 @@ ft.upload(fileURI, uri, win, fail, options);
 <li>
 <strong>trustAllHosts</strong> - Optional parameter, defaults to false. If set to true then it will accept all security certificates. This is useful as Android rejects self signed security certificates. Not recommended for production use. Supported on Android and iOS. <em>(boolean)</em>
 </li>
+<li>
+<strong>options</strong> - Optional parameters, currently only supports headers (such as Authorization (Basic Authentication), etc).</li>
 </ul>
 <p><strong>Quick Example</strong></p>
 
@@ -2090,6 +2206,12 @@ fileTransfer.download(
         console.log("download error source " + error.source);
         console.log("download error target " + error.target);
         console.log("upload error code" + error.code);
+    },
+    false,
+    {
+        headers: {
+            "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+        }
     }
 );
 </code></pre>
@@ -2348,7 +2470,7 @@ window.resolveLocalFileSystemURI("file:///example.txt", onSuccess, onError);
   &lt;head&gt;
     &lt;title&gt;Local <a href="cordova_file_file.md.html#File">File</a> System Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     // Wait for Cordova to load

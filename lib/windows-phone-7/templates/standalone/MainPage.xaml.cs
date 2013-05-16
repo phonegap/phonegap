@@ -34,7 +34,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 
 
-
 namespace $safeprojectname$
 {
     public partial class MainPage : PhoneApplicationPage
@@ -43,12 +42,13 @@ namespace $safeprojectname$
         public MainPage()
         {
             InitializeComponent();
-            this.PGView.Loaded += GapBrowser_Loaded;
+            this.CordovaView.Loaded += CordovaView_Loaded;
         }
 
-        private void GapBrowser_Loaded(object sender, RoutedEventArgs e)
+        private void CordovaView_Loaded(object sender, RoutedEventArgs e)
         {
-            this.PGView.Loaded -= GapBrowser_Loaded;
+            this.CordovaView.Loaded -= CordovaView_Loaded;
+            // first time load will have an animation
             Storyboard _storyBoard = new Storyboard();
             DoubleAnimation animation = new DoubleAnimation()
             {

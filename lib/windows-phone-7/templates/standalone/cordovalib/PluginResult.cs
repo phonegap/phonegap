@@ -68,8 +68,6 @@ namespace WPCordovaClassLib.Cordova
 
         public Status Result { get; private set; }
         public string Message { get; set; }
-        public String Cast { get; private set; }
-
         public bool KeepCallback { get; set; }
 
         /// <summary>
@@ -103,21 +101,6 @@ namespace WPCordovaClassLib.Cordova
             this.Message = JSON.JsonHelper.Serialize(message);
         }
 
-        /// <summary>
-        /// Creates new instance of the PluginResult class.
-        /// </summary>
-        /// <param name="status">Execution result</param>
-        /// <param name="message">The message</param>
-        /// <param name="cast">The cast parameter</param>
-        /// 
-        [Obsolete("Don't use Cast!!", false)]
-        public PluginResult(Status status, object message, string cast)
-        {
-            this.Result = status;
-            this.Message = JSON.JsonHelper.Serialize(message);
-            this.Cast = cast;
-        }
-
         public string ToJSONString()
         {
             string res = String.Format("\"status\":{0},\"message\":{1},\"keepCallback\":{2}",
@@ -132,21 +115,10 @@ namespace WPCordovaClassLib.Cordova
 
         public string ToCallbackString(string callbackId, string successCallback, string errorCallback)
         {
-            //return String.Format("{0}('{1}',{2});", successCallback, callbackId, this.ToJSONString());
-
             if (this.IsSuccess)
             {
                 StringBuilder buf = new StringBuilder("");
-                if (this.Cast != null)
-                {
-                    Debug.WriteLine(callbackId + "this.Cast = " + this.Cast);
-                    buf.Append("var temp = " + this.Cast + "(" + this.ToJSONString() + ");\n");
-                    buf.Append(String.Format("{0}('{1}',temp);", successCallback, callbackId));
-                }
-                else
-                {
-                    buf.Append(String.Format("{0}('{1}',{2});", successCallback, callbackId, this.ToJSONString()));
-                }
+                buf.Append(String.Format("{0}('{1}',{2});", successCallback, callbackId, this.ToJSONString()));
                 return buf.ToString();
             }
             else

@@ -34,9 +34,9 @@
 + (CDVInvokedUrlCommand*)commandFromJson:(NSArray*)jsonEntry;
 
 - (id)initWithArguments:(NSArray*)arguments
-   callbackId          :(NSString*)callbackId
-    className           :(NSString*)className
-   methodName          :(NSString*)methodName;
+             callbackId:(NSString*)callbackId
+              className:(NSString*)className
+             methodName:(NSString*)methodName;
 
 - (id)initFromJson:(NSArray*)jsonEntry;
 

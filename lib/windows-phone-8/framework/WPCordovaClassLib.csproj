@@ -29,6 +29,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WPCordovaClassLib</RootNamespace>
     <AssemblyName>WPCordovaClassLib</AssemblyName>
+    <AssemblyVersion>$(BaseVersionNumber)</AssemblyVersion>
+    <AssemblyFileVersion>$(BaseVersionNumber)</AssemblyFileVersion>
+    <AssemblyDescription>$(VersionNumber)</AssemblyDescription>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>
     </SilverlightVersion>
@@ -122,68 +125,8 @@
     <Compile Include="..\templates\standalone\cordovalib\CommandFactory.cs">
       <Link>CordovaLib\CommandFactory.cs</Link>
     </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Accelerometer.cs">
-      <Link>CordovaLib\Commands\Accelerometer.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\AudioFormatsHelper.cs">
-      <Link>CordovaLib\Commands\AudioFormatsHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\AudioPlayer.cs">
-      <Link>CordovaLib\Commands\AudioPlayer.cs</Link>
-    </Compile>
     <Compile Include="..\templates\standalone\cordovalib\Commands\BaseCommand.cs">
       <Link>CordovaLib\Commands\BaseCommand.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Battery.cs">
-      <Link>CordovaLib\Commands\Battery.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Camera.cs">
-      <Link>CordovaLib\Commands\Camera.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Capture.cs">
-      <Link>CordovaLib\Commands\Capture.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Compass.cs">
-      <Link>CordovaLib\Commands\Compass.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Contacts.cs">
-      <Link>CordovaLib\Commands\Contacts.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\DebugConsole.cs">
-      <Link>CordovaLib\Commands\DebugConsole.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Device.cs">
-      <Link>CordovaLib\Commands\Device.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\File.cs">
-      <Link>CordovaLib\Commands\File.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\FileTransfer.cs">
-      <Link>CordovaLib\Commands\FileTransfer.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\GeoLocation.cs">
-      <Link>CordovaLib\Commands\GeoLocation.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Globalization.cs">
-      <Link>CordovaLib\Commands\Globalization.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\ImageExifHelper.cs">
-      <Link>CordovaLib\Commands\ImageExifHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\InAppBrowser.cs">
-      <Link>CordovaLib\Commands\InAppBrowser.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Media.cs">
-      <Link>CordovaLib\Commands\Media.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\MimeTypeMapper.cs">
-      <Link>CordovaLib\Commands\MimeTypeMapper.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\NetworkStatus.cs">
-      <Link>CordovaLib\Commands\NetworkStatus.cs</Link>
-    </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\Commands\Notification.cs">
-      <Link>CordovaLib\Commands\Notification.cs</Link>
     </Compile>
     <Compile Include="..\templates\standalone\cordovalib\ConfigHandler.cs">
       <Link>CordovaLib\ConfigHandler.cs</Link>
@@ -213,49 +156,87 @@
     <Compile Include="..\templates\standalone\cordovalib\ScriptCallback.cs">
       <Link>CordovaLib\ScriptCallback.cs</Link>
     </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\UI\AudioCaptureTask.cs">
-      <Link>CordovaLib\UI\AudioCaptureTask.cs</Link>
+    <Compile Include="..\templates\standalone\Plugins\Accelerometer.cs">
+      <Link>CordovaLib\Plugins\Accelerometer.cs</Link>
     </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\UI\AudioRecorder.xaml.cs">
-      <Link>CordovaLib\UI\AudioRecorder.xaml.cs</Link>
-      <DependentUpon>AudioRecorder.xaml</DependentUpon>
+    <Compile Include="..\templates\standalone\Plugins\AudioFormatsHelper.cs">
+      <Link>CordovaLib\Plugins\AudioFormatsHelper.cs</Link>
     </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\UI\ImageCapture.xaml.cs">
-      <Link>CordovaLib\UI\ImageCapture.xaml.cs</Link>
-      <DependentUpon>ImageCapture.xaml</DependentUpon>
+    <Compile Include="..\templates\standalone\Plugins\AudioPlayer.cs">
+      <Link>CordovaLib\Plugins\AudioPlayer.cs</Link>
     </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\UI\NotificationBox.xaml.cs">
-      <Link>CordovaLib\UI\NotificationBox.xaml.cs</Link>
-      <DependentUpon>NotificationBox.xaml</DependentUpon>
+    <Compile Include="..\templates\standalone\Plugins\Battery.cs">
+      <Link>CordovaLib\Plugins\Battery.cs</Link>
     </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\UI\VideoCaptureTask.cs">
-      <Link>CordovaLib\UI\VideoCaptureTask.cs</Link>
+    <Compile Include="..\templates\standalone\Plugins\Camera.cs">
+      <Link>CordovaLib\Plugins\Camera.cs</Link>
     </Compile>
-    <Compile Include="..\templates\standalone\cordovalib\UI\VideoRecorder.xaml.cs">
-      <Link>CordovaLib\UI\VideoRecorder.xaml.cs</Link>
-      <DependentUpon>VideoRecorder.xaml</DependentUpon>
+    <Compile Include="..\templates\standalone\Plugins\Capture.cs">
+      <Link>CordovaLib\Plugins\Capture.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\Compass.cs">
+      <Link>CordovaLib\Plugins\Compass.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\Contacts.cs">
+      <Link>CordovaLib\Plugins\Contacts.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\DebugConsole.cs">
+      <Link>CordovaLib\Plugins\DebugConsole.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\Device.cs">
+      <Link>CordovaLib\Plugins\Device.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\File.cs">
+      <Link>CordovaLib\Plugins\File.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\FileTransfer.cs">
+      <Link>CordovaLib\Plugins\FileTransfer.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\GeoLocation.cs">
+      <Link>CordovaLib\Plugins\GeoLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\Globalization.cs">
+      <Link>CordovaLib\Plugins\Globalization.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\ImageExifHelper.cs">
+      <Link>CordovaLib\Plugins\ImageExifHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\InAppBrowser.cs">
+      <Link>CordovaLib\Plugins\InAppBrowser.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\Media.cs">
+      <Link>CordovaLib\Plugins\Media.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\MimeTypeMapper.cs">
+      <Link>CordovaLib\Plugins\MimeTypeMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\NetworkStatus.cs">
+      <Link>CordovaLib\Plugins\NetworkStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\Notification.cs">
+      <Link>CordovaLib\Plugins\Notification.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\UI\AudioCaptureTask.cs">
+      <Link>CordovaLib\Plugins\UI\AudioCaptureTask.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\UI\AudioRecorder.xaml.cs">
+      <Link>CordovaLib\Plugins\UI\AudioRecorder.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\UI\ImageCapture.xaml.cs">
+      <Link>CordovaLib\Plugins\UI\ImageCapture.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\UI\NotificationBox.xaml.cs">
+      <Link>CordovaLib\Plugins\UI\NotificationBox.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\UI\VideoCaptureTask.cs">
+      <Link>CordovaLib\Plugins\UI\VideoCaptureTask.cs</Link>
+    </Compile>
+    <Compile Include="..\templates\standalone\Plugins\UI\VideoRecorder.xaml.cs">
+      <Link>CordovaLib\Plugins\UI\VideoRecorder.xaml.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\templates\standalone\cordovalib\Images\appbar.back.rest.png">
-      <Link>CordovaLib\Images\appbar.back.rest.png</Link>
-    </Resource>
-    <Resource Include="..\templates\standalone\cordovalib\Images\appbar.close.rest.png">
-      <Link>CordovaLib\Images\appbar.close.rest.png</Link>
-    </Resource>
-    <Resource Include="..\templates\standalone\cordovalib\Images\appbar.feature.video.rest.png">
-      <Link>CordovaLib\Images\appbar.feature.video.rest.png</Link>
-    </Resource>
-    <Resource Include="..\templates\standalone\cordovalib\Images\appbar.next.rest.png">
-      <Link>CordovaLib\Images\appbar.next.rest.png</Link>
-    </Resource>
-    <Resource Include="..\templates\standalone\cordovalib\Images\appbar.save.rest.png">
-      <Link>CordovaLib\Images\appbar.save.rest.png</Link>
-    </Resource>
-    <Resource Include="..\templates\standalone\cordovalib\Images\appbar.stop.rest.png">
-      <Link>CordovaLib\Images\appbar.stop.rest.png</Link>
-    </Resource>
     <Content Include="..\templates\standalone\cordovalib\resources\notification-beep.wav">
       <Link>CordovaLib\resources\notification-beep.wav</Link>
     </Content>
@@ -290,23 +271,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\templates\standalone\cordovalib\UI\AudioRecorder.xaml">
-      <Link>CordovaLib\UI\AudioRecorder.xaml</Link>
+    <Page Include="..\templates\standalone\Plugins\UI\AudioRecorder.xaml">
+      <Link>CordovaLib\Plugins\UI\AudioRecorder.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\templates\standalone\cordovalib\UI\ImageCapture.xaml">
-      <Link>CordovaLib\UI\ImageCapture.xaml</Link>
+    <Page Include="..\templates\standalone\Plugins\UI\ImageCapture.xaml">
+      <Link>CordovaLib\Plugins\UI\ImageCapture.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\templates\standalone\cordovalib\UI\NotificationBox.xaml">
-      <Link>CordovaLib\UI\NotificationBox.xaml</Link>
+    <Page Include="..\templates\standalone\Plugins\UI\NotificationBox.xaml">
+      <Link>CordovaLib\Plugins\UI\NotificationBox.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\templates\standalone\cordovalib\UI\VideoRecorder.xaml">
-      <Link>CordovaLib\UI\VideoRecorder.xaml</Link>
+    <Page Include="..\templates\standalone\Plugins\UI\VideoRecorder.xaml">
+      <Link>CordovaLib\Plugins\UI\VideoRecorder.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

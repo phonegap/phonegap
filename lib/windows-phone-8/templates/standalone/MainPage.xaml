@@ -37,7 +37,7 @@
         </Grid.RowDefinitions>
         <my:CordovaView HorizontalAlignment="Stretch" 
                    Margin="0,0,0,0"  
-                   Name="PGView" 
+                   x:Name="CordovaView" 
                    VerticalAlignment="Stretch" />
         <Image Source="SplashScreenImage.jpg"
           x:Name="SplashImage"
@@ -50,3 +50,4 @@
     </Grid>
 
 </phone:PhoneApplicationPage>
+

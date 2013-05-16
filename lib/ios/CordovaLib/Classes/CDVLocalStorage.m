@@ -35,7 +35,7 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResignActive)
                                                  name:UIApplicationWillResignActiveNotification object:nil];
-    BOOL cloudBackup = [@"cloud" isEqualToString:self.commandDelegate.settings[@"BackupWebStorage"]];
+    BOOL cloudBackup = [@"cloud" isEqualToString : self.commandDelegate.settings[@"BackupWebStorage"]];
 
     self.backupInfo = [[self class] createBackupInfoWithCloudBackup:cloudBackup];
 }
@@ -64,8 +64,8 @@
     // ////////// LOCALSTORAGE
 
     original = [targetDir stringByAppendingPathComponent:targetDirNests ? @"WebKit/LocalStorage/file__0.localstorage":@"file__0.localstorage"];
-    backup = [backupDir stringByAppendingPathComponent:(backupDirNests ? @"WebKit/LocalStorage":@"")];
-    backup = [backup stringByAppendingPathComponent:(rename ? @"localstorage.appdata.db":@"file__0.localstorage")];
+    backup = [backupDir stringByAppendingPathComponent:(backupDirNests ? @"WebKit/LocalStorage" : @"")];
+    backup = [backup stringByAppendingPathComponent:(rename ? @"localstorage.appdata.db" : @"file__0.localstorage")];
 
     backupItem = [[CDVBackupInfo alloc] init];
     backupItem.backup = backup;
@@ -77,8 +77,8 @@
     // ////////// WEBSQL MAIN DB
 
     original = [targetDir stringByAppendingPathComponent:targetDirNests ? @"WebKit/LocalStorage/Databases.db":@"Databases.db"];
-    backup = [backupDir stringByAppendingPathComponent:(backupDirNests ? @"WebKit/LocalStorage":@"")];
-    backup = [backup stringByAppendingPathComponent:(rename ? @"websqlmain.appdata.db":@"Databases.db")];
+    backup = [backupDir stringByAppendingPathComponent:(backupDirNests ? @"WebKit/LocalStorage" : @"")];
+    backup = [backup stringByAppendingPathComponent:(rename ? @"websqlmain.appdata.db" : @"Databases.db")];
 
     backupItem = [[CDVBackupInfo alloc] init];
     backupItem.backup = backup;
@@ -90,8 +90,8 @@
     // ////////// WEBSQL DATABASES
 
     original = [targetDir stringByAppendingPathComponent:targetDirNests ? @"WebKit/LocalStorage/file__0":@"file__0"];
-    backup = [backupDir stringByAppendingPathComponent:(backupDirNests ? @"WebKit/LocalStorage":@"")];
-    backup = [backup stringByAppendingPathComponent:(rename ? @"websqldbs.appdata.db":@"file__0")];
+    backup = [backupDir stringByAppendingPathComponent:(backupDirNests ? @"WebKit/LocalStorage" : @"")];
+    backup = [backup stringByAppendingPathComponent:(rename ? @"websqldbs.appdata.db" : @"file__0")];
 
     backupItem = [[CDVBackupInfo alloc] init];
     backupItem.backup = backup;
@@ -106,8 +106,8 @@
 + (NSMutableArray*)createBackupInfoWithCloudBackup:(BOOL)cloudBackup
 {
     // create backup info from backup folder to caches folder
-    NSString* appLibraryFolder = [NSSearchPathForDirectoriesInDomains (NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* appDocumentsFolder = [NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* appLibraryFolder = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* appDocumentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString* cacheFolder = [appLibraryFolder stringByAppendingPathComponent:@"Caches"];
     NSString* backupsFolder = [appDocumentsFolder stringByAppendingPathComponent:@"Backups"];
 
@@ -131,7 +131,7 @@
     return success;
 }
 
-+ (BOOL)copyFrom:(NSString*)src to:(NSString*)dest error:(NSError * __autoreleasing*)error
++ (BOOL)copyFrom:(NSString*)src to:(NSString*)dest error:(NSError* __autoreleasing*)error
 {
     NSFileManager* fileManager = [NSFileManager defaultManager];
 
@@ -149,7 +149,7 @@
     // generate unique filepath in temp directory
     CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
     CFStringRef uuidString = CFUUIDCreateString(kCFAllocatorDefault, uuidRef);
-    NSString* tempBackup = [[NSTemporaryDirectory () stringByAppendingPathComponent:(__bridge NSString*)uuidString] stringByAppendingPathExtension:@"bak"];
+    NSString* tempBackup = [[NSTemporaryDirectory() stringByAppendingPathComponent:(__bridge NSString*)uuidString] stringByAppendingPathExtension:@"bak"];
     CFRelease(uuidString);
     CFRelease(uuidRef);
 
@@ -334,8 +334,8 @@
         return;
     }
 
-    NSString* appLibraryFolder = [NSSearchPathForDirectoriesInDomains (NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* appDocumentsFolder = [NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* appLibraryFolder = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* appDocumentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 
     NSMutableArray* backupInfo = [NSMutableArray arrayWithCapacity:0];
 
@@ -386,15 +386,15 @@
         backgroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
                 [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskID];
                 backgroundTaskID = UIBackgroundTaskInvalid;
-                NSLog (@"Background task to backup WebSQL/LocalStorage expired.");
+                NSLog(@"Background task to backup WebSQL/LocalStorage expired.");
             }];
         CDVLocalStorage __weak* weakSelf = self;
         [self.commandDelegate runInBackground:^{
-                [weakSelf backup:nil];
+            [weakSelf backup:nil];
 
-                [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskID];
-                backgroundTaskID = UIBackgroundTaskInvalid;
-            }];
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskID];
+            backgroundTaskID = UIBackgroundTaskInvalid;
+        }];
     }
 }
 

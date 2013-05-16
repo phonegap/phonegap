@@ -2,25 +2,42 @@
 Android 
 ---
 
-fb1455a Preparing to tag 2.5.0
-5462edd Updating the JS for 2.5.0rc1
-fef51f1 Apparently the JS was wrong when tagging
-5cd1773 Tagging 2.5.0rc1.  Updating files
-cb19205 CB-2458: gracefully exit with back button If users do extra initialization, we can get NPEs when hitting the back button before loadUrl() has been called. -Null fenced code in startOfHistory() that gave us an NPE when hitting Back button with useBrowserHistory=true -Call finish() in Back button code when no history since with useBrowserHistory=true it would just hang while the app inits -Call loadUrlIntoView() first in handleDestory() since with useBrowserHistory=false, the default behavior would try to use the baseUrl which is null
-892f96e CB-2282: Turning on AppCache
-13ef58a Updated XML for the test project
-a45d5a9 CB-1605: Going through Eclipse warnings, removing the unused imports
-a31714f CB-2447: This is a non-trivial task.  Migrated test plugin to modern plugin API.
-23d2a80 Merge branch 'CB-2447' of git://github.com/jamesjong/cordova-android
-c20b233 CB-2446: Ugly, but workable fix
-8613551 minor readme stuff
-2ab01da Adding link to cordova.io in readme
-790636c CB-2447: Remove use of deprecate org.apache.cordova.api.Plugin
-2393883 [CB-2213] Add NATIVE_URI to the quick-return logic.
-674b870 [CB-2297] Fix for geolocaion database error
-83d9248 Update framework/src/org/apache/cordova/ContactAccessorSdk5.java
-f9d27e4 CB-2408: There should be a check for the browser history, but the logic intentionally doesn't match
-2683803 Add check for build targets in create script
-dd86d7a [CB-2095] Delete file on FileTransfer.download fail
-1246a81 [CB-2213] Added NATIVE_URI support.
-8ab7278 Code clean-up of FileTransfer
+909e664 Updating JS for Android
+a308100 Prep for 2.7.0 final
+fea8c5d Merge branch '2.7.x' of https://git-wip-us.apache.org/repos/asf/cordova-android into 2.7.x
+a890c81 This should be 2.7.0rc1
+665c1bd [CB-3226] Fix: plugins can intercept urls with "?", "#", "%20"(cherry picked from commit 53982272d694b0bcc2093e8374b3a6fdd64b97fa)
+b22990c cordova-js wasn't properly auto-incremented either
+832998b 2.7.0rc1 prep
+c798d13 Update JS snapshot for 2.7.0
+bf3e024 [CB-3066] Fire onNativeReady from JS, as bridge is available immediately
+191f31b [CB-2432] Don't try and write exif info for images from picasa
+d3b7903 Merge branch 'master' of https://git-wip-us.apache.org/repos/asf/cordova-android
+99e7d1e Merge branches 'sunshine' and 'master'
+b13166f [CB-2432] Fix Camera.getPicture() for picasa images
+80fe445 Use FileHelper in IceCreamCordovaWebViewClient.
+791574c Make URL parsing more robust in FileHelper.
+ac61ebf Merge branch 'master' of github.com:SunshineTech/cordova-android into sunshine
+cb99ed0 Fixing URL transformation algorithm
+4864d52 [CB-2202] Remove Plugin.java (was deprecated).
+b2d6167 [CB-2963] Re-enable sending messages in batches.
+383b3da [CB-3024] expanded help string for cl create script
+c65c259 CB-2200: Remove deprecated Android device.name
+e7e2730 Fixing CB-2955, breaking CB-2085, use localStorage, NOT WebSQL
+bb9615e Merge branch 'master' of https://git-wip-us.apache.org/repos/asf/cordova-android
+18877bf Adding additional condition that the phone must be made by HTC for the setNavDump to be set to true to try and work around CB-2907, if it's still a problem on HTC devices running Android 2.2, that's just the luck of the draw.
+778b784 [CB-2908] Fix the DroidGap activity Lifecycle broken issue
+5ff900f Fixup for CB-2654.
+ba31424 Keep the splashscreen image ratio instead of streatching it. An ImageView is used to be able to use ScaleType.CENTER_CROP, which is similar to the background-size:cover CSS property
+1782111 [CB-2654] Delay executeScript/insertCSS callback until resources have loaded; pass JS results to callback
+1fa6330 [CB-2666] Added check for null arguments.
+b42c918 Prep for 2.6.0 final
+f12262e Merge branch 'master' of https://git-wip-us.apache.org/repos/asf/cordova-android
+334cf45 Fixing CB-1700, we had the file names reversed, so exif was never being written right.  Needed to upload a file to debug this thing
+b7bb722 CB-1796: Let's make sure we actually write the file instead of just writing EXIF to NOTHING
+64ff204 Updating JS
+282367c [CB-1517] Properly report download progress for GZIP-encoded resources
+36c33a5 CB-1944: Better error messages for Create script
+5ee7e81 [CB-51] Added httpMethod for upload (defaults to POST)
+f485944 Fixed protocol regex bug. Unknown protocol support Added whitelist support for unknown protocols
+2bf6509 Modify Issue CB-2273.

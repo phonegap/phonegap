@@ -30,7 +30,7 @@ using System.Diagnostics;
 namespace WPCordovaClassLib.Cordova
 {
     /// <summary>
-    /// Provides functionality to create phone gap command by name.
+    /// Provides functionality to create Cordova command by name.
     /// </summary>
     public static class CommandFactory
     {

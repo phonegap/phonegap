@@ -1,0 +1,113 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>CordovaWP8_2_7_0</Name>
+    <Description>Cordova 2.7.0 for Windows Phone 8 using the Cordova source code directly.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>CordovaWP8_2_7_0</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.jpg</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="CordovaAppProj.csproj" File="CordovaAppProj.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="ApplicationIcon.png">ApplicationIcon.png</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Background.png">Background.png</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="config.xml">config.xml</ProjectItem>
+      <Folder Name="cordovalib" TargetFolderName="cordovalib">
+        <ProjectItem ReplaceParameters="true" TargetFileName="BrowserMouseHelper.cs">BrowserMouseHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CommandFactory.cs">CommandFactory.cs</ProjectItem>
+        <Folder Name="Commands" TargetFolderName="Commands">
+          <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommand.cs">BaseCommand.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ConfigHandler.cs">ConfigHandler.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CordovaCommandCall.cs">CordovaCommandCall.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CordovaView.xaml">CordovaView.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CordovaView.xaml.cs">CordovaView.xaml.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DOMStorageHelper.cs">DOMStorageHelper.cs</ProjectItem>
+        <Folder Name="JSON" TargetFolderName="JSON">
+          <ProjectItem ReplaceParameters="true" TargetFileName="JsonHelper.cs">JsonHelper.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="NativeExecution.cs">NativeExecution.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="OrientationHelper.cs">OrientationHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PluginResult.cs">PluginResult.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ScriptCallback.cs">ScriptCallback.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Images" TargetFolderName="Images">
+        <ProjectItem ReplaceParameters="false" TargetFileName="appbar.back.rest.png">appbar.back.rest.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="appbar.close.rest.png">appbar.close.rest.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="appbar.feature.video.rest.png">appbar.feature.video.rest.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="appbar.next.rest.png">appbar.next.rest.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="appbar.save.rest.png">appbar.save.rest.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="appbar.stop.rest.png">appbar.stop.rest.png</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="MainPage.xaml">MainPage.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="MainPage.xaml.cs">MainPage.xaml.cs</ProjectItem>
+      <Folder Name="Plugins" TargetFolderName="Plugins">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Accelerometer.cs">Accelerometer.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="AudioFormatsHelper.cs">AudioFormatsHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="AudioPlayer.cs">AudioPlayer.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Battery.cs">Battery.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Camera.cs">Camera.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Capture.cs">Capture.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Compass.cs">Compass.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Contacts.cs">Contacts.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DebugConsole.cs">DebugConsole.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Device.cs">Device.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="File.cs">File.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="FileTransfer.cs">FileTransfer.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="GeoLocation.cs">GeoLocation.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Globalization.cs">Globalization.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ImageExifHelper.cs">ImageExifHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="InAppBrowser.cs">InAppBrowser.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Media.cs">Media.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MimeTypeMapper.cs">MimeTypeMapper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="NetworkStatus.cs">NetworkStatus.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Notification.cs">Notification.cs</ProjectItem>
+        <Folder Name="UI" TargetFolderName="UI">
+          <ProjectItem ReplaceParameters="true" TargetFileName="AudioCaptureTask.cs">AudioCaptureTask.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="AudioRecorder.xaml">AudioRecorder.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="AudioRecorder.xaml.cs">AudioRecorder.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ImageCapture.xaml">ImageCapture.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ImageCapture.xaml.cs">ImageCapture.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="NotificationBox.xaml">NotificationBox.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="NotificationBox.xaml.cs">NotificationBox.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="VideoCaptureTask.cs">VideoCaptureTask.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="VideoRecorder.xaml">VideoRecorder.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="VideoRecorder.xaml.cs">VideoRecorder.xaml.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AppManifest.xml">AppManifest.xml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="WMAppManifest.xml">WMAppManifest.xml</ProjectItem>
+      </Folder>
+      <Folder Name="resources" TargetFolderName="resources">
+        <ProjectItem ReplaceParameters="false" TargetFileName="notification-beep.wav">notification-beep.wav</ProjectItem>
+      </Folder>
+      <Folder Name="Service References" TargetFolderName="Service References" />
+      <ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.jpg">SplashScreenImage.jpg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="VERSION">VERSION</ProjectItem>
+      <Folder Name="www" TargetFolderName="www">
+        <ProjectItem ReplaceParameters="true" TargetFileName="cordova-2.7.0.js">cordova-2.7.0.js</ProjectItem>
+        <Folder Name="css" TargetFolderName="css">
+          <ProjectItem ReplaceParameters="true" TargetFileName="index.css">index.css</ProjectItem>
+        </Folder>
+        <Folder Name="img" TargetFolderName="img">
+          <ProjectItem ReplaceParameters="false" TargetFileName="logo.png">logo.png</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="index.html">index.html</ProjectItem>
+        <Folder Name="js" TargetFolderName="js">
+          <ProjectItem ReplaceParameters="true" TargetFileName="index.js">index.js</ProjectItem>
+        </Folder>
+      </Folder>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

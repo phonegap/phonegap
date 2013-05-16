@@ -1,0 +1,106 @@
+#!/usr/bin/python
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+"""
+Updates the subproject path of the CordovaFramework entry to point to this script's version of Cordova.
+
+Usage: CordovaVersion/bin/update_cordova_subproject path/to/your/app.xcodeproj [path/to/CordovaFramework.xcodeproj]
+"""
+
+import fileinput
+import os
+import re
+import sys
+from posixpath import curdir, sep, pardir, join, abspath, commonprefix
+
+def Usage():
+  print __doc__
+  sys.exit(1)
+
+def AbsParentPath(path):
+  return os.path.abspath(os.path.join(path, os.path.pardir))
+
+def AbsFrameworkPath(argv0):
+  script_path = argv0
+  # This can happen if the script's dir is in the user's PATH
+  if not os.path.exists(script_path):
+    raise Exception('Could not locale framework directory.')
+  return AbsParentPath(AbsParentPath(script_path))
+
+def AbsProjectPath(relative_path):
+  # Do an extra abspath here to strip off trailing / if present.
+  project_path = os.path.abspath(relative_path)
+  if project_path.endswith('.pbxproj'):
+    project_path = AbsParentPath(project_path)
+  elif project_path.endswith('.xcodeproj'):
+    pass
+  else:
+    raise Exception('The following is not a valid path to an Xcode project: %s' % project_path)
+  return project_path
+
+def relpath(path, start=curdir):
+  # it would be nice to use os.path.relpath, 
+  # but that leaves out those with python < v2.6
+  if not path:
+    raise ValueError("no path specified")
+  start_list = abspath(start).split(sep)
+  path_list = abspath(path).split(sep)
+  # Work out how much of the filepath is shared by start and path.
+  i = len(commonprefix([start_list, path_list]))
+  rel_list = [pardir] * (len(start_list)-i) + path_list[i:]
+  if not rel_list:
+    return curdir
+  return join(*rel_list)
+
+
+def main(argv):
+  if len(argv) < 2 or len(argv) > 3:
+    Usage()
+
+  project_path = AbsProjectPath(argv[1])
+  if len(argv) < 3:
+    framework_path = AbsFrameworkPath(argv[0])
+    cordova_lib_xcode_path = os.path.join(framework_path, 'CordovaFramework', 'CordovaFramework.xcodeproj')
+  else:
+    cordova_lib_xcode_path = AbsProjectPath(argv[2])
+
+  parent_project_path = AbsParentPath(project_path)
+  subproject_path = relpath(cordova_lib_xcode_path, parent_project_path)
+
+  # /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CordovaFramework.xcodeproj; sourceTree = "<group>"; };
+  REGEX = re.compile(r'(.+PBXFileReference.+wrapper.pb-project.+)(path = .+?;)(.*)(sourceTree.+;)(.+)')
+
+  file_handle = fileinput.input(os.path.join(project_path, 'project.pbxproj'), inplace=1)
+  found = False
+  for line in file_handle:
+    if 'CordovaFramework.xcodeproj' in line:
+      m = REGEX.match(line)
+      if m:
+        found = True
+        line = m.expand(r'\1path = "%s";\3sourceTree = "<group>";\5\n') % subproject_path
+        if 'name =' not in line:
+            line = line.replace('path = ', 'name = CordovaFramework.xcodeproj; path = ')
+    print line,
+  file_handle.close()
+
+  if not found:
+    raise Exception('Sub-project entry not found in project file.')
+  print('CordovaFramework set to path: %s' % subproject_path)
+
+
+if __name__ == '__main__':
+  main(sys.argv)

@@ -138,14 +138,14 @@
 
     // create the formatter using the user's current default locale and formats for dates and times
     CFDateFormatterRef formatter = CFDateFormatterCreate(kCFAllocatorDefault,
-        currentLocale,
-        dateStyle,
-        timeStyle);
+            currentLocale,
+            dateStyle,
+            timeStyle);
     // if we have a valid date object then call the formatter
     if (date) {
         dateString = (__bridge_transfer NSString*)CFDateFormatterCreateStringWithDate(kCFAllocatorDefault,
-            formatter,
-            (__bridge CFDateRef)date);
+                formatter,
+                (__bridge CFDateRef)date);
     }
 
     // if the date was converted to a string successfully then return the result
@@ -227,18 +227,18 @@
 
     // get the user's default settings for date and time formats
     CFDateFormatterRef formatter = CFDateFormatterCreate(kCFAllocatorDefault,
-        currentLocale,
-        dateStyle,
-        timeStyle);
+            currentLocale,
+            dateStyle,
+            timeStyle);
 
     // set the parsing to be more lenient
     CFDateFormatterSetProperty(formatter, kCFDateFormatterIsLenient, kCFBooleanTrue);
 
     // parse tha date and time string
     CFDateRef date = CFDateFormatterCreateDateFromString(kCFAllocatorDefault,
-        formatter,
-        (__bridge CFStringRef)dateString,
-        NULL);
+            formatter,
+            (__bridge CFStringRef)dateString,
+            NULL);
 
     // if we were able to parse the date then get the date and time components
     if (date != NULL) {
@@ -336,9 +336,9 @@
 
     // get the user's default settings for date and time formats
     CFDateFormatterRef formatter = CFDateFormatterCreate(kCFAllocatorDefault,
-        currentLocale,
-        dateStyle,
-        timeStyle);
+            currentLocale,
+            dateStyle,
+            timeStyle);
 
     // get the date pattern to apply when formatting and parsing
     CFStringRef datePattern = CFDateFormatterGetFormat(formatter);
@@ -415,9 +415,9 @@
     }
 
     CFDateFormatterRef formatter = CFDateFormatterCreate(kCFAllocatorDefault,
-        currentLocale,
-        kCFDateFormatterFullStyle,
-        kCFDateFormatterFullStyle);
+            currentLocale,
+            kCFDateFormatterFullStyle,
+            kCFDateFormatterFullStyle);
 
     if ((selector == CDV_SELECTOR_MONTHS) && (style == CDV_FORMAT_LONG)) {
         dataStyle = kCFDateFormatterMonthSymbols;
@@ -545,13 +545,13 @@
     }
 
     CFNumberFormatterRef formatter = CFNumberFormatterCreate(kCFAllocatorDefault,
-        currentLocale,
-        style);
+            currentLocale,
+            style);
 
     // get the localized string based upon the locale and user preferences
     NSString* numberString = (__bridge_transfer NSString*)CFNumberFormatterCreateStringWithNumber(kCFAllocatorDefault,
-        formatter,
-        (__bridge CFNumberRef)number);
+            formatter,
+            (__bridge CFNumberRef)number);
 
     if (numberString) {
         NSDictionary* dictionary = [NSDictionary dictionaryWithObject:numberString forKey:@"value"];
@@ -612,8 +612,8 @@
     }
 
     CFNumberFormatterRef formatter = CFNumberFormatterCreate(kCFAllocatorDefault,
-        currentLocale,
-        style);
+            currentLocale,
+            style);
 
     // we need to make this lenient so as to avoid problems with parsing currencies that have non-breaking space characters
     if (style == kCFNumberFormatterCurrencyStyle) {
@@ -622,10 +622,10 @@
 
     // parse againist the largest type to avoid data loss
     Boolean rc = CFNumberFormatterGetValueFromString(formatter,
-        (__bridge CFStringRef)numberString,
-        NULL,
-        kCFNumberDoubleType,
-        &doubleValue);
+            (__bridge CFStringRef)numberString,
+            NULL,
+            kCFNumberDoubleType,
+            &doubleValue);
 
     if (rc) {
         NSDictionary* dictionary = [NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:doubleValue] forKey:@"value"];
@@ -681,8 +681,8 @@
     }
 
     CFNumberFormatterRef formatter = CFNumberFormatterCreate(kCFAllocatorDefault,
-        currentLocale,
-        style);
+            currentLocale,
+            style);
 
     NSString* numberPattern = (__bridge NSString*)CFNumberFormatterGetFormat(formatter);
 
@@ -749,8 +749,8 @@
     // now set the currency code in the formatter
     if (rc) {
         CFNumberFormatterRef formatter = CFNumberFormatterCreate(kCFAllocatorDefault,
-            currentLocale,
-            kCFNumberFormatterCurrencyStyle);
+                currentLocale,
+                kCFNumberFormatterCurrencyStyle);
 
         CFNumberFormatterSetProperty(formatter, kCFNumberFormatterCurrencyCode, (__bridge CFStringRef)currencyCode);
         CFNumberFormatterSetProperty(formatter, kCFNumberFormatterInternationalCurrencySymbol, (__bridge CFStringRef)currencyCode);

@@ -141,7 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml" />
-    <Content Include="www\cordova-2.5.0.js" />
+    <Content Include="www\cordova-2.7.0.js" />
     <Content Include="www\cordova-current.js" />
     <Content Include="www\network.html">
       <SubType>Designer</SubType>

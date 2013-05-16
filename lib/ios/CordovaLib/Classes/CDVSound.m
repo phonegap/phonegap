@@ -87,7 +87,7 @@
         NSLog(@"Will use resource '%@' from the documents folder with path = %@", resourcePath, filePath);
     } else {
         // if resourcePath is not from FileSystem put in tmp dir, else attempt to use provided resource path
-        NSString* tmpPath = [NSTemporaryDirectory ()stringByStandardizingPath];
+        NSString* tmpPath = [NSTemporaryDirectory()stringByStandardizingPath];
         BOOL isTmp = [resourcePath rangeOfString:tmpPath].location != NSNotFound;
         BOOL isDoc = [resourcePath rangeOfString:docsPath].location != NSNotFound;
         if (!isTmp && !isDoc) {
@@ -127,7 +127,7 @@
         filePath = [self.commandDelegate pathForResource:resourcePath];
         if (filePath == nil) {
             // see if this exists in the documents/temp directory from a previous recording
-            NSString* testPath = [NSString stringWithFormat:@"%@/%@", [NSTemporaryDirectory ()stringByStandardizingPath], resourcePath];
+            NSString* testPath = [NSString stringWithFormat:@"%@/%@", [NSTemporaryDirectory()stringByStandardizingPath], resourcePath];
             if ([[NSFileManager defaultManager] fileExistsAtPath:testPath]) {
                 // inefficient as existence will be checked again below but only way to determine if file exists from previous recording
                 filePath = testPath;
@@ -273,6 +273,9 @@
     } else {
         audioFile = [[self soundCache] objectForKey:mediaId];
         audioFile.volume = volume;
+        if (audioFile.player) {
+            audioFile.player.volume = [volume floatValue];
+        }
         [[self soundCache] setObject:audioFile forKey:mediaId];
     }
 
@@ -385,7 +388,7 @@
             // bug in AVAudioPlayer when playing downloaded data in NSData - we have to download the file and play from disk
             CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
             CFStringRef uuidString = CFUUIDCreateString(kCFAllocatorDefault, uuidRef);
-            NSString* filePath = [NSString stringWithFormat:@"%@/%@", [NSTemporaryDirectory ()stringByStandardizingPath], uuidString];
+            NSString* filePath = [NSString stringWithFormat:@"%@/%@", [NSTemporaryDirectory()stringByStandardizingPath], uuidString];
             CFRelease(uuidString);
             CFRelease(uuidRef);
 
@@ -458,9 +461,19 @@
     double position = [[command.arguments objectAtIndex:1] doubleValue];
 
     if ((audioFile != nil) && (audioFile.player != nil)) {
+        NSString* jsString;
         double posInSeconds = position / 1000;
-        audioFile.player.currentTime = posInSeconds;
-        NSString* jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%f);", @"cordova.require('cordova/plugin/Media').onStatus", mediaId, MEDIA_POSITION, posInSeconds];
+        if (posInSeconds >= audioFile.player.duration) {
+            // The seek is past the end of file.  Stop media and reset to beginning instead of seeking past the end.
+            [audioFile.player stop];
+            audioFile.player.currentTime = 0;
+            jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%.3f);\n%@(\"%@\",%d,%d);", @"cordova.require('cordova/plugin/Media').onStatus", mediaId, MEDIA_POSITION, 0.0, @"cordova.require('cordova/plugin/Media').onStatus", mediaId, MEDIA_STATE, MEDIA_STOPPED];
+            // NSLog(@"seekToEndJsString=%@",jsString);
+        } else {
+            audioFile.player.currentTime = posInSeconds;
+            jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%f);", @"cordova.require('cordova/plugin/Media').onStatus", mediaId, MEDIA_POSITION, posInSeconds];
+            // NSLog(@"seekJsString=%@",jsString);
+        }
 
         [self.commandDelegate evalJs:jsString];
     }
@@ -625,6 +638,7 @@
         NSLog(@"Finished playing audio sample '%@'", audioFile.resourcePath);
     }
     if (flag) {
+        audioFile.player.currentTime = 0;
         jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('cordova/plugin/Media').onStatus", mediaId, MEDIA_STATE, MEDIA_STOPPED];
     } else {
         // jsString = [NSString stringWithFormat: @"%@(\"%@\",%d,%d);", @"cordova.require('cordova/plugin/Media').onStatus", mediaId, MEDIA_ERROR, MEDIA_ERR_DECODE];

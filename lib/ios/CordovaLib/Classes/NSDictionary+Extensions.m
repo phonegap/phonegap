@@ -28,7 +28,7 @@
     bool exists = false;
 
     if (val != nil) {
-        exists = [(NSString*) val compare:expectedValue options:NSCaseInsensitiveSearch] == 0;
+        exists = [(NSString*)val compare : expectedValue options : NSCaseInsensitiveSearch] == 0;
     }
 
     return exists;

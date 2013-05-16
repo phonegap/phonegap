@@ -24,9 +24,9 @@
 #import "CDVContact.h"
 
 @interface CDVContacts : CDVPlugin <ABNewPersonViewControllerDelegate,
-    ABPersonViewControllerDelegate,
-    ABPeoplePickerNavigationControllerDelegate
-    >
+                         ABPersonViewControllerDelegate,
+                         ABPeoplePickerNavigationControllerDelegate
+                         >
 {
     ABAddressBookRef addressBook;
 }
@@ -63,7 +63,7 @@
 
 - (void)newPersonViewController:(ABNewPersonViewController*)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person;
 - (BOOL)personViewController:(ABPersonViewController*)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person
-   property                 :(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue;
+                    property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue;
 
 /*
  * search - searches for contacts.  Only person records are currently supported.
@@ -140,9 +140,9 @@
 - (CDVAddressBookAccessError*)initWithCode:(CDVContactError)code;
 @end
 
-typedef void (^CDVAddressBookWorkerBlock)(
-    ABAddressBookRef addressBook,
-    CDVAddressBookAccessError * error
+typedef void (^ CDVAddressBookWorkerBlock)(
+    ABAddressBookRef         addressBook,
+    CDVAddressBookAccessError* error
     );
 @interface CDVAddressBookHelper : NSObject
 {}

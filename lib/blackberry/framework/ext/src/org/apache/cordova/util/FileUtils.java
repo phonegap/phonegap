@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
+import java.util.Random;
 
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
@@ -35,6 +36,7 @@ import net.rim.device.api.io.FileNotFoundException;
 import net.rim.device.api.io.IOUtilities;
 import net.rim.device.api.io.MIMETypeAssociations;
 import net.rim.device.api.system.Application;
+import net.rim.device.api.system.ControlledAccessException;
 
 /**
  * Contains file utility methods.
@@ -45,7 +47,13 @@ public class FileUtils {
     public static final String LOCAL_PROTOCOL = "local://";
     public static final String FILE_PROTOCOL = "file://";
 
-    private static final String APP_TMP_DIR    = "tmp" + CordovaExtension.getAppID();
+    private static final String APP_TMP_DIR;
+    
+    // init APP_TMP_DIR with a random value
+    static {
+        Random gen = new Random();
+        APP_TMP_DIR = "tmp" + Math.abs(gen.nextInt());
+    }
 
     /**
      * Reads file as byte array.
@@ -226,6 +234,9 @@ public class FileUtils {
                 return;
             }
             fconn.mkdir();
+        } catch (ControlledAccessException e) {
+            Logger.log("ControlledAccessException on dir " + dirPath + ", either directory conflict after reinstall of app, or device is connected via usb, see Cordova Docs File Blackberry Quirks");
+            Logger.log(e.toString());
         }
         finally {
             try {
@@ -234,6 +245,26 @@ public class FileUtils {
             catch (IOException ignored) {
             }
         }
+    }
+
+    /**
+     * Determines the size of a file on the file system. Size always represents number of bytes contained in the file; never pre-allocated but empty space
+     * @return size in bytes of the selected file, or -1 if the file does not exist or is inaccessible
+     */
+    public static long fileSize(String path) throws IOException {
+        FileConnection fconn = null;
+        long fsize = -1;
+        try {
+            fconn = (FileConnection)Connector.open(path);
+            fsize = fconn.fileSize();
+        } catch (IOException e) {
+            Logger.log(FileUtils.class.getName() + " fileSize:  " + path + "not found or inaccessible");
+        } finally {
+            try {
+                if (fconn != null) fconn.close();
+            } catch (IOException ignored) {}
+        }
+       return fsize;
     }
 
     /**

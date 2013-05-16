@@ -22,6 +22,12 @@
 
 This document is for developers who need to upgrade their Cordova  plugins to a newer Cordova version. Starting with Cordova 1.5.0, some classes have been renamed, which will require the plugin to be upgraded. Make sure your project itself has been upgraded using the [Cordova iOS Upgrading Guide](http://cordova.apache.org/docs/en/edge/guide_upgrading_ios_index.md.html#Upgrading%20Cordova%20iOS) document.
 
+## Upgrading older Cordova plugins to 2.6.0 ##
+
+1. **Install** Cordova 2.6.0
+2. Follow the **"Upgrading older Cordova plugins to 2.5.0"** section, if necessary
+3. The **registerPlugin** method of the **commandDelegate** property of plugin, which was deprecated, has been **removed**. Use the **registerPlugin** method directly from the **viewController** property of the plugin.
+
 ## Upgrading older Cordova plugins to 2.5.0 ##
 
 1. **Install** Cordova 2.5.0

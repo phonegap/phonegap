@@ -96,7 +96,7 @@ static NSMutableArray* gPendingSetUserAgentBlocks = nil;
         void (^block)() = [gPendingSetUserAgentBlocks objectAtIndex:0];
         [gPendingSetUserAgentBlocks removeObjectAtIndex:0];
         gCurrentLockToken = ++gNextLockToken;
-        NSLog (@"Gave lock %d", gCurrentLockToken);
+        NSLog(@"Gave lock %d", gCurrentLockToken);
         block(gCurrentLockToken);
     } else {
         gCurrentLockToken = 0;

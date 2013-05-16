@@ -2,6 +2,8 @@
 
 > The command line tool to build, deploy and manage [Cordova](http://cordova.io)-based applications.
 
+[Apache Cordova](http://cordova.io) allows for building native mobile applications using HTML, CSS and JavaScript. Check out the [Getting Started guides](http://cordova.apache.org/docs/en/edge/guide_getting-started_index.md.html#Getting%20Started%20Guides) for more details on how to work with Cordova sub-projects.
+
 # Requirements
 
 * [nodejs](http://nodejs.org/)
@@ -16,11 +18,11 @@ cordova-cli has been tested on Mas OS X and Linux.
 
 # Install
 
-```
-npm install -g cordova
-```
+    npm install -g cordova
 
-**NOTE**: on Mac OS X, you may want to change the owner of the cordova directory that npm installs to. This will allow you to run cordova as local user without requiring root permissions. Assuming your node_modules directory is in `/usr/local/lib/`, you can do this by running: `sudo chown -R <username> /usr/local/lib/node_modules/cordova`
+**NOTE**: on Unix-based machines, you may want to change the owner of the cordova directory that npm installs to. This will allow you to run cordova as local user without requiring root permissions. Assuming your node_modules directory is in `/usr/local/lib/`, you can do this by running: 
+
+    sudo chown -R <username> /usr/local/lib/node_modules/cordova
 
 # Getting Started
 
@@ -40,30 +42,48 @@ cordova-cli has a single global `create` command that creates new cordova projec
 - `plugin add <path-to-plugin> [<path-to-plugin> ...]` add one (or more) plugins to the project
 - `plugin [rm | remove] <plugin-name> [<plugin-name> ...]` remove one (or more) added plugins
 - `prepare [platform...]` copies files into the specified platforms, or all platforms. it is then ready for building by Eclipse/Xcode/etc.
-- `compile [platform...]` compiles and deploys the app to a connected and compatible device. With no parameters, builds for all platforms, otherwise builds for the specified platforms.
+- `compile [platform...]` compiles the app into a binary for each added platform. With no parameters, builds for all platforms, otherwise builds for the specified platforms.
 - `build [<platform> [<platform> [...]]]` an alias for `cordova prepare` followed by `cordova compile`
 - `emulate [<platform> [<platform> [...]]]` launch emulators and deploy app to them. With no parameters emulates for all platforms added to the project, otherwise emulates for the specified platforms
 - `serve <platform> [port]` launch a local web server for that platform's www directory on the given port (default 8000).
 
 
 # Project Directory Structure
-A Cordova application built with cordova-cli will have the following
-directory structure:
+A Cordova application built with cordova-cli will have the following directory structure:
 
     myApp/
-    |-.cordova/
-    |- platforms/
-    |- plugins/
-    `- www/
+    |--.cordova/
+    |-- merges/
+    | |-- android/
+    | |-- blackberry/
+    | `-- ios/
+    |-- platforms/
+    | |-- android/
+    | |-- blackberry/
+    | `-- ios/
+    |-- plugins/
+    `-- www/
 
 ## .cordova/
 This directory identifies a tree as a cordova project. Simple configuration information is stored in here (such as BlackBerry environment variables).
 
 Commands other than `create` operate against the project directory itself, rather than the current directory - a search up the current directory's parents is made to find the project directory. Thus, any command (other than `create`) can be used from any subdirectory whose parent is a cordova project directory (same as git).
 
+## merges/
+Platform-specific web assets (HTML, CSS and JavaScript files) are contained within appropriate subfolders in this directory. These are deployed during a `prepare` to the appropriate native directory.  Files placed under `merges/` will override matching files in the `www/` folder for the relevant platform. A quick example, assuming a project structure of:
+
+    merges/
+    |-- ios/
+    | `-- app.js
+    |-- android/
+    | `-- android.js
+    www/
+      `-- app.js
+
+After building the Android and iOS projects, the Android application will contain both `app.js` and `android.js`. However, the iOS application will only contain an `app.js`, and it will override the "common" `app.js` located inside the `www/` folder above.
+
 ## platforms/
-Platforms added to your application will have the native
- application project structures laid out within this directory.
+Platforms added to your application will have the native application project structures laid out within this directory.
 
 ## plugins/
 Any added plugins will be extracted or copied into this directory.
@@ -82,7 +102,9 @@ This file is what you should be editing to modify your application's metadata. A
 
 # Hooks
 
-Projects created by cordova-cli have `before` and `after` hooks for each [project command](#project_commands). There are two types of hooks: project-specific ones and module-level ones.
+Projects created by cordova-cli have `before` and `after` hooks for each [project command](#project_commands).
+
+There are two types of hooks: project-specific ones and module-level ones. Both of these types of hooks receive the project root folder as a parameter.
 
 ## Project-specific Hooks
 
@@ -96,10 +118,12 @@ These are located under the `.cordova/hooks` directory in the root of your cordo
 
 If you are using cordova-cli as a module within a larger node application, you can also use the standard `EventEmitter` methods to attach to the events. The events include `before_build`, `before_compile`, `before_docs`, `before_emulate`, `before_platform_add`, `before_platform_ls`, `before_platform_rm`, `before_plugin_add`, `before_plugin_ls`, `before_plugin_rm` and `before_prepare`. Additionally, there are `after_` flavours of all the above events.
 
+Once you `require('cordova')` in your node project, you will have the usual `EventEmitter` methods available (`on`, `off` or `removeListener`, and `emit` or `trigger`).
+
 # Examples
 
 ## Creating a new cordova project
-This example shows how to create a project from scratch named KewlApp with iOS and Android platform support, and includes a plugin named Kewlio. The project will live in ~/MyProjects/KewlApp
+This example shows how to create a project from scratch named KewlApp with iOS and Android platform support, and includes a plugin named Kewlio. The project will live in ~/KewlApp
 
     cordova create ~/KewlApp KewlApp
     cd ~/KewlApp
@@ -111,6 +135,9 @@ The directory structure of KewlApp now looks like this:
 
     KewlApp/
     |- .cordova/
+    |- mergess/
+       |- android/
+       `- ios/
     |- platforms/
        |- android/
        |  `- …

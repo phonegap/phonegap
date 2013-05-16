@@ -149,9 +149,10 @@
     CDVWhitelist* whitelist = [[CDVWhitelist alloc] initWithArray:allowedHosts];
 
     STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://apache.org"]], nil);
-    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://build.apache.prg"]], nil);
-    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://MyDangerousSite.org"]], nil);
-    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://apache.org.SuspiciousSite.com"]], nil);
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"https://build.apache.prg"]], nil);
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"ftp://MyDangerousSite.org"]], nil);
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"ftps://apache.org.SuspiciousSite.com"]], nil);
+    STAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"gopher://apache.org"]], nil);
 }
 
 - (void)testWildcardInHostname
@@ -272,6 +273,21 @@
     errorString = [whitelist errorStringForURL:testUrl];
     expectedErrorString = [NSString stringWithFormat:whitelist.whitelistRejectionFormatString, [testUrl absoluteString]];
     STAssertTrue([expectedErrorString isEqualToString:errorString], @"Customized whitelist rejection string has unexpected value.");
+}
+
+- (void)testSpecificProtocol
+{
+    NSArray* allowedHosts = [NSArray arrayWithObjects:
+        @"http://www.apache.org",
+        @"cordova://www.google.com",
+        nil];
+
+    CDVWhitelist* whitelist = [[CDVWhitelist alloc] initWithArray:allowedHosts];
+
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://www.apache.org"]], nil);
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"cordova://www.google.com"]], nil);
+    STAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"cordova://www.apache.org"]], nil);
+    STAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"http://www.google.com"]], nil);
 }
 
 @end
