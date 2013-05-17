@@ -31,7 +31,7 @@ static NSSet* org_apache_cordova_validArrowDirections;
 @interface CDVCamera ()
 
 @property (readwrite, assign) BOOL hasPendingOperation;
--(void)processPickedImage:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info;
+-(void)processPickedImage:(CDVCameraPicker*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info;
 @end
 
 @implementation CDVCamera
@@ -263,7 +263,7 @@ static NSSet* org_apache_cordova_validArrowDirections;
 }
 
 // older api calls newer didFinishPickingMediaWithInfo
-- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingImage:(UIImage*)image editingInfo:(NSDictionary*)editingInfo
+- (void)imagePickerController:(CDVCameraPicker*)picker didFinishPickingImage:(UIImage*)image editingInfo:(NSDictionary*)editingInfo
 {
     NSDictionary* imageInfo = [NSDictionary dictionaryWithObject:image forKey:UIImagePickerControllerOriginalImage];
 
@@ -470,7 +470,7 @@ static NSSet* org_apache_cordova_validArrowDirections;
 
     self.hasPendingOperation = NO;
 }
--(void)processPickedImage:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info{
+-(void)processPickedImage:(CDVCameraPicker*)cameraPicker didFinishPickingMediaWithInfo:(NSDictionary*)info{
   CDVPluginResult* result = nil;
   
   NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
