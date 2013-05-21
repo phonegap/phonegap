@@ -573,7 +573,8 @@
 					"-weak_framework",
 					CoreMedia,
 					"-weak-lSystem",
-					"-all_load",
+					"-force_load",
+					"${TARGET_BUILD_DIR}/libCordova.a",
 					"-Obj-C",
 				);
 				SDKROOT = iphoneos;
