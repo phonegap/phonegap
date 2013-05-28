@@ -1044,6 +1044,15 @@ myMedia.play({ playAudioWhenScreenIsLocked : false })
 </code></pre>
 </li>
 <li>
+<p><strong>playAudioWithSpeaker</strong></p>
+
+<p>Pass in this option to the <strong>play</strong> method to specify whether you want to play the audio of the media file over the loud speaker of the device, even if headphones are plugged in (this defaults to false if not set). e.g:</p>
+
+<pre class="prettyprint"><code>var myMedia = new <a href="cordova_media_media.md.html#Media">Media</a>("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3")
+myMedia.play({ playAudioWithSpeaker : true })
+</code></pre>
+</li>
+<li>
 <p><strong>order of file search</strong></p>
 
 <p>When only a file name or simple path is provided, iOS will search in the www for the file and then in the application documents/tmp directory.</p>
