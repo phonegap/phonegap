@@ -309,14 +309,34 @@
                 if (playAudioWhenScreenIsLocked != nil) {
                     bPlayAudioWhenScreenIsLocked = [playAudioWhenScreenIsLocked boolValue];
                 }
-
-                NSString* sessionCategory = bPlayAudioWhenScreenIsLocked ? AVAudioSessionCategoryPlayback : AVAudioSessionCategorySoloAmbient;
+                
+                NSNumber* playAudioWithSpeaker = [options objectForKey:@"playAudioWithSpeaker"];
+                BOOL bPlayAudioWithSpeaker = NO;
+                if (playAudioWithSpeaker != nil) {
+                    bPlayAudioWithSpeaker = [playAudioWithSpeaker boolValue];
+                }
+                
+                // In order to send audio to the speaker with headphones plugged in,
+                // the session must be PlayAndRecord type
+                NSString* sessionCategory = bPlayAudioWithSpeaker
+                ? AVAudioSessionCategoryPlayAndRecord
+                : bPlayAudioWhenScreenIsLocked
+                ? AVAudioSessionCategoryPlayback
+                : AVAudioSessionCategorySoloAmbient;
+                
                 [self.avSession setCategory:sessionCategory error:&err];
                 if (![self.avSession setActive:YES error:&err]) {
                     // other audio with higher priority that does not allow mixing could cause this to fail
                     NSLog(@"Unable to play audio: %@", [err localizedFailureReason]);
                     bError = YES;
                 }
+                
+                //Set the audio route to use (if one was specified)
+                UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
+                if(bPlayAudioWithSpeaker){
+                    audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+                }
+                AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);
             }
             if (!bError) {
                 NSLog(@"Playing audio sample '%@'", audioFile.resourcePath);
