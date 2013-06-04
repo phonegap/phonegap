@@ -64,8 +64,6 @@ function createAppInfoJar {
 
 function on_error {
     echo "An unexpected error occurred: $previous_command exited with $?"
-    echo "Deleting project..."
-    [ -d "$PROJECT_PATH" ] && rm -rf "$PROJECT_PATH"
     exit 1
 }
 
