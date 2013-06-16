@@ -24,17 +24,17 @@ Community
 Directory Structure
 -------------------
 
-	  |-doc/ ........... source documentation
-	  |-lib/ ........... platform code for supported operating systems
-	  | |-android/
-	  | |-blackberry/
-	  | |-cordova-cli/
-	  | |-ios/
-          | |-windows-phone-7
-          | |-windows-phone-8
-	  | |-windows8/
-	  |-changelog ..... a changelog compiled from comments and authors
-	  |-license ....... the Apache Software License v2
-	  |-version ....... release version in plain text
-	  '-readme.md ..... release readme
+	  |_doc/ ........... source documentation
+	  |_lib/ ........... platform code for supported operating systems
+	  | |_android/
+	  | |_blackberry/
+	  | |_cordova-cli/
+	  | |_ios/
+          | |_windows-phone-7
+          | |_windows-phone-8
+	  | |_windows8/
+	  |_changelog ..... a changelog compiled from comments and authors
+	  |_license ....... the Apache Software License v2
+	  |_version ....... release version in plain text
+	  |_readme.md ..... release readme
 
