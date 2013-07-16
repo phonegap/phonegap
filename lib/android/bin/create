@@ -38,7 +38,7 @@ VERSION=$(cat "$BUILD_PATH"/VERSION)
 
 PROJECT_PATH="${1:-'./example'}"
 PACKAGE=${2:-"org.apache.cordova.example"}
-ACTIVITY=${3:-"cordovaExample"}
+ACTIVITY=$(echo ${3:-"cordovaExample"} | tr -d ' ')
 
 # clobber any existing example
 if [ -d "$PROJECT_PATH" ]
