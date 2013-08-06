@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -113,7 +116,7 @@
 <option value="FileReader_methods">      - Methods</option>
 <option value="FileReader_details">      - Details</option>
 <option value="FileReader_supported_platforms">      - Supported Platforms</option>
-<option value="FileReader_read_as_data_url">      - Read As Data URL </option>
+<option value="FileReader_read_as_data_url">      - Read As Data URL</option>
 <option value="FileReader_quick_example">      - Quick Example</option>
 <option value="FileReader_read_as_text">      - Read As Text</option>
 <option value="FileReader_quick_example">      - Quick Example</option>
@@ -126,12 +129,12 @@
 <option value="FileReader_quick_example">      - Quick Example</option>
 <option value="FileWriter">FileWriter</option>
 <option value="FileWriter_properties">      - Properties</option>
-<option value="FileWriter_methods">      - Methods</option>
 <option value="FileWriter_details">      - Details</option>
 <option value="FileWriter_supported_platforms">      - Supported Platforms</option>
 <option value="FileWriter_seek_quick_example">      - Seek Quick Example</option>
 <option value="FileWriter_truncate_quick_example">      - Truncate Quick Example</option>
 <option value="FileWriter_write_quick_example">      - Write Quick Example</option>
+<option value="FileWriter_binary_write_quick_example">      - Binary Write Quick Example</option>
 <option value="FileWriter_append_quick_example">      - Append Quick Example</option>
 <option value="FileWriter_abort_quick_example">      - Abort Quick Example</option>
 <option value="FileWriter_full_example">      - Full Example</option>
@@ -242,8 +245,11 @@ File System Quick Example</option>
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -258,7 +264,7 @@ File System Quick Example</option>
                 <h1><a name="File">File</a></h1>
 
 <blockquote>
-  <p>This API is based on the W3C <a class="external" href="http://www.w3.org/TR/FileAPI"></a><a href="cordova_file_file.md.html#File">File</a> API. An API to read, write and navigate file system hierarchies.</p>
+  <p>An API to read, write and navigate file system hierarchies, based on the <a class="external" href="http://www.w3.org/TR/FileAPI">W3C </a><a href="cordova_file_file.md.html#File">File</a> API.</p>
 </blockquote>
 
 <h2>
@@ -299,11 +305,6 @@ File System Quick Example</option>
 <pre class="prettyprint"><code>&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
 </code></pre>
 
-<h3>Bada</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
-</code></pre>
-
 <h3>BlackBerry WebWorks</h3>
 
 <h4>www/plugins.xml</h4>
@@ -330,11 +331,6 @@ File System Quick Example</option>
 &lt;plugin name="<a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a>" value="CDVFileTransfer" /&gt;
 </code></pre>
 
-<h3>webOS</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
-</code></pre>
-
 <h3>Windows Phone</h3>
 
 <pre class="prettyprint"><code>No permissions are required.
@@ -351,19 +347,19 @@ File System Quick Example</option>
 
 <ul>
 <li>
-<strong>name:</strong> The name of the file. <em>(DOMString)</em>
+<strong>name</strong>: The name of the file. <em>(DOMString)</em>
 </li>
 <li>
-<strong>fullPath:</strong> The full path of the file including the file name. <em>(DOMString)</em>
+<strong>fullPath</strong>: The full path of the file including the file name. <em>(DOMString)</em>
 </li>
 <li>
-<strong>type:</strong> The mime type of the file. <em>(DOMString)</em>
+<strong>type</strong>: The mime type of the file. <em>(DOMString)</em>
 </li>
 <li>
-<strong>lastModifiedDate:</strong> The last time the file was modified. <em>(Date)</em>
+<strong>lastModifiedDate</strong>: The last time the file was modified. <em>(Date)</em>
 </li>
 <li>
-<strong>size:</strong> The size of the file in bytes. <em>(long)</em>
+<strong>size</strong>: The size of the file in bytes. <em>(long)</em>
 </li>
 </ul>
 <h2>
@@ -378,7 +374,9 @@ File System Quick Example</option>
 <a name="File_details">Details</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#File">File</a></code> object contains attributes of a single file.  You can get an instance of a <a href="cordova_file_file.md.html#File">File</a> object by calling the <strong>file</strong> method of a <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> object.</p>
+<p>The <code><a href="cordova_file_file.md.html#File">File</a></code> object contains attributes of a single file.  You can get
+an instance of a <code><a href="cordova_file_file.md.html#File">File</a></code> object by calling a <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> object's
+<code>file()</code> method.</p>
 
 <h2>
 <a name="File_supported_platforms">Supported Platforms</a>
@@ -395,17 +393,18 @@ File System Quick Example</option>
 <a name="File_slice">slice</a>
 </h2>
 
-<p>Return a new <a href="cordova_file_file.md.html#File">File</a> object, for which <a href="cordova_file_file.md.html#FileReader">FileReader</a> will return only the specified portion of the file.
-Negative values for <strong>start</strong> or <strong>end</strong> are measured from the end of the file.
-The indexes are always relative to the current slice (see the full example).</p>
+<p>Return a new <code><a href="cordova_file_file.md.html#File">File</a></code> object, for which <code><a href="cordova_file_file.md.html#FileReader">FileReader</a></code> returns only the
+specified portion of the file.  Negative values for <code>start</code> or <code>end</code>
+are measured from the end of the file.  Indexes are positioned
+relative to the current slice. (See the full example below.)</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>start</strong> - The index of the first byte to read, inclusive.</li>
+<strong>start</strong>: The index of the first byte to read, inclusive.</li>
 <li>
-<strong>end</strong> - The index of the byte after the last one to read.</li>
+<strong>end</strong>: The index of the byte after the last one to read.</li>
 </ul>
 <p><strong>Quick Example</strong></p>
 
@@ -421,7 +420,7 @@ var slice3 = file.slice(120, 135);
 // slice2 and slice3 are equivalent.
 </code></pre>
 
-<p><strong>Supported Platforms:</strong></p>
+<p><strong>Supported Platforms</strong></p>
 
 <ul>
 <li>Android</li>
@@ -430,7 +429,7 @@ var slice3 = file.slice(120, 135);
 <hr>
 <h1><a name="FileReader">FileReader</a></h1>
 
-<p><a href="cordova_file_file.md.html#FileReader">FileReader</a> is an object that allows one to read a file.</p>
+<p>The <code><a href="cordova_file_file.md.html#FileReader">FileReader</a></code> allows basic access to a file.</p>
 
 <h2>
 <a name="FileReader_properties">Properties</a>
@@ -438,29 +437,34 @@ var slice3 = file.slice(120, 135);
 
 <ul>
 <li>
-<strong>readyState:</strong> One of the three states the reader can be in EMPTY, LOADING or DONE.</li>
+<strong>readyState</strong>: One of the reader's three possible states, either <code>EMPTY</code>, <code>LOADING</code> or <code>DONE</code>.</li>
 <li>
-<strong>result:</strong> The contents of the file that has been read. <em>(DOMString)</em>
+<strong>result</strong>: The contents of the file that have been read. <em>(DOMString)</em>
 </li>
 <li>
-<strong>error:</strong> An object containing errors. <em>(<a href="cordova_file_file.md.html#FileError">FileError</a>)</em>
+<strong>error</strong>: An object containing errors. <em>(<a href="cordova_file_file.md.html#FileError">FileError</a>)</em>
 </li>
 <li>
-<strong>onloadstart:</strong> Called when the read starts. . <em>(Function)</em>
+<strong>onloadstart</strong>: Called when the read starts. <em>(Function)</em>
 </li>
 <li>
-<strong>onprogress:</strong> Called while reading the file, reports progress (progess.loaded/progress.total). <em>(Function)</em> -NOT SUPPORTED</li>
-<li>
-<strong>onload:</strong> Called when the read has successfully completed. <em>(Function)</em>
+<strong>onload</strong>: Called when the read has successfully completed. <em>(Function)</em>
 </li>
 <li>
-<strong>onabort:</strong> Called when the read has been aborted. For instance, by invoking the abort() method. <em>(Function)</em>
+<strong>onabort</strong>: Called when the read has been aborted. For instance, by invoking the <code>abort()</code> method. <em>(Function)</em>
 </li>
 <li>
-<strong>onerror:</strong> Called when the read has failed. <em>(Function)</em>
+<strong>onerror</strong>: Called when the read has failed. <em>(Function)</em>
 </li>
 <li>
-<strong>onloadend:</strong> Called when the request has completed (either in success or failure).  <em>(Function)</em>
+<strong>onloadend</strong>: Called when the request has completed (either in success or failure).  <em>(Function)</em>
+</li>
+</ul>
+<p><strong>NOTE:</strong> The following porperty is not supported:</p>
+
+<ul>
+<li>
+<strong>onprogress</strong>: Called while reading the file, reporting progress in terms of <code>progress.loaded</code>/<code>progress.total</code>. <em>(Function)</em>
 </li>
 </ul>
 <h2>
@@ -471,19 +475,22 @@ var slice3 = file.slice(120, 135);
 <li>
 <strong>abort</strong>: Aborts reading file.</li>
 <li>
-<strong>readAsDataURL</strong>: Read file and return data as a base64 encoded data url.</li>
+<strong>readAsDataURL</strong>: Read file and return data as a base64-encoded data URL.</li>
 <li>
 <strong>readAsText</strong>: Reads text file.</li>
 <li>
 <strong>readAsBinaryString</strong>: Reads file as binary and returns a binary string.</li>
 <li>
-<strong>readAsArrayBuffer</strong>: Reads file as an ArrayBuffer.</li>
+<strong>readAsArrayBuffer</strong>: Reads file as an <code>ArrayBuffer</code>.</li>
 </ul>
 <h2>
 <a name="FileReader_details">Details</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#FileReader">FileReader</a></code> object is a way to read files from the devices file system.  Files can be read as text or as a base64 data encoded string.  Users register their own event listeners to receive the loadstart, progress, load, loadend, error and abort events.</p>
+<p>The <code><a href="cordova_file_file.md.html#FileReader">FileReader</a></code> object offers a way to read files from the device's
+file system.  Files can be read as text or as a base64 data-encoded
+string.  Event listeners receive the <code>loadstart</code>, <code>progress</code>, <code>load</code>,
+<code>loadend</code>, <code>error</code>, and <code>abort</code> events.</p>
 
 <h2>
 <a name="FileReader_supported_platforms">Supported Platforms</a>
@@ -497,26 +504,29 @@ var slice3 = file.slice(120, 135);
 <li>Windows 8</li>
 </ul>
 <h2>
-<a name="FileReader_read_as_data_url">Read As Data URL </a>
+<a name="FileReader_read_as_data_url">Read As Data URL</a>
 </h2>
 
-<p><strong>Parameters:</strong>
-- file - the file object to read</p>
+<p><strong>Parameters:</strong></p>
 
+<ul>
+<li>
+<strong>file</strong>: the file object to read.</li>
+</ul>
 <h2>
 <a name="FileReader_quick_example">Quick Example</a>
 </h2>
 
 <pre class="prettyprint"><code>function win(file) {
     var reader = new <a href="cordova_file_file.md.html#FileReader">FileReader</a>();
-    reader.onloadend = function(evt) {
+    reader.onloadend = function (evt) {
         console.log("read success");
         console.log(evt.target.result);
     };
     reader.readAsDataURL(file);
 };
 
-var fail = function(evt) {
+var fail = function (evt) {
     console.log(error.code);
 };
 
@@ -530,8 +540,10 @@ entry.file(win, fail);
 <p><strong>Parameters:</strong></p>
 
 <ul>
-<li>file - the file object to read</li>
-<li>encoding - the encoding to use to encode the file's content. Default is UTF8.</li>
+<li>
+<strong>file</strong>: the file object to read.</li>
+<li>
+<strong>encoding</strong>: the encoding to use to encode the file's content. Default is UTF8.</li>
 </ul>
 <h2>
 <a name="FileReader_quick_example">Quick Example</a>
@@ -539,14 +551,14 @@ entry.file(win, fail);
 
 <pre class="prettyprint"><code>function win(file) {
     var reader = new <a href="cordova_file_file.md.html#FileReader">FileReader</a>();
-    reader.onloadend = function(evt) {
+    reader.onloadend = function (evt) {
         console.log("read success");
         console.log(evt.target.result);
     };
     reader.readAsText(file);
 };
 
-var fail = function(evt) {
+var fail = function (evt) {
     console.log(error.code);
 };
 
@@ -586,13 +598,13 @@ entry.file(win, fail);
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     function onLoad() {
         document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
     }
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.PERSISTENT, 0, gotFS, fail);
@@ -647,8 +659,7 @@ entry.file(win, fail);
 </h2>
 
 <ul>
-<li>
-<strong>encoding</strong> parameter is not supported, UTF8 encoding is always used.</li>
+<li>The <strong>encoding</strong> parameter is not supported, and UTF8 encoding is always in effect.</li>
 </ul>
 <h2>
 <a name="FileReader_read_as_binary_string">Read As Binary String</a>
@@ -656,23 +667,26 @@ entry.file(win, fail);
 
 <p>Currently supported on iOS and Android only.</p>
 
-<p><strong>Parameters:</strong>
-- file - the file object to read</p>
+<p><strong>Parameters:</strong></p>
 
+<ul>
+<li>
+<strong>file</strong>: the file object to read.</li>
+</ul>
 <h2>
 <a name="FileReader_quick_example">Quick Example</a>
 </h2>
 
 <pre class="prettyprint"><code>function win(file) {
     var reader = new <a href="cordova_file_file.md.html#FileReader">FileReader</a>();
-    reader.onloadend = function(evt) {
+    reader.onloadend = function (evt) {
         console.log("read success");
         console.log(evt.target.result);
     };
     reader.readAsBinaryString(file);
 };
 
-var fail = function(evt) {
+var fail = function (evt) {
     console.log(error.code);
 };
 
@@ -685,23 +699,26 @@ entry.file(win, fail);
 
 <p>Currently supported on iOS and Android only.</p>
 
-<p><strong>Parameters:</strong>
-- file - the file object to read</p>
+<p><strong>Parameters:</strong></p>
 
+<ul>
+<li>
+<strong>file</strong>:  the file object to read.</li>
+</ul>
 <h2>
 <a name="FileReader_quick_example">Quick Example</a>
 </h2>
 
 <pre class="prettyprint"><code>function win(file) {
     var reader = new <a href="cordova_file_file.md.html#FileReader">FileReader</a>();
-    reader.onloadend = function(evt) {
+    reader.onloadend = function (evt) {
         console.log("read success");
         console.log(new Uint8Array(evt.target.result));
     };
     reader.readAsArrayBuffer(file);
 };
 
-var fail = function(evt) {
+var fail = function (evt) {
     console.log(error.code);
 };
 
@@ -711,7 +728,7 @@ entry.file(win, fail);
 <hr>
 <h1><a name="FileWriter">FileWriter</a></h1>
 
-<p><a href="cordova_file_file.md.html#FileWriter">FileWriter</a> is an object that allows one to write a file.</p>
+<p>As object that allows you to create and write data to a file.</p>
 
 <h2>
 <a name="FileWriter_properties">Properties</a>
@@ -719,67 +736,83 @@ entry.file(win, fail);
 
 <ul>
 <li>
-<strong>readyState:</strong> One of the three states the reader can be in INIT, WRITING or DONE.</li>
+<strong>readyState</strong>: One of the three possible states, either <code>INIT</code>, <code>WRITING</code>, or <code>DONE</code>.</li>
 <li>
-<strong>fileName:</strong> The name of the file to be written. <em>(DOMString)</em>
+<strong>fileName</strong>: The name of the file to be written. <em>(DOMString)</em>
 </li>
 <li>
-<strong>length:</strong> The length of the file to be written. <em>(long)</em>
+<strong>length</strong>: The length of the file to be written. <em>(long)</em>
 </li>
 <li>
-<strong>position:</strong> The current position of the file pointer. <em>(long)</em>
+<strong>position</strong>: The current position of the file pointer. <em>(long)</em>
 </li>
 <li>
-<strong>error:</strong> An object containing errors. <em>(<a href="cordova_file_file.md.html#FileError">FileError</a>)</em>
+<strong>error</strong>: An object containing errors. <em>(<a href="cordova_file_file.md.html#FileError">FileError</a>)</em>
 </li>
 <li>
-<strong>onwritestart:</strong> Called when the write starts. . <em>(Function)</em>
+<strong>onwritestart</strong>: Called when the write starts. <em>(Function)</em>
 </li>
 <li>
-<strong>onprogress:</strong> Called while writing the file, reports progress (progress.loaded/progress.total). <em>(Function)</em> -NOT SUPPORTED</li>
-<li>
-<strong>onwrite:</strong> Called when the request has completed successfully.  <em>(Function)</em>
+<strong>onwrite</strong>: Called when the request has completed successfully.  <em>(Function)</em>
 </li>
 <li>
-<strong>onabort:</strong> Called when the write has been aborted. For instance, by invoking the abort() method. <em>(Function)</em>
+<strong>onabort</strong>: Called when the write has been aborted. For instance, by invoking the abort() method. <em>(Function)</em>
 </li>
 <li>
-<strong>onerror:</strong> Called when the write has failed. <em>(Function)</em>
+<strong>onerror</strong>: Called when the write has failed. <em>(Function)</em>
 </li>
 <li>
-<strong>onwriteend:</strong> Called when the request has completed (either in success or failure).  <em>(Function)</em>
+<strong>onwriteend</strong>: Called when the request has completed (either in success or failure).  <em>(Function)</em>
 </li>
 </ul>
-<h2>
-<a name="FileWriter_methods">Methods</a>
-</h2>
+<p>The following property is <em>not</em> supported:</p>
 
 <ul>
 <li>
-<strong>abort</strong>: Aborts writing file. </li>
+<p><strong>onprogress</strong>: Called while writing the file, reporting progress in terms of <code>progress.loaded</code>/<code>progress.total</code>. <em>(Function)</em></p>
+
+<h2>Methods</h2>
+</li>
+<li><p><strong>abort</strong>: Aborts writing the file.</p></li>
 <li>
-<strong>seek</strong>: Moves the file pointer to the byte specified.</li>
+<strong>seek</strong>: Moves the file pointer to the specified byte.</li>
 <li>
-<strong>truncate</strong>: Shortens the file to the length specified.</li>
+<strong>truncate</strong>: Shortens the file to the specified length.</li>
 <li>
-<strong>write</strong>: Writes data to the file with a UTF-8 encoding.</li>
+<strong>write</strong>: Writes data to the file.</li>
 </ul>
 <h2>
 <a name="FileWriter_details">Details</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code> object is a way to write files to the device file system (UTF-8 encoded).  Users register their own event listeners to receive the writestart, progress, write, writeend, error and abort events.</p>
+<p>The <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code> object offers a way to write UTF-8 encoded files to
+the device file system.  Applications respond to <code>writestart</code>,
+<code>progress</code>, <code>write</code>, <code>writeend</code>, <code>error</code>, and <code>abort</code> events.</p>
 
-<p>A <a href="cordova_file_file.md.html#FileWriter">FileWriter</a> is created for a single file. You can use it to write to a file multiple times. The <a href="cordova_file_file.md.html#FileWriter">FileWriter</a> maintains the file's position and length attributes, so you can seek and write anywhere in the file. By default, the <a href="cordova_file_file.md.html#FileWriter">FileWriter</a> writes to the beginning of the file (will overwrite existing data). Set the optional append boolean to true in the <a href="cordova_file_file.md.html#FileWriter">FileWriter</a>'s constructor to begin writing to the end of the file.</p>
+<p>Each <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code> corresponds to a single file, to which data can be
+written many times.  The <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code> maintains the file's <code>position</code>
+and <code>length</code> attributes, which allow the app to <code>seek</code> and <code>write</code>
+anywhere in the file. By default, the <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code> writes to the
+beginning of the file, overwriting existing data. Set the optional
+<code>append</code> boolean to <code>true</code> in the <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code>'s constructor to
+write to the end of the file.</p>
+
+<p>Text data is supported by all platforms listed below. Text is encoded as UTF-8 before being written to the filesystem. Some platforms also support binary data, which can be passed in as either an ArrayBuffer or a Blob.</p>
 
 <h2>
 <a name="FileWriter_supported_platforms">Supported Platforms</a>
 </h2>
 
+<h3>Text and Binary suport</h3>
+
 <ul>
 <li>Android</li>
-<li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
+</ul>
+<h3>Text only support</h3>
+
+<ul>
+<li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
@@ -789,7 +822,7 @@ entry.file(win, fail);
 
 <pre class="prettyprint"><code>function win(writer) {
     // fast forwards file pointer to end of file
-    writer.seek(writer.length); 
+    writer.seek(writer.length);
 };
 
 var fail = function(evt) {
@@ -804,7 +837,7 @@ entry.createWriter(win, fail);
 </h2>
 
 <pre class="prettyprint"><code>function win(writer) {
-    writer.truncate(10);    
+    writer.truncate(10);
 };
 
 var fail = function(evt) {
@@ -833,14 +866,37 @@ entry.createWriter(win, fail);
 </code></pre>
 
 <h2>
+<a name="FileWriter_binary_write_quick_example">Binary Write Quick Example</a>
+</h2>
+
+<pre class="prettyprint"><code>function win(writer) {
+    var data = new ArrayBuffer(5),
+        dataView = new Int8Array(data);
+    for (i=0; i &lt; 5; i++) {
+        dataView[i] = i;
+    }
+    writer.onwrite = function(evt) {
+        console.log("write success");
+    };
+    writer.write(data);
+};
+
+var fail = function(evt) {
+    console.log(error.code);
+};
+
+entry.createWriter(win, fail);
+</code></pre>
+
+<h2>
 <a name="FileWriter_append_quick_example">Append Quick Example</a>
 </h2>
 
 <pre class="prettyprint"><code>function win(writer) {
     writer.onwrite = function(evt) {
-        console.log("write success");
-    };
-    writer.seek(writer.length);
+    console.log("write success");
+};
+writer.seek(writer.length);
     writer.write("appended text");
 };
 
@@ -882,11 +938,11 @@ entry.createWriter(win, fail);
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.PERSISTENT, 0, gotFS, fail);
@@ -903,7 +959,7 @@ entry.createWriter(win, fail);
     function gotFileWriter(writer) {
         writer.onwriteend = function(evt) {
             console.log("contents of file now 'some sample text'");
-            writer.truncate(11);  
+            writer.truncate(11);
             writer.onwriteend = function(evt) {
                 console.log("contents of file now 'some sample'");
                 writer.seek(4);
@@ -940,17 +996,20 @@ entry.createWriter(win, fail);
 
 <ul>
 <li>
-<strong>name:</strong> The name of the file system. <em>(DOMString)</em>
+<strong>name</strong>: The name of the file system. <em>(DOMString)</em>
 </li>
 <li>
-<strong>root:</strong> The root directory of the file system. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
+<strong>root</strong>: The root directory of the file system. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
 </li>
 </ul>
 <h2>
 <a name="FileSystem_details">Details</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#FileSystem">FileSystem</a></code> object represents information about the file system. The name of the file system will be unique across the list of exposed file systems.  The root property contains a <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> object which represents the root directory of the file system.</p>
+<p>The <code><a href="cordova_file_file.md.html#FileSystem">FileSystem</a></code> object represents information about the file system.
+The name of the file system is unique across the list of exposed
+file systems.  The root property contains a <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> object
+that represents the file system's root directory.</p>
 
 <h2>
 <a name="FileSystem_supported_platforms">Supported Platforms</a>
@@ -989,11 +1048,11 @@ window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">Loc
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.PERSISTENT, 0, onFileSystemSuccess, fail);
@@ -1020,7 +1079,9 @@ window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">Loc
 <hr>
 <h1><a name="FileEntry">FileEntry</a></h1>
 
-<p>This object represents a file on a file system.  It is defined in the <a class="external" href="http://www.w3.org/TR/file-system-api/">W3C Directories and Systems</a> specification.</p>
+<p>Represents a file on a file system, as defined in the
+<a class="external" href="http://www.w3.org/TR/file-system-api/">W3C Directories and Systems</a>
+specification.</p>
 
 <h2>
 <a name="FileEntry_properties">Properties</a>
@@ -1028,23 +1089,24 @@ window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">Loc
 
 <ul>
 <li>
-<strong>isFile:</strong> Always true. <em>(boolean)</em>
+<strong>isFile</strong>: Always true. <em>(boolean)</em>
 </li>
 <li>
-<strong>isDirectory:</strong> Always false. <em>(boolean)</em>
+<strong>isDirectory</strong>: Always false. <em>(boolean)</em>
 </li>
 <li>
-<strong>name:</strong> The name of the <a href="cordova_file_file.md.html#FileEntry">FileEntry</a>, excluding the path leading to it. <em>(DOMString)</em>
+<strong>name</strong>: The name of the <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code>, excluding the path leading to it. <em>(DOMString)</em>
 </li>
 <li>
-<strong>fullPath:</strong> The full absolute path from the root to the <a href="cordova_file_file.md.html#FileEntry">FileEntry</a>. <em>(DOMString)</em>
+<strong>fullPath</strong>: The full absolute path from the root to the <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code>. <em>(DOMString)</em>
 </li>
 </ul>
-<p>NOTE: The following attributes are defined by the W3C specification, but are <strong>not supported</strong> by Cordova:</p>
+<p><strong>NOTE:</strong> The following attribute is defined by the W3C specification,
+but is <em>not</em> supported:</p>
 
 <ul>
 <li>
-<strong>filesystem:</strong> The file system on which the <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> resides. <em>(<a href="cordova_file_file.md.html#FileSystem">FileSystem</a>)</em>
+<strong>filesystem</strong>: The file system on which the <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> resides. <em>(<a href="cordova_file_file.md.html#FileSystem">FileSystem</a>)</em>
 </li>
 </ul>
 <h2>
@@ -1067,9 +1129,9 @@ window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">Loc
 <li>
 <strong>getParent</strong>: Look up the parent directory.</li>
 <li>
-<strong>createWriter</strong>: Creates a <a href="cordova_file_file.md.html#FileWriter">FileWriter</a> object that can be used to write to a file.</li>
+<strong>createWriter</strong>: Creates a <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code> object that can be used to write to a file.</li>
 <li>
-<strong>file</strong>: Creates a <a href="cordova_file_file.md.html#File">File</a> object containing file properties.</li>
+<strong>file</strong>: Creates a <code><a href="cordova_file_file.md.html#File">File</a></code> object containing file properties.</li>
 </ul>
 <h2>
 <a name="FileEntry_supported_platforms">Supported Platforms</a>
@@ -1092,10 +1154,10 @@ window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">Loc
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called with a <a href="cordova_file_file.md.html#Metadata">Metadata</a> object. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed a <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs retrieving the <a href="cordova_file_file.md.html#Metadata">Metadata</a>. Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when retrieving the <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code>. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1116,20 +1178,22 @@ entry.getMetadata(success, fail);
 <a name="FileEntry_setmetadata">setMetadata</a>
 </h2>
 
-<p>Set metadata on a file.
-<strong>Only works on iOS currently</strong> - this will set the extended attributes of a file.</p>
+<p>Set metadata on a file.</p>
+
+<p><strong>Currently works only on iOS.</strong>
+- this will set the extended attributes of a file.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called when the metadata was successfully set. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that executes when the metadata is set. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called when the metadata was not successfully set. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes when the metadata is not successfully set. <em>(Function)</em>
 </li>
 <li>
-<strong>metadataObject</strong> - An object that contains the metadata keys and values. <em>(Object)</em>
+<strong>metadataObject</strong>: An object that contains the metadata's keys and values. <em>(Object)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1149,68 +1213,70 @@ entry.setMetadata(success, fail, { "com.apple.MobileBackup": 1});
 <p><strong>iOS Quirk</strong></p>
 
 <ul>
-<li>only the <strong>"com.apple.MobileBackup"</strong> extended attribute is supported. Set the value to <strong>1</strong> to NOT enable the file to be backed up by iCloud. Set the value to <strong>0</strong> to re-enable the file to be backed up by iCloud.</li>
+<li>Only the <code>com.apple.MobileBackup</code> extended attribute is supported. Set the value to <code>1</code> to prevent the file from being backed up to iCloud. Set the value to <code>0</code> to re-enable the file to be backed up to iCloud.</li>
 </ul>
 <p><strong>Quick Example</strong></p>
 
-<pre class="prettyprint"><code>function setFileMetadata(localFileSystem, filePath, metadataKey, metadataValue) 
+<pre class="prettyprint"><code>function setFileMetadata(localFileSystem, filePath, metadataKey, metadataValue)
 {
-    var onSetMetadataWin = function() {
-      console.log("success setting metadata")
-    }
+        var onSetMetadataWin = function() {
+          console.log("success setting metadata")
+        }
     var onSetMetadataFail = function() {
-      console.log("error setting metadata")
+          console.log("error setting metadata")
     }
 
-    var onGetFileWin = function(parent) {
-      var data = {};
-      data[metadataKey] = metadataValue;
-      parent.setMetadata(onSetMetadataWin, onSetMetadataFail, data);
-    }
-    var onGetFileFail = function() {
-      console.log("error getting file")
-    }
+        var onGetFileWin = function(parent) {
+          var data = {};
+          data[metadataKey] = metadataValue;
+          parent.setMetadata(onSetMetadataWin, onSetMetadataFail, data);
+        }
+        var onGetFileFail = function() {
+          console.log("error getting file")
+        }
 
-    var onFSWin = function(fileSystem) {
-      fileSystem.root.getFile(filePath, {create: true, exclusive: false}, onGetFileWin, onGetFileFail);
-    }
+        var onFSWin = function(fileSystem) {
+          fileSystem.root.getFile(filePath, {create: true, exclusive: false}, onGetFileWin, onGetFileFail);
+        }
 
-    var onFSFail = function(evt) {
-      console.log(evt.target.error.code);
-    }
+        var onFSFail = function(evt) {
+              console.log(evt.target.error.code);
+        }
 
-    window.requestFileSystem(localFileSystem, 0, onFSWin, onFSFail);
+        window.requestFileSystem(localFileSystem, 0, onFSWin, onFSFail);
 }
 
-setFileMetadata(<a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.PERSISTENT, "Backups/sqlite.db", "com.apple.MobileBackup", 1);
+    setFileMetadata(<a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.PERSISTENT, "Backups/sqlite.db", "com.apple.MobileBackup", 1);
 </code></pre>
 
 <h2>
 <a name="FileEntry_moveto">moveTo</a>
 </h2>
 
-<p>Move a file to a different location on the file system. It is an error to attempt to:</p>
+<p>Move a file to a different location on the file system. An error
+results if the app attempts to:</p>
 
 <ul>
 <li>move a file into its parent if a name different from its current one isn't provided;</li>
 <li>move a file to a path occupied by a directory;</li>
 </ul>
-<p>In addition, an attempt to move a file on top of an existing file must attempt to delete and replace that file.</p>
+<p>In addition, moving a file on top of an existing file attempts to
+delete and replace that file.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>parent</strong> - The parent directory to which to move the file. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
+<strong>parent</strong>: The parent directory to which to move the file. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
 </li>
 <li>
-<strong>newName</strong> - The new name of the file. Defaults to the current name if unspecified. <em>(DOMString)</em>
+<strong>newName</strong>: The new name of the file. Defaults to the current name if unspecified. <em>(DOMString)</em>
 </li>
 <li>
-<strong>successCallback</strong> - A callback that is called with the <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> object of the new file. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed the new files <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to move the file.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to move the file.  Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1237,7 +1303,8 @@ function moveFile(entry) {
 <a name="FileEntry_copyto">copyTo</a>
 </h2>
 
-<p>Copy a file to a new location on the file system.  It is an error to attempt to:</p>
+<p>Copy a file to a new location on the file system.  An error results if
+the app attempts to:</p>
 
 <ul>
 <li>copy a file into its parent if a name different from its current one is not provided.</li>
@@ -1246,16 +1313,16 @@ function moveFile(entry) {
 
 <ul>
 <li>
-<strong>parent</strong> - The parent directory to which to copy the file. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
+<strong>parent</strong>: The parent directory to which to copy the file. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
 </li>
 <li>
-<strong>newName</strong> - The new name of the file. Defaults to the current name if unspecified. <em>(DOMString)</em>
+<strong>newName</strong>: The new name of the file. Defaults to the current name if unspecified. <em>(DOMString)</em>
 </li>
 <li>
-<strong>successCallback</strong> - A callback that is called with the <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> object of the new file. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed the new file's <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to copy the file.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to copy the file.  Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1301,10 +1368,10 @@ console.log(fileURL);
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called after the file has been deleted.  Invoked with no parameters. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that executes after the file has been deleted.  Invoked with no parameters. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to delete the file.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to delete the file.  Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1325,16 +1392,16 @@ entry.remove(success, fail);
 <a name="FileEntry_getparent">getParent</a>
 </h2>
 
-<p>Look up the parent <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> containing the file.</p>
+<p>Look up the parent <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> containing the file.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called with the file's parent <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed the file's parent <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to retrieve the parent <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to retrieve the parent <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>.  Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1355,16 +1422,16 @@ entry.getParent(success, fail);
 <a name="FileEntry_createwriter">createWriter</a>
 </h2>
 
-<p>Create a <a href="cordova_file_file.md.html#FileWriter">FileWriter</a> object associated with the file that the <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> represents.</p>
+<p>Create a <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code> object associated with the file represented by the <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code>.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called with a <a href="cordova_file_file.md.html#FileWriter">FileWriter</a> object. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed a <code><a href="cordova_file_file.md.html#FileWriter">FileWriter</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs while attempting to create the <a href="cordova_file_file.md.html#FileWriter">FileWriter</a>.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs while attempting to create the <a href="cordova_file_file.md.html#FileWriter">FileWriter</a>.  Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1385,16 +1452,17 @@ entry.createWriter(success, fail);
 <a name="FileEntry_file">file</a>
 </h2>
 
-<p>Return a <a href="cordova_file_file.md.html#File">File</a> object that represents the current state of the file that this <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> represents.</p>
+<p>Return a <code><a href="cordova_file_file.md.html#File">File</a></code> object that represents the current state of the file
+that this <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> represents.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called with a <a href="cordova_file_file.md.html#File">File</a> object. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed a <code><a href="cordova_file_file.md.html#File">File</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when creating the <a href="cordova_file_file.md.html#File">File</a> object (e.g. the underlying file no longer exists).  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when creating the <code><a href="cordova_file_file.md.html#File">File</a></code> object, such as when the file no longer exists.  Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1414,7 +1482,9 @@ entry.file(success, fail);
 <hr>
 <h1><a name="DirectoryEntry">DirectoryEntry</a></h1>
 
-<p>This object represents a directory on a file system.  It is defined in the <a class="external" href="http://www.w3.org/TR/file-system-api/">W3C Directories and Systems</a> specification.</p>
+<p>This object represents a directory on a file system, as defined by the
+<a class="external" href="http://www.w3.org/TR/file-system-api/">W3C Directories and Systems</a>
+specification.</p>
 
 <h2>
 <a name="DirectoryEntry_properties">Properties</a>
@@ -1422,30 +1492,31 @@ entry.file(success, fail);
 
 <ul>
 <li>
-<strong>isFile:</strong> Always false. <em>(boolean)</em>
+<strong>isFile</strong>: Always false. <em>(boolean)</em>
 </li>
 <li>
-<strong>isDirectory:</strong> Always true. <em>(boolean)</em>
+<strong>isDirectory</strong>: Always true. <em>(boolean)</em>
 </li>
 <li>
-<strong>name:</strong> The name of the <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>, excluding the path leading to it. <em>(DOMString)</em>
+<strong>name</strong>: The name of the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>, excluding the path leading to it. <em>(DOMString)</em>
 </li>
 <li>
-<strong>fullPath:</strong> The full absolute path from the root to the <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>. <em>(DOMString)</em>
+<strong>fullPath</strong>: The full absolute path from the root to the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>. <em>(DOMString)</em>
 </li>
 </ul>
-<p>NOTE: The following attributes are defined by the W3C specification, but are <strong>not supported</strong> by Cordova:</p>
+<p><strong>NOTE:</strong> The following attribute is defined by the W3C specification,
+but is <em>not</em> supported:</p>
 
 <ul>
 <li>
-<strong>filesystem:</strong> The file system on which the <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> resides. <em>(<a href="cordova_file_file.md.html#FileSystem">FileSystem</a>)</em>
+<strong>filesystem</strong>: The file system on which the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> resides. <em>(<a href="cordova_file_file.md.html#FileSystem">FileSystem</a>)</em>
 </li>
 </ul>
 <h2>
 <a name="DirectoryEntry_methods">Methods</a>
 </h2>
 
-<p>The following methods can be invoked on a <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> object:</p>
+<p>The following methods can be invoked on a <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> object:</p>
 
 <ul>
 <li>
@@ -1457,13 +1528,13 @@ entry.file(success, fail);
 <li>
 <strong>copyTo</strong>: Copy a directory to a different location on the file system.</li>
 <li>
-<strong>toURL</strong>: Return a URL that can be used to locate a directory.</li>
+<strong>toURL</strong>: Return a URL to help locate a directory.</li>
 <li>
-<strong>remove</strong>: Delete a directory.  The directory must be empty.</li>
+<strong>remove</strong>: Delete a directory. The directory must be empty.</li>
 <li>
 <strong>getParent</strong>: Look up the parent directory.</li>
 <li>
-<strong>createReader</strong>: Create a new <a href="cordova_file_file.md.html#DirectoryReader">DirectoryReader</a> that can read entries from a directory.</li>
+<strong>createReader</strong>: Create a new <code><a href="cordova_file_file.md.html#DirectoryReader">DirectoryReader</a></code> that can read entries from a directory.</li>
 <li>
 <strong>getDirectory</strong>: Create or look up a directory.</li>
 <li>
@@ -1492,10 +1563,10 @@ entry.file(success, fail);
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called with a <a href="cordova_file_file.md.html#Metadata">Metadata</a> object. <em>(Function)</em>
+<strong>successCallback</strong>: A callback function to execute with a <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs retrieving the <a href="cordova_file_file.md.html#Metadata">Metadata</a>. Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback function to execute if an error occurs when retrieving the <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code>. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1517,19 +1588,19 @@ entry.getMetadata(success, fail);
 </h2>
 
 <p>Set metadata on a directory.
-<strong>Only works on iOS currently</strong> - this will set the extended attributes of a directory.</p>
+<strong>Currently works only on iOS.</strong> - this will set the extended attributes of a directory.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called when the metadata was successfully set. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that executes when the metadata is successfully set. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called when the metadata was not successfully set. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes when the metadata fails to be set. <em>(Function)</em>
 </li>
 <li>
-<strong>metadataObject</strong> - An object that contains the metadata keys and values. <em>(Object)</em>
+<strong>metadataObject</strong>: An object that contains the metadata's keys and values. <em>(Object)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1549,70 +1620,71 @@ entry.setMetadata(success, fail, { "com.apple.MobileBackup": 1});
 <p><strong>iOS Quirk</strong></p>
 
 <ul>
-<li>only the <strong>"com.apple.MobileBackup"</strong> extended attribute is supported. Set the value to <strong>1</strong> to NOT enable the directory to be backed up by iCloud. Set the value to <strong>0</strong> to re-enable the directory to be backed up by iCloud.</li>
+<li>Only the <code>com.apple.MobileBackup</code> extended attribute is supported. Set the value to <code>1</code> to prevent the directory from being backed up to iCloud. Set the value to <code>0</code> to re-enable the directory to be backed up to iCloud.</li>
 </ul>
 <p><strong>Quick Example</strong></p>
 
-<pre class="prettyprint"><code>function setFolderMetadata(localFileSystem, subFolder, metadataKey, metadataValue) 
+<pre class="prettyprint"><code>function setFolderMetadata(localFileSystem, subFolder, metadataKey, metadataValue)
 {
-    var onSetMetadataWin = function() {
-      console.log("success setting metadata")
-    }
+        var onSetMetadataWin = function() {
+          console.log("success setting metadata")
+        }
     var onSetMetadataFail = function() {
-      console.log("error setting metadata")
+          console.log("error setting metadata")
     }
 
-    var onGetDirectoryWin = function(parent) {
-      var data = {};
-      data[metadataKey] = metadataValue;
-      parent.setMetadata(onSetMetadataWin, onSetMetadataFail, data);
-    }
-    var onGetDirectoryFail = function() {
-      console.log("error getting dir")
-    }
+        var onGetDirectoryWin = function(parent) {
+          var data = {};
+          data[metadataKey] = metadataValue;
+          parent.setMetadata(onSetMetadataWin, onSetMetadataFail, data);
+        }
+        var onGetDirectoryFail = function() {
+          console.log("error getting dir")
+        }
 
-    var onFSWin = function(fileSystem) {
-      fileSystem.root.getDirectory(subFolder, {create: true, exclusive: false}, onGetDirectoryWin, onGetDirectoryFail);
-    }
+        var onFSWin = function(fileSystem) {
+          fileSystem.root.getDirectory(subFolder, {create: true, exclusive: false}, onGetDirectoryWin, onGetDirectoryFail);
+        }
 
-    var onFSFail = function(evt) {
-      console.log(evt.target.error.code);
-    }
+        var onFSFail = function(evt) {
+              console.log(evt.target.error.code);
+        }
 
-    window.requestFileSystem(localFileSystem, 0, onFSWin, onFSFail);
+        window.requestFileSystem(localFileSystem, 0, onFSWin, onFSFail);
 }
 
-setFolderMetadata(<a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.PERSISTENT, "Backups", "com.apple.MobileBackup", 1);
+    setFolderMetadata(<a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.PERSISTENT, "Backups", "com.apple.MobileBackup", 1);
 </code></pre>
 
 <h2>
 <a name="DirectoryEntry_moveto">moveTo</a>
 </h2>
 
-<p>Move a directory to a different location on the file system. It is an error to attempt to:</p>
+<p>Move a directory to a different location on the file system. An error results if the app attempts to:</p>
 
 <ul>
-<li>move a directory inside itself or to any child at any depth;</li>
-<li>move a directory into its parent if a name different from its current one is not provided;</li>
-<li>move a directory to a path occupied by a file;</li>
-<li>move a directory to a path occupied by a directory which is not empty.</li>
+<li>move a directory inside itself or to any child at any depth.</li>
+<li>move a directory into its parent if a name different from its current directory is not provided.</li>
+<li>move a directory to a path occupied by a file.</li>
+<li>move a directory to a path occupied by a directory that is not empty.</li>
 </ul>
-<p>In addition, an attempt to move a directory on top of an existing empty directory must attempt to delete and replace that directory.</p>
+<p>Moving a directory on top of an existing empty directory attempts to
+delete and replace that directory.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>parent</strong> - The parent directory to which to move the directory. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
+<strong>parent</strong>: The parent directory to which to move the directory. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
 </li>
 <li>
-<strong>newName</strong> - The new name of the directory. Defaults to the current name if unspecified. <em>(DOMString)</em>
+<strong>newName</strong>: The new name of the directory. Defaults to the current name if unspecified. <em>(DOMString)</em>
 </li>
 <li>
-<strong>successCallback</strong> - A callback that is called with the <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> object of the new directory. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that executes with the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> object for the new directory. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to move the directory.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to move the directory. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1625,7 +1697,7 @@ function fail(error) {
     alert(error.code);
 }
 
-function moveDir(entry) {
+    function moveDir(entry) {
     var parent = document.getElementById('parent').value,
         parentName = parent.substring(parent.lastIndexOf('/')+1),
         newName = document.getElementById('newName').value,
@@ -1640,41 +1712,41 @@ function moveDir(entry) {
 <a name="DirectoryEntry_copyto">copyTo</a>
 </h2>
 
-<p>Copy a directory to a different location on the file system. It is an error to attempt to:</p>
+<p>Copy a directory to a different location on the file system.  An error results if the app attempts to:</p>
 
 <ul>
-<li>copy a directory inside itself at any depth;</li>
-<li>copy a directory into its parent if a name different from its current one is not provided.</li>
+<li>copy a directory inside itself at any depth.</li>
+<li>copy a directory into its parent if a name different from its current directory is not provided.</li>
 </ul>
-<p>Directory copies are always recursive - that is, they copy all contents of the directory.</p>
+<p>Directory copies are always recursive, and copy all contents of the directory.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>parent</strong> - The parent directory to which to copy the directory. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
+<strong>parent</strong>: The parent directory to which to copy the directory. <em>(<a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>)</em>
 </li>
 <li>
-<strong>newName</strong> - The new name of the directory. Defaults to the current name if unspecified. <em>(DOMString)</em>
+<strong>newName</strong>: The new name of the directory. Defaults to the current name if unspecified. <em>(DOMString)</em>
 </li>
 <li>
-<strong>successCallback</strong> - A callback that is called with the <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> object of the new directory. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that executes with the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> object for the new directory. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to copy the underlying directory.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to copy the underlying directory. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
 
-<pre class="prettyprint"><code>function win(entry) {
-    console.log("New Path: " + entry.fullPath);
-}
+<pre class="prettyprint"><code>    function win(entry) {
+        console.log("New Path: " + entry.fullPath);
+    }
 
-function fail(error) {
-    alert(error.code);
-}
+    function fail(error) {
+        alert(error.code);
+    }
 
-function copyDir(entry) {
+    function copyDir(entry) {
     var parent = document.getElementById('parent').value,
         parentName = parent.substring(parent.lastIndexOf('/')+1),
         newName = document.getElementById('newName').value,
@@ -1702,20 +1774,20 @@ console.log(dirURL);
 <a name="DirectoryEntry_remove">remove</a>
 </h2>
 
-<p>Deletes a directory. It is an error to attempt to:</p>
+<p>Deletes a directory. An error results if the app attempts to:</p>
 
 <ul>
-<li>delete a directory that is not empty;</li>
+<li>delete a directory that is not empty.</li>
 <li>delete the root directory of a filesystem.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called after the directory has been deleted.  Invoked with no parameters. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that executes after the directory is deleted.  Invoked with no parameters. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to delete the directory.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to delete the directory. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1736,16 +1808,16 @@ entry.remove(success, fail);
 <a name="DirectoryEntry_getparent">getParent</a>
 </h2>
 
-<p>Look up the parent <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> containing the directory.</p>
+<p>Look up the parent <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> containing the directory.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called with the directory's parent <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed the directory's parent <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to retrieve the parent <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to retrieve the parent <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1778,7 +1850,7 @@ var directoryReader = entry.createReader();
 <a name="DirectoryEntry_getdirectory">getDirectory</a>
 </h2>
 
-<p>Creates or looks up an existing directory.  It is an error to attempt to:</p>
+<p>Creates or looks up an existing directory.  An error results if the app attempts to:</p>
 
 <ul>
 <li>create a directory whose immediate parent does not yet exist.</li>
@@ -1787,16 +1859,16 @@ var directoryReader = entry.createReader();
 
 <ul>
 <li>
-<strong>path</strong> - The path to the directory to be looked up or created.  Either an absolute path, or a relative path from this <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>. <em>(DOMString)</em>
+<strong>path</strong>: The path to the directory to be looked up or created.  Either an absolute path, or a relative path from this <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>. <em>(DOMString)</em>
 </li>
 <li>
-<strong>options</strong> - Options to specify whether the directory is created if it doesn't exist.  <em>(<a href="cordova_file_file.md.html#Flags">Flags</a>)</em>
+<strong>options</strong>: Options to specify whether the directory is to be created if it doesn't exist.  <em>(<a href="cordova_file_file.md.html#Flags">Flags</a>)</em>
 </li>
 <li>
-<strong>successCallback</strong> - A callback that is invoked with a <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> object. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that executes with a <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs creating or looking up the directory.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when creating or looking up the directory. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1817,7 +1889,7 @@ entry.getDirectory("newDir", {create: true, exclusive: false}, success, fail);
 <a name="DirectoryEntry_getfile">getFile</a>
 </h2>
 
-<p>Creates or looks up a file.  It is an error to attempt to:</p>
+<p>Creates or looks up a file.  An error results if the app attempts to:</p>
 
 <ul>
 <li>create a file whose immediate parent does not yet exist.</li>
@@ -1826,16 +1898,16 @@ entry.getDirectory("newDir", {create: true, exclusive: false}, success, fail);
 
 <ul>
 <li>
-<strong>path</strong> - The path to the file to be looked up or created.  Either an absolute path, or a relative path from this <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>. <em>(DOMString)</em>
+<strong>path</strong>: The path to the file to be looked up or created.  Either an absolute path, or a relative path from this <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>. <em>(DOMString)</em>
 </li>
 <li>
-<strong>options</strong> - Options to specify whether the file is created if it doesn't exist.  <em>(<a href="cordova_file_file.md.html#Flags">Flags</a>)</em>
+<strong>options</strong>: Options to specify whether the file is created if it doesn't exist.  <em>(<a href="cordova_file_file.md.html#Flags">Flags</a>)</em>
 </li>
 <li>
-<strong>successCallback</strong> - A callback that is invoked with a <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> object. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed a <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs creating or looking up the file.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when creating or looking up the file. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1856,9 +1928,9 @@ entry.getFile("newFile.txt", {create: true, exclusive: false}, success, fail);
 <a name="DirectoryEntry_removerecursively">removeRecursively</a>
 </h2>
 
-<p>Deletes a directory and all of its contents.  In the event of an error (e.g. trying to delete
-a directory that contains a file that cannot be removed), some of the contents of the directory may
-be deleted.   It is an error to attempt to:</p>
+<p>Deletes a directory and all of its contents.  In the event of an error (such as trying to delete
+a directory containing a file that cannot be removed), some of the contents of the directory may
+be deleted.   An error results if the app attempts to:</p>
 
 <ul>
 <li>delete the root directory of a filesystem.</li>
@@ -1867,10 +1939,10 @@ be deleted.   It is an error to attempt to:</p>
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is called after the <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> has been deleted.  Invoked with no parameters. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that executes after the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> has been deleted.  Invoked with no parameters. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs when attempting to delete the <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a>.  Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to delete the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code>. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1891,26 +1963,29 @@ entry.removeRecursively(success, fail);
 <a name="DirectoryEntry_blackberry_quirks">BlackBerry Quirks</a>
 </h2>
 
-<p>May fail with a ControlledAccessException in the following cases:</p>
+<p>May fail with a <code>ControlledAccessException</code> in the following cases:</p>
 
 <ul>
-<li>Access is attempted on an directory created by a previous installation of an application.</li>
+<li>An app attempts to access a directory created by a previous installation of the app.</li>
 </ul>
 <blockquote>
-  <p>solution: insure temporary directories are cleaned manually, or by the application before reinstall</p>
+  <p>Solution: ensure temporary directories are cleaned manually, or by the application prior to reinstallation.</p>
 </blockquote>
 
 <ul>
-<li>if device is connected by usb</li>
+<li>If the device is connected by USB.</li>
 </ul>
 <blockquote>
-  <p>solution: disconnect usb cable from device and run again</p>
+  <p>Solution: disconnect the USB cable from the device and run again.</p>
 </blockquote>
 
 <hr>
 <h1><a name="DirectoryReader">DirectoryReader</a></h1>
 
-<p>An object that lists files and directories in a directory.  Defined in the <a class="external" href="http://www.w3.org/TR/file-system-api/">Directories and Systems</a> specification.</p>
+<p>An object that lists files and directories within a directory, as
+defined in the
+<a class="external" href="http://www.w3.org/TR/file-system-api/">W3C Directories and Systems</a>
+specification.</p>
 
 <h2>
 <a name="DirectoryReader_methods">Methods</a>
@@ -1918,7 +1993,7 @@ entry.removeRecursively(success, fail);
 
 <ul>
 <li>
-<strong>readEntries</strong>: Read the entries in a directory. </li>
+<strong>readEntries</strong>: Read the entries in a directory.</li>
 </ul>
 <h2>
 <a name="DirectoryReader_supported_platforms">Supported Platforms</a>
@@ -1941,10 +2016,10 @@ entry.removeRecursively(success, fail);
 
 <ul>
 <li>
-<strong>successCallback</strong> - A callback that is passed an array of <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> and <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> objects. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed an array of <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> and <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> objects. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs retrieving the directory listing. Invoked with a <a href="cordova_file_file.md.html#FileError">FileError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when retrieving the directory listing. Invoked with a <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object. <em>(Function)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
@@ -1970,7 +2045,8 @@ directoryReader.readEntries(success,fail);
 <hr>
 <h1><a name="FileTransfer">FileTransfer</a></h1>
 
-<p><a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a> is an object that allows you to upload files to a server or download files from a server.</p>
+<p>The <code><a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a></code> object allows you to upload or download files to
+and from a server.</p>
 
 <h2>
 <a name="FileTransfer_properties">Properties</a>
@@ -1978,7 +2054,7 @@ directoryReader.readEntries(success,fail);
 
 <ul>
 <li>
-<strong>onprogress:</strong> Called with a ProgressEvent whenever a new chunk of data is transferred. <em>(Function)</em>
+<strong>onprogress</strong>: Called with a <code>ProgressEvent</code> whenever a new chunk of data is transferred. <em>(Function)</em>
 </li>
 </ul>
 <h2>
@@ -1987,7 +2063,7 @@ directoryReader.readEntries(success,fail);
 
 <ul>
 <li>
-<strong>upload</strong>: sends a file to a server. </li>
+<strong>upload</strong>: sends a file to a server.</li>
 <li>
 <strong>download</strong>: downloads a file from server.</li>
 <li>
@@ -1997,8 +2073,15 @@ directoryReader.readEntries(success,fail);
 <a name="FileTransfer_details">Details</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a></code> object provides a way to upload files to a remote server using an HTTP multi-part POST request.  Both HTTP and HTTPS protocols are supported.  Optional parameters can be specified by passing a <a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a> object to the upload method.  On successful upload, the success callback will be called with a <a href="cordova_file_file.md.html#FileUploadResult">FileUploadResult</a> object.  If an error occurs, the error callback will be invoked with a <a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a> object.
-It is also possible to download a file from remote and save it on the device (only iOS and Android).</p>
+<p>The <code><a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a></code> object provides a way to upload files to a remote
+server using an HTTP multi-part POST request.  Both HTTP and HTTPS
+protocols are supported.  Optional parameters can be specified by
+passing a <code><a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a></code> object to the <code>upload()</code> method.  On
+successful upload, a <code><a href="cordova_file_file.md.html#FileUploadResult">FileUploadResult</a></code> object is passed to the
+success callback.  If an error occurs, a <code><a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a></code> object is
+passed to the error callback.  It is also possible (only on iOS and
+Android) to download a file from a remote server and save it on the
+device.</p>
 
 <h2>
 <a name="FileTransfer_supported_platforms">Supported Platforms</a>
@@ -2019,48 +2102,47 @@ It is also possible to download a file from remote and save it on the device (on
 
 <ul>
 <li>
-<strong>filePath</strong> - Full path of the file on the device</li>
+<strong>filePath</strong>: Full path of the file on the device.</li>
 <li>
-<strong>server</strong> - URL of the server to receive the file (must already be encoded using encodeURI())</li>
+<strong>server</strong>: URL of the server to receive the file, as encoded by <code>encodeURI()</code>.</li>
 <li>
-<strong>successCallback</strong> - A callback that is called with a <a href="cordova_file_file.md.html#Metadata">Metadata</a> object. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed a <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs retrieving the <a href="cordova_file_file.md.html#Metadata">Metadata</a>. Invoked with a <a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs retrieving the <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code>. Invoked with a <code><a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>options</strong> - Optional parameters such as file name and mimetype</li>
+<strong>options</strong>: Optional parameters such as file name and mimetype.</li>
 <li>
-<strong>trustAllHosts</strong> - Optional parameter, defaults to false. If set to true then it will accept all security certificates. This is useful as Android rejects self signed security certificates. Not recommended for production use. Supported on Android and iOS. <em>(boolean)</em>
+<strong>trustAllHosts</strong>: Optional parameter, defaults to <code>false</code>. If set to true, it accepts all security certificates. This is useful since Android rejects self-signed security certificates. Not recommended for production use. Supported on Android and iOS. <em>(boolean)</em>
 </li>
 </ul>
 <p><strong>Quick Example</strong></p>
 
 <pre class="prettyprint"><code>// !! Assumes variable fileURI contains a valid URI to a text file on the device
 
-var win = function(r) {
+var win = function (r) {
     console.log("Code = " + r.responseCode);
     console.log("Response = " + r.response);
     console.log("Sent = " + r.bytesSent);
 }
 
-var fail = function(error) {
+var fail = function (error) {
     alert("An error has occurred: Code = " + error.code);
     console.log("upload error source " + error.source);
     console.log("upload error target " + error.target);
 }
 
 var options = new <a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a>();
-options.fileKey="file";
-options.fileName=fileURI.substr(fileURI.lastIndexOf('/')+1);
-options.mimeType="text/plain";
-</code></pre>
+options.fileKey = "file";
+options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+options.mimeType = "text/plain";
 
-<p>var params = {};
-    params.value1 = "test";
-    params.value2 = "param";</p>
+var params = {};
+params.value1 = "test";
+params.value2 = "param";
 
-<pre class="prettyprint"><code>options.params = params;
+options.params = params;
 
 var ft = new <a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a>();
 ft.upload(fileURI, encodeURI("http://some.server.com/upload.php"), win, fail, options);
@@ -2076,22 +2158,23 @@ ft.upload(fileURI, encodeURI("http://some.server.com/upload.php"), win, fail, op
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        // Wait for Cordova to load
+        // Wait for device API libraries to load
         //
         document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-        // Cordova is ready
+        // device APIs are available
         //
         function onDeviceReady() {
-
             // Retrieve image file location from specified source
-            navigator.<a href="cordova_camera_camera.md.html#camera.getPicture">camera.getPicture</a>(uploadPhoto,
-                                        function(message) { alert('get picture failed'); },
-                                        { quality: 50, 
-                                        destinationType: navigator.camera.DestinationType.FILE_URI,
-                                        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY }
-                                        );
-
+            navigator.<a href="cordova_camera_camera.md.html#camera.getPicture">camera.getPicture</a>(
+                uploadPhoto,
+                function(message) { alert('get picture failed'); },
+                {
+                    quality         : 50,
+                    destinationType : navigator.camera.DestinationType.FILE_URI,
+                    sourceType      : navigator.camera.PictureSourceType.PHOTOLIBRARY
+                }
+            );
         }
 
         function uploadPhoto(imageURI) {
@@ -2164,7 +2247,8 @@ ft.upload(fileURI, uri, win, fail, options);
 
 <p><strong>Android Quirks</strong></p>
 
-<p>If you experience problems uploading to a Nginx server then make sure you have the chunkedMode option set to false.</p>
+<p>Set the <code>chunkedMode</code> option to <code>false</code> to prevent problems uploading
+to a Nginx server.</p>
 
 <h2>
 <a name="FileTransfer_download">download</a>
@@ -2174,20 +2258,20 @@ ft.upload(fileURI, uri, win, fail, options);
 
 <ul>
 <li>
-<strong>source</strong> - URL of the server to download the file (must already be encoded using encodeURI())</li>
+<strong>source</strong>: URL of the server to download the file, as encoded by <code>encodeURI()</code>.</li>
 <li>
-<strong>target</strong> - Full path of the file on the device</li>
+<strong>target</strong>: Full path of the file on the device.</li>
 <li>
-<strong>successCallback</strong> - A callback that is called with a <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> object. <em>(Function)</em>
+<strong>successCallback</strong>: A callback that is passed  a <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>errorCallback</strong> - A callback that is called if an error occurs retrieving the <a href="cordova_file_file.md.html#Metadata">Metadata</a>. Invoked with a <a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a> object. <em>(Function)</em>
+<strong>errorCallback</strong>: A callback that executes if an error occurs when retrieving the <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code>. Invoked with a <code><a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a></code> object. <em>(Function)</em>
 </li>
 <li>
-<strong>trustAllHosts</strong> - Optional parameter, defaults to false. If set to true then it will accept all security certificates. This is useful as Android rejects self signed security certificates. Not recommended for production use. Supported on Android and iOS. <em>(boolean)</em>
+<strong>trustAllHosts</strong>: Optional parameter, defaults to <code>false</code>. If set to <code>true</code> then it will accept all security certificates. This is useful as Android rejects self signed security certificates. Not recommended for production use. Supported on Android and iOS. <em>(boolean)</em>
 </li>
 <li>
-<strong>options</strong> - Optional parameters, currently only supports headers (such as Authorization (Basic Authentication), etc).</li>
+<strong>options</strong>: Optional parameters, currently only supports headers (such as Authorization (Basic Authentication), etc).</li>
 </ul>
 <p><strong>Quick Example</strong></p>
 
@@ -2220,7 +2304,7 @@ fileTransfer.download(
 <a name="FileTransfer_abort">abort</a>
 </h2>
 
-<p>Aborts an in-progress transfer. The onerror callback will be called with a <a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a> object which has an error code of <a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a>.ABORT_ERR.</p>
+<p>Aborts an in-progress transfer. The onerror callback is passed a <a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a> object which has an error code of <a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a>.ABORT_ERR.</p>
 
 <p><strong>Supported Platforms</strong></p>
 
@@ -2232,11 +2316,11 @@ fileTransfer.download(
 
 <pre class="prettyprint"><code>// !! Assumes variable fileURI contains a valid URI to a text file on the device
 
-var win = function(r) {
+      var win = function(r) {
     console.log("Code = " + r.responseCode);
     console.log("Response = " + r.response);
     console.log("Sent = " + r.bytesSent);
-}
+    }
 
 var fail = function(error) {
     alert("An error has occurred: Code = " + error.code);
@@ -2244,18 +2328,18 @@ var fail = function(error) {
     console.log("upload error target " + error.target);
 }
 
-var options = new <a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a>();
-options.fileKey="file";
-options.fileName=fileURI.substr(fileURI.lastIndexOf('/')+1);
-options.mimeType="text/plain";
+    var options = new <a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a>();
+    options.fileKey="file";
+    options.fileName=fileURI.substr(fileURI.lastIndexOf('/')+1);
+    options.mimeType="text/plain";
 
 var params = {};
-params.value1 = "test";
-params.value2 = "param";
+    params.value1 = "test";
+    params.value2 = "param";
 
-options.params = params;
+    options.params = params;
 
-var ft = new <a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a>();
+    var ft = new <a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a>();
 ft.upload(fileURI, encodeURI("http://some.server.com/upload.php"), win, fail, options);
 ft.abort(win, fail);
 </code></pre>
@@ -2290,7 +2374,9 @@ fileTransfer.download(...); // or fileTransfer.upload(...);
 <hr>
 <h1><a name="FileUploadOptions">FileUploadOptions</a></h1>
 
-<p>A <code><a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a></code> object can be passed to the <a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a> objects upload method in order to specify additional parameters to the upload script.</p>
+<p>A <code><a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a></code> object can be passed to the <code><a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a></code>
+object's <code>upload()</code> method to specify additional parameters to the
+upload script.</p>
 
 <h2>
 <a name="FileUploadOptions_properties">Properties</a>
@@ -2298,23 +2384,25 @@ fileTransfer.download(...); // or fileTransfer.upload(...);
 
 <ul>
 <li>
-<strong>fileKey:</strong> The name of the form element.  If not set defaults to "file". (DOMString)</li>
+<strong>fileKey</strong>: The name of the form element.  Defaults to <code>file</code>. (DOMString)</li>
 <li>
-<strong>fileName:</strong> The file name you want the file to be saved as on the server.  If not set defaults to "image.jpg". (DOMString)</li>
+<strong>fileName</strong>: The file name to use when saving the file on the server.  Defaults to <code>image.jpg</code>. (DOMString)</li>
 <li>
-<strong>mimeType:</strong> The mime type of the data you are uploading.  If not set defaults to "image/jpeg". (DOMString)</li>
+<strong>mimeType</strong>: The mime type of the data to upload.  Defaults to <code>image/jpeg</code>. (DOMString)</li>
 <li>
-<strong>params:</strong> A set of optional key/value pairs to be passed along in the HTTP request. (Object)</li>
+<strong>params</strong>: A set of optional key/value pairs to pass in the HTTP request. (Object)</li>
 <li>
-<strong>chunkedMode:</strong> Should the data be uploaded in chunked streaming mode. If not set defaults to "true". (Boolean)</li>
+<strong>chunkedMode</strong>: Whether to upload the data in chunked streaming mode. Defaults to <code>true</code>. (Boolean)</li>
 <li>
-<strong>headers:</strong> A map of header name =&gt; header value. To specify multiple values for a header, use an array of values. (Object)</li>
+<strong>headers</strong>: A map of header name/header values. Use an array to specify more than one value. (Object)</li>
 </ul>
 <h2>
 <a name="FileUploadOptions_description">Description</a>
 </h2>
 
-<p>A <code><a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a></code> object can be passed to the <a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a> objects upload method in order to specify additional parameters to the upload script.</p>
+<p>A <code><a href="cordova_file_file.md.html#FileUploadOptions">FileUploadOptions</a></code> object can be passed to the <code><a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a></code>
+object's <code>upload()</code> method to specify additional parameters to the
+upload script.</p>
 
 <h2>
 <a name="FileUploadOptions_wp7_quirk">WP7 Quirk</a>
@@ -2322,13 +2410,13 @@ fileTransfer.download(...); // or fileTransfer.upload(...);
 
 <ul>
 <li>
-<strong>chunkedMode:</strong>
-This parameter is ignored on WP7.</li>
+<strong>chunkedMode:</strong>: Ignored on WP7.</li>
 </ul>
 <hr>
 <h1><a name="FileUploadResult">FileUploadResult</a></h1>
 
-<p>A <code><a href="cordova_file_file.md.html#FileUploadResult">FileUploadResult</a></code> object is returned via the success callback of the <a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a> upload method.</p>
+<p>A <code><a href="cordova_file_file.md.html#FileUploadResult">FileUploadResult</a></code> object is passed to the success callback of the
+<code><a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a></code> object's <code>upload()</code> method.</p>
 
 <h2>
 <a name="FileUploadResult_properties">Properties</a>
@@ -2336,29 +2424,32 @@ This parameter is ignored on WP7.</li>
 
 <ul>
 <li>
-<strong>bytesSent:</strong> The number of bytes sent to the server as part of the upload. (long)</li>
+<strong>bytesSent</strong>: The number of bytes sent to the server as part of the upload. (long)</li>
 <li>
-<strong>responseCode:</strong> The HTTP response code returned by the server. (long)</li>
+<strong>responseCode</strong>: The HTTP response code returned by the server. (long)</li>
 <li>
-<strong>response:</strong> The HTTP response returned by the server. (DOMString)</li>
+<strong>response</strong>: The HTTP response returned by the server. (DOMString)</li>
 </ul>
 <h2>
 <a name="FileUploadResult_description">Description</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#FileUploadResult">FileUploadResult</a></code> object is returned via the success callback of the <a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a> upload method.</p>
+<p>The <code><a href="cordova_file_file.md.html#FileUploadResult">FileUploadResult</a></code> object is returned via the success callback of
+the <code><a href="cordova_file_file.md.html#FileTransfer">FileTransfer</a></code> object's <code>upload()</code> method.</p>
 
 <h2>
 <a name="FileUploadResult_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
-<li>iOS does not include values for responseCode nor bytesSent in the success callback <a href="cordova_file_file.md.html#FileUploadResult">FileUploadResult</a> object.</li>
+<li>Does not support <code>responseCode</code> or <code>bytesSent</code>.</li>
 </ul>
 <hr>
 <h1><a name="Flags">Flags</a></h1>
 
-<p>This object is used to supply arguments to the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> <strong>getFile</strong> and <strong>getDirectory</strong> methods, which look up or create files and directories, respectively.</p>
+<p>Supplies arguments to the <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> object's <code>getFile()</code> and
+<code>getDirectory()</code> methods, which look up or create files and
+directories, respectively.</p>
 
 <h2>
 <a name="Flags_properties">Properties</a>
@@ -2366,10 +2457,10 @@ This parameter is ignored on WP7.</li>
 
 <ul>
 <li>
-<strong>create:</strong> Used to indicate that the file or directory should be created, if it does not exist. <em>(boolean)</em>
+<strong>create</strong>: Indicates that the file or directory should be created if it does not already exist. <em>(boolean)</em>
 </li>
 <li>
-<strong>exclusive:</strong> By itself, exclusive has no effect. Used with create, it causes the file or directory creation to fail if the target path already exists. <em>(boolean)</em>
+<strong>exclusive</strong>: Has has no effect by itself, but when used with <code>create</code> causes the file or directory creation to fail if the target path already exists. <em>(boolean)</em>
 </li>
 </ul>
 <h2>
@@ -2405,10 +2496,10 @@ lockFile = dataDir.getFile("lockfile.txt", {create: true, exclusive: true});
 
 <ul>
 <li>
-<strong>requestFileSystem:</strong> Requests a filesystem. <em>(Function)</em>
+<strong>requestFileSystem</strong>: Requests a filesystem. <em>(Function)</em>
 </li>
 <li>
-<strong>resolveLocalFileSystemURI:</strong> Retrieve a <a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a> or <a href="cordova_file_file.md.html#FileEntry">FileEntry</a> using local URI. <em>(Function)</em>
+<strong>resolveLocalFileSystemURI</strong>: Retrieve a <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> or <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> using local URI. <em>(Function)</em>
 </li>
 </ul>
 <h2>
@@ -2425,7 +2516,7 @@ lockFile = dataDir.getFile("lockfile.txt", {create: true, exclusive: true});
 <a name="LocalFileSystem_details">Details</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a></code> object methods are defined on the <strong>window</strong> object.</p>
+<p>The <code><a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a></code> object methods are defined on the <code>window</code> object.</p>
 
 <h2>
 <a name="LocalFileSystem_supported_platforms">Supported Platforms</a>
@@ -2473,11 +2564,11 @@ window.resolveLocalFileSystemURI("file:///example.txt", onSuccess, onError);
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         window.requestFileSystem(<a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.PERSISTENT, 0, onFileSystemSuccess, fail);
@@ -2508,7 +2599,7 @@ window.resolveLocalFileSystemURI("file:///example.txt", onSuccess, onError);
 <hr>
 <h1><a name="Metadata">Metadata</a></h1>
 
-<p>This interface supplies information about the state of a file or directory.</p>
+<p>An interface that supplies information about the state of a file or directory.</p>
 
 <h2>
 <a name="Metadata_properties">Properties</a>
@@ -2516,14 +2607,16 @@ window.resolveLocalFileSystemURI("file:///example.txt", onSuccess, onError);
 
 <ul>
 <li>
-<strong>modificationTime:</strong> This is the time at which the file or directory was last modified. <em>(Date)</em>
+<strong>modificationTime</strong>: The time when the file or directory was last modified. <em>(Date)</em>
 </li>
 </ul>
 <h2>
 <a name="Metadata_details">Details</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code> object represents information about the state of a file or directory.  You can get an instance of a <a href="cordova_file_file.md.html#Metadata">Metadata</a> object by calling the <strong>getMetadata</strong> method of a <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> or <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> object.</p>
+<p>The <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code> object represents information about the state of a file
+or directory.  Calling a <code><a href="cordova_file_file.md.html#DirectoryEntry">DirectoryEntry</a></code> or <code><a href="cordova_file_file.md.html#FileEntry">FileEntry</a></code> object's
+<code>getMetadata()</code> method results in a <code><a href="cordova_file_file.md.html#Metadata">Metadata</a></code> instance.</p>
 
 <h2>
 <a name="Metadata_supported_platforms">Supported Platforms</a>
@@ -2551,7 +2644,7 @@ entry.getMetadata(win, null);
 <hr>
 <h1><a name="FileError">FileError</a></h1>
 
-<p>A '<a href="cordova_file_file.md.html#FileError">FileError</a>' object is set when an error occurs in any of the <a href="cordova_file_file.md.html#File">File</a> API methods. </p>
+<p>A <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object is set when an error occurs in any of the <a href="cordova_file_file.md.html#File">File</a> API methods.</p>
 
 <h2>
 <a name="FileError_properties">Properties</a>
@@ -2559,7 +2652,7 @@ entry.getMetadata(win, null);
 
 <ul>
 <li>
-<strong>code:</strong> One of the predefined error codes listed below.</li>
+<strong>code</strong>: One of the predefined error codes listed below.</li>
 </ul>
 <h2>
 <a name="FileError_constants">Constants</a>
@@ -2583,12 +2676,14 @@ entry.getMetadata(win, null);
 <a name="FileError_description">Description</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object is the only parameter of any of the <a href="cordova_file_file.md.html#File">File</a> API's error callbacks.  Developers must read the code property to determine the type of error.</p>
+<p>The <code><a href="cordova_file_file.md.html#FileError">FileError</a></code> object is the only parameter provided to any of the
+<a href="cordova_file_file.md.html#File">File</a> API's error callbacks.  To determine the type of error, compare
+its <code>code</code> property to any of the listings above.</p>
 
 <hr>
 <h1><a name="FileTransferError">FileTransferError</a></h1>
 
-<p>A <code><a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a></code> object is returned via the error callback when an error occurs.</p>
+<p>A <code><a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a></code> object is passed to an error callback when an error occurs.</p>
 
 <h2>
 <a name="FileTransferError_properties">Properties</a>
@@ -2596,13 +2691,13 @@ entry.getMetadata(win, null);
 
 <ul>
 <li>
-<strong>code</strong> One of the predefined error codes listed below. (Number)</li>
+<strong>code</strong>: One of the predefined error codes listed below. (Number)</li>
 <li>
-<strong>source</strong> URI to the source (String)</li>
+<strong>source</strong>: URI to the source. (String)</li>
 <li>
-<strong>target</strong> URI to the target (String)</li>
+<strong>target</strong>: URI to the target. (String)</li>
 <li>
-<strong>http_status</strong> HTTP status code.  This attribute is only available when a response code is received from the HTTP connection. (Number)</li>
+<strong>http_status</strong>: HTTP status code.  This attribute is only available when a response code is received from the HTTP connection. (Number)</li>
 </ul>
 <h2>
 <a name="FileTransferError_constants">Constants</a>
@@ -2618,7 +2713,8 @@ entry.getMetadata(win, null);
 <a name="FileTransferError_description">Description</a>
 </h2>
 
-<p>The <code><a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a></code> object is returned via the error callback when an error occurs when uploading or downloading a file.</p>
+<p>The <code><a href="cordova_file_file.md.html#FileTransferError">FileTransferError</a></code> object is passed to the error callback when an
+error occurs when uploading or downloading a file.</p>
 
             </div>
         </div>

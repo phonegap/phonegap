@@ -1,3 +1,4 @@
+#!/bin/bash
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -15,10 +16,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-#!/bin/bash
-
-set -e
-
-CORDOVA_PATH=$( cd "$( dirname "$0" )" && pwd )
-
-bash "$CORDOVA_PATH"/cordova clean
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_PATH=$( cd "$DIR/.." && pwd )
+echo "Cleaning project..."
+ant -f "$PROJECT_PATH/build.xml" clean

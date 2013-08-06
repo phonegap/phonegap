@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, target-densitydpi=device-dpi, width=device-width">
+    <title>WebWorks For BB10 Bootstrap</title>
+    <script src="./require.js"></script>
+    <script src="platform:///webplatform.js"></script>
+    <script src="./frameworkModules.js"></script>
+    <script>
+        function start() {
+            //Must load jnext first, as there seemed to be a race condition for if it was defined before it was used
+            require("lib/jnext.js");
+            require(frameworkModules, function () {
+                require('lib/framework').start();
+            });
+        }
+    </script>
+  </head>
+  <body onload="start();">
+      I am the man behind the curtain.
+  </body>
+</html>

@@ -18,6 +18,8 @@
  */
 
 
+// controller title for Videos
+"Videos title" = "Videor";
 // accessibility label for recording button
 "toggle audio recording" = "börja/avsluta inspelning";
 // notification spoken by VoiceOver when timed recording finishes

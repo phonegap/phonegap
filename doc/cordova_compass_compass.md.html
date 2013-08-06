@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -127,9 +130,8 @@
 <option value="compassError_example">      - Example</option>
 <option value="compassOptions">compassOptions</option>
 <option value="compassOptions_options">      - Options</option>
-<option value="compassOptions_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
-<option value="compassOptions_bada_quirks">      - Bada Quirks</option>
 <option value="compassOptions_tizen_quirks">      - Tizen Quirks</option>
+<option value="compassOptions_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="compassHeading">compassHeading</option>
 <option value="compassHeading_properties">      - Properties</option>
 <option value="compassHeading_description">      - Description</option>
@@ -164,8 +166,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -192,9 +197,9 @@
 <li><a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a></li>
 <li><a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a></li>
 <li>
-<a href="cordova_compass_compass.md.html#compass.watchHeadingFilter">compass.watchHeadingFilter</a>    (obsolete)</li>
+<a href="cordova_compass_compass.md.html#compass.watchHeadingFilter">compass.watchHeadingFilter</a> (obsolete)</li>
 <li>
-<a href="cordova_compass_compass.md.html#compass.clearWatchFilter">compass.clearWatchFilter</a>      (obsolete)</li>
+<a href="cordova_compass_compass.md.html#compass.clearWatchFilter">compass.clearWatchFilter</a>   (obsolete)</li>
 </ul>
 <h2>
 <a name="Compass_arguments">Arguments</a>
@@ -217,11 +222,6 @@
 <pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_compass_compass.md.html#Compass">Compass</a>" value="org.apache.cordova.CompassListener" /&gt;
 </code></pre>
 
-<h3>Bada</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
-</code></pre>
-
 <h3>BlackBerry WebWorks</h3>
 
 <pre class="prettyprint"><code>No permissions are required.
@@ -232,11 +232,6 @@
 <h4>config.xml</h4>
 
 <pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_compass_compass.md.html#Compass">Compass</a>" value="CDVLocation" /&gt;
-</code></pre>
-
-<h3>webOS</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
 </code></pre>
 
 <h3>Windows Phone</h3>
@@ -267,9 +262,12 @@
 <a name="compass.getCurrentHeading_description">Description</a>
 </h2>
 
-<p>The compass is a sensor that detects the direction or heading that the device is pointed.  It measures the heading in degrees from 0 to 359.99.</p>
+<p>The compass is a sensor that detects the direction or heading that the
+device is pointed, typically from the top of the device.  It measures
+the heading in degrees from 0 to 359.99, where 0 is north.</p>
 
-<p>The compass heading information is returned via a CompassHeading object using the <code><a href="cordova_compass_compass.md.html#compassSuccess">compassSuccess</a></code> callback function.</p>
+<p>The compass heading information is returned via a <code>CompassHeading</code>
+object using the <code><a href="cordova_compass_compass.md.html#compassSuccess">compassSuccess</a></code> callback function.</p>
 
 <h2>
 <a name="compass.getCurrentHeading_supported_platforms">Supported Platforms</a>
@@ -277,11 +275,9 @@
 
 <ul>
 <li>Android</li>
-<li>iPhone</li>
-<li>Windows Phone 7 and 8 ( if available in hardware )</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8 ( if available in hardware )</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -311,11 +307,11 @@ navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">co
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">compass.getCurrentHeading</a>(onSuccess, onError);
@@ -354,11 +350,18 @@ navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">co
 <a name="compass.watchHeading_description">Description</a>
 </h2>
 
-<p>The compass is a sensor that detects the direction or heading that the device is pointed.  It measures the heading in degrees from 0 to 359.99.</p>
+<p>The compass is a sensor that detects the direction or heading that the
+device is pointed.  It measures the heading in degrees from 0 to
+359.99.</p>
 
-<p>The <code><a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a></code> gets the device's current heading at a regular interval. Each time the heading is retrieved, the <code>headingSuccess</code> callback function is executed. Specify the interval in milliseconds via the <code>frequency</code> parameter in the <code><a href="cordova_compass_compass.md.html#compassOptions">compassOptions</a></code> object.</p>
+<p>The <code><a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a></code> gets the device's current heading at a
+regular interval. Each time the heading is retrieved, the
+<code>headingSuccess</code> callback function is executed. Specify the interval
+in milliseconds via the <code>frequency</code> parameter in the <code><a href="cordova_compass_compass.md.html#compassOptions">compassOptions</a></code>
+object.</p>
 
-<p>The returned watch ID references references the compass watch interval. The watch ID can be used with <code><a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a></code> to stop watching the compass.</p>
+<p>The returned watch ID references the compass watch interval. The watch
+ID can be used with <code><a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a></code> to stop watching the compass.</p>
 
 <h2>
 <a name="compass.watchHeading_supported_platforms">Supported Platforms</a>
@@ -366,11 +369,9 @@ navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">co
 
 <ul>
 <li>Android</li>
-<li>iPhone</li>
-<li>Windows Phone 7 and 8 ( if available in hardware )</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8 (if available in hardware)</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -383,10 +384,12 @@ navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">co
 };
 
 function onError(<a href="cordova_compass_compass.md.html#compassError">compassError</a>) {
-        alert('<a href="cordova_compass_compass.md.html#Compass">Compass</a> error: ' + <a href="cordova_compass_compass.md.html#compassError">compassError</a>.code);
+    alert('<a href="cordova_compass_compass.md.html#Compass">Compass</a> error: ' + <a href="cordova_compass_compass.md.html#compassError">compassError</a>.code);
 };
 
-var options = { frequency: 3000 };  // Update every 3 seconds
+var options = {
+    frequency: 3000
+}; // Update every 3 seconds
 
 var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a>(onSuccess, onError, options);
 </code></pre>
@@ -406,11 +409,11 @@ var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHe
     // The watch id references the current `watchHeading`
     var watchID = null;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         startWatch();
@@ -462,9 +465,21 @@ var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHe
 <a name="compass.watchHeading_ios_quirks">iOS Quirks</a>
 </h2>
 
-<p>In iOS <code><a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a></code> can also get the device's current heading when it changes by a specified number of degrees. Each time the heading changes by the specified number of degrees or more, the <code>headingSuccess</code> callback function is called. Specify the degrees of change via the <code>filter</code> parameter in the <code><a href="cordova_compass_compass.md.html#compassOptions">compassOptions</a></code> object.  Clear the watch as normal by passing the returned watch ID to <code><a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a></code>.  This functionality replaces the previously separate, iOS only functions, watchHeadingFilter and clearWatchFilter, which were removed in 1.6.</p>
+<p>In iOS <code><a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a></code> can also get the device's current
+heading when it changes by a specified number of degrees. Each time
+the heading changes by the specified number of degrees or more, the
+<code>headingSuccess</code> callback function executes. Specify the degrees of
+change via the <code>filter</code> parameter in the <code><a href="cordova_compass_compass.md.html#compassOptions">compassOptions</a></code> object.
+Clear the watch as usual by passing the returned watch ID to
+<code><a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a></code>.  This functionality replaces the previously
+separate, iOS-only <code>watchHeadingFilter</code> and <code>clearWatchFilter</code>
+functions, which were removed in version 1.6.</p>
 
-<p>In iOS only one watchHeading can be in effect at one time.  If a watchHeading via filter is in effect, calling getCurrentHeading or watchHeading will use the existing filter value for specifying heading changes. On iOS watching heading changes via a filter is more efficient than via time.</p>
+<p>Only one <code>watchHeading</code> can be in effect at one time in iOS.  If a
+<code>watchHeading</code> uses a filter, calling <code>getCurrentHeading</code> or
+<code>watchHeading</code> uses the existing filter value to specify heading
+changes. Watching heading changes with a filter is more efficient than
+with time intervals.</p>
 
 <hr>
 <h1><a name="compass.clearWatch">compass.clearWatch</a></h1>
@@ -484,11 +499,9 @@ var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHe
 
 <ul>
 <li>Android</li>
-<li>iPhone</li>
-<li>Windows Phone 7 and 8 ( if available in hardware )</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8 ( if available in hardware )</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -517,11 +530,11 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
     // The watch id references the current `watchHeading`
     var watchID = null;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         startWatch();
@@ -559,7 +572,6 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
         alert('<a href="cordova_compass_compass.md.html#Compass">Compass</a> error: ' + <a href="cordova_compass_compass.md.html#compassError">compassError</a>.code);
     }
 
-
     &lt;/script&gt;
   &lt;/head&gt;
   &lt;body&gt;
@@ -583,7 +595,7 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
 <hr>
 <h1><a name="compassSuccess">compassSuccess</a></h1>
 
-<p>onSuccess callback function that provides the compass heading information via a <a href="cordova_compass_compass.md.html#compassHeading">compassHeading</a> object.</p>
+<p>onSuccess callback function that provides the compass heading information via a <code><a href="cordova_compass_compass.md.html#compassHeading">compassHeading</a></code> object.</p>
 
 <pre class="prettyprint"><code>function(heading) {
     // Do something
@@ -596,7 +608,7 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
 
 <ul>
 <li>
-<strong>heading:</strong> The heading information. <em>(<a href="cordova_compass_compass.md.html#compassHeading">compassHeading</a>)</em>
+<strong>heading</strong>: The heading information. <em>(<a href="cordova_compass_compass.md.html#compassHeading">compassHeading</a>)</em>
 </li>
 </ul>
 <h2>
@@ -611,7 +623,7 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
 <hr>
 <h1><a name="compassError">compassError</a></h1>
 
-<p>onError callback function for compass functions. </p>
+<p>onError callback function for compass functions.</p>
 
 <h2>
 <a name="compassError_example">Example</a>
@@ -633,42 +645,38 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
 
 <ul>
 <li>
-<strong>frequency:</strong> How often to retrieve the compass heading in milliseconds. <em>(Number)</em> (Default: 100)</li>
+<strong>frequency</strong>: How often to retrieve the compass heading in milliseconds. <em>(Number)</em> (Default: 100)</li>
 <li>
-<strong>filter:</strong> The change in degrees required to initiate a watchHeading success callback. <em>(Number)</em>
+<strong>filter</strong>: The change in degrees required to initiate a watchHeading success callback. <em>(Number)</em>
 </li>
 </ul>
 <p>Android Quirks</p>
 
 <hr>
 <ul>
-<li>filter is not supported.</li>
-</ul>
-<h2>
-<a name="compassOptions_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
-</h2>
-
-<ul>
-<li>filter is not supported.</li>
-</ul>
-<h2>
-<a name="compassOptions_bada_quirks">Bada Quirks</a>
-</h2>
-
-<ul>
-<li>filter is not supported.</li>
+<li>
+<code>filter</code> is not supported.</li>
 </ul>
 <h2>
 <a name="compassOptions_tizen_quirks">Tizen Quirks</a>
 </h2>
 
 <ul>
-<li>filter is not supported.</li>
+<li>
+<code>filter</code> is not supported.</li>
+</ul>
+<h2>
+<a name="compassOptions_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
+</h2>
+
+<ul>
+<li>
+<code>filter</code> is not supported.</li>
 </ul>
 <hr>
 <h1><a name="compassHeading">compassHeading</a></h1>
 
-<p>A <code>CompassHeading</code> object is returned to the <code><a href="cordova_compass_compass.md.html#compassSuccess">compassSuccess</a></code> callback function when an error occurs.</p>
+<p>A <code>CompassHeading</code> object is returned to the <code><a href="cordova_compass_compass.md.html#compassSuccess">compassSuccess</a></code> callback function.</p>
 
 <h2>
 <a name="compassHeading_properties">Properties</a>
@@ -676,41 +684,44 @@ navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.c
 
 <ul>
 <li>
-<strong>magneticHeading:</strong> The heading in degrees from 0 - 359.99 at a single moment in time. <em>(Number)</em>
+<strong>magneticHeading</strong>: The heading in degrees from 0 - 359.99 at a single moment in time. <em>(Number)</em>
 </li>
 <li>
-<strong>trueHeading:</strong> The heading relative to the geographic North Pole in degrees 0 - 359.99 at a single moment in time. A negative value indicates that the true heading could not be determined.  <em>(Number)</em>
+<strong>trueHeading</strong>: The heading relative to the geographic North Pole in degrees 0 - 359.99 at a single moment in time. A negative value indicates that the true heading cannot be determined.  <em>(Number)</em>
 </li>
 <li>
-<strong>headingAccuracy:</strong> The deviation in degrees between the reported heading and the true heading. <em>(Number)</em>
+<strong>headingAccuracy</strong>: The deviation in degrees between the reported heading and the true heading. <em>(Number)</em>
 </li>
 <li>
-<strong>timestamp:</strong> The time at which this heading was determined.  <em>(milliseconds)</em>
+<strong>timestamp</strong>: The time at which this heading was determined.  <em>(milliseconds)</em>
 </li>
 </ul>
 <h2>
 <a name="compassHeading_description">Description</a>
 </h2>
 
-<p>The <code>CompassHeading</code> object is returned to the user through the <code><a href="cordova_compass_compass.md.html#compassSuccess">compassSuccess</a></code> callback function.</p>
+<p>The <code>CompassHeading</code> object is returned to the <code><a href="cordova_compass_compass.md.html#compassSuccess">compassSuccess</a></code> callback function.</p>
 
 <h2>
 <a name="compassHeading_android_quirks">Android Quirks</a>
 </h2>
 
 <ul>
-<li>trueHeading is not supported. It will report the same value as magneticHeading</li>
-<li>headingAccuracy will always be 0 as there is no difference between the magneticHeading and trueHeading on Android.</li>
+<li>
+<code>trueHeading</code> is not supported, but reports the same value as <code>magneticHeading</code>
+</li>
+<li>
+<code>headingAccuracy</code> is always 0 because there is no difference between the <code>magneticHeading</code> and <code>trueHeading</code>.</li>
 </ul>
 <h2>
 <a name="compassHeading_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
-<li>trueHeading is only returned when location services are running via <code>navigator.geolocation.watchLocation()</code>
+<li>
+<code>trueHeading</code> is only returned when location services are enabled via <code>navigator.geolocation.watchLocation()</code>
 </li>
-<li>For iOS &gt; 4 devices, if the device is rotated and the app supports that orientation, the heading values will be reported 
-back with respect to the current orientation.</li>
+<li>For iOS 4 devices and above, heading factors in the device's current orientation, not in reference to its absolute position, for apps that supports that orientation.</li>
 </ul>
 <hr>
 <h1><a name="CompassError">CompassError</a></h1>
@@ -723,22 +734,22 @@ back with respect to the current orientation.</li>
 
 <ul>
 <li>
-<strong>code:</strong> One of the predefined error codes listed below.</li>
+<strong>code</strong>: One of the predefined error codes listed below.</li>
 </ul>
 <h2>
 <a name="CompassError_constants">Constants</a>
 </h2>
 
 <ul>
-<li>
-<code><a href="cordova_compass_compass.md.html#CompassError">CompassError</a>.COMPASS_INTERNAL_ERR</code> </li>
+<li><code><a href="cordova_compass_compass.md.html#CompassError">CompassError</a>.COMPASS_INTERNAL_ERR</code></li>
 <li><code><a href="cordova_compass_compass.md.html#CompassError">CompassError</a>.COMPASS_NOT_SUPPORTED</code></li>
 </ul>
 <h2>
 <a name="CompassError_description">Description</a>
 </h2>
 
-<p>The <code><a href="cordova_compass_compass.md.html#CompassError">CompassError</a></code> object is returned to the user through the <code><a href="cordova_compass_compass.md.html#compassError">compassError</a></code> callback function when an error occurs.</p>
+<p>When an error occurs, the <code><a href="cordova_compass_compass.md.html#CompassError">CompassError</a></code> object is passed as a
+parameter to a <code><a href="cordova_compass_compass.md.html#compassError">compassError</a></code> callback function.</p>
 
             </div>
         </div>

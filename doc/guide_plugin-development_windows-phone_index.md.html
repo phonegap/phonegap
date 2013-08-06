@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -131,8 +134,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -148,19 +154,19 @@
 
 <p>Writing a plugin for Cordova on Windows Phone requires a basic understanding of
 the architecture of Cordova. Cordova-WP7 consists of a WebBrowser which hosts the
-application javascript code and manages native API calls. There is a BaseCommand
+application JavaScript code and manages native API calls. There is a BaseCommand
 (<code>WP7CordovaClassLib.Cordova.Commands.BaseCommand</code>) class in C# which you can extend,
 and it comes with the majority of the 'plumbing' built for you already.</p>
 
 <ol>
-<li>Select your project, and right click choose 'Add -&gt; New Item ...'
+<li>Select your project, and right-click to choose <strong>Add → New Item...</strong>
 <ul>
 <li>Preferably add it to the 'Plugins' folder, but it is up to you</li>
 </ul>
 </li>
 <li>Select 'Class' and name it <code>Echo.cs</code>
 <ul>
-<li>The name of this class must EXACTLY match what you call into <code>cordova.exec(win, fail, "Echo", ...)</code>
+<li>The name of this class must <em>exactly</em> match what you call into <code>cordova.exec(win, fail, "Echo", ...)</code>
 </li>
 </ul>
 </li>
@@ -207,8 +213,9 @@ using WPCordovaClassLib.Cordova.JSON;
 }
 </code></pre>
 
-<p>If you would like to use your own namespace, you will need to make a fully qualified
-call to <code>cordova.exec</code>. For example, if you wanted to define your C# class like this:</p>
+<p>If you want to use your own namespace, you need to make a fully
+qualified call to <code>cordova.exec</code>. For example, if you want to define
+your C# class like this:</p>
 
 <pre class="prettyprint"><code>namespace com.mydomain.cordovaExtensions
 {
@@ -219,7 +226,7 @@ call to <code>cordova.exec</code>. For example, if you wanted to define your C# 
 }
 </code></pre>
 
-<p>Then, in JS you would need to call exec like this:</p>
+<p>Then, in JS you need to call <code>exec</code> like this:</p>
 
 <pre class="prettyprint"><code>cordova.exec(win, fail, "com.mydomain.cordovaExtensions.Echo", ...);
 </code></pre>
@@ -235,13 +242,13 @@ Looking back at our JS call to <code>cordova.exec</code>, we see we passed <code
 <pre class="prettyprint"><code>cordova.exec(win, fail, "Echo", "echo", ["input string"]);
 </code></pre>
 
-<p>If we inspect the options string passed in to our <code>Echo.echo</code> method, we will
-see that the value is actually:</p>
+<p>If we inspect the options string passed in to our <code>Echo.echo</code> method,
+we see that the value is actually:</p>
 
 <pre class="prettyprint"><code>"[\"input string\"]"
 </code></pre>
 
-<p>All javascript exec arguments are JSON encoded before being passed into C#.</p>
+<p>All JavaScript exec arguments are JSON encoded before being passed into C#.</p>
 
 <p>If we want to treat this as the string we were expecting, we need to decode it.
 We can use simple JSON deserialization.</p>
@@ -261,7 +268,7 @@ you can can simply call:</p>
 <pre class="prettyprint"><code>DispatchCommandResult(); // calls back with an empty plugin result, considered a success callback
 </code></pre>
 
-<p>To pass data back, you will need to call a different version of <code>DispatchCommandResult</code>:</p>
+<p>To pass data back, you need to call a different version of <code>DispatchCommandResult</code>:</p>
 
 <pre class="prettyprint"><code>DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "Everything went as planned, this is a result that is passed to the success handler."));
 </code></pre>
@@ -285,13 +292,13 @@ in case we have bad input. This is a pattern used throughout the Cordova C# code
 
 <pre class="prettyprint"><code>string optVal = null;
 
-try 
+try
 {
     optVal = JsonHelper.Deserialize&lt;string[]&gt;(options)[0];
 }
 catch(Exception)
 {
-    // simply catch the exception, we will handle null values and exceptions together
+    // simply catch the exception, we handle null values and exceptions together
 }
 
 if (optVal == null)
@@ -320,8 +327,9 @@ else
 <p>To debug the C# side, you can use Visual Studio's debugger, just set a break point
 at any of the methods exposed by your class.</p>
 
-<p>Javascript is a little more difficult to debug on Windows Phone, you will need to
-use <code>console.log</code> to output the state of your plugin, or inform yourself of errors.</p>
+<p>JavaScript is a little more difficult to debug on Windows Phone. You
+need to use <code>console.log</code> to output the state of your plugin, or
+inform yourself of errors.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20Windows%20Phone_common_pitfalls">Common Pitfalls</a>
@@ -339,7 +347,7 @@ becomes difficult or impossible to deserialize.</p>
 
 <ul>
 <li>
-<p>This will mean that your C# code will receive a difficult to decode string value, such as:</p>
+<p>This means that your C# code receives a difficult to decode string value, such as:</p>
 
 <pre class="prettyprint"><code>"[\"this is a string\", 54, { literal:'trouble' }]"
 </code></pre>
@@ -355,9 +363,10 @@ string[] optValues = JsonHelper.Deserialize&lt;string[]&gt;(options);
 </li>
 </ul>
 </li>
-<li><p>It is usually a good idea to do parameter checking in your JavaScript code,
-before you call exec.  This will let you re-use more JS code between different
-native implementations of your plugin.</p></li>
+<li><p>It is usually a good idea to do parameter checking in your
+JavaScript code, before you call <code>exec</code>.  This allows you to re-use
+more JavaScript code among your plug-in's various native
+implementations.</p></li>
 </ul>
 </div>
         </div>

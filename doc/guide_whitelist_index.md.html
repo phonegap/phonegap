@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -104,11 +107,8 @@
 <option value="Domain%20Whitelist%20Guide_specification">      - Specification</option>
 <option value="Domain%20Whitelist%20Guide_syntax">      - Syntax</option>
 <option value="Domain%20Whitelist%20Guide_android">      - Android</option>
-<option value="Domain%20Whitelist%20Guide_bada">      - Bada</option>
 <option value="Domain%20Whitelist%20Guide_blackberry">      - BlackBerry</option>
 <option value="Domain%20Whitelist%20Guide_ios">      - iOS</option>
-<option value="Domain%20Whitelist%20Guide_symbian">      - Symbian</option>
-<option value="Domain%20Whitelist%20Guide_webos">      - webOS</option>
 <option value="Domain%20Whitelist%20Guide_windows_phone_7_8">      - Windows Phone (7 &amp; 8)</option>
 <option value="Domain%20Whitelist%20Guide_tizen">      - Tizen</option></select></small>
         </div>
@@ -136,8 +136,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -155,15 +158,17 @@
 <a name="Domain%20Whitelist%20Guide_overview">Overview</a>
 </h2>
 
-<p>Domain whitelisting in Apache Cordova is a security model that controls access to outside domains, such as <code>http://google.com</code>.</p>
-
-<p>The default security policy is to allow all network access. Before moving your application to production, it is advised to review your application's whitelist. The application developer is encouraged to declare access to specific network domains and subdomains.</p>
+<p>Domain whitelisting is a security model that controls access to
+outside domains, such as <code>http://google.com</code>.  Apache Cordova's
+default security policy allows access to any site. Before moving your
+application to production, you should review its whitelist and declare
+access to specific network domains and subdomains.</p>
 
 <h2>
 <a name="Domain%20Whitelist%20Guide_specification">Specification</a>
 </h2>
 
-<p>Domain whitelisting lays the ground work for the <a class="external" href="http://www.w3.org/TR/widgets-access/">W3C Widget Access</a> specification. In the Widget Access specification, the <code>&lt;access&gt;</code> element is used to declare access to specific network domains. In the future, Apache Cordova will abstract the platform whitelisting implementations to the W3C Widget Access specification. However, for now each platform must implement it's own domain whitelisting.</p>
+<p>Domain whitelisting lays the groundwork for the <a class="external" href="http://www.w3.org/TR/widgets-access/">W3C Widget Access</a> specification. In the Widget Access specification, the <code>&lt;access&gt;</code> element is used to declare access to specific network domains. In the future, Apache Cordova will abstract the platform whitelisting implementations to the W3C Widget Access specification. However, for now each platform must implement its own domain whitelisting.</p>
 
 <h2>
 <a name="Domain%20Whitelist%20Guide_syntax">Syntax</a>
@@ -200,9 +205,10 @@
 
 <h3>Details</h3>
 
-<p>The whitelisting rules are found in <code>res/xml/config.xml</code> and declared with the element <code>&lt;access origin="..." /&gt;</code>.</p>
+<p>The whitelisting rules are found in <code>res/xml/config.xml</code> and declared
+with the element <code>&lt;access origin="..." /&gt;</code>.</p>
 
-<p>Android has full support for the whitelisting syntax.</p>
+<p>Android fully supports whitelisting syntax.</p>
 
 <h3>Syntax</h3>
 
@@ -210,12 +216,6 @@
 
 <pre class="prettyprint"><code>&lt;access origin="http://google.com" /&gt;
 </code></pre>
-
-<h2>
-<a name="Domain%20Whitelist%20Guide_bada">Bada</a>
-</h2>
-
-<p>Domain whitelisting is unsupported on Bada. By default, all domains are accessible.</p>
 
 <h2>
 <a name="Domain%20Whitelist%20Guide_blackberry">BlackBerry</a>
@@ -257,9 +257,11 @@
 
 <p>The whitelisting rules are found in <code>AppName/config.xml</code> and declared with the element <code>&lt;access origin="..." /&gt;</code>.</p>
 
-<p>iOS has full support for the whitelisting syntax.</p>
+<p>iOS fully supports whitelisting syntax.</p>
 
-<p>Note: origins specified without a protocol (i.e. <code>www.apache.org</code> instead of <code>http://www.apache.org</code>) will default to all of http, https, ftp, and ftps.</p>
+<p><strong>NOTE:</strong> origins specified without a protocol, such as
+<code>www.apache.org</code> rather than <code>http://www.apache.org</code>, default to all
+of the <code>http</code>, <code>https</code>, <code>ftp</code>, and <code>ftps</code> schemes.</p>
 
 <h3>Syntax</h3>
 
@@ -271,24 +273,12 @@
 </code></pre>
 
 <h2>
-<a name="Domain%20Whitelist%20Guide_symbian">Symbian</a>
-</h2>
-
-<p>Domain whitelisting is unsupported on Symbian. By default, all domains are accessible.</p>
-
-<h2>
-<a name="Domain%20Whitelist%20Guide_webos">webOS</a>
-</h2>
-
-<p>Domain whitelisting is unsupported on webOS. By default, all domains are accessible.</p>
-
-<h2>
 <a name="Domain%20Whitelist%20Guide_windows_phone_7_8">Windows Phone (7 &amp; 8)</a>
 </h2>
 
 <p>The whitelisting rules are found in <code>config.xml</code> and declared with the element <code>&lt;access origin="..." /&gt;</code>.</p>
 
-<p>Android has full support for the whitelisting syntax.</p>
+<p>Android fully supports whitelisting syntax.</p>
 
 <h3>Syntax</h3>
 
@@ -303,8 +293,8 @@
 
 <h3>Details</h3>
 
-<p>The domain whitelisting rules are found in <code>config.xml</code> located in your application root directory.
-They are declared with the element <code>&lt;access origin="..." /&gt;</code>.
+<p>The application root directory's <code>config.xml</code> file specifies domain
+whitelisting rules, using the <code>&lt;access origin="..." /&gt;</code> element.
 For a complete reference, see the [Tizen Accessing External Network Resources documentation][10].</p>
 
 <h3>Syntax</h3>

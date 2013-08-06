@@ -1,0 +1,91 @@
+#!/bin/bash
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_PATH=$( cd "$( dirname "$0" )/../.." && pwd )
+
+function dot {
+    sleep 1
+    echo -n "."
+}
+
+function wait_for_emulator {
+    local i="0"
+    echo -n "Waiting for emulator"
+    emulator_string=$($DIR/list-started-emulators)
+    while [ $? != 0 ]
+    do
+        dot
+        i=$[i+1]
+        emulator_string=$($DIR/list-started-emulators)
+    done
+    read -ra target <<< "$emulator_string"
+    echo ""
+    echo -n "Waiting for it to boot up (this can take a while)"
+    while [ $i -lt 300 ]
+    do
+        boot_anim=$(adb -s $target shell getprop init.svc.bootanim 2>&1)
+        if [[ "$boot_anim" =~ "stopped" ]] ; then
+            break
+        else
+            i=$[i+1]
+            dot
+        fi
+    done
+    # Device timeout: emulator has not started in time
+    if [ $i -eq 300 ]
+    then
+        echo ""
+        echo "Emulator timeout!"
+        exit 69
+    else
+        echo ""
+        echo "Connected!"
+    fi
+    # Unlock the device
+    adb -s $target shell input keyevent 82
+    exit 0
+}
+
+emulator_images=$("$DIR/list-emulator-images")
+if [ $? != 0 ]; then
+    echo "No emulators found, if you would like to create an emulator follow the instructions"
+    echo " provided here : http://developer.android.com/tools/devices/index.html"
+    echo " Or run 'android create avd --name <name> --target <targetID>' in on the command line."
+    exit 2
+fi
+
+# if target emulator is provided
+if [[ "$#" -eq 1 ]] ; then
+    # check that it exists
+    if [[ $emulator_images =~ $1 ]] ; then
+        #xterm -e emulator -avd $1 &
+        emulator -avd $1 1> /dev/null 2>&1 &
+    else
+        echo "Could not find the provided emulator '$1', make sure the emulator exists"
+        echo " by checking 'cordova/lib/list-emulator-images'"
+        exit 2
+    fi
+else
+    # start first emulator
+    read -ra emulator_list <<< "$emulator_images"
+    #xterm -e emulator -avd ${emulator_list[0]} &
+    emulator -avd ${emulator_list[0]} 1> /dev/null 2>&1 &
+fi
+
+wait_for_emulator

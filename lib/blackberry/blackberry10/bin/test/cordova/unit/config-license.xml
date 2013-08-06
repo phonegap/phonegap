@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns=" http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        version="1.0.0"
+        id="myID">
+    <name>Demo</name>
+    <content src="local:///startPage.html"/>
+    <author>Research In Motion Ltd.</author>
+    <license href="http://www.apache.org/licenses/LICENSE-2.0"></license>
+</widget>

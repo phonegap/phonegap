@@ -34,5 +34,6 @@
 }
 
 - (id)initWithDelegate:(NSObject <UIWebViewDelegate>*)delegate;
+- (BOOL)request:(NSURLRequest*)newRequest isFragmentIdentifierToRequest:(NSURLRequest*)originalRequest;
 
 @end

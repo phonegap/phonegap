@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302193F91745430F00BC8D2B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302193F81745430F00BC8D2B /* ImageIO.framework */; };
 		3035621714104C34006C2D43 /* CDVWhitelistTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30356213141049E1006C2D43 /* CDVWhitelistTests.m */; };
 		303A406A152124BB00182201 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686357AA141002F100DF4CF2 /* UIKit.framework */; };
 		303A406B152124BB00182201 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686357AC141002F100DF4CF2 /* Foundation.framework */; };
@@ -41,6 +42,8 @@
 		68A32D7D141030E4006B237C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686357AE141002F100DF4CF2 /* CoreGraphics.framework */; };
 		68A32D7E141030EB006B237C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686357AA141002F100DF4CF2 /* UIKit.framework */; };
 		68A32D7F141030F3006B237C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686357AC141002F100DF4CF2 /* Foundation.framework */; };
+		7E13A295175D487B00E522AB /* CDVExifTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E13A294175D487B00E522AB /* CDVExifTests.m */; };
+		7E91406017711D88002C6A3F /* CDVWebViewDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E91405F17711D88002C6A3F /* CDVWebViewDelegateTests.m */; };
 		8220B5C216D541BD00EC3921 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8220B5C116D541BD00EC3921 /* AssetsLibrary.framework */; };
 		8220B5C616D542F500EC3921 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8220B5C116D541BD00EC3921 /* AssetsLibrary.framework */; };
 		EB3B34E9161B5532003DBE7D /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB3B34E6161B5454003DBE7D /* libCordova.a */; };
@@ -76,6 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		302193F81745430F00BC8D2B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		30356213141049E1006C2D43 /* CDVWhitelistTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVWhitelistTests.m; sourceTree = "<group>"; };
 		303A4068152124BB00182201 /* CordovaLibApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CordovaLibApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		303A406F152124BB00182201 /* CordovaLibApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CordovaLibApp-Info.plist"; sourceTree = "<group>"; };
@@ -89,7 +93,6 @@
 		30AE4E8C1419532F005A9C9A /* CDVContactsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVContactsTests.m; sourceTree = "<group>"; };
 		30B342F415224B360070E6A5 /* CDVWebViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVWebViewTest.m; sourceTree = "<group>"; };
 		30D1B08B15A2B36D0060C291 /* CDVBase64Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVBase64Tests.m; sourceTree = "<group>"; };
-		30F8AE12152127CE006625B3 /* Cordova.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Cordova.plist; sourceTree = "<group>"; };
 		30F8AE1C152129DA006625B3 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		686357A9141002F100DF4CF2 /* CordovaLibTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CordovaLibTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		686357AA141002F100DF4CF2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -106,6 +109,9 @@
 		686357D414100AF200DF4CF2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		686357DC14100B1600DF4CF2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		68A32D7414103017006B237C /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		7E13A293175D487B00E522AB /* CDVExifTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVExifTests.h; sourceTree = "<group>"; };
+		7E13A294175D487B00E522AB /* CDVExifTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVExifTests.m; sourceTree = "<group>"; };
+		7E91405F17711D88002C6A3F /* CDVWebViewDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVWebViewDelegateTests.m; sourceTree = "<group>"; };
 		8220B5C116D541BD00EC3921 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		EB37018115D18B2D00BEBC43 /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = ../CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		EB89634915FE66EA00E12277 /* CDVInvokedUrlCommandTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVInvokedUrlCommandTests.m; sourceTree = "<group>"; };
@@ -122,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				302193F91745430F00BC8D2B /* ImageIO.framework in Frameworks */,
 				EB3B34E9161B5532003DBE7D /* libCordova.a in Frameworks */,
 				8220B5C216D541BD00EC3921 /* AssetsLibrary.framework in Frameworks */,
 				30F8AE0C152125B6006625B3 /* MobileCoreServices.framework in Frameworks */,
@@ -185,6 +192,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				302193F81745430F00BC8D2B /* ImageIO.framework */,
 				68A32D7414103017006B237C /* AddressBook.framework */,
 				8220B5C116D541BD00EC3921 /* AssetsLibrary.framework */,
 				686357DC14100B1600DF4CF2 /* CoreMedia.framework */,
@@ -217,7 +225,6 @@
 		303A406E152124BB00182201 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				30F8AE12152127CE006625B3 /* Cordova.plist */,
 				303A406F152124BB00182201 /* CordovaLibApp-Info.plist */,
 				303A4070152124BB00182201 /* InfoPlist.strings */,
 				303A4073152124BB00182201 /* main.m */,
@@ -245,6 +252,9 @@
 		EB3B34F4161B585D003DBE7D /* CordovaLibTests */ = {
 			isa = PBXGroup;
 			children = (
+				7E91405F17711D88002C6A3F /* CDVWebViewDelegateTests.m */,
+				7E13A293175D487B00E522AB /* CDVExifTests.h */,
+				7E13A294175D487B00E522AB /* CDVExifTests.m */,
 				EB96677116ADBCF500D86CDF /* CDVUserAgentTest.m */,
 				EBA3554415A731F100F4DE24 /* CDVFakeFileManager.h */,
 				EBA3554515A731F100F4DE24 /* CDVFakeFileManager.m */,
@@ -272,7 +282,7 @@
 				303A4064152124BB00182201 /* Sources */,
 				303A4065152124BB00182201 /* Frameworks */,
 				303A4066152124BB00182201 /* Resources */,
-				30F8AE1615212883006625B3 /* Copy cordova.ios.js into www directory */,
+				30F8AE1615212883006625B3 /* Copy cordova.js into www directory */,
 			);
 			buildRules = (
 			);
@@ -371,7 +381,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		30F8AE1615212883006625B3 /* Copy cordova.ios.js into www directory */ = {
+		30F8AE1615212883006625B3 /* Copy cordova.js into www directory */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -379,12 +389,12 @@
 			inputPaths = (
 				"",
 			);
-			name = "Copy cordova.ios.js into www directory";
+			name = "Copy cordova.js into www directory";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp ../CordovaLib/cordova.ios.js \"$BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME/www/cordova.ios.js\"";
+			shellScript = "cp ../CordovaLib/cordova.js \"$BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME/www/cordova.js\"";
 			showEnvVarsInLog = 0;
 		};
 		686357A7141002F100DF4CF2 /* ShellScript */ = {
@@ -427,6 +437,8 @@
 				EBA3556F15ABD0C900F4DE24 /* CDVFileTransferTests.m in Sources */,
 				EB89634A15FE66EA00E12277 /* CDVInvokedUrlCommandTests.m in Sources */,
 				EB96677216ADBCF500D86CDF /* CDVUserAgentTest.m in Sources */,
+				7E13A295175D487B00E522AB /* CDVExifTests.m in Sources */,
+				7E91406017711D88002C6A3F /* CDVWebViewDelegateTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

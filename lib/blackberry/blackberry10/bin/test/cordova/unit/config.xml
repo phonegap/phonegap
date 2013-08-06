@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns=" http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        version="1.0.0"
+        id="My WidgetId"
+        rim:header="RIM-Widget:rim/widget"
+        rim:userAgent="A Test-User-Agent/(Blackberry-Agent)">
+    <name>Demo</name>
+    <content src="local:///startPage.html"/>
+    <author rim:copyright="No Copyright"
+            href="http://www.rim.com/"
+            email = "author@rim.com">Research In Motion Ltd.</author>
+    <description>This app does everything.</description>
+    <license href="http://www.apache.org/licenses/LICENSE-2.0">My License</license>
+    <icon src="test.png" />
+    <rim:permissions>
+        <rim:permit>access_shared</rim:permit>
+        <rim:permit>read_geolocation</rim:permit>
+        <rim:permit>use_camera</rim:permit>
+    </rim:permissions>
+    <feature id="blackberry.app.orientation">
+        <param name="mode" value="portrait" />
+        <param name="other" value="portrait" />
+      </feature>
+    <feature id="blackberry.app" required="true" version="1.0.0.0">
+        <param name="childBrowser" value="disable" />
+        <param name="websecurity" value="disable" />
+        <param name="popupBlocker" value="enable" />
+    </feature>
+    <feature id="blackberry.system" required="true" version="1.0.0.3"/>
+    <access uri="http://www.somedomain1.com" subdomains="true">
+        <feature id="blackberry.app" required="true" version="1.0.0.0"/>
+        <feature id="blackberry.app.event" required="false" version="2.0.0.0"/>
+    </access>
+    <rim:invoke-target id="com.domain.subdomain.appname.app1">
+	<type>APPLICATION</type>
+        <require-source-permissions>invoke_accross_perimeters,access_shared</require-source-permissions>
+        <filter>
+            <action>bb.action.OPEN</action>
+            <action>bb.action.SET</action>
+            <action>bb.action.VIEW</action>
+            <mime-type>image/*</mime-type>
+            <mime-type>text/*</mime-type>
+            <property var="uris" value="ftp://" />
+            <property var="uris" value="http://" />
+            <property var="uris" value="https://" />
+            <property var="exts" value="jpg" />
+            <property var="exts" value="png" />
+            <property var="exts" value="txt" />
+            <property var="exts" value="doc" />
+        </filter>
+    </rim:invoke-target>
+</widget>

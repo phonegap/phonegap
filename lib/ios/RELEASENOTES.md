@@ -19,8 +19,73 @@
 #
 -->
 ## Release Notes for Cordova (iOS) ##
- 
- Cordova is a static library that enables developers to include the Cordova API in their iOS application projects easily, and also create new Cordova-based iOS application projects through the command-line.
+
+Update these notes using: git log --pretty=format:'* %s' --topo-order --no-merges origin/2.7.x...HEAD
+
+Cordova is a static library that enables developers to include the Cordova API in their iOS application projects easily, and also create new Cordova-based iOS application projects through the command-line.
+
+### 2.9.0 (201306XX) ###
+
+* [CB-3469] Add a version macro for 2.8.0.
+* [CB-3469] Adding missing license found by RAT
+* [CB-2200] Remove device.name (deprecated)
+* [CB-3031] Fix for emulate script when project name has a space
+* [CB-3420] add hidden option to InAppBrowser
+* [CB-2840] Nil checks to avoid crash when network disconnected
+* [CB-3514] Remove partially-downloaded files when FileTransfer fails
+* [CB-2406] Add ArrayBuffer support to FileWriter.write
+* [CB-3757] camera.getPicture from photolib fails on iOS
+* [CB-3524] cordova/emulate and cordova/run silently fails when ios-sim is not installed
+* [CB-3526] typo in cordova/lib/install-emulator - does not check for ios-sim
+* [CB-3490] Update CordovaLib iOS Deployment Target in Project Setting to 5.0
+* [CB-3528] Update Plugin Upgrade Guide for iOS
+* [CB-3530] PhoneGap app crashes on iOS with error "CDVWebViewDelegate: Navigation started when state=1"
+* [CB-3768] Build to phone failing on Xcode 5 DP1 (OS X Mavericks)
+* [CB-3833] Deprecation plugin tag upgrade step has malformed xml
+* [CB-3743] Remove compatibility headers folder
+* [CB-3619] ./cordova/run script does not always call ./cordova/build first
+* [CB-3463] bin/create should copy cordova.js into the project's CordovaLib
+* [CB-3530] PhoneGap app crashes on iOS with error "CDVWebViewDelegate: Navigation started when state=1" (for navigation to an anchor on the same page)
+* [CB-3507] Wrong Linker Flag for project template
+* [CB-3458] remove all_load dependency. Use force load instead
+* Removing "build" from gitignore as one of our cli scripts is named build :)
+* Added/renamed CDVExifTests to test project.
+
+<br />
+
+### 2.8.0 (201305XX) ###
+
+* [CB-2840] Nil checks to avoid crash when network disconnected
+* [CB-3416] adding empty <plugins> element during deprecation window.
+* [CB-3006] Customize InAppBrowser location bar
+* [CB-3405] InAppBrowser option to hide bottom bar with Done/History buttons
+* [CB-3394] Cordova iOS crashes when multiple access elements in config.xml
+* [CB-3166] Add deprecation notice for use of <plugin> in config.xml in iOS
+* [CB-2905] Exif geolocation meta data tag writing
+* [CB-3307] Rename cordova-ios.js -> cordova.js
+* [CB-1108] Convert <plugin> -> <feature> with <param>
+* [CB-3321] Fix bogus "failed whitelist" log messages
+* [CB-3311] add default textbox for notification prompt
+* [CB-2846] SplashScreen crashes app when image not available
+* [CB-2789] Remove CaptureOptions.mode support.
+* [CB-3295] Send InAppBrowser loadstart events when redirects occur
+* [CB-2896] added ImageIO and OpenAL system frameworks to support new exif functionality in CDVCamera
+* [CB-2896] writing data to object through CGImageDestinationRef, enables multipart exif tag writing
+* [CB-2958] simple fix, moved write to photealbum code and sourced from modified data. Photo data returned by cordova will match photo on cameraroll
+* [CB-3339] add version to command line scripts
+* [CB-3377] Remove cordova/release script
+* [CB-2974] Add a ./cordova/lib/list-devices project-level helper script to iOS
+* [CB-2951] Add a ./cordova/lib/list-emulator-images project-level helper script to iOS
+* [CB-2974] Add a ./cordova/lib/list-devices project-level helper script to iOS
+* [CB-2966] Add a ./cordova/lib/list-started-emulators as project-level helper script to iOS
+* [CB-2990] Add a ./cordova/lib/install-device project-level helper script to iOS
+* [CB-2982] Add a ./cordova/lib/install-emulator project-level helper script to iOS
+* [CB-2998] Add a ./cordova/lib/start-emulator project-level helper script to iOS
+* [CB-2916] Add a ./cordova/clean project-level script for iOS
+* [CB-2053] Update UIImagePickerController label to reflect video media type in CDVCamera
+* [CB-3530] PhoneGap app crashes on iOS with error "CDVWebViewDelegate: Navigation started when state=1"
+
+<br />
 
 ### 2.7.0 (201304XX) ###
 

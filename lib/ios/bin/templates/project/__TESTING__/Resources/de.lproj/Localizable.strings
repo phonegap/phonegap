@@ -18,6 +18,8 @@
  */
 
 
+// controller title for Videos
+"Videos title" = "Videos";
 // accessibility label for recording button
 "toggle audio recording" = "starten/beenden der Tonaufnahme";
 // notification spoken by VoiceOver when timed recording finishes

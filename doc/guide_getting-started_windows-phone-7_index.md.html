@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -98,17 +101,17 @@
 <optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
         </div>
         <div id="subheader">
-            <h1>Getting Started with Windows Phone 7</h1>
-            <small><select><option value="Getting%2520Started%2520with%2520Windows%2520Phone%25207">Getting Started with Windows Phone 7</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_video_tutorials">      - Video Tutorials:</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_1_requirements">      - 1. Requirements</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_2_install_sdk_cordova">      - 2. Install SDK + Cordova</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_2_1_building_the_template">      - 2.1. Building the template</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_3_setup_new_project">      - 3. Setup New Project</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_4_review_the_project_structure">      - 4. Review the project structure</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_5_build_and_deploy_to_emulator">      - 5. Build and Deploy to Emulator</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_6_build_your_project_for_the_device">      - 6. Build your project for the device</option>
-<option value="Getting%20Started%20with%20Windows%20Phone%207_done">      - Done!</option></select></small>
+            <h1>Windows Phone 7 Platform Guide</h1>
+            <small><select><option value="Windows%2520Phone%25207%2520Platform%2520Guide">Windows Phone 7 Platform Guide</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_video_tutorials">      - Video Tutorials:</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_1_requirements">      - 1. Requirements</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_2_install_sdk_cordova">      - 2. Install SDK + Cordova</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_2_1_building_the_template">      - 2.1. Building the template</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_3_set_up_new_project">      - 3. Set up New Project</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_4_review_the_project_structure">      - 4. Review the project structure</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_5_build_and_deploy_to_emulator">      - 5. Build and Deploy to Emulator</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_6_build_your_project_for_the_device">      - 6. Build your project for the device</option>
+<option value="Windows%20Phone%207%20Platform%20Guide_done">      - Done!</option></select></small>
         </div>
 
         <div id="sidebar">
@@ -134,8 +137,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -147,12 +153,12 @@
 
         <div id="scrollable">
             <div id="content">
-                <h1><a name="Getting%20Started%20with%20Windows%20Phone%207">Getting Started with Windows Phone 7</a></h1>
+                <h1><a name="Windows%20Phone%207%20Platform%20Guide">Windows Phone 7 Platform Guide</a></h1>
 
 <p>This guide describes how to set up your development environment for Cordova and run a sample application.  Note that Cordova used to be called PhoneGap, so some of the sites still use the old PhoneGap name.</p>
 
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_video_tutorials">Video Tutorials:</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_video_tutorials">Video Tutorials:</a>
 </h2>
 
 <ul>
@@ -160,102 +166,107 @@
 <li><a class="external" href="http://www.youtube.com/v/BJFX1GRUXj8?autoplay=1">Cordova and Windows Phone deep dive</a></li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_1_requirements">1. Requirements</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_1_requirements">1. Requirements</a>
 </h2>
 
 <ul>
 <li>Windows 7, Windows 8 or Windows Vista with SP2</li>
 </ul>
-<p>Note: Running in VM has issues, if you are on a Mac, you will need to setup a bootcamp partition with Windows 7 or Vista</p>
-
-<p>Necessary for Installing on <a href="cordova_device_device.md.html#Device">Device</a> and Submitting to Market Place:</p>
+<p><strong>NOTE:</strong> Running in VM does not work well. If you are on a Mac, you need to set up a bootcamp partition with Windows 7 or Vista.</p>
 
 <ul>
-<li>Become an <a class="external" href="http://create.msdn.com/en-US/home/membership">App Hub member</a>.</li>
+<li>Become an <a class="external" href="http://create.msdn.com/en-US/home/membership">App Hub member</a>. You need to do so to install onto a device and submit the application to the market place.</li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_2_install_sdk_cordova">2. Install SDK + Cordova</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_2_install_sdk_cordova">2. Install SDK + Cordova</a>
 </h2>
 
 <ul>
 <li>Download and install <a class="external" href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=27570/">Windows Phone  SDK</a>
 </li>
-<li>Download the latest copy of [<a class="external" href="http://phonegap.com/download">PhoneGap</a> and extract its contents. We will be working with the subfolder: lib\windows-phone\</li>
-<li>copy the file CordovaWP7<em>x</em>x_x.zip to the folder : \My Documents\Visual Studio 2012\Templates\ProjectTemplates
-( if the template file does not exist, you will need to build it. See 2.1 below )
+<li>Download and extract the latest copy of [<a class="external" href="http://phonegap.com/download">PhoneGap</a>. You will be working in the <code>lib\windows-phone</code> subfolder.</li>
+<li>Copy the <code>CordovaWP7_x.x.x.zip</code> to the <code>\My Documents\Visual Studio 2012\Templates\ProjectTemplates\</code> folder.
+(If the template file does not exist, you need to build it as described in 2.1 below.)
 if you have just installed VisualStudio, you should launch it once to create this folder
-if you prefer, you may add the project instead to the "Silverlight for Windows Phone" subfolder of "Visual C#". This is up to you, and only affects where the project template is shown when creating a new project. Also, You may need to create this folder. </li>
+if you prefer, you may add the project instead to the <code>Silverlight for Windows Phone</code> subfolder of <code>Visual C#</code>. This is up to you, and only affects where the project template is shown when creating a new project. Also, You may need to create this folder.</li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_2_1_building_the_template">2.1. Building the template</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_2_1_building_the_template">2.1. Building the template</a>
 </h2>
 
-<p>( note, this step may not be required.  If the lib\windows-phone directory already contains a file CordovaWP7<em>x</em>x_x.zip then you may skip this step )
-- Open the file lib\windows-phone\templates\standalone\CordovaSolution.sln in Visual Studio Express for Windows Phone
-- From the file menu, select 'Export Template...' 
-- Choose template type 'Project template'
-- Give the exported template a name, ex. CordovaStarter-2.1.0 will produce CordovaStarter-2.1.0.zip
-- Optionally, you may add a description, icon image, and Preview image.  These are what is displayed in Visual Studio in the 'New Project' dialog.- 
-- Note: If you select ( 'Automatically import the template ... ') then you will not need to copy the .zip file over as outlined in step 2.
-- Press 'Finish'</p>
+<p><strong>NOTE:</strong> Skip this step if the <code>lib\windows-phone</code> directory already contains a <code>CordovaWP7_x.x.x.zip</code> file.</p>
 
+<ul>
+<li>Open the <code>lib\windows-phone\templates\standalone\CordovaSolution.sln</code> in Visual Studio Express for Windows Phone</li>
+<li>Select <strong>Export Template...</strong> from the <strong><a href="cordova_file_file.md.html#File">File</a></strong> menu.</li>
+<li>Choose template type <strong>Project template</strong>
+</li>
+<li><p>Supply a name of the exported template, such as <code>CordovaStarter-2.1.0</code> to produce a <code>CordovaStarter-2.1.0.zip</code> file.</p></li>
+<li><p>Optionally, add a description, icon image, or Preview image.  These are displayed in Visual Studio's <strong>New Project</strong> dialog.</p></li>
+<li>
+<strong>NOTE:</strong> If you select <strong>Automatically import the template...</strong>, then you don't need to copy the <code>.zip</code> file over as outlined in step 2.</li>
+<li>Press <strong>Finish</strong>.</li>
+</ul>
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_3_setup_new_project">3. Setup New Project</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_3_set_up_new_project">3. Set up New Project</a>
 </h2>
 
 <ul>
 <li>Open Visual Studio Express for Windows Phone and choose <strong>New Project</strong>.</li>
-<li>Select <strong>CordovaStarter</strong>. ( the version number will be displayed in the template description )</li>
+<li>Select <strong>CordovaStarter</strong>. (The version number displays in the template description.)</li>
 <li><ul>
-<li>note: If you do not see it, you may have to select the top level 'Visual C#' to see it</li>
+<li>
+<strong>NOTE:</strong> If you do not see it, you may have to select the top-level 'Visual C#'.</li>
 </ul></li>
 <li>
-<p>Give your project a name, and select OK.</p>
+<p>Give your project a name, and select <strong>OK</strong>.</p>
 
-<p><img src="img/guide/getting-started/windows-phone-7/wpnewproj.PNG" alt="" title=""></p>
+<p><img src="img/guide/getting-started/windows-phone-7/wpnewproj.png" alt="" title=""></p>
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_4_review_the_project_structure">4. Review the project structure</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_4_review_the_project_structure">4. Review the project structure</a>
 </h2>
 
 <ul>
 <li>The 'www' folder contains your Cordova html/js/css and any other resources included in your app.</li>
 <li>
-<p>Any content that you add here needs to be a part of the Visual Studio project, and it must be set as content. </p>
+<p>Any content that you add needs to be a part of the Visual Studio project, and it must be set as content.</p>
 
-<p><img src="img/guide/getting-started/windows-phone-7/wp7projectstructure.PNG" alt="" title=""></p>
+<p><img src="img/guide/getting-started/windows-phone-7/wp7projectstructure.png" alt="" title=""></p>
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_5_build_and_deploy_to_emulator">5. Build and Deploy to Emulator</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_5_build_and_deploy_to_emulator">5. Build and Deploy to Emulator</a>
 </h2>
 
 <ul>
-<li>Make sure to have <strong>Windows Phone Emulator</strong> selected in the top drop-down menu.</li>
+<li>Make sure <strong>Windows Phone Emulator</strong> is selected in the main drop-down menu.</li>
 <li>
-<p>Hit the green <strong>play button</strong> beside the Windows Phone Emulator drop-down menu to start debugging or press F5.</p>
+<p>Press the green <strong>play</strong> button next to the drop-down menu to start debugging, or else type <strong>F5</strong>.</p>
 
-<p><img src="img/guide/getting-started/windows-phone-7/wprun.png" alt="" title=""><img src="img/guide/getting-started/windows-phone-7/wpfirstrun.PNG" alt="" title=""></p>
+<p><img src="img/guide/getting-started/windows-phone-7/wprun.png" alt="" title=""></p>
+
+<p><img src="img/guide/getting-started/windows-phone-7/wpfirstrun.png" alt="" title=""></p>
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_6_build_your_project_for_the_device">6. Build your project for the device</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_6_build_your_project_for_the_device">6. Build your project for the device</a>
 </h2>
 
-<p>In order to test your application on a device, the device must be registered. Click <a class="external" href="http://msdn.microsoft.com/en-us/library/gg588378(v=VS.92">here</a>.aspx) to read documentation on deploying and testing on your Windows Phone.</p>
+<p>To test your application on a device, the device must be registered. MSDN provides <a class="external" href="http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff402565(v=vs.105).aspx">documentation</a> to help deploy and test your Windows Phone.</p>
 
 <ul>
 <li>Make sure your phone is connected, and the screen is unlocked</li>
 <li>In Visual Studio, select 'Windows Phone <a href="cordova_device_device.md.html#Device">Device</a>' from the top drop-down menu.</li>
 <li>
-<p>Hit the green <strong>play button</strong> beside the drop-down menu to start debugging or press F5.</p>
+<p>Press the green <strong>play</strong> button next to the main drop-down menu to start debugging, or type <strong>F5</strong>.</p>
 
 <p><img src="img/guide/getting-started/windows-phone-7/wpd.png" alt="" title=""></p>
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Windows%20Phone%207_done">Done!</a>
+<a name="Windows%20Phone%207%20Platform%20Guide_done">Done!</a>
 </h2>
 
 <p>You can also checkout more detailed version of this guide <a class="external" href="http://wiki.phonegap.com/w/page/48672055/Getting%20Started%20with%20PhoneGap%20Windows%20Phone%207">here</a>.</p>

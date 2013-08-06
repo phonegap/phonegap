@@ -19,15 +19,34 @@
 # under the License.
 #
 -->
-<widget>
-    <preference name="EnableWebGL" value="false" />
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        id        = "io.cordova.helloCordova"
+        version   = "2.0.0">
+    <name>Hello Cordova</name>
 
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+
+    <author href="http://cordova.io" email="dev@cordova.apache.org">
+        Apache Cordova Team
+    </author>
+
+    <access origin="*"/>
+
+    <!-- <content src="http://mysite.com/myapp.html" /> for external pages -->
     <content src="index.html" />
 
-    <plugins>
-        <plugin name="Device" value="CDVDevice"/>
-        <plugin name="NetworkStatus" value="CDVConnection" />
-    </plugins>
+    <!-- Preferences for OSX -->
+    <preference name="EnableWebGL" value="false" />
 
-    <access origin="*" />
+    <feature name="Device">
+      <param name="ios-package" value="CDVDevice"/>
+    </feature>
+    <feature name="NetworkStatus">
+      <param name="ios-package" value="CDVConnection"/>
+    </feature>
+    <!-- Deprecated plugins element. REmove in 3.0 -->
+    <plugins>
+    </plugins>
 </widget>

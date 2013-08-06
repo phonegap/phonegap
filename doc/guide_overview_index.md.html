@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+<meta name="generator" content="joDoc">
+<title>PhoneGap API Documentation</title>
+<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+<link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+</head>
+<body>
+        <div id="header">
+            <h1><a href="index.html">PhoneGap Documentation</a></h1>
+            <small>
+                <select><optgroup label="English" value="en">
+<option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
+<option value="2.7.0rc1">2.7.0rc1</option>
+<option value="2.7.0">2.7.0</option>
+<option value="2.6.0rc1">2.6.0rc1</option>
+<option value="2.6.0">2.6.0</option>
+<option value="2.5.0rc1">2.5.0rc1</option>
+<option value="2.5.0">2.5.0</option>
+<option value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.4.0">2.4.0</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
+<option value="2.2.0rc2">2.2.0rc2</option>
+<option value="2.2.0rc1">2.2.0rc1</option>
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0rc2">2.1.0rc2</option>
+<option value="2.1.0rc1">2.1.0rc1</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0rc1">2.0.0rc1</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0rc1">1.9.0rc1</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.8.0rc1">1.8.0rc1</option>
+<option value="1.8.0">1.8.0</option>
+<option value="1.7.0rc1">1.7.0rc1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="1.6.1">1.6.1</option>
+<option value="1.6.0rc1">1.6.0rc1</option>
+<option value="1.6.0">1.6.0</option>
+<option value="1.5.0rc1">1.5.0rc1</option>
+<option value="1.5.0">1.5.0</option>
+<option value="1.4.1">1.4.1</option>
+<option value="1.4.0rc1">1.4.0rc1</option>
+<option value="1.4.0">1.4.0</option>
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+<option value="1.0.0rc3">1.0.0rc3</option>
+<option value="1.0.0rc2">1.0.0rc2</option>
+<option value="1.0.0rc1">1.0.0rc1</option>
+<option value="1.0.0">1.0.0</option>
+<option value="0.9.6">0.9.6</option>
+<option value="0.9.5.1">0.9.5.1</option>
+<option value="0.9.5">0.9.5</option>
+<option value="0.9.4">0.9.4</option>
+<option value="0.9.3">0.9.3</option>
+<option value="0.9.2">0.9.2</option>
+</optgroup>
+<optgroup label="Español" value="es"><option value="1.0.0">1.0.0</option></optgroup>
+<optgroup label="Français" value="fr">
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+</optgroup>
+<optgroup label="Japanese" value="jp">
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="0.9.5">0.9.5</option>
+</optgroup>
+<optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
+        </div>
+        <div id="subheader">
+            <h1>Overview</h1>
+            <small><select><option value="Overview">Overview</option>
+<option value="Overview_basic_components">      - Basic Components</option>
+<option value="Overview_development_paths">      - Development Paths</option>
+<option value="Overview_platform_support">      - Platform Support</option></select></small>
+        </div>
+
+        <div id="sidebar">
+            <div class="vertical_divider"></div>
+        <h1>API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+<li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
+<li><a href="cordova_storage_storage.md.html#Storage">Storage</a></li>
+</ul>
+<h1>Guides</h1>
+<ul>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
+<li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
+<li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
+<li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
+<li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
+<li><a href="guide_whitelist_index.md.html#Domain%20Whitelist%20Guide">Domain Whitelist Guide</a></li>
+<li><a href="guide_cordova-webview_index.md.html#Embedding%20WebView">Embedding WebView</a></li>
+<li><a href="_index.html">Keyword Index</a></li>
+</ul>
+</div>
+
+        <div id="scrollable">
+            <div id="content">
+                <h1><a name="Overview">Overview</a></h1>
+
+<p>Cordova is an open-source mobile development framework. It allows you
+to use standard web technologies such as HTML5, CSS3, and JavaScript
+for cross-platform development, avoiding each mobile platforms' native
+development language.  Applications execute within wrappers targeted
+to each platform, and rely on standards-compliant API bindings to
+access each device's sensors, data, and network status.</p>
+
+<p>Use Cordova if you are:</p>
+
+<ul>
+<li><p>a mobile developer and want to extend an application across more
+than one platform, without having to re-implement it with each
+platform's language and tool set.</p></li>
+<li><p>a web developer and want to deploy a web app that's packaged for
+distribution in various app store portals.</p></li>
+<li><p>a mobile developer interested in mixing native application
+components with a <em>WebView</em> (browser window) that can access
+device-level APIs, or if you want to develop a plug-in interface
+between native and WebView components.</p></li>
+</ul>
+<h2>
+<a name="Overview_basic_components">Basic Components</a>
+</h2>
+
+<p>Cordova applications rely on a common <code>config.xml</code> file that provides
+information about the app and specifies parameters affecting how it
+works, such as whether it responds to orientation shifts. This file
+adheres to the W3C's
+<a class="external" href="http://www.w3.org/TR/widgets/">Packaged Web App</a>,
+or <em>widget</em>, specification.</p>
+
+<p>The application itself is implemented as a web page, named
+<em>index.html</em> by default, that references whatever CSS, JavaScript,
+images, media files, or other resources are necessary for it to run.
+The app executes as a <em>WebView</em> within the native application wrapper,
+which you distribute to app stores.  For the web app to interact with
+various device features the way native apps do, it must also reference
+a <code>cordova.js</code> file, which provides API bindings.
+<!-- XREF
+(See the <a href="index.md.html#API Reference">API Reference</a> for an overview, and the API and Configuration
+Guide for examples of how to use them.)
+XREF --></p>
+
+<p>The Cordova-enabled WebView may provide the application with its
+entire user interface. It can also be a component within a larger,
+hybrid application that mixes the WebView with native application
+components.  Cordova provides a <em>plug-in</em> interface for these
+components to communicate with each other.</p>
+
+<h2>
+<a name="Overview_development_paths">Development Paths</a>
+</h2>
+
+<p>The easiest way to set up an application is to run the <code>cordova</code>
+command-line utility, also known as the <em>command-line interface</em>
+(CLI). (To install the CLI, see <a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a>.)
+Depending on the set of platforms you wish to target, you can rely on
+the CLI for progressively greater shares of the development cycle:</p>
+
+<ul>
+<li><p>In the most basic scenario, you can use the CLI simply to create a
+new project that is populated with default configuration for you to
+modify.</p></li>
+<li><p>For many mobile platforms, you can also use the CLI to set up
+additional project files required to compile within each SDK.  For
+this to work, you must install each targeted platform's SDK.
+<!-- XREF
+(See the <a href="guide_getting-started_index.md.html#Platform Guides">Platform Guides</a> for instructions.)
+XREF -->
+As indicated in the Platform Support table below, you may need to
+run the CLI on different operating systems depending on the targeted
+platform.</p></li>
+<li><p>For supporting platforms, the CLI can compile executible
+applications and run them in an SDK- or browser-based device
+emulator, depending on the device feature you want to test.
+<!-- XREF
+(See API and Configuration Guide for details.)
+XREF -->
+For comprehensive testing, you can also generate application files
+and install them directly on a device.</p></li>
+</ul>
+<p>At any point in the development cycle, you can also rely on
+platform-specific SDK tools, which may provide a richer set of
+options. 
+<!-- XREF
+(See the <a href="guide_getting-started_index.md.html#Platform Guides">Platform Guides</a> for details about each platform's SDK tool set.)
+XREF -->
+An SDK environment is more appropriate if you want implement a hybrid
+app that mixes web-based and native application components.
+<!-- XREF
+(See Extended Hybrid Applications for more information.)
+XREF -->
+You may use the command-line utility to initially generate the app, or
+iteratively thereafter to feed updated code to SDK tools.  You may
+also build the app's configuration file yourself.
+<!-- XREF
+(See Configuration Reference for details.)
+XREF --></p>
+
+<!-- XREF
+To build projects on some platforms, you may need to apply digital signatures.
+See Distributing Applications for information on how to upload your app to various store portals.
+XREF -->
+
+<h2>
+<a name="Overview_platform_support">Platform Support</a>
+</h2>
+
+<p>The following shows the set of development tools and device APIs
+available for each mobile platform:</p>
+
+<!-- START HTML -->
+
+<table class="compat" width="100%">
+<thead><tr>
+<th>
+        </th>
+<th>Android</th>
+        <th>Blackberry</th>
+        <th>Blackberry 10</th>
+        <th>iOS</th>
+        <th>Windows<br>Phone 7</th>
+        <th>Windows<br>Phone 8</th>
+        <th>Windows<br>8</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th><a href="#">cordova<br>CLI</a></th>
+        <td data-col="android" class="y">Mac, Windows, Linux</td>
+        <td data-col="blackberry" class="y">Mac, Windows</td>
+        <td data-col="blackberry10" class="y">Mac, Windows</td>
+        <td data-col="ios" class="y">Mac</td>
+        <td data-col="winphone7" class="y">Windows</td>
+        <td data-col="winphone8" class="y">Windows</td>
+        <td data-col="win8" class="u"></td>
+    </tr>
+<tr>
+<th><a href="#">PhoneGap<br>Build</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="u"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="u"></td>
+    </tr>
+<tr>
+<th><a href="guide_getting-started_index.md.html">IDE platform support</a></th>
+        <td data-col="android" class="y"><a href="guide_getting-started_android_index.md.html">         </a></td>
+        <td data-col="blackberry" class="y"><a href="guide_getting-started_blackberry_index.md.html">      </a></td>
+        <td data-col="blackberry10" class="y"><a href="guide_getting-started_blackberry10_index.md.html">      </a></td>
+        <td data-col="ios" class="y"><a href="guide_getting-started_ios_index.md.html">             </a></td>
+        <td data-col="winphone7" class="y"><a href="guide_getting-started_windows-phone-7_index.md.html"> </a></td>
+        <td data-col="winphone8" class="y"><a href="guide_getting-started_windows-phone-8_index.md.html"> </a></td>
+        <td data-col="win8" class="y"><a href="guide_getting-started_windows-8_index.md.html">       </a></td>
+    </tr>
+<tr>
+<th><a href="#">Embedded<br>WebView</a></th>
+        <td data-col="android" class="y"><a href="guide_cordova-webview_android.md.html"></a></td>
+        <td data-col="blackberry" class="n"></td>
+        <td data-col="blackberry10" class="n"></td>
+        <td data-col="ios" class="y"><a href="guide_cordova-webview_ios.md.html"></a></td>
+        <td data-col="winphone7" class="n"></td>
+        <td data-col="winphone8" class="n"></td>
+        <td data-col="win8" class="n"></td>
+    </tr>
+<tr>
+<th><a href="guide_plugin-development_index.md.html">Plug-in<br>Interface</a></th>
+        <td data-col="android" class="y"><a href="guide_plugin-development_android_index.md.html"></a></td>
+        <td data-col="blackberry" class="y"><a href="guide_plugin-development_blackberry_index.md.html"></a></td>
+        <td data-col="blackberry10" class="y"><a href="guide_plugin-development_blackberry10_index.md.html"></a></td>
+        <td data-col="ios" class="y"><a href="guide_plugin-development_ios_index.md.html"></a></td>
+        <td data-col="winphone7" class="y"><a href="guide_plugin-development_windows-phone_index.md.html"></a></td>
+        <td data-col="winphone8" class="n"></td>
+        <td data-col="win8" class="n"></td>
+    </tr>
+<tr>
+<th></th>
+        <th colspan="20">Platform APIs</th>
+    </tr>
+<tr>
+<th><a href="cordova_accelerometer_accelerometer.md.html">Accelerometer</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_camera_camera.md.html">Camera</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_media_capture_capture.md.html">Capture</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="n"></td>
+    </tr>
+<tr>
+<th><a href="cordova_compass_compass.md.html">Compass</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="n"></td>
+        <td data-col="blackberry10" class="n"></td>
+        <td data-col="ios" class="y">(3GS+)</td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_connection_connection.md.html">Connection</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_contacts_contacts.md.html">Contacts</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_device_device.md.html">Device</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_events_events.md.html">Events</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_file_file.md.html">File</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_geolocation_geolocation.md.html">Geolocation</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_globalization_globalization.md.html">Globalization</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="n"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="n"></td>
+    </tr>
+<tr>
+<th><a href="cordova_inappbrowser_inappbrowser.md.html">InAppBrowser</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_media_media.md.html">Media</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="n"></td>
+        <td data-col="blackberry10" class="n"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_notification_notification.md.html">Notification</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+<tr>
+<th><a href="cordova_splashscreen_splashscreen.md.html">Splashscreen</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="n"></td>
+        <td data-col="blackberry10" class="n"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="n"></td>
+        <td data-col="winphone8" class="n"></td>
+        <td data-col="win8" class="n"></td>
+    </tr>
+<tr>
+<th><a href="cordova_storage_storage.md.html">Storage</a></th>
+        <td data-col="android" class="y"></td>
+        <td data-col="blackberry" class="y"></td>
+        <td data-col="blackberry10" class="y"></td>
+        <td data-col="ios" class="y"></td>
+        <td data-col="winphone7" class="y"></td>
+        <td data-col="winphone8" class="y"></td>
+        <td data-col="win8" class="y"></td>
+    </tr>
+</tbody>
+</table>
+<!-- END HTML -->
+</div>
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script><script type="text/javascript" src="prettify/prettify.js"></script>
+</body>
+</html>

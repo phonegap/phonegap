@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+<meta name="generator" content="joDoc">
+<title>PhoneGap API Documentation</title>
+<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+<link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+</head>
+<body>
+        <div id="header">
+            <h1><a href="index.html">PhoneGap Documentation</a></h1>
+            <small>
+                <select><optgroup label="English" value="en">
+<option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
+<option value="2.7.0rc1">2.7.0rc1</option>
+<option value="2.7.0">2.7.0</option>
+<option value="2.6.0rc1">2.6.0rc1</option>
+<option value="2.6.0">2.6.0</option>
+<option value="2.5.0rc1">2.5.0rc1</option>
+<option value="2.5.0">2.5.0</option>
+<option value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.4.0">2.4.0</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
+<option value="2.2.0rc2">2.2.0rc2</option>
+<option value="2.2.0rc1">2.2.0rc1</option>
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0rc2">2.1.0rc2</option>
+<option value="2.1.0rc1">2.1.0rc1</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0rc1">2.0.0rc1</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0rc1">1.9.0rc1</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.8.0rc1">1.8.0rc1</option>
+<option value="1.8.0">1.8.0</option>
+<option value="1.7.0rc1">1.7.0rc1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="1.6.1">1.6.1</option>
+<option value="1.6.0rc1">1.6.0rc1</option>
+<option value="1.6.0">1.6.0</option>
+<option value="1.5.0rc1">1.5.0rc1</option>
+<option value="1.5.0">1.5.0</option>
+<option value="1.4.1">1.4.1</option>
+<option value="1.4.0rc1">1.4.0rc1</option>
+<option value="1.4.0">1.4.0</option>
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+<option value="1.0.0rc3">1.0.0rc3</option>
+<option value="1.0.0rc2">1.0.0rc2</option>
+<option value="1.0.0rc1">1.0.0rc1</option>
+<option value="1.0.0">1.0.0</option>
+<option value="0.9.6">0.9.6</option>
+<option value="0.9.5.1">0.9.5.1</option>
+<option value="0.9.5">0.9.5</option>
+<option value="0.9.4">0.9.4</option>
+<option value="0.9.3">0.9.3</option>
+<option value="0.9.2">0.9.2</option>
+</optgroup>
+<optgroup label="Español" value="es"><option value="1.0.0">1.0.0</option></optgroup>
+<optgroup label="Français" value="fr">
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+</optgroup>
+<optgroup label="Japanese" value="jp">
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="0.9.5">0.9.5</option>
+</optgroup>
+<optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
+        </div>
+        <div id="subheader">
+            <h1>BlackBerry 10 Platform Guide</h1>
+            <small><select><option value="BlackBerry%252010%2520Platform%2520Guide">BlackBerry 10 Platform Guide</option>
+<option value="BlackBerry%2010%20Platform%20Guide_requirements">      - Requirements</option>
+<option value="BlackBerry%2010%20Platform%20Guide_setting_up_your_signing_keys">      - Setting up your signing keys</option>
+<option value="BlackBerry%2010%20Platform%20Guide_creating_your_project">      - Creating your project</option>
+<option value="BlackBerry%2010%20Platform%20Guide_adding_and_managing_targets">      - Adding and managing targets</option>
+<option value="BlackBerry%2010%20Platform%20Guide_building_your_app">      - Building your app</option>
+<option value="BlackBerry%2010%20Platform%20Guide_deploying_an_app">      - Deploying an app</option>
+<option value="BlackBerry%2010%20Platform%20Guide_adding_and_managing_plugins">      - Adding and managing plugins</option></select></small>
+        </div>
+
+        <div id="sidebar">
+            <div class="vertical_divider"></div>
+        <h1>API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+<li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
+<li><a href="cordova_storage_storage.md.html#Storage">Storage</a></li>
+</ul>
+<h1>Guides</h1>
+<ul>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
+<li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
+<li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
+<li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
+<li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
+<li><a href="guide_whitelist_index.md.html#Domain%20Whitelist%20Guide">Domain Whitelist Guide</a></li>
+<li><a href="guide_cordova-webview_index.md.html#Embedding%20WebView">Embedding WebView</a></li>
+<li><a href="_index.html">Keyword Index</a></li>
+</ul>
+</div>
+
+        <div id="scrollable">
+            <div id="content">
+                <h1><a name="BlackBerry%2010%20Platform%20Guide">BlackBerry 10 Platform Guide</a></h1>
+
+<p>Apache Cordova is an application development platform that allows you to use common web technologies, primarily HTML5, JavaScript, and CSS, to create applications for mobile devices. Cordova uses a standard set of APIs to access common device features. Additional plugins allow you to access BlackBerry specific APIs, so that you can extend your application to tightly integrate with the BlackBerry 10 OS.</p>
+
+<h2>
+<a name="BlackBerry%2010%20Platform%20Guide_requirements">Requirements</a>
+</h2>
+
+<p>Cordova for BlackBerry has the following software requirements:</p>
+
+<ul>
+<li>Windows XP (32-bit) or Windows 7 (32-bit and 64-bit) or Mac OSX 10.6.4+</li>
+<li>node.js (&gt; 0.9.9) <a class="external" href="http://nodejs.org/">Download node.js now</a>
+</li>
+<li>BlackBerry 10 Native SDK. <a class="external" href="http://developer.blackberry.com/native/download/">Download the BlackBerry 10 Native SDK now.</a>
+</li>
+</ul>
+<h2>
+<a name="BlackBerry%2010%20Platform%20Guide_setting_up_your_signing_keys">Setting up your signing keys</a>
+</h2>
+
+<p>Before starting development, you'll need to register for your code signing key and debug token. The signing key allows you to sign your completed app so that you can distribute it through BlackBerry World. The debug token allows you to test an unsigned app on a BlackBerry 10 device. You do not need to create and install the debug token yourself; if you supply the keystore password, the build script will create and install the debug token for you.</p>
+
+<ul>
+<li><a class="external" href="https://www.blackberry.com/SignedKeys/codesigning.html">Register for your code signing key now.</a></li>
+<li><a class="external" href="http://developer.blackberry.com/html5/documentation/set_up_for_signing.html">Set your computer up for code signing. </a></li>
+<li><a class="external" href="http://developer.blackberry.com/html5/documentation/running_your_bb10_app_2008471_11.html">Learn more about debug tokens.</a></li>
+</ul>
+<h2>
+<a name="BlackBerry%2010%20Platform%20Guide_creating_your_project">Creating your project</a>
+</h2>
+
+<p>To create a new project, you use the <code>create</code> command to set up the folder structure for your app.</p>
+
+<ol>
+<li>On the command line, navigate to the folder where you extracted Cordova.</li>
+<li>Run the <code>create</code> command using the following syntax:
+<code>
+bin/create &lt;path-to-project&gt;
+</code>
+</li>
+</ol>
+<p>This command creates the folder structure for your project at the specified location. All of your project resource files should be stored in the <em><path-to-project></path-to-project></em>/www folder, or in a subfolder within it.</p>
+
+<h2>
+<a name="BlackBerry%2010%20Platform%20Guide_adding_and_managing_targets">Adding and managing targets</a>
+</h2>
+
+<p>A target refers to a BlackBerry device or simulator that you will use to test your app. Targets are added directly to your project; you can add multiple targets to your project, each with a unique name. Then, when you want to deploy your app to a particular target, you can simply refer to that target by name when you run your script.</p>
+
+<h3>Add a target</h3>
+
+<p>To add a target, on the command line, type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/target  add  &lt;name&gt;  &lt;ip-address&gt;  [-t &lt;device | simulator&gt;]  [-p | --password &lt;password&gt;]  [--pin &lt;device-pin&gt;]
+</code></p>
+
+<p>where</p>
+
+<ul>
+<li>
+<code>&lt;name&gt;</code>  specifies a unique name for the target.</li>
+<li>
+<code>&lt;ip-address&gt;</code>  specifies the ip address of the BlackBerry device or simulator.</li>
+<li>
+<code>-t &lt;device | simulator&gt;</code> specifies the target type. If not provided, the default value is device.</li>
+<li>
+<code>-p|--password &lt;password&gt;</code>  specifies the password for the device or simulator. This is required only if the device or simulator is password protected.</li>
+<li>
+<code>--pin &lt;device-pin&gt;</code>  specifies the PIN of the BlackBerry device, which identifies that device as a valid host for the debug token. This argument is required only if you are creating a debug token.</li>
+</ul>
+<h3>Remove a target</h3>
+
+<p>To remove a target, on the command line, type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/target  remove  &lt;name&gt;
+</code></p>
+
+<h3>Set a target as the default</h3>
+
+<p>To specify a specific target as the default, on the command line, type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/target  default  &lt;name&gt;
+</code></p>
+
+<h2>
+<a name="BlackBerry%2010%20Platform%20Guide_building_your_app">Building your app</a>
+</h2>
+
+<p>To build your app, run the build script. You can build the app in either release mode or in debug mode.</p>
+
+<ul>
+<li>When you build the app in release mode, you are preparing it for distribution through BlackBerry World. The script packages your app resources and plugins together in a .bar file, then signs the app.</li>
+<li>
+<p>When you build the app in debug mode, you are preparing it to be tested. The script packages your app resources and plugins together in a .bar file, but does not sign it. The script can also deploy the app onto a previously defined target. If you have not already created and installed a debug token, you can supply the keystore password, and the build script will create and install the debug token for you as well.</p>
+
+<p>Debug mode also enables Web Inspector for the app, which allows you to remotely inspect the source code. A prompt displays the URL that you can use to connect to and inspect your app. For more information on using Web Inspector, see <a class="external" href="http://developer.blackberry.com/html5/documentation/web_inspector_overview_1553586_11.html">Debugging using Web Inspector</a>.</p>
+</li>
+</ul>
+<h3>Build your app in release mode</h3>
+
+<p>To build your app in release mode, on the command line, type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/build  release  -k|--keystorepass &lt;password&gt;  [-b|--buildId &lt;number&gt;]  [-p|--params &lt;params-JSON-file&gt;]
+</code></p>
+
+<p>where</p>
+
+<ul>
+<li>
+<code>-k|--keystorepass &lt;password&gt;</code>  specifies the password you defined when you configured your computer to sign applications.</li>
+<li>
+<code>-b|--buildId &lt;number&gt;</code>  specifies the build version number of your application. Typically, this number should be incremented from the previous signed version. This argument is optional.</li>
+<li>
+<code>-p|--params &lt;params-JSON-file&gt;</code>  specifies a JSON file containing additional parameters to pass to downstream tools. This argument is optional.</li>
+</ul>
+<h3>Build your app in debug mode</h3>
+
+<p>To build your app in release mode, on the command line, type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/build  debug  [&lt;target&gt;]  [-k|--keystorepass &lt;password&gt;]  [-p|--params &lt;params-JSON-file&gt;]  [-ll|--loglevel &lt;error|warn|verbose&gt;]
+</code></p>
+
+<p>where</p>
+
+<ul>
+<li>
+<code>&lt;target&gt;</code>  specifies the name of a previously added target. If <code>&lt;target&gt;</code>  is not specified, the default target is used, if one has been created. This argument is only required if you want the script to deploy your app to a BlackBerry device or simulator and you have not created a default target. Additionally, if <code>&lt;target&gt;</code>  is a device, then that device must be connected to your computer by USB connection or be connected to the same Wi-Fi network as your computer.</li>
+<li>
+<code>-k|--keystorepass &lt;password&gt;</code>  specifies the password you defined when you configured your computer to sign applications. This password is also used to create your debug token. This argument is only required if you want the script to create and install the debug token for you.</li>
+<li>
+<code>-p|--params &lt;params-JSON-file&gt;</code>  specifies a JSON file containing additional parameters to pass to downstream tools.</li>
+<li>
+<code>-ll|--loglevel &lt;level&gt;</code>  specifies the log level. The log level may be one of <code>error</code>, <code>warn</code>, or <code>verbose</code>.</li>
+</ul>
+<p>Note that all of these parameters are optional. If you have previously defined a default target (and installed a debug token, if that target is a BlackBerry device), you can run the script with no arguments, and the script will package your app and deploy it to the default target. For example:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/build debug
+</code></p>
+
+<h2>
+<a name="BlackBerry%2010%20Platform%20Guide_deploying_an_app">Deploying an app</a>
+</h2>
+
+<p>You can test your app using either a BlackBerry device or a simulator. Before deploying your app, you must first create a target for the device or simulator you want to deploy your app to.</p>
+
+<p>The run script will first build  your app. If you intend to deploy an app to a physical device for testing, you must first install a debug token on that device. If you specify the <code>--keystorepass &lt;password&gt;</code> argument when running the run script, the script will create and install the debug token for you. You do not need a debug token to test your app on a simulator, even if that app is unsigned.</p>
+
+<p>To deploy your app to a device or simulator, on a command line type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/run &lt;target&gt; [--no-build]
+</code></p>
+
+<p>where
+-   <code>&lt;target&gt;</code>  specifies the name of a previously added target. If <code>&lt;target&gt;</code>  is a device, then that device must be connected to your computer by USB connection or be connected to the same Wi-Fi network as your computer.</p>
+
+<ul>
+<li>
+<code>-no--build</code> will use the most recently built version of the application rather than re-building. This is useful to test an application in release mode.</li>
+</ul>
+<h2>
+<a name="BlackBerry%2010%20Platform%20Guide_adding_and_managing_plugins">Adding and managing plugins</a>
+</h2>
+
+<p>To add additional functionality that is outside of the core features of Cordova, you'll need to add plugins. A plugin represents a set of APIs that provide access to additional features of the platform.</p>
+
+<p>In order to use a plugin, you must first add it into your project. Once added into your project, the plugin will be bundled with your project during the build process, to ensure that your app has access to all the APIs it needs.</p>
+
+<h3>Add a plugin</h3>
+
+<p>To add a plugin, on the command line, type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/plugin add &lt;path to plugin&gt;
+</code></p>
+
+<h3>Remove a plugin</h3>
+
+<p>To remove a plugin, on the command line, type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/plugin rm &lt;name&gt;
+</code></p>
+
+<h3>View a list of installed plugins</h3>
+
+<p>To view a list of installed plugins, on the command line, type the following command:</p>
+
+<p><code>
+&lt;path-to-project&gt;/cordova/plugin ls
+</code></p>
+
+            </div>
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script><script type="text/javascript" src="prettify/prettify.js"></script>
+</body>
+</html>

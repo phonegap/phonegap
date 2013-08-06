@@ -40,19 +40,6 @@
     return modelVersion;
 }
 
-- (NSString*)model
-{
-    size_t size;
-    
-    sysctlbyname("hw.model", NULL, &size, NULL, 0);
-    char* model = malloc(size);
-    sysctlbyname("hw.model", model, &size, NULL, 0);
-    NSString* name = [NSString stringWithUTF8String:model];
-    free(model);
-    
-    return name;
-}
-
 - (NSString*)uniqueAppInstanceIdentifier
 {
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
@@ -101,7 +88,6 @@
     [devProps setObject:[self platform] forKey:@"platform"];
     [devProps setObject:[self systemVersion] forKey:@"version"];
     [devProps setObject:[self uniqueAppInstanceIdentifier] forKey:@"uuid"];
-    [devProps setObject:[self model] forKey:@"name"];
     [devProps setObject:[[self class] cordovaVersion] forKey:@"cordova"];
 
     NSDictionary* devReturn = [NSDictionary dictionaryWithDictionary:devProps];

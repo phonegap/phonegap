@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -173,8 +176,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -189,12 +195,21 @@
                 <h1><a name="Geolocation">Geolocation</a></h1>
 
 <blockquote>
-  <p>The <code>geolocation</code> object provides access to the device's GPS sensor.</p>
+  <p>The <code>geolocation</code> object provides access to location data based on the device's GPS sensor or inferred from network signals.</p>
 </blockquote>
 
-<p><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a> provides location information for the device, such as latitude and longitude. Common sources of location information include Global Positioning System (GPS) and location inferred from network signals such as IP address, RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs. No guarantee is given that the API returns the device's actual location.</p>
+<p><code><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></code> provides information about the device's location, such as
+latitude and longitude. Common sources of location information include
+Global Positioning System (GPS) and location inferred from network
+signals such as IP address, RFID, WiFi and Bluetooth MAC addresses,
+and GSM/CDMA cell IDs. There is no guarantee that the API returns the
+device's actual location.</p>
 
-<p>This API is based on the <a class="external" href="http://dev.w3.org/geo/api/spec-source.html">W3C </a><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a> API Specification.  Some devices (Android, BlackBerry, Bada, Windows Phone 7, webOS and Tizen, to be specific) already provide an implementation of this spec.  For those devices, the built-in support is used instead of replacing it with Cordova's implementation.  For devices that don't have geolocation support, the Cordova implementation adheres to the W3C specification.</p>
+<p>This API is based on the
+<a class="external" href="http://dev.w3.org/geo/api/spec-source.html">W3C </a><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a> API Specification,
+and only executes on devices that don't already provide an implementation.</p>
+
+<p><strong>Important privacy note:</strong> Collection and use of geolocation data raises important privacy issues.  Your app's <a href="guide_getting-started_index.md.html">privacy policy</a> should discuss how the app uses geolocation data, whether it is shared with any other parties, and the level of precision of the data (for example, coarse, fine, ZIP code level, etc.).  <a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a> data is generally considered sensitive because it can reveal a person's whereabouts and, if stored, the history of his or her travels.  Therefore, in addition to your app's privacy policy, you should strongly consider providing a just-in-time notice prior to your app accessing geolocation data (if the device operating system doesn't do so already).  That notice should provide the same information noted above, as well as obtaining the user's permission (e.g., by presenting choices for "OK" and "No Thanks").  For more information, please see the <a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a>.</p>
 
 <h2>
 <a name="Geolocation_methods">Methods</a>
@@ -241,11 +256,6 @@
 &lt;uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt;
 </code></pre>
 
-<h3>Bada</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
-</code></pre>
-
 <h3>BlackBerry WebWorks</h3>
 
 <h4>www/plugins.xml</h4>
@@ -265,11 +275,6 @@
 <h4>config.xml</h4>
 
 <pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a>" value="CDVLocation" /&gt;
-</code></pre>
-
-<h3>webOS</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
 </code></pre>
 
 <h3>Windows Phone</h3>
@@ -293,8 +298,8 @@
 
 <p>Returns the device's current position as a <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> object.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a>(<a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a>, 
-                                         [<a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a>], 
+<pre class="prettyprint"><code>navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a>(<a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a>,
+                                         [<a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a>],
                                          [<a href="cordova_geolocation_geolocation.md.html#geolocationOptions">geolocationOptions</a>]);
 </code></pre>
 
@@ -304,17 +309,21 @@
 
 <ul>
 <li>
-<strong><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></strong>: The callback that is called with the current position.</li>
+<strong><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></strong>: The callback that is passed the current position.</li>
 <li>
-<strong><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></strong>: (Optional) The callback that is called if there was an error.</li>
+<strong><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></strong>: <em>(Optional)</em> The callback that executes if an error occurs.</li>
 <li>
-<strong><a href="cordova_geolocation_geolocation.md.html#geolocationOptions">geolocationOptions</a></strong>: (Optional) The geolocation options.</li>
+<strong><a href="cordova_geolocation_geolocation.md.html#geolocationOptions">geolocationOptions</a></strong>: <em>(Optional)</em> The geolocation options.</li>
 </ul>
 <h2>
 <a name="geolocation.getCurrentPosition_description">Description</a>
 </h2>
 
-<p><code><a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a></code> is an asynchronous function. It returns the device's current position to the <code><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></code> callback with a <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> object as the parameter.  If there is an error, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback is invoked with a <code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code> object.</p>
+<p><code><a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a></code> is an asynchronous function. It
+returns the device's current position to the <code><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></code>
+callback with a <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> object as the parameter.  If there is an
+error, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback is passed a
+<code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code> object.</p>
 
 <h2>
 <a name="geolocation.getCurrentPosition_supported_platforms">Supported Platforms</a>
@@ -324,10 +333,8 @@
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -335,8 +342,8 @@
 </h2>
 
 <pre class="prettyprint"><code>// onSuccess Callback
-//   This method accepts a `<a href="cordova_geolocation_geolocation.md.html#Position">Position</a>` object, which contains
-//   the current GPS coordinates
+// This method accepts a <a href="cordova_geolocation_geolocation.md.html#Position">Position</a> object, which contains the
+// current GPS coordinates
 //
 var onSuccess = function(position) {
     alert('Latitude: '          + position.coords.latitude          + '\n' +
@@ -371,11 +378,11 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a>(onSuccess, onError);
@@ -392,14 +399,14 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
                             'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '&lt;br /&gt;' +
                             'Heading: '            + position.coords.heading               + '&lt;br /&gt;' +
                             'Speed: '              + position.coords.speed                 + '&lt;br /&gt;' +
-                            'Timestamp: '          +                                   position.timestamp          + '&lt;br /&gt;';
+                            'Timestamp: '          + position.timestamp                    + '&lt;br /&gt;';
     }
 
     // onError Callback receives a <a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a> object
     //
     function onError(error) {
         alert('code: '    + error.code    + '\n' +
-                'message: ' + error.message + '\n');
+              'message: ' + error.message + '\n');
     }
 
     &lt;/script&gt;
@@ -426,9 +433,9 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 
 <ul>
 <li>
-<strong><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></strong>: The callback that is called with the current position.</li>
+<strong><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></strong>: The callback that is passed the current position.</li>
 <li>
-<strong><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></strong>: (Optional) The callback that is called if there was an error.</li>
+<strong><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></strong>: (Optional) The callback that executes if an error occurs.</li>
 <li>
 <strong><a href="cordova_geolocation_geolocation.md.html#geolocationOptions">geolocationOptions</a></strong>: (Optional) The geolocation options.</li>
 </ul>
@@ -444,7 +451,12 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 <a name="geolocation.watchPosition_description">Description</a>
 </h2>
 
-<p><code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code> is an asynchronous function. It returns the device's current position when a change in position has been detected.  When the device has retrieved a new location, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></code> callback is invoked with a <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> object as the parameter.  If there is an error, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback is invoked with a <code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code> object.</p>
+<p><code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code> is an asynchronous function. It returns
+the device's current position when a change in position is detected.
+When the device retrieves a new location, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></code>
+callback executes with a <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> object as the parameter.  If
+there is an error, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback executes with a
+<code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code> object as the parameter.</p>
 
 <h2>
 <a name="geolocation.watchPosition_supported_platforms">Supported Platforms</a>
@@ -454,10 +466,8 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -499,13 +509,13 @@ var watchID = navigator.<a href="cordova_geolocation_geolocation.md.html#geoloca
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     var watchID = null;
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         // Throw an error if no update is received every 30 seconds
@@ -522,12 +532,12 @@ var watchID = navigator.<a href="cordova_geolocation_geolocation.md.html#geoloca
                             '&lt;hr /&gt;'      + element.innerHTML;
     }
 
-    // onError Callback receives a <a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a> object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
+        // onError Callback receives a <a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a> object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
 
     &lt;/script&gt;
   &lt;/head&gt;
@@ -540,7 +550,8 @@ var watchID = navigator.<a href="cordova_geolocation_geolocation.md.html#geoloca
 <hr>
 <h1><a name="geolocation.clearWatch">geolocation.clearWatch</a></h1>
 
-<p>Stop watching for changes to the device's location referenced by the <code>watchID</code> parameter.</p>
+<p>Stop watching for changes to the device's location referenced by the
+<code>watchID</code> parameter.</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatch">geolocation.clearWatch</a>(watchID);
 </code></pre>
@@ -551,13 +562,15 @@ var watchID = navigator.<a href="cordova_geolocation_geolocation.md.html#geoloca
 
 <ul>
 <li>
-<strong>watchID:</strong> The id of the <code>watchPosition</code> interval to clear. (String)</li>
+<strong>watchID</strong>: The id of the <code>watchPosition</code> interval to clear. (String)</li>
 </ul>
 <h2>
 <a name="geolocation.clearWatch_description">Description</a>
 </h2>
 
-<p><code><a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatch">geolocation.clearWatch</a></code> stops watching changes to the device's location by clearing the <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code> referenced by <code>watchID</code>.</p>
+<p>The <code><a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatch">geolocation.clearWatch</a></code> stops watching changes to the device's
+location by clearing the <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code> referenced by
+<code>watchID</code>.</p>
 
 <h2>
 <a name="geolocation.clearWatch_supported_platforms">Supported Platforms</a>
@@ -567,10 +580,8 @@ var watchID = navigator.<a href="cordova_geolocation_geolocation.md.html#geoloca
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -599,13 +610,13 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatc
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     var watchID = null;
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         // Get the most accurate position updates available on the
@@ -624,7 +635,7 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatc
     }
 
     // clear the watch that was started earlier
-    // 
+    //
     function clearWatch() {
         if (watchID != null) {
             navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatch">geolocation.clearWatch</a>(watchID);
@@ -632,18 +643,18 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatc
         }
     }
 
-    // onError Callback receives a <a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a> object
-    //
-    function onError(error) {
-      alert('code: '    + error.code    + '\n' +
-            'message: ' + error.message + '\n');
-    }
+        // onError Callback receives a <a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a> object
+        //
+        function onError(error) {
+          alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
+        }
 
     &lt;/script&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;p id="geolocation"&gt;Watching geolocation...&lt;/p&gt;
-    &lt;button onclick="clearWatch();"&gt;Clear Watch&lt;/button&gt;     
+        &lt;button onclick="clearWatch();"&gt;Clear Watch&lt;/button&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
@@ -684,7 +695,8 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatc
 <a name="Coordinates_description">Description</a>
 </h2>
 
-<p>The <code><a href="cordova_geolocation_geolocation.md.html#Coordinates">Coordinates</a></code> object is created and populated by Cordova, and attached to the <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> object. The <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> object is then returned to the user through a callback function.</p>
+<p>The <code><a href="cordova_geolocation_geolocation.md.html#Coordinates">Coordinates</a></code> object is attached to the <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> object that is
+available to callback functions in requests for the current position.</p>
 
 <h2>
 <a name="Coordinates_supported_platforms">Supported Platforms</a>
@@ -694,10 +706,8 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.clearWatc
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -737,11 +747,11 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Set an event to wait for Cordova to load
+    // wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is loaded and Ready
+    // device APIs are available
     //
     function onDeviceReady() {
         navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a>(onSuccess, onError);
@@ -752,13 +762,13 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
     function onSuccess(position) {
         var div = document.getElementById('myDiv');
 
-        div.innerHTML = 'Latitude: '             + position.coords.latitude  + '&lt;br/&gt;' +
-                        'Longitude: '            + position.coords.longitude + '&lt;br/&gt;' +
-                        'Altitude: '             + position.coords.altitude  + '&lt;br/&gt;' +
-                        'Accuracy: '             + position.coords.accuracy  + '&lt;br/&gt;' +
-                        'Altitude Accuracy: '    + position.coords.altitudeAccuracy  + '&lt;br/&gt;' +
-                        'Heading: '              + position.coords.heading   + '&lt;br/&gt;' +
-                        'Speed: '                + position.coords.speed     + '&lt;br/&gt;';
+        div.innerHTML = 'Latitude: '             + position.coords.latitude         + '&lt;br/&gt;' +
+                        'Longitude: '            + position.coords.longitude        + '&lt;br/&gt;' +
+                        'Altitude: '             + position.coords.altitude         + '&lt;br/&gt;' +
+                        'Accuracy: '             + position.coords.accuracy         + '&lt;br/&gt;' +
+                        'Altitude Accuracy: '    + position.coords.altitudeAccuracy + '&lt;br/&gt;' +
+                        'Heading: '              + position.coords.heading          + '&lt;br/&gt;' +
+                        'Speed: '                + position.coords.speed            + '&lt;br/&gt;';
     }
 
     // Show an alert if there is a problem getting the geolocation
@@ -779,7 +789,7 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 <a name="Coordinates_android_quirks">Android Quirks</a>
 </h2>
 
-<p><strong>altitudeAccuracy:</strong> This property is not support by Android devices, it will always return null.</p>
+<p><strong>altitudeAccuracy</strong>: Not supported by Android devices, returning <code>null</code>.</p>
 
 <hr>
 <h1><a name="Position">Position</a></h1>
@@ -792,10 +802,10 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 
 <ul>
 <li>
-<strong>coords:</strong> A set of geographic coordinates. <em>(<a href="cordova_geolocation_geolocation.md.html#Coordinates">Coordinates</a>)</em>
+<strong>coords</strong>: A set of geographic coordinates. <em>(<a href="cordova_geolocation_geolocation.md.html#Coordinates">Coordinates</a>)</em>
 </li>
 <li>
-<strong>timestamp:</strong> Creation timestamp for <code>coords</code>. <em>(Date)</em>
+<strong>timestamp</strong>: Creation timestamp for <code>coords</code>. <em>(Date)</em>
 </li>
 </ul>
 <h2>
@@ -812,10 +822,8 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
-<li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -857,11 +865,11 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a>(onSuccess, onError);
@@ -871,23 +879,22 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
     //
     function onSuccess(position) {
         var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '&lt;br /&gt;' +
-                            'Longitude: '          + position.coords.longitude             + '&lt;br /&gt;' +
-                            'Altitude: '           + position.coords.altitude              + '&lt;br /&gt;' +
-                            'Accuracy: '           + position.coords.accuracy              + '&lt;br /&gt;' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '&lt;br /&gt;' +
-                            'Heading: '            + position.coords.heading               + '&lt;br /&gt;' +
-                            'Speed: '              + position.coords.speed                 + '&lt;br /&gt;' +
-                            'Timestamp: '          + 
- position.timestamp                    + '&lt;br /&gt;';
+        element.innerHTML = 'Latitude: '          + position.coords.latitude         + '&lt;br /&gt;' +
+                            'Longitude: '         + position.coords.longitude        + '&lt;br /&gt;' +
+                            'Altitude: '          + position.coords.altitude         + '&lt;br /&gt;' +
+                            'Accuracy: '          + position.coords.accuracy         + '&lt;br /&gt;' +
+                            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '&lt;br /&gt;' +
+                            'Heading: '           + position.coords.heading          + '&lt;br /&gt;' +
+                            'Speed: '             + position.coords.speed            + '&lt;br /&gt;' +
+                            'Timestamp: '         + position.timestamp               + '&lt;br /&gt;';
     }
 
-    // onError Callback receives a <a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a> object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
+        // onError Callback receives a <a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a> object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
 
     &lt;/script&gt;
   &lt;/head&gt;
@@ -900,7 +907,7 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 <hr>
 <h1><a name="PositionError">PositionError</a></h1>
 
-<p>A <code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code> object is returned to the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback when an error occurs.</p>
+<p>A <code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code> object is passed to the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback when an error occurs.</p>
 
 <h2>
 <a name="PositionError_properties">Properties</a>
@@ -908,9 +915,9 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 
 <ul>
 <li>
-<strong>code:</strong> One of the predefined error codes listed below.</li>
+<strong>code</strong>: One of the predefined error codes listed below.</li>
 <li>
-<strong>message:</strong> Error message describing the details of the error encountered.</li>
+<strong>message</strong>: Error message describing the details of the error encountered.</li>
 </ul>
 <h2>
 <a name="PositionError_constants">Constants</a>
@@ -925,7 +932,8 @@ navigator.<a href="cordova_geolocation_geolocation.md.html#geolocation.getCurren
 <a name="PositionError_description">Description</a>
 </h2>
 
-<p>The <code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code> object is returned to the user through the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback function when an error occurs with geolocation.</p>
+<p>The <code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code> object is passed to the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code>
+callback function when an error occurs with geolocation.</p>
 
 <h3><code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a>.PERMISSION_DENIED</code></h3>
 
@@ -934,21 +942,24 @@ position information. This is dependent on the platform.</p>
 
 <h3><code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a>.POSITION_UNAVAILABLE</code></h3>
 
-<p>Returned when the device was unable to retrieve a position. In general
+<p>Returned when the device is unable to retrieve a position. In general
 this means the device has no network connectivity and/or cannot get a
 satellite fix.</p>
 
 <h3><code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a>.TIMEOUT</code></h3>
 
-<p>Returned when the device was unable to retrieve a position within the
-time specified in the <code><a href="cordova_geolocation_geolocation.md.html#geolocationOptions">geolocationOptions</a></code>' <code>timeout</code> property. When using
-in conjunction with <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code>, this error could be
-called into the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback every <code>timeout</code> milliseconds.</p>
+<p>Returned when the device is unable to retrieve a position within the
+time specified in the <code><a href="cordova_geolocation_geolocation.md.html#geolocationOptions">geolocationOptions</a></code>' <code>timeout</code> property. When
+used with <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code>, this error could be passed to
+the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback every <code>timeout</code> milliseconds.</p>
 
 <hr>
 <h1><a name="geolocationSuccess">geolocationSuccess</a></h1>
 
-<p>The user's callback function that is called when a geolocation position becomes available (when using with <code><a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a></code>), or when the position changes (when using with <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code>).</p>
+<p>The user's callback function that executes when a geolocation position
+becomes available (when called from <code><a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a></code>),
+or when the position changes (when called from
+<code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code>).</p>
 
 <pre class="prettyprint"><code>function(position) {
     // Do something
@@ -961,7 +972,8 @@ called into the <code><a href="cordova_geolocation_geolocation.md.html#geolocati
 
 <ul>
 <li>
-<strong>position:</strong> The geolocation position returned by the device. (<code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code>)</li>
+<strong>position</strong>: The geolocation position returned by the device. <em>(<a href="cordova_geolocation_geolocation.md.html#Position">Position</a>)</em>
+</li>
 </ul>
 <h2>
 <a name="geolocationSuccess_example">Example</a>
@@ -982,7 +994,8 @@ called into the <code><a href="cordova_geolocation_geolocation.md.html#geolocati
 <hr>
 <h1><a name="geolocationError">geolocationError</a></h1>
 
-<p>The user's callback function that is called when there is an error for geolocation functions.</p>
+<p>The user's callback function that executes when there is an error for
+geolocation functions.</p>
 
 <pre class="prettyprint"><code>function(error) {
     // Handle the error
@@ -995,7 +1008,8 @@ called into the <code><a href="cordova_geolocation_geolocation.md.html#geolocati
 
 <ul>
 <li>
-<strong>error:</strong> The error returned by the device. (<code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a></code>)</li>
+<strong>error</strong>: The error returned by the device. <em>(<a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a>)</em>
+</li>
 </ul>
 <hr>
 <h1><a name="geolocationOptions">geolocationOptions</a></h1>
@@ -1012,23 +1026,20 @@ called into the <code><a href="cordova_geolocation_geolocation.md.html#geolocati
 
 <ul>
 <li>
-<strong>enableHighAccuracy:</strong> Provides a hint that the application would like to receive the best possible results. By default, the device will attempt to retrieve a <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> using network-based methods. Setting this property to <code>true</code> tells the framework to use more accurate methods, such as satellite positioning. <em>(Boolean)</em>
+<strong>enableHighAccuracy</strong>: Provides a hint that the application needs the best possible results. By default, the device attempts to retrieve a <code><a href="cordova_geolocation_geolocation.md.html#Position">Position</a></code> using network-based methods. Setting this property to <code>true</code> tells the framework to use more accurate methods, such as satellite positioning. <em>(Boolean)</em>
 </li>
 <li>
-<strong>timeout:</strong> The maximum length of time (milliseconds) that is allowed to pass from the call to <code><a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a></code> or <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code> until the corresponding <code><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></code> callback is invoked. If the <code><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></code> callback is not invoked within this time, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback will be invoked with a <code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a>.TIMEOUT</code> error code. NOTE: when used in conjunction with <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code>, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback could be called on an interval every <code>timeout</code> milliseconds! <em>(Number)</em>
+<strong>timeout</strong>: The maximum length of time (milliseconds) that is allowed to pass from the call to <code><a href="cordova_geolocation_geolocation.md.html#geolocation.getCurrentPosition">geolocation.getCurrentPosition</a></code> or <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code> until the corresponding <code><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></code> callback executes. If the <code><a href="cordova_geolocation_geolocation.md.html#geolocationSuccess">geolocationSuccess</a></code> callback is not invoked within this time, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback is passed a <code><a href="cordova_geolocation_geolocation.md.html#PositionError">PositionError</a>.TIMEOUT</code> error code. (Note that when used in conjunction with <code><a href="cordova_geolocation_geolocation.md.html#geolocation.watchPosition">geolocation.watchPosition</a></code>, the <code><a href="cordova_geolocation_geolocation.md.html#geolocationError">geolocationError</a></code> callback could be called on an interval every <code>timeout</code> milliseconds!) <em>(Number)</em>
 </li>
 <li>
-<strong>maximumAge:</strong> Accept a cached position whose age is no greater than the specified time in milliseconds. <em>(Number)</em>
+<strong>maximumAge</strong>: Accept a cached position whose age is no greater than the specified time in milliseconds. <em>(Number)</em>
 </li>
 </ul>
 <h2>
 <a name="geolocationOptions_android_quirks">Android Quirks</a>
 </h2>
 
-<p>The Android 2.x simulators will not return a geolocation result unless the enableHighAccuracy option is set to true.</p>
-
-<pre class="prettyprint"><code>{ enableHighAccuracy: true }
-</code></pre>
+<p>Android 2.x simulators do not return a geolocation result unless the <code>enableHighAccuracy</code> option is set to <code>true</code>.</p>
 
             </div>
         </div>

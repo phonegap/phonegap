@@ -1,0 +1,139 @@
+#!/usr/bin/env node
+
+/*
+ *  Copyright 2012 Research In Motion Limited.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+var path = require("path"),
+    command = require("commander"),
+    utils = require("./utils"),
+    bbProperties = utils.getProperties(),
+    bbwpArgv = [
+        process.argv[0],
+        path.resolve(path.join(__dirname, process.argv[1])),
+        path.resolve(path.join(__dirname, "..", "..", "www")),
+        "-o",
+        path.resolve(path.join(__dirname, "..", "..", "build"))
+    ],
+    jWorkflow = require("jWorkflow"),
+    childProcess = require("child_process"),
+    pkgrUtils = require("./packager-utils"),
+    commandStr;
+
+function copyArgIfExists(arg) {
+    if (command[arg]) {
+        bbwpArgv.push("--" + arg);
+        bbwpArgv.push(command[arg]);
+    }
+}
+
+function doDebugBuild() {
+    //build in debug mode by default
+    bbwpArgv.push("-d");
+
+    build();
+}
+
+function doReleaseBuild() {
+    //Note: Packager refers to signing password as "password" not "keystorepass"
+    if (command["keystorepass"]) {
+        bbwpArgv.push("--password");
+        bbwpArgv.push(command["keystorepass"]);
+    } else if (bbProperties.keystorepass) {
+        bbwpArgv.push("--password");
+        bbwpArgv.push(bbProperties.keystorepass);
+    } else {
+        console.log("No signing password provided. Please use --keystorepass via command-line or enter a value for keystorepass in project.json");
+        console.log(command.helpInformation());
+        process.exit(2);
+    }
+
+    copyArgIfExists("buildId");
+
+    build();
+}
+
+function build() {
+    copyArgIfExists("params");
+    copyArgIfExists("loglevel");
+
+    //Overwrite process.argv, before calling packager
+    process.argv = bbwpArgv;
+
+    //Delete cached commander object. It will conflict with the packagers commander
+    delete require.cache[require.resolve("commander")];
+    delete require.cache[require.resolve("commander/lib/commander")];
+
+    require("./packager").start(function() {});
+}
+
+function postClean() {
+    if (command.release) {
+        doReleaseBuild();
+    } else {
+        doDebugBuild();
+    }
+}
+
+function clean(previous, baton) {
+    var cleanScript,
+        execName = "./clean";
+
+    if (pkgrUtils.isWindows()) {
+        execName = "clean";
+    }
+
+    baton.take();
+
+    cleanScript = childProcess.exec(execName, {
+        "cwd": path.normalize(__dirname + "/.."),
+        "env": process.env
+    });
+
+    cleanScript.stdout.on("data", pkgrUtils.handleProcessOutput);
+    cleanScript.stderr.on("data", pkgrUtils.handleProcessOutput);
+
+    cleanScript.on("exit", function (code) {
+        baton.pass();
+    });
+}
+
+command
+    .usage('[--debug] [--release] [-k | --keystorepass] [-b | --buildId <number>] [-p | --params <json>] [-ll | --loglevel <level>]')
+    .option('--debug', 'build in debug mode.')
+    .option('--release', 'build in release mode. This will sign the resulting bar.')
+    .option('-k, --keystorepass <password>', 'signing key password')
+    .option('-b, --buildId <num>', 'specifies the build number for signing (typically incremented from previous signing).')
+    .option('-p, --params <params JSON file>', 'specifies additional parameters to pass to downstream tools.')
+    .option('-ll, --loglevel <loglevel>', 'set the logging level (error, warn, verbose)');
+
+try {
+    command.parse(process.argv);
+
+    if (command.debug && command.release) {
+        console.log("Invalid build command: cannot specify both debug and release parameters.");
+        console.log(command.helpInformation());
+        process.exit(2);
+    }
+
+    // Implicitly call clean first
+    jWorkflow.order(clean)
+             .andThen(postClean)
+             .start();
+} catch (e) {
+    console.log(e);
+    process.exit(2);
+}
+

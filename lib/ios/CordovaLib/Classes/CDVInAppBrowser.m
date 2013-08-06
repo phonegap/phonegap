@@ -101,15 +101,19 @@
         }
     }
 
+
     CDVInAppBrowserOptions* browserOptions = [CDVInAppBrowserOptions parseOptions:options];
     [self.inAppBrowserViewController showLocationBar:browserOptions.location];
-
+    [self.inAppBrowserViewController showToolBar:browserOptions.toolbar];
+    if (browserOptions.closebuttoncaption != nil) {
+        [self.inAppBrowserViewController setCloseButtonTitle:browserOptions.closebuttoncaption];
+    }
     // Set Presentation Style
     UIModalPresentationStyle presentationStyle = UIModalPresentationFullScreen; // default
     if (browserOptions.presentationstyle != nil) {
-        if ([browserOptions.presentationstyle isEqualToString:@"pagesheet"]) {
+        if ([[browserOptions.presentationstyle lowercaseString] isEqualToString:@"pagesheet"]) {
             presentationStyle = UIModalPresentationPageSheet;
-        } else if ([browserOptions.presentationstyle isEqualToString:@"formsheet"]) {
+        } else if ([[browserOptions.presentationstyle lowercaseString] isEqualToString:@"formsheet"]) {
             presentationStyle = UIModalPresentationFormSheet;
         }
     }
@@ -118,14 +122,15 @@
     // Set Transition Style
     UIModalTransitionStyle transitionStyle = UIModalTransitionStyleCoverVertical; // default
     if (browserOptions.transitionstyle != nil) {
-        if ([browserOptions.transitionstyle isEqualToString:@"fliphorizontal"]) {
+        if ([[browserOptions.transitionstyle lowercaseString] isEqualToString:@"fliphorizontal"]) {
             transitionStyle = UIModalTransitionStyleFlipHorizontal;
-        } else if ([browserOptions.transitionstyle isEqualToString:@"crossdissolve"]) {
+        } else if ([[browserOptions.transitionstyle lowercaseString] isEqualToString:@"crossdissolve"]) {
             transitionStyle = UIModalTransitionStyleCrossDissolve;
         }
     }
     self.inAppBrowserViewController.modalTransitionStyle = transitionStyle;
 
+  
     // UIWebView options
     self.inAppBrowserViewController.webView.scalesPageToFit = browserOptions.enableviewportscale;
     self.inAppBrowserViewController.webView.mediaPlaybackRequiresUserAction = browserOptions.mediaplaybackrequiresuseraction;
@@ -134,11 +139,18 @@
         self.inAppBrowserViewController.webView.keyboardDisplayRequiresUserAction = browserOptions.keyboarddisplayrequiresuseraction;
         self.inAppBrowserViewController.webView.suppressesIncrementalRendering = browserOptions.suppressesincrementalrendering;
     }
-
-    if (self.viewController.modalViewController != self.inAppBrowserViewController) {
+  
+    if (! browserOptions.hidden) {
+      if (self.viewController.modalViewController != self.inAppBrowserViewController) {
         [self.viewController presentModalViewController:self.inAppBrowserViewController animated:YES];
+      }
     }
     [self.inAppBrowserViewController navigateTo:url];
+}
+
+- (void)show:(CDVInvokedUrlCommand*)command
+{
+  [self.viewController presentModalViewController:self.inAppBrowserViewController animated:YES];
 }
 
 - (void)openInCordovaWebView:(NSURL*)url withOptions:(NSString*)options
@@ -401,9 +413,6 @@
 
     self.closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
     self.closeButton.enabled = YES;
-    self.closeButton.imageInsets = UIEdgeInsetsZero;
-    self.closeButton.style = UIBarButtonItemStylePlain;
-    self.closeButton.width = 32.000;
 
     UIBarButtonItem* flexibleSpaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
@@ -467,32 +476,132 @@
     [self.view addSubview:self.spinner];
 }
 
+- (void)setCloseButtonTitle:(NSString*)title
+{
+    // the advantage of using UIBarButtonSystemItemDone is the system will localize it for you automatically
+    // but, if you want to set this yourself, knock yourself out (we can't set the title for a system Done button, so we have to create a new one)
+    self.closeButton = nil;
+    self.closeButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
+    self.closeButton.enabled = YES;
+    self.closeButton.tintColor = [UIColor colorWithRed:60.0 / 255.0 green:136.0 / 255.0 blue:230.0 / 255.0 alpha:1];
+
+    NSMutableArray* items = [self.toolbar.items mutableCopy];
+    [items replaceObjectAtIndex:0 withObject:self.closeButton];
+    [self.toolbar setItems:items];
+}
+
 - (void)showLocationBar:(BOOL)show
 {
-    CGRect addressLabelFrame = self.addressLabel.frame;
-    BOOL locationBarVisible = (addressLabelFrame.size.height > 0);
+    CGRect locationbarFrame = self.addressLabel.frame;
+
+    BOOL toolbarVisible = !self.toolbar.hidden;
 
     // prevent double show/hide
-    if (locationBarVisible == show) {
+    if (show == !(self.addressLabel.hidden)) {
         return;
     }
 
     if (show) {
-        CGRect webViewBounds = self.view.bounds;
-        webViewBounds.size.height -= FOOTER_HEIGHT;
-        self.webView.frame = webViewBounds;
+        self.addressLabel.hidden = NO;
 
-        CGRect addressLabelFrame = self.addressLabel.frame;
-        addressLabelFrame.size.height = LOCATIONBAR_HEIGHT;
-        self.addressLabel.frame = addressLabelFrame;
+        if (toolbarVisible) {
+            // toolBar at the bottom, leave as is
+            // put locationBar on top of the toolBar
+
+            CGRect webViewBounds = self.view.bounds;
+            webViewBounds.size.height -= FOOTER_HEIGHT;
+            self.webView.frame = webViewBounds;
+
+            locationbarFrame.origin.y = webViewBounds.size.height;
+            self.addressLabel.frame = locationbarFrame;
+        } else {
+            // no toolBar, so put locationBar at the bottom
+
+            CGRect webViewBounds = self.view.bounds;
+            webViewBounds.size.height -= LOCATIONBAR_HEIGHT;
+            self.webView.frame = webViewBounds;
+
+            locationbarFrame.origin.y = webViewBounds.size.height;
+            self.addressLabel.frame = locationbarFrame;
+        }
     } else {
-        CGRect webViewBounds = self.view.bounds;
-        webViewBounds.size.height -= TOOLBAR_HEIGHT;
-        self.webView.frame = webViewBounds;
+        self.addressLabel.hidden = YES;
 
-        CGRect addressLabelFrame = self.addressLabel.frame;
-        addressLabelFrame.size.height = 0;
-        self.addressLabel.frame = addressLabelFrame;
+        if (toolbarVisible) {
+            // locationBar is on top of toolBar, hide locationBar
+
+            // webView take up whole height less toolBar height
+            CGRect webViewBounds = self.view.bounds;
+            webViewBounds.size.height -= TOOLBAR_HEIGHT;
+            self.webView.frame = webViewBounds;
+        } else {
+            // no toolBar, expand webView to screen dimensions
+
+            CGRect webViewBounds = self.view.bounds;
+            self.webView.frame = webViewBounds;
+        }
+    }
+}
+
+- (void)showToolBar:(BOOL)show
+{
+    CGRect toolbarFrame = self.toolbar.frame;
+    CGRect locationbarFrame = self.addressLabel.frame;
+
+    BOOL locationbarVisible = !self.addressLabel.hidden;
+
+    // prevent double show/hide
+    if (show == !(self.toolbar.hidden)) {
+        return;
+    }
+
+    if (show) {
+        self.toolbar.hidden = NO;
+
+        if (locationbarVisible) {
+            // locationBar at the bottom, move locationBar up
+            // put toolBar at the bottom
+
+            CGRect webViewBounds = self.view.bounds;
+            webViewBounds.size.height -= FOOTER_HEIGHT;
+            self.webView.frame = webViewBounds;
+
+            locationbarFrame.origin.y = webViewBounds.size.height;
+            self.addressLabel.frame = locationbarFrame;
+
+            toolbarFrame.origin.y = (webViewBounds.size.height + LOCATIONBAR_HEIGHT);
+            self.toolbar.frame = toolbarFrame;
+        } else {
+            // no locationBar, so put toolBar at the bottom
+
+            CGRect webViewBounds = self.view.bounds;
+            webViewBounds.size.height -= TOOLBAR_HEIGHT;
+            self.webView.frame = webViewBounds;
+
+            toolbarFrame.origin.y = webViewBounds.size.height;
+            self.toolbar.frame = toolbarFrame;
+        }
+    } else {
+        self.toolbar.hidden = YES;
+
+        if (locationbarVisible) {
+            // locationBar is on top of toolBar, hide toolBar
+            // put locationBar at the bottom
+
+            // webView take up whole height less locationBar height
+            CGRect webViewBounds = self.view.bounds;
+            webViewBounds.size.height -= LOCATIONBAR_HEIGHT;
+            self.webView.frame = webViewBounds;
+
+            // move locationBar down
+            locationbarFrame.origin.y = webViewBounds.size.height;
+            self.addressLabel.frame = locationbarFrame;
+        } else {
+            // no locationBar, expand webView to screen dimensions
+
+            CGRect webViewBounds = self.view.bounds;
+            self.webView.frame = webViewBounds;
+        }
     }
 }
 
@@ -655,12 +764,15 @@
     if (self = [super init]) {
         // default values
         self.location = YES;
+        self.toolbar = YES;
+        self.closebuttoncaption = nil;
 
         self.enableviewportscale = NO;
         self.mediaplaybackrequiresuseraction = NO;
         self.allowinlinemediaplayback = NO;
         self.keyboarddisplayrequiresuseraction = YES;
         self.suppressesincrementalrendering = NO;
+        self.hidden = NO;
     }
 
     return self;
@@ -679,19 +791,20 @@
 
         if ([keyvalue count] == 2) {
             NSString* key = [[keyvalue objectAtIndex:0] lowercaseString];
-            NSString* value = [[keyvalue objectAtIndex:1] lowercaseString];
+            NSString* value = [keyvalue objectAtIndex:1];
+            NSString* value_lc = [value lowercaseString];
 
-            BOOL isBoolean = [value isEqualToString:@"yes"] || [value isEqualToString:@"no"];
+            BOOL isBoolean = [value_lc isEqualToString:@"yes"] || [value_lc isEqualToString:@"no"];
             NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
             [numberFormatter setAllowsFloats:YES];
-            BOOL isNumber = [numberFormatter numberFromString:value] != nil;
+            BOOL isNumber = [numberFormatter numberFromString:value_lc] != nil;
 
             // set the property according to the key name
             if ([obj respondsToSelector:NSSelectorFromString(key)]) {
                 if (isNumber) {
-                    [obj setValue:[numberFormatter numberFromString:value] forKey:key];
+                    [obj setValue:[numberFormatter numberFromString:value_lc] forKey:key];
                 } else if (isBoolean) {
-                    [obj setValue:[NSNumber numberWithBool:[value isEqualToString:@"yes"]] forKey:key];
+                    [obj setValue:[NSNumber numberWithBool:[value_lc isEqualToString:@"yes"]] forKey:key];
                 } else {
                     [obj setValue:value forKey:key];
                 }

@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -136,8 +139,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -164,14 +170,23 @@
 <pre class="prettyprint"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
 </code></pre>
 
-<p>This will marshal a request from the UIWebView to the iOS native side, more or less boiling down to calling the <code>action</code> method on the <code>service</code> class, with the arguments passed in the <code>args</code> Array. </p>
+<p>This marshals a request from the <code>UIWebView</code> to the iOS native side,
+more or less boiling down to calling the <code>action</code> method on the
+<code>service</code> class, with the arguments passed in the <code>args</code> array.</p>
 
-<p>The plugin must be added under the <code>&lt;plugins&gt;</code> tag of the <code>config.xml</code> file in your Cordova-iOS application's project folder.</p>
+<p>The plugin must be added under the <code>&lt;plugins&gt;</code> tag of your Cordova-iOS
+application's project's <code>config.xml</code> file.</p>
 
-<pre class="prettyprint"><code>&lt;plugin name="service_name" value="PluginClassName" /&gt;
+<pre class="prettyprint"><code>&lt;feature name="LocalStorage"&gt;
+    &lt;param name="ios-package" value="CDVLocalStorage" /&gt;
+&lt;/feature&gt;
 </code></pre>
 
-<p>The key <code>service_name</code> should match what you use in the JavaScript <code>exec</code> call, and the value will be the name of the Objective-C class of the plugin. Without this added, the plugin may compile but will not be reachable by Cordova.</p>
+<p>The feature name='name' should match what you use in the JavaScript
+<code>exec</code> call, and the value matches the name of the plugin's
+Objective-C class. param name should always be "ios-package".
+Otherwise the plugin may compile but would not be
+reachable by Cordova.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_plugin_initialization_and_lifetime">Plugin Initialization and Lifetime</a>
@@ -184,7 +199,7 @@
 
 <p>There is <em>no</em> designated initializer for plugins. Instead, plugins should use the <code>pluginInitialize</code> method for their start-up logic.</p>
 
-<p>Plugins with long-running requests, background activity (e.g. playing media), listeners or internal state should implement the <code>onReset</code> method and stop or clean up those activities. This method is run when the <code>UIWebView</code> navigates to a new page or refreshes, which reloads the Javascript.</p>
+<p>Plugins with long-running requests, background activity (e.g. playing media), listeners or internal state should implement the <code>onReset</code> method and stop or clean up those activities. This method is run when the <code>UIWebView</code> navigates to a new page or refreshes, which reloads the JavaScript.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_writing_an_ios_cordova_plugin">Writing an iOS Cordova Plugin</a>
@@ -201,7 +216,7 @@
 
     if (myarg != nil) {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    } else { 
+    } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
     }
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -217,20 +232,24 @@
 <a name="Developing%20a%20Plugin%20on%20iOS_ios_cdvpluginresult_message_types">iOS CDVPluginResult message types</a>
 </h2>
 
-<p>Using CDVPluginResult you can return a variety of result types back to your javascript callbacks, using class methods that look like:</p>
+<p>Using CDVPluginResult you can return a variety of result types back to your JavaScript callbacks, using class methods that look like:</p>
 
 <pre class="prettyprint"><code>+ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAs...
 </code></pre>
 
-<p>The types you can create are: <code>String</code>, <code>Int</code>, <code>Double</code>, <code>Bool</code>, <code>Array</code>, <code>Dictionary</code>, <code>ArrayBuffer</code>, and <code>Multipart</code>.  Or, don't attach any arguments (just send a status).  Or, return an Error.  You can even chose to not send any plugin result at all (your callback will not fire).</p>
+<p>You can create <code>String</code>, <code>Int</code>, <code>Double</code>, <code>Bool</code>, <code>Array</code>,
+<code>Dictionary</code>, <code>ArrayBuffer</code>, and <code>Multipart</code> types.  Or, don't attach
+any arguments (just send a status).  Or, return an Error.  You can
+even choose to not send any plugin result at all, in which case the
+callback does not fire.</p>
 
 <h3>Notes</h3>
 
 <ul>
 <li>
-<code>messageAsArrayBuffer</code> expects <code>NSData*</code> and will convert to an <code>ArrayBuffer</code> for your javascript callback (and <code>ArrayBuffers</code> sent to a plugin from javascript are converted to <code>NSData*</code>).</li>
+<code>messageAsArrayBuffer</code> expects <code>NSData*</code> and converts to an <code>ArrayBuffer</code> for your JavaScript callback (and <code>ArrayBuffers</code> sent to a plugin from JavaScript are converted to <code>NSData*</code>).</li>
 <li>
-<code>messageAsMultipart</code> expects an <code>NSArray*</code> containing any of the other supported types, and will send the whole array as the <code>arguments</code> to your javascript callback.
+<code>messageAsMultipart</code> expects an <code>NSArray*</code> containing any of the other supported types, and sends the whole array as the <code>arguments</code> to your JavaScript callback.
 <ul>
 <li>Quirk: this is not just syntactic sugar (though it is sweet).  This way, all of the arguments are serialized/deserialized as necessary.  e.g. it is safe to return <code>NSData*</code> as multipart, but not as <code>Array</code>/<code>Dictionary</code>.</li>
 </ul>
@@ -250,7 +269,7 @@
 <pre class="prettyprint"><code>    - (void)myMethod:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
 </code></pre>
 
-<p>Basically, the options dictionary has been removed for the new signature, and the callbackId is not the 0th index item for the arguments array, but it is now in a separate property. </p>
+<p>Basically, the options dictionary has been removed for the new signature, and the callbackId is not the 0th index item for the arguments array, but it is now in a separate property.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_echo_plugin_ios_plugin">Echo Plugin iOS Plugin</a>
@@ -298,19 +317,32 @@ application folder:</p>
 @end
 </code></pre>
 
-<p>Let's take a look at the code. At the top we have all of the necessary Cordova imports. Our class extends from <code>CDVPlugin</code> - very important. </p>
+<p>Let's take a look at the code. At the top we have all of the necessary
+Cordova imports. Our class extends from <code>CDVPlugin</code> - very important.</p>
 
-<p>This plugin only supports one action, the <code>echo</code> action. First, we grab the echo string using the <code>objectAtIndex</code> method on our <code>args</code>, telling it we want to get the 0th parameter in the arguments array. We do a bit of parameter checking: make sure it is not <code>nil</code>, and make sure it is not a zero-length string.</p>
+<p>This plugin only supports one action, the <code>echo</code> action. First, we
+grab the echo string using the <code>objectAtIndex</code> method on our <code>args</code>,
+telling it we want to get the 0th parameter in the arguments array. We
+do a bit of parameter checking: make sure it is not <code>nil</code>, and make
+sure it is not a zero-length string.</p>
 
-<p>If it is, we return a <code>PluginResult</code> with an <code>ERROR</code> status. If all of those checks pass, then we return a <code>PluginResult</code> with an <code>OK</code> status, and pass in the <code>echo</code> string we received in the first place as a parameter.</p>
+<p>If it is, we return a <code>PluginResult</code> with an <code>ERROR</code> status. If all of
+those checks pass, then we return a <code>PluginResult</code> with an <code>OK</code>
+status, and pass in the <code>echo</code> string we received in the first place
+as a parameter.</p>
 
-<p>Finally, we send the result to <code>self.commandDelegate</code>, which will execute the JavaScript that will callback to success or failure callbacks of the exec method on the JavaScript side. If the success callback was called, it will pass the <code>echo</code> parameter as a parameter.</p>
+<p>Finally, we send the result to <code>self.commandDelegate</code>, which executes
+the <code>exec</code> method's success or failure callbacks on the JavaScript
+side. If the success callback is called, it passes in the <code>echo</code>
+parameter.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_threading">Threading</a>
 </h2>
 
-<p>Plugin methods are executed on the UI thread. If your plugin requires a non-trivial amount of processing or requires a blocking call, you should make use of a background thread. An example:</p>
+<p>Plugin methods are executed in the same thread as the UI. If your
+plugin requires a great deal of processing or requires a blocking
+call, you should use a background thread. For example:</p>
 
 <pre class="prettyprint"><code>- (void)myPluginMethod:(CDVInvokedUrlCommand*)command
 {
@@ -335,23 +367,27 @@ application folder:</p>
 <li><a class="external" href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.h">CDVPlugin.h</a></li>
 <li><a class="external" href="https://github.com/apache/cordova-ios/blob/master/CordovaLib/Classes/CDVPlugin.m">CDVPlugin.m</a></li>
 </ol>
-<p>For example, you can hook into the <a href="cordova_events_events.md.html#pause">pause</a>, <a href="cordova_events_events.md.html#resume">resume</a>, app terminate and handleOpenURL events.</p>
+<p>For example, you can hook into the <code><a href="cordova_events_events.md.html#pause">pause</a></code>, <code><a href="cordova_events_events.md.html#resume">resume</a></code>, app terminate and <code>handleOpenURL</code> events.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_debugging_plugins">Debugging Plugins</a>
 </h2>
 
-<p>To debug the Objective-C side, you would use Xcode's built in debugger. For JavaScript, on iOS 5.0 you can use <a class="external" href="https://github.com/apache/cordova-weinre">Weinre, an Apache Cordova Project</a> or <a class="external" href="http://www.iwebinspector.com/">iWebInspector, a third-party utility</a></p>
+<p>To debug the Objective-C side, you would use Xcode's built-in debugger.
+For JavaScript, on iOS 5.0 you can use
+<a class="external" href="https://github.com/apache/cordova-weinre">Weinre, an Apache Cordova Project</a> or
+<a class="external" href="http://www.iwebinspector.com/">iWebInspector, a third-party utility</a></p>
 
-<p>For iOS 6, you would use Safari 6.0 to simply attach to your app running in the iOS 6 Simulator.</p>
+<p>For iOS 6, you would use Safari 6.0 to simply attach to your app
+running in the iOS 6 Simulator.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_common_pitfalls">Common Pitfalls</a>
 </h2>
 
 <ul>
-<li>Don't forget to add your plugin's mapping to config.xml - if you forgot, an error will be printed to the Xcode console log</li>
-<li>Don't forget to add any hosts you connect to in the <a href="guide_whitelist_index.md.html#Domain%20Whitelist%20Guide">whitelist</a> - if you forgot, an error will be printed to the Xcode console log</li>
+<li>Don't forget to add your plugin's mapping to config.xml. If you forget, an error is logged in the Xcode console.</li>
+<li>Don't forget to add any hosts you connect to in the <a href="guide_whitelist_index.md.html#Domain%20Whitelist%20Guide">whitelist</a>. If you forget, an error is logged in the Xcode console.</li>
 </ul>
 <h2>
 <a name="Developing%20a%20Plugin%20on%20iOS_deprecated_plugin_signature_note">Deprecated Plugin Signature Note</a>
@@ -362,7 +398,16 @@ application folder:</p>
 <pre class="prettyprint"><code>    - (void) myMethod:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
 </code></pre>
 
-<p>The options parameter for the Objective-C plugin method is deprecated, and it should not be used. For legacy reasons - the last JavaScript object passed in the args Array will be passed in as the options dictionary of the method in Objective-C. You must make sure that any JavaScript object that is passed in as an element in the args array occurs as the last item in the Array, if not it will throw off the array index of all subsequent parameters of the Array in Objective-C. Only one JavaScript object is supported for the options dictionary, and only the last one encountered will be passed to the native method. It is because of these error-prone reasons that they are being deprecated.</p>
+<p>The Objective-C plugin method's <code>options</code> parameter is deprecated, and
+should not be used. For legacy reasons, the last JavaScript object
+passed in the <code>args</code> array is passed in as the <code>options</code> dictionary of
+the Objective-C method. You must make sure that any JavaScript object
+that is passed in as an element in the <code>args</code> appears as the last item
+in the array. Otherwise it throws off the array index for all
+subsequent parameters of the Objective-C array. Only one JavaScript
+object is supported for the options dictionary, and only the last one
+encountered will be passed to the native method. Errors stemming from
+this problem are the reason <code>options</code> has been deprecated.</p>
 
             </div>
         </div>

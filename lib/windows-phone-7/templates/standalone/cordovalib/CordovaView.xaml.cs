@@ -152,6 +152,18 @@ namespace WPCordovaClassLib
             configHandler = new ConfigHandler();
             configHandler.LoadAppPackageConfig();
 
+            if (configHandler.ContentSrc != null)
+            {
+                if (Uri.IsWellFormedUriString(configHandler.ContentSrc, UriKind.Absolute))
+                {
+                    this.StartPageUri = new Uri(configHandler.ContentSrc, UriKind.Absolute);
+                }
+                else
+                {
+                    this.StartPageUri = new Uri(AppRoot + "www/" + configHandler.ContentSrc, UriKind.Relative);
+                }
+            }  
+
             // initializes native execution logic
             nativeExecution = new NativeExecution(ref this.CordovaBrowser);
             bmHelper = new BrowserMouseHelper(ref this.CordovaBrowser);

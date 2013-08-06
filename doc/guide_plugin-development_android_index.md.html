@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -130,8 +133,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -149,10 +155,10 @@
 of an Android WebView with hooks attached to it. These plugins are represented as class mappings in the config.xml
 file.</p>
 
-<p>A plugin will consist of at least a single Java class that extends the <code>CordovaPlugin</code> class. A plugin must override one
-of the <code>execute</code> methods from <code>CordovaPlugin</code>. In addition to this, there is a best practice that
-the plugin should handle <a href="cordova_events_events.md.html#pause">pause</a> and <a href="cordova_events_events.md.html#resume">resume</a> events, and should handle message passing between plugins.
-Plugins with long-running requests, background activity (e.g. playing media), listeners or internal state should implement the <code>onReset()</code> method as well. This method is run when the <code>WebView</code> navigates to a new page or refreshes, which reloads the Javascript.</p>
+<p>A plugin consists of at least one Java class that extends the <code>CordovaPlugin</code> class. A plugin must override one
+of the <code>execute</code> methods from <code>CordovaPlugin</code>.
+As best practice, the plugin should handle <code><a href="cordova_events_events.md.html#pause">pause</a></code> and <code><a href="cordova_events_events.md.html#resume">resume</a></code> events, and any message passing between plugins.
+Plugins with long-running requests, background activity such as media payback, listeners, or internal state should implement the <code>onReset()</code> method as well. This method is run when the <code>WebView</code> navigates to a new page or refreshes, which reloads the JavaScript.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20Android_plugin_class_mapping">Plugin Class Mapping</a>
@@ -163,8 +169,8 @@ Plugins with long-running requests, background activity (e.g. playing media), li
 <pre class="prettyprint"><code>exec(&lt;successFunction&gt;, &lt;failFunction&gt;, &lt;service&gt;, &lt;action&gt;, [&lt;args&gt;]);
 </code></pre>
 
-<p>This will marshal a request from the WebView to the Android native
-side, more or less boiling down to calling the <code>action</code> method on the
+<p>This marshals a request from the WebView to the Android native side,
+more or less boiling down to calling the <code>action</code> method on the
 <code>service</code> class, with the arguments passed in the <code>args</code> Array.</p>
 
 <p>Whether you distribute your plugin as Java file or as a JAR of its own, the plugin must be added to the <code>config.xml</code> file in your Cordova-Android application's <code>res/xml/</code> folder.</p>
@@ -172,8 +178,10 @@ side, more or less boiling down to calling the <code>action</code> method on the
 <pre class="prettyprint"><code>&lt;plugin name="&lt;service_name&gt;" value="&lt;full_name_including_namespace&gt;"/&gt;
 </code></pre>
 
-<p>The service name should match what you use in the JavaScript <code>exec</code> call, and the value will be the full name of the Java class including the namespace. Without this added, the plugin may compile but 
-will not be reachable by Cordova.</p>
+<p>The service name should match the one used in the JavaScript <code>exec</code>
+call, and the value is the Java classes full name, including the
+namespace.  Otherwise the plugin may compile but still be unreachable
+by Cordova.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20Android_writing_an_android_java_plugin">Writing an Android Java Plugin</a>
@@ -198,11 +206,13 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
 }
 </code></pre>
 
-<p>We compare the value of the <code>action</code> parameter, and dispatch
-the request off to a (private) method in the class, optionally passing
+<p>We compare the value of the <code>action</code> parameter, and dispatch the
+request off to a (private) method in the class, optionally passing
 some of the parameters to the method.</p>
 
-<p>When catching exceptions and returning errors, it's important that the error we return to JavaScript match the Java exception as much as possible, for clarity.</p>
+<p>When catching exceptions and returning errors, it's important for the
+sake of clarity that errors returned to JavaScript match Java's
+exception names as much as possible.</p>
 
 <h3>Threading</h3>
 
@@ -271,7 +281,7 @@ public class Echo extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("echo")) {
-            String message = args.getString(0); 
+            String message = args.getString(0);
             this.echo(message, callbackContext);
             return true;
         }
@@ -279,7 +289,7 @@ public class Echo extends CordovaPlugin {
     }
 
     private void echo(String message, CallbackContext callbackContext) {
-        if (message != null &amp;&amp; message.length() &gt; 0) { 
+        if (message != null &amp;&amp; message.length() &gt; 0) {
             callbackContext.success(message);
         } else {
             callbackContext.error("Expected one non-empty string argument.");
@@ -288,29 +298,29 @@ public class Echo extends CordovaPlugin {
 }
 </code></pre>
 
-<p>Let's take a look at the code. At the top we have all of the necessary
-Cordova <code>imports</code>. Our class extends from <code>CordovaPlugin</code>. We override
-the execute() method in order to recieve messages from exec(). Our method
-first compares against <code>action</code>: this plugin only supports
-one action, the <code>echo</code> action. Any other action will return false, which
-results in an error of type <code>INVALID_ACTION</code> - this will translate
-into an error callback invocation on the JavaScript side. Next, we grab
-the echo string using the <code>getString</code> method on our <code>args</code>, telling it
-we want to get the 0th parameter in the parameter array. We do a bit of
-parameter checking: make sure it is not <code>null</code>, and make sure it is not
-a zero-length string. If it is, we call callbackContext.error() (which,
-by now, you should know will invoke the error callback). If all of those
-checks pass, then we call callbackContext.success(), and pass in the
-<code>message</code> string we received as a parameter. This will finally translate
-into a success callback invocation on the JavaScript side. It will also
-pass the <code>message</code> parameter as a parameter into the JavaScript success
-callback function.</p>
+<p>Let's take a look at the code. The necessary <code>imports</code> are at
+the top. Our class extends from <code>CordovaPlugin</code>. We override the
+execute() method in order to recieve messages from exec(). Our method
+first compares against <code>action</code>: this plugin only supports one action,
+the <code>echo</code> action. Any other action returns false, which results in an
+error of type <code>INVALID_ACTION</code>, which translates into an error
+callback invocation on the JavaScript side. Next, we grab the echo
+string using the <code>getString</code> method on our <code>args</code>, telling it we want
+to get the 0th parameter in the parameter array. We do a bit of
+parameter checking: make sure it is not <code>null</code>, and make sure it is
+not a zero-length string. If it is, we call <code>callbackContext.error()</code>
+(which, by now, you should know invokes the error callback). If all of
+those checks pass, then we call <code>callbackContext.success()</code> and pass
+in the <code>message</code> string we received as a parameter. This finally
+translates into a success callback invocation on the JavaScript
+side. It also passes the <code>message</code> parameter as a parameter into the
+JavaScript success callback function.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20Android_debugging_plugins">Debugging Plugins</a>
 </h2>
 
-<p>Eclipse can be used to debug an Android project, and the plugins can be debugged if the Java source is included in the project. Only the latest version of the Android Dev Tools is known to allow source code attachment to JAR dependencies, this is not fully supported at this time.</p>
+<p>Eclipse can be used to debug an Android project, and the plugins can be debugged if the Java source is included in the project. Only the latest version of the Android Developer Tools is known to allow source code attachment to JAR dependencies, so this is not fully supported at this time.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20Android_common_pitfalls">Common Pitfalls</a>
@@ -320,14 +330,14 @@ callback function.</p>
 <li>Plugins have access to a <code>CordovaInterface</code> object. This object has access to the Android <code>Activity</code> that is running the application. This is the <code>Context</code> required to launch
 a new Android <code>Intent</code>. The <code>CordovaInterface</code> allows plugins to start an <code>Activity</code> for a result, and to set the callback plugin for when the <code>Intent</code> comes back to the application. This is important, since the
 <code>Intent</code>s system is how Android communicates between processes.</li>
-<li>Plugins do not have direct access to the <code>Context</code> as they have in the past. The legacy <code>ctx</code> member is deprecated, and will be removed six months after 2.0 is released. All the methods that <code>ctx</code> has exist on the <code>Context</code>, so both <code>getContext()</code> and <code>getActivity()</code> are capable of returning the proper object required.</li>
+<li>Plugins do not have direct access to the <code>Context</code> as they have in the past. The legacy <code>ctx</code> member is deprecated, and will be removed six months after 2.0 is released. All of <code>ctx</code> methods exist on the <code>Context</code>, so both <code>getContext()</code> and <code>getActivity()</code> are capable of returning the proper object required.</li>
 </ul>
 <h2>
 <a name="Developing%20a%20Plugin%20on%20Android_use_the_source">Use the Source</a>
 </h2>
 
 <p>One of the best ways to prepare yourself to write your own plugin is to
-have a <a class="external" href="https://github.com/apache/cordova-android/tree/master/framework/src/org/apache/cordova">look at other plugins that already exist</a>.</p>
+<a class="external" href="https://github.com/apache/cordova-android/tree/master/framework/src/org/apache/cordova">look over existing plugins</a>.</p>
 
 <p>You should also read through the comments in <a class="external" href="https://github.com/apache/cordova-android/blob/master/framework/src/org/apache/cordova/api/CordovaPlugin.java">CordovaPlugin.java</a>.</p>
 

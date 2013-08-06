@@ -1,0 +1,44 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>CordovaAppWin8</Name>
+    <Description>CordovaAppWin8 2.9.0</Description>
+    <ProjectType>JavaScript</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>CordovaAppWin8</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="CordovaApp.jsproj" File="CordovaApp.jsproj" ReplaceParameters="true">
+      <Folder Name="images" TargetFolderName="images">
+        <ProjectItem ReplaceParameters="false" TargetFileName="logo.png">logo.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="smalllogo.png">smalllogo.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="splashscreen.png">splashscreen.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="storelogo.png">storelogo.png</ProjectItem>
+      </Folder>
+      <Folder Name="www" TargetFolderName="www">
+        <Folder Name="css" TargetFolderName="css">
+          <ProjectItem ReplaceParameters="true" TargetFileName="index.css">index.css</ProjectItem>
+        </Folder>
+        <Folder Name="img" TargetFolderName="img">
+          <ProjectItem ReplaceParameters="false" TargetFileName="logo.png">logo.png</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="smalllogo.png">smalllogo.png</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="splashscreen.png">splashscreen.png</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="storelogo.png">storelogo.png</ProjectItem>
+        </Folder>
+        <Folder Name="js" TargetFolderName="js">
+          <ProjectItem ReplaceParameters="true" TargetFileName="index.js">index.js</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="cordova.js">cordova.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="index.html">index.html</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="false" TargetFileName="CordovaApp_TemporaryKey.pfx">CordovaApp_TemporaryKey.pfx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="package.appxmanifest">package.appxmanifest</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

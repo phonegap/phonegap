@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -127,8 +130,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -142,13 +148,18 @@
             <div id="content">
                 <h1><a name="Embedding%20Cordova%20WebView%20on%20Android">Embedding Cordova WebView on Android</a></h1>
 
-<p>Beginning in Cordova 1.9, with the assistance of the <code>CordovaActivity</code>, you can use Cordova as a component in a larger native Android application. This component is known in Android
-as the <code>CordovaWebView</code>. New Cordova-based applications from 1.9 onwards will be using the <code>CordovaWebView</code> as its main view, whether the legacy <code>DroidGap</code> approach is 
-used or not.</p>
+<p>Beginning in Cordova 1.9, with the assistance of the
+<code>CordovaActivity</code>, you can use Cordova as a component in a larger
+native Android application. Android refers to this component as the
+<code>CordovaWebView</code>. New Cordova-based applications from 1.9 onwards use
+the <code>CordovaWebView</code> as its main view, regardless of whether the
+legacy <code>DroidGap</code> approach is used.</p>
 
-<p>The prerequisites are the same as the prerequisites for Android application development. It is assumed that you are familiar with Android development. If not, please
-look at the Getting Started guide to developing a Cordova Application and start there before continuing with this approach. This is not the main approach used
-to author Android Cordova applications. Thus the instructions are currently manual.  In the future, we may try to further automate project generation via this method.</p>
+<p>If you're unfamiliar with Android application development, please read
+the <a href="guide_getting-started_android_index.md.html#Android%20Platform%20Guide">Android Platform Guide</a> to developing a Cordova Application before
+attempting to include a WebView. It's not the main way to author
+Android Cordova applications. These instructions are currently manual,
+but may be eventually be automated.</p>
 
 <h2>
 <a name="Embedding%20Cordova%20WebView%20on%20Android_prerequisites">Prerequisites</a>
@@ -164,14 +175,12 @@ to author Android Cordova applications. Thus the instructions are currently manu
 </h2>
 
 <ol>
-<li>Use <code>bin/create</code> to fetch the commons-codec-1.6.jar</li>
+<li>Use <code>bin/create</code> to fetch the <code>commons-codec-1.6.jar</code> file.</li>
 <li>
-<code>cd</code> into <code>/framework</code> and run <code>ant jar</code> to build the cordova jar (it
-will create the .jar file in the form <code>cordova-x.x.x.jar</code> in the
-<code>/framework</code> folder)</li>
-<li>Copy the cordova jar into your Android project's <code>/libs</code> directory</li>
+<code>cd</code> into <code>/framework</code> and run <code>ant jar</code> to build the cordova jar. It creates the .jar file formed as <code>cordova-x.x.x.jar</code> in the <code>/framework</code> folder.</li>
+<li>Copy the cordova jar into your Android project's <code>/libs</code> directory.</li>
 <li>
-<p>Edit your application's <code>main.xml</code> file (under <code>/res/xml</code>) to look similar the following. The <code>layout_height</code>, <code>layout_width</code> and <code>id</code> can be modified to suit your application</p>
+<p>Edit your application's <code>main.xml</code> file (under <code>/res/xml</code>) to look like the following, with the <code>layout_height</code>, <code>layout_width</code> and <code>id</code> modified to suit your application:</p>
 
 <pre class="prettyprint"><code>&lt;org.apache.cordova.CordovaWebView
     android:id="@+id/tutorialView"
@@ -180,7 +189,7 @@ will create the .jar file in the form <code>cordova-x.x.x.jar</code> in the
 </code></pre>
 </li>
 <li>
-<p>Modify your activity so that it implements the <code>CordovaInterface</code>.  It is recommended that you implement the methods that are included.  You may wish to copy the methods from <code>/framework/src/org/apache/cordova/DroidGap.java</code>, or you may wish to implement your own methods.  Below is a fragment of code from a basic application that uses the interface (note how the view id referenced matches the <code>id</code> attribute specified in the above XML fragment from step 4):</p>
+<p>Modify your activity so that it implements the <code>CordovaInterface</code>.  You should implement the included methods.  You may wish to copy them from <code>/framework/src/org/apache/cordova/DroidGap.java</code>, or implement them on your own.  The code fragment below shows a basic application that uses the interface. Note how the referenced view id matches the <code>id</code> attribute specified in the XML fragment shown above:</p>
 
 <pre class="prettyprint"><code>public class CordovaViewTestActivity extends Activity implements CordovaInterface {
     CordovaWebView cwv;
@@ -193,66 +202,71 @@ will create the .jar file in the form <code>cordova-x.x.x.jar</code> in the
         Config.init(this);
         cwv.loadUrl(Config.getStartUrl());
     }
-</code></pre>
-</li>
-</ol>
-<p>In addition to this, if you are using camera, you will want to implement this as well:</p>
 
-<pre class="prettyprint"><code>@Override
+
+If you use the camera, you should also implement this:
+</code></pre>
+
+<p>@Override
 public void setActivityResultCallback(CordovaPlugin plugin) {
-    this.activityResultCallback = plugin;        
+    this.activityResultCallback = plugin;
 }
-/**
- * Launch an activity for which you would like a result when it finished. When this activity exits, 
- * your onActivityResult() method will be called.
- *
- * @param command           The command object
- * @param intent            The intent to start
- * @param requestCode       The request code that is passed to callback to identify the activity
- */
+/**</p>
+
+<ul>
+<li>Launch an activity for which you would like a result when it finished. When this activity exits,</li>
+<li>your onActivityResult() method is called.
+*</li>
+<li>@param command           The command object</li>
+<li>@param intent            The intent to start</li>
+<li>
+<p>@param requestCode       The request code that is passed to callback to identify the activity
+*/
 public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
-    this.activityResultCallback = command;
-    this.activityResultKeepRunning = this.keepRunning;
+this.activityResultCallback = command;
+this.activityResultKeepRunning = this.keepRunning;</p>
 
-    // If multitasking turned on, then disable it for activities that return results
-    if (command != null) {
-        this.keepRunning = false;
-    }
+<p>// If multitasking turned on, then disable it for activities that return results
+if (command != null) {
+    this.keepRunning = false;
+}</p>
 
-    // Start activity
-    super.startActivityForResult(intent, requestCode);
-}
+<p>// Start activity
+super.startActivityForResult(intent, requestCode);
+}</p>
+</li>
+</ul>
+<p>@Override
+/**</p>
 
-@Override
-/**
- * Called when an activity you launched exits, giving you the requestCode you started it with,
- * the resultCode it returned, and any additional data from it.
- *
- * @param requestCode       The request code originally supplied to startActivityForResult(),
- *                          allowing you to identify who this result came from.
- * @param resultCode        The integer result code returned by the child activity through its setResult().
- * @param data              An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
- */
+<ul>
+<li>Called when an activity you launched exits, giving you the requestCode you started it with,</li>
+<li>the resultCode it returned, and any additional data from it.
+*</li>
+<li>@param requestCode       The request code originally supplied to startActivityForResult(),</li>
+<li>allowing you to identify who this result came from.</li>
+<li>@param resultCode        The integer result code returned by the child activity through its setResult().</li>
+<li>
+<p>@param data              An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
+*/
 protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-    super.onActivityResult(requestCode, resultCode, intent);
-    CordovaPlugin callback = this.activityResultCallback;
-    if (callback != null) {
-        callback.onActivityResult(requestCode, resultCode, intent);
-    }
+super.onActivityResult(requestCode, resultCode, intent);
+CordovaPlugin callback = this.activityResultCallback;
+if (callback != null) {
+    callback.onActivityResult(requestCode, resultCode, intent);
 }
-</code></pre>
+}</p>
 
-<p>Finally, remember to add the thread pool, otherwise the plugins will have no threads to run on.</p>
-
-<pre class="prettyprint"><code>@Override
+<p>Finally, remember to add the thread pool, otherwise the plugins have no threads to run on:</p>
+</li>
+</ul>
+<p>@Override
 public ExecutorService getThreadPool() {
     return threadPool;
-}
-</code></pre>
-
-<ol>
-<li>Copy your application's HTML and JavaScript used to the <code>/assets/www</code> directory of your Android project</li>
-<li>Copy <code>cordova.xml</code> and <code>plugins.xml</code> from <code>/framework/res/xml</code> to the <code>/res/xml</code> folder in your project</li>
+}</p>
+</li>
+<li><p>Copy your application's HTML and JavaScript files to your Android project's <code>/assets/www</code> directory.</p></li>
+<li>Copy <code>cordova.xml</code> and <code>plugins.xml</code> from <code>/framework/res/xml</code> to your project's <code>/res/xml</code> folder.</li>
 </ol>
 </div>
         </div>

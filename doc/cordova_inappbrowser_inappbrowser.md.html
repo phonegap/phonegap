@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -154,8 +157,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -170,7 +176,7 @@
                 <h1><a name="InAppBrowser">InAppBrowser</a></h1>
 
 <blockquote>
-  <p>The <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> is a web-browser that is shown in your app when you use the <code><a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a></code> call.</p>
+  <p>The <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> is a web browser that displays in the app when calling <code><a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a></code>.</p>
 </blockquote>
 
 <pre class="prettyprint"><code>var ref = <a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a>('http://apache.org', '_blank', 'location=yes');
@@ -190,6 +196,8 @@
 <li><a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></li>
 <li><a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">removeEventListener</a></li>
 <li><a href="cordova_inappbrowser_inappbrowser.md.html#close">close</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#executeScript">executeScript</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#insertCSS">insertCSS</a></li>
 </ul>
 <h2>
 <a name="InAppBrowser_permissions">Permissions</a>
@@ -219,7 +227,7 @@
 <h1><a name="addEventListener">addEventListener</a></h1>
 
 <blockquote>
-  <p>Adds a listener for an event from the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>.</p>
+  <p>Adds a listener for an event from the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>.</p>
 </blockquote>
 
 <pre class="prettyprint"><code>ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>(eventname, callback);
@@ -227,18 +235,23 @@
 
 <ul>
 <li>
-<strong>ref:</strong> reference to the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window (<code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>)</li>
-<li>
-<p><strong>eventname:</strong> the event to listen for (<code>String</code>)</p>
-
-<pre class="prettyprint"><code>loadstart - event fired when the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> starts to load a URL
-loadstop - event fired when the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> finished loading a URL
-loaderror - event fired when the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> encounters an error loading a URL
-exit - event fired when the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window is closed
-</code></pre>
+<strong>ref</strong>: reference to the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window <em>(<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>)</em>
 </li>
-<li><p><strong>callback:</strong> the function that is called when the event is fired.
-The function is passed an <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowserEvent">InAppBrowserEvent</a></code> object.</p></li>
+<li>
+<p><strong>eventname</strong>: the event to listen for <em>(String)</em></p>
+
+<ul>
+<li>
+<strong>loadstart</strong>: event fires when the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> starts to load a URL.</li>
+<li>
+<strong>loadstop</strong>: event fires when the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> finishes loading a URL.</li>
+<li>
+<strong>loaderror</strong>: event fires when the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> encounters an error when loading a URL.</li>
+<li>
+<strong>exit</strong>: event fires when the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window is closed.</li>
+</ul>
+</li>
+<li><p><strong>callback</strong>: the function that executes when the event fires. The function is passed an <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowserEvent">InAppBrowserEvent</a></code> object as a parameter.</p></li>
 </ul>
 <h2>
 <a name="addEventListener_supported_platforms">Supported Platforms</a>
@@ -269,11 +282,11 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
          var ref = <a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a>('http://apache.org', '_blank', 'location=yes');
@@ -293,7 +306,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
 <h1><a name="removeEventListener">removeEventListener</a></h1>
 
 <blockquote>
-  <p>Removes a listener for an event from the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>.</p>
+  <p>Removes a listener for an event from the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>.</p>
 </blockquote>
 
 <pre class="prettyprint"><code>ref.<a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">removeEventListener</a>(eventname, callback);
@@ -301,17 +314,23 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
 
 <ul>
 <li>
-<strong>ref:</strong> reference to the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window (<code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>)</li>
-<li>
-<p><strong>eventname:</strong> the event to stop listening for (<code>String</code>)</p>
-
-<pre class="prettyprint"><code>loadstart - event fired when the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> starts to load a URL
-loadstop - event fired when the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> finished loading a URL
-loaderror - event fired when the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> encounters an error loading a URL
-exit - event fired when the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window is closed
-</code></pre>
+<strong>ref</strong>: reference to the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window. <em>(<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>)</em>
 </li>
-<li><p><strong>callback:</strong> the function that was to be called when the event is fired.
+<li>
+<p><strong>eventname</strong>: the event to stop listening for. <em>(String)</em></p>
+
+<ul>
+<li>
+<strong>loadstart</strong>: event fires when the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> starts to load a URL.</li>
+<li>
+<strong>loadstop</strong>: event fires when the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> finishes loading a URL.</li>
+<li>
+<strong>loaderror</strong>: event fires when the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> encounters an error loading a URL.</li>
+<li>
+<strong>exit</strong>: event fires when the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window is closed.</li>
+</ul>
+</li>
+<li><p><strong>callback</strong>: the function to execute when the event fires.
 The function is passed an <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowserEvent">InAppBrowserEvent</a></code> object.</p></li>
 </ul>
 <h2>
@@ -345,7 +364,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">remo
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
@@ -372,7 +391,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">remo
          iabRef.<a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">removeEventListener</a>('exit', iabClose);
     }
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
          iabRef = <a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a>('http://apache.org', '_blank', 'location=yes');
@@ -392,7 +411,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">remo
 <h1><a name="close">close</a></h1>
 
 <blockquote>
-  <p>Closes the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window.</p>
+  <p>Closes the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window.</p>
 </blockquote>
 
 <pre class="prettyprint"><code>ref.<a href="cordova_inappbrowser_inappbrowser.md.html#close">close</a>();
@@ -400,7 +419,8 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">remo
 
 <ul>
 <li>
-<strong>ref:</strong> reference to the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window (<code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>)</li>
+<strong>ref</strong>: reference to the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window <em>(<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>)</em>
+</li>
 </ul>
 <h2>
 <a name="close_supported_platforms">Supported Platforms</a>
@@ -432,11 +452,11 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#close">close</a>();
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
          var ref = <a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a>('http://apache.org', '_blank', 'location=yes');
@@ -456,7 +476,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#close">close</a>();
 <h1><a name="executeScript">executeScript</a></h1>
 
 <blockquote>
-  <p>Injects JavaScript code into the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window</p>
+  <p>Injects JavaScript code into the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window</p>
 </blockquote>
 
 <pre class="prettyprint"><code>ref.<a href="cordova_inappbrowser_inappbrowser.md.html#executeScript">executeScript</a>(details, callback);
@@ -464,27 +484,25 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#close">close</a>();
 
 <ul>
 <li>
-<strong>ref:</strong> reference to the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window (<code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>)</li>
+<strong>ref</strong>: reference to the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window. <em>(<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>)</em>
+</li>
 <li>
-<p><strong>injectDetails:</strong> details of the script ot run (<code>Object</code>)</p>
-
+<strong>injectDetails</strong>: details of the script to run, specifying either a <code>file</code> or <code>code</code> key. <em>(Object)</em>
 <ul>
 <li>
-<p>Supported keys:  (exactly one of "file" or "code" should be present)</p>
-
-<pre class="prettyprint"><code>"file" - URL of the script to inject
-"code" - Text of the script to inject
-</code></pre>
-</li>
+<strong>file</strong>: URL of the script to inject.</li>
+<li>
+<strong>code</strong>: Text of the script to inject.</li>
 </ul>
 </li>
 <li>
-<p><strong>callback:</strong> the function that is to be called in the Cordova application after the JavaScript code is injected.</p>
-
+<strong>callback</strong>: the function that executes after the JavaScript code is injected.
 <ul>
-<li>If the injected script is of type "code", then the callback will be called with a single argument, which is
-the return value of the script, wrapped in an Array. (For multi-line scripts, this is the return value of the
-last statement, or the last expression evaluated.)</li>
+<li>If the injected script is of type <code>code</code>, the callback executes
+with a single parameter, which is the return value of the
+script, wrapped in an <code>Array</code>. For multi-line scripts, this is
+the return value of the last statement, or the last expression
+evaluated.</li>
 </ul>
 </li>
 </ul>
@@ -515,10 +533,10 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
   &lt;head&gt;
     &lt;title&gt;<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>.<a href="cordova_inappbrowser_inappbrowser.md.html#executeScript">executeScript</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
@@ -540,7 +558,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
          iabRef.<a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">removeEventListener</a>('exit', iabClose);
     }
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
          iabRef = <a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a>('http://apache.org', '_blank', 'location=yes');
@@ -558,7 +576,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
 <h1><a name="insertCSS">insertCSS</a></h1>
 
 <blockquote>
-  <p>Injects CSS into the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window</p>
+  <p>Injects CSS into the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window.</p>
 </blockquote>
 
 <pre class="prettyprint"><code>ref.<a href="cordova_inappbrowser_inappbrowser.md.html#insertCSS">insertCSS</a>(details, callback);
@@ -566,21 +584,19 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
 
 <ul>
 <li>
-<strong>ref:</strong> reference to the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window (<code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>)</li>
+<strong>ref</strong>: reference to the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window <em>(<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>)</em>
+</li>
 <li>
-<p><strong>injectDetails:</strong> details of the script ot run (<code>Object</code>)</p>
-
+<strong>injectDetails</strong>: details of the script to run, specifying either a <code>file</code> or <code>code</code> key. <em>(Object)</em>
 <ul>
 <li>
-<p>Supported keys:  (exactly one of "file" or "code" should be present)</p>
-
-<pre class="prettyprint"><code>"file" - URL of the stylesheet to inject
-"code" - Text of the stylesheet to inject
-</code></pre>
-</li>
+<strong>file</strong>: URL of the stylesheet to inject.</li>
+<li>
+<strong>code</strong>: Text of the stylesheet to inject.</li>
 </ul>
 </li>
-<li><p><strong>callback:</strong> the function that is to be called in the Cordova application after the CSS is injected.</p></li>
+<li>
+<strong>callback</strong>: the function that executes after the CSS is injected.</li>
 </ul>
 <h2>
 <a name="insertCSS_supported_platforms">Supported Platforms</a>
@@ -607,12 +623,12 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
 <pre class="prettyprint"><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>.<a href="cordova_inappbrowser_inappbrowser.md.html#executeScript">executeScript</a> Example&lt;/title&gt;
+    &lt;title&gt;<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>.<a href="cordova_inappbrowser_inappbrowser.md.html#insertCSS">insertCSS</a> Example&lt;/title&gt;
 
-    &lt;script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
@@ -622,7 +638,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
     // Inject our custom CSS into the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window
     //
     function changeBackgroundColor() {
-        iabRef.<a href="cordova_inappbrowser_inappbrowser.md.html#executeScript">executeScript</a>({
+        iabRef.<a href="cordova_inappbrowser_inappbrowser.md.html#insertCSS">insertCSS</a>({
             code: "body { background: #ffff00"
         }, function() {
             alert("Styles Altered");
@@ -634,7 +650,7 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
          iabRef.<a href="cordova_inappbrowser_inappbrowser.md.html#removeEventListener">removeEventListener</a>('exit', iabClose);
     }
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
          iabRef = <a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a>('http://apache.org', '_blank', 'location=yes');
@@ -651,7 +667,8 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
 
 <h1><a name="InAppBrowserEvent">InAppBrowserEvent</a></h1>
 
-<p>The object that is passed to the callback function from an <a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a> call on an <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> object.</p>
+<p>The object that is passed to the callback function from an
+<code><a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a></code> call on an <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> object.</p>
 
 <h2>
 <a name="InAppBrowserEvent_properties">Properties</a>
@@ -659,62 +676,81 @@ ref.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEven
 
 <ul>
 <li>
-<strong>type:</strong> the eventname (<code>String</code>) - one of loadstart, loadstop, loaderror or exit</li>
+<strong>type</strong>: the eventname, either <code>loadstart</code>, <code>loadstop</code>, <code>loaderror</code>, or <code>exit</code>. <em>(String)</em>
+</li>
 <li>
-<strong>url:</strong> the URL that was loaded (<code>String</code>)</li>
+<strong>url</strong>: the URL that was loaded. <em>(String)</em>
+</li>
 <li>
-<strong>code:</strong> the error code (<code>Number</code>) - only in the case of loaderror</li>
+<strong>code</strong>: the error code, only in the case of <code>loaderror</code>. <em>(Number)</em>
+</li>
 <li>
-<strong>message:</strong> the error message (<code>String</code>) - only in the case of loaderror</li>
+<strong>message</strong>: the error message, only in the case of <code>loaderror</code>. <em>(String)</em>
+</li>
 </ul>
 <hr>
 <h1><a name="window.open">window.open</a></h1>
 
-<p>Opens a URL in a new <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> instance, the current browser instance, or the system browser.</p>
+<p>Opens a URL in a new <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> instance, the current browser
+instance, or the system browser.</p>
 
 <pre class="prettyprint"><code>var ref = <a href="cordova_inappbrowser_inappbrowser.md.html#window.open">window.open</a>(url, target, options);
 </code></pre>
 
 <ul>
 <li>
-<strong>ref:</strong> reference to the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> window (<code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>)</li>
-<li>
-<strong>url:</strong> the URL to load (<code>String</code>). Call encodeURI() on this if you have Unicode characters in your URL.</li>
-<li>
-<p><strong>target:</strong> the target to load the URL in (<code>String</code>) (Optional, Default: "_self")</p>
-
-<pre class="prettyprint"><code>_self - opens in the Cordova WebView if url is in the white-list, else it opens in the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> 
-_blank - always open in the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> 
-_system - always open in the system web browser
-</code></pre>
+<strong>ref</strong>: Reference to the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code> window. <em>(<a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>)</em>
 </li>
 <li>
-<p><strong>options:</strong> options for the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> (<code>String</code>) (Optional, Default: "location=yes")</p>
-
-<p>The options string must not contain any blank space, each feature name and value must be separated by a comma. Feature names are case insensitive. Only the value below is supported on all platforms:</p>
+<strong>url</strong>: The URL to load <em>(String)</em>. Call <code>encodeURI()</code> on this if the URL contains Unicode characters.</li>
+<li>
+<p><strong>target</strong>: The target in which to load the URL, an optional parameter that defaults to <code>_self</code>. <em>(String)</em></p>
 
 <ul>
 <li>
-<strong>location</strong> - set to 'yes' or 'no' to turn the location bar on or off for the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a>
+<code>_self</code>: Opens in the Cordova WebView if the URL is in the white list, otherwise it opens in the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>.</li>
+<li>
+<code>_blank</code>: Opens in the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>.</li>
+<li>
+<code>_system</code>: Opens in the system's web browser.</li>
+</ul>
 </li>
+<li>
+<p><strong>options</strong>: Options for the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>. Optional, defaulting to: <code>location=yes</code>. <em>(String)</em></p>
+
+<p>The <code>options</code> string must not contain any blank space, and each feature's name/value pairs must be separated by a comma. Feature names are case insensitive. All platforms support the value below:</p>
+
+<ul>
+<li>
+<strong>location</strong>: Set to <code>yes</code> or <code>no</code> to turn the <code><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></code>'s location bar on or off.</li>
+</ul>
+<h2>Android only</h2>
+
+<ul>
+<li>
+<strong>closebuttoncaption</strong> - set to a string that will be the caption for the "Done" button.</li>
 </ul>
 <h2>iOS only</h2>
 
 <ul>
 <li>
-<strong>enableViewportScale</strong> -  set to 'yes' or 'no' to prevent viewport scaling through a meta tag (defaults to 'no')</li>
+<strong>closebuttoncaption</strong> - set to a string that will be the caption for the "Done" button. Note that you will have to localize this value yourself.</li>
 <li>
-<strong>mediaPlaybackRequiresUserAction</strong> - set to 'yes' or 'no' to not allow autoplayed HTML5 video (defaults to 'no')</li>
+<strong>toolbar</strong> -  set to 'yes' or 'no' to turn the toolbar on or off for the <a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a> (defaults to 'yes')</li>
 <li>
-<strong>allowInlineMediaPlayback</strong> - set to 'yes' or 'no' to allow inline HTML5 media playback, also, the video element in the HTML document must also include the webkit-playsinline attribute (defaults to 'no')</li>
+<strong>enableViewportScale</strong>:  Set to <code>yes</code> or <code>no</code> to prevent viewport scaling through a meta tag (defaults to <code>no</code>).</li>
 <li>
-<strong>keyboardDisplayRequiresUserAction</strong> - set to 'yes' or 'no' to open the keyboard when form elements get focus via the JavaScript focus() call (defaults to 'yes')</li>
+<strong>mediaPlaybackRequiresUserAction</strong>: Set to <code>yes</code> or <code>no</code> to prevent HTML5 audio or video from autoplaying (defaults to <code>no</code>).</li>
 <li>
-<strong>suppressesIncrementalRendering</strong> - set to 'yes' or 'no' to wait until all new view content has been received before it is rendered (defaults to 'no')</li>
+<strong>allowInlineMediaPlayback</strong>: Set to <code>yes</code> or <code>no</code> to allow inline HTML5 media playback, displaying within the browser window rather than a device-specific playback interface. The HTML's <code>video</code> element must also include the <code>webkit-playsinline</code> attribute (defaults to <code>no</code>)</li>
 <li>
-<strong>presentationstyle</strong> -  set to 'pagesheet', 'formsheet' or 'fullscreen' to set the <a class="external" href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle">presentation style</a> (defaults to 'fullscreen')</li>
+<strong>keyboardDisplayRequiresUserAction</strong>: Set to <code>yes</code> or <code>no</code> to open the keyboard when form elements receive focus via JavaScript's <code>focus()</code> call (defaults to <code>yes</code>).</li>
 <li>
-<strong>transitionstyle</strong> - set to 'fliphorizontal', 'crossdissolve' or 'coververtical' to set the <a class="external" href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle">transition style</a> (defaults to 'coververtical')</li>
+<strong>suppressesIncrementalRendering</strong>: Set to <code>yes</code> or <code>no</code> to wait until all new view content is received before being rendered (defaults to <code>no</code>).</li>
+<li>
+<strong>presentationstyle</strong>:  Set to <code>pagesheet</code>, <code>formsheet</code> or <code>fullscreen</code> to set the <a class="external" href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle">presentation style</a> (defaults to <code>fullscreen</code>).</li>
+<li>
+<strong>transitionstyle</strong>: Set to <code>fliphorizontal</code>, <code>crossdissolve</code> or <code>coververtical</code> to set the <a class="external" href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle">transition style</a> (defaults to <code>coververtical</code>).</li>
 </ul>
 </li>
 </ul>
@@ -748,11 +784,11 @@ var ref2 = <a href="cordova_inappbrowser_inappbrowser.md.html#window.open">windo
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         // external url

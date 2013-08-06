@@ -1,0 +1,49 @@
+#!/bin/bash
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_PATH=$( cd "$DIR/../.." && pwd )
+device_list=$("$DIR/list-devices")
+if [ $? != 0 ]; then
+    echo "No devices found to deploy to. Please make sure your device is connected"
+    echo " and you can view it using the 'cordova/lib/list-devices' command."
+    exit 2
+fi
+
+apks=`find $PROJECT_PATH/bin -type f -maxdepth 1 | egrep '\.apk$'`
+apk_list=($apks)
+if [[ ${#apk_list[@]} > 0 ]] ; then
+    # handle target
+    read -ra device_array <<< "$device_list"
+    if [[ "$#" -eq 1 ]] ; then
+        # deploy to given target
+        target=${1/--target=/}
+    else
+        # delete trailing space and 'device' after device ID
+        target=${device_array[0]}
+    fi
+    echo "Installing ${apk_list[0]} onto device $target..."
+    adb -s $target install -r ${apk_list[0]};
+    echo "Launching application..."
+    launch_str=$(java -jar "$PROJECT_PATH"/cordova/appinfo.jar "$PROJECT_PATH"/AndroidManifest.xml)
+    adb -s $target shell am start -W -a android.intent.action.MAIN -n $launch_str
+else
+    echo "Application package not found, could not install to device"
+    echo " make sure your application is built before deploying."
+    exit 2
+fi

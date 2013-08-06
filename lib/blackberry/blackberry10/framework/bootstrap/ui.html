@@ -1,0 +1,73 @@
+<!-- Copyright 2012 Research In Motion Limited.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+ -->
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+        <title>Overlay WebView</title>
+        <link rel="stylesheet" href="platform:///ui-resources/styles/styles.css" type="text/css" media="screen" charset="utf-8">
+
+        <script src="../chrome/require.js" type="text/javascript"></script>
+        <script src="platform:///webplatform.js" type="text/javascript"></script>
+        <script src="platform:///i18n.js" type="text/javascript"></script>
+        <script src="platform:///ui-resources/index.js" type="text/javascript"></script>
+    </head>
+    <body>
+
+        <div id="contextMenuModal" style="display:none;"></div>
+<div id="contextMenu" class="hideMenu">
+    <div id="contextMenuHeader">
+        <div id="contextMenuHeadText"></div>
+        <div id="contextMenuSubheadText"></div>
+    </div>
+    <div id="contextMenuContent"></div>
+    <div id="contextMenuHandle"></div>
+    <div id="contextMenuDelete"></div>
+</div>
+
+        <div id="dialog" class="hidden">
+    <div class="dialog-top-third">
+        <div id="dialog-panel">
+        </div>
+    </div>
+    <div class="dialog-bottom-two-thirds">
+    </div>
+</div>
+
+        <div id="invocationlist" class="screenInner screenSlide removed">
+    <div id="cancelTitlebar"></div>
+    <div id="invocationListContent" class="targetList"></div>
+    <div id="targetLoader">
+        <div id="targetLoaderActivity" class="activityIndicator"></div>
+    </div>
+</div>
+
+        <div id="toaster" class="toaster"></div>
+
+
+        <div id="childwebviewcontrols"></div>
+
+        <div id="formcontrolPanel">
+            <div id="formcontrol">
+                <button id="formcontrol_previous"/>
+                <button id="formcontrol_next"/>
+                <button id="formcontrol_submit"/>
+            </div>
+        </div>
+
+    </body>
+</html>

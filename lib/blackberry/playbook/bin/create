@@ -1,0 +1,108 @@
+#! /bin/sh
+#       Licensed to the Apache Software Foundation (ASF) under one
+#       or more contributor license agreements.  See the NOTICE file
+#       distributed with this work for additional information
+#       regarding copyright ownership.  The ASF licenses this file
+#       to you under the Apache License, Version 2.0 (the
+#       "License"); you may not use this file except in compliance
+#       with the License.  You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#       Unless required by applicable law or agreed to in writing,
+#       software distributed under the License is distributed on an
+#       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#       KIND, either express or implied.  See the License for the
+#       specific language governing permissions and limitations
+#       under the License.
+#
+# create a cordova/blackberry project
+# 
+# USAGE
+#   ./create [path package appname]
+#
+set -e
+
+if [ -n "$1" ] && [ "$1" == "-h" ]
+then
+  echo "Usage: $0 <path_to_new_project> <package_name> <project_name>"
+  echo "    <path_to_new_project>: Path to your new Cordova iOS project"
+  echo "    <package_name>: Package name, following reverse-domain style convention (ignored on BlackBerry platforms)"
+  echo "    <project_name>: Project name"
+  echo 'After you have created your application, make sure to customize the project.properties file inside your app directory with your environment specifics!'
+  exit 0;
+fi
+
+
+BUILD_PATH="$( cd "$( dirname "$0" )/.." && pwd )"
+VERSION=$(cat "$BUILD_PATH/VERSION")
+
+PROJECT_PATH="${1:-"./example"}"
+PACKAGE=${2:-"org.apache.cordova.example"}
+NAME=${3:-"cordovaExample"}
+
+# clobber any existing example
+if [ -d "$PROJECT_PATH" ]
+then
+    echo "Project already exists! Delete and recreate"
+    exit 1
+fi
+
+# cleanup after exit and/or on error
+function on_exit {
+    echo "Cleaning up ..."
+    [ -d "$BUILD_PATH/build" ] && rm -rf "$BUILD_PATH/build"
+    echo "Remember to update the project.properties file inside your application directory!"
+}
+
+function on_error {
+    echo "An error occured. Deleting project..."
+    [ -d "$PROJECT_PATH" ] && rm -rf "$PROJECT_PATH"
+}
+
+function replace {
+    local pattern=$1
+    local filename=$2
+    # Mac OS X requires -i argument
+    if [[ "$OSTYPE" =~ "darwin" ]]
+    then
+        /usr/bin/sed -i '' -e $pattern "$filename"
+    elif [[ "$OSTYPE" =~ "linux" ]]
+    then
+        /bin/sed -i -e $pattern "$filename"
+    fi
+}
+
+# we do not want the script to silently fail
+trap on_error ERR
+trap on_exit EXIT
+
+ANT="$(which ant)"
+
+MANIFEST_PATH="$PROJECT_PATH/www/config.xml"
+
+# compile cordova.js and cordova.jar if in source, ignore if in distribution
+if [ ! -e "$BUILD_PATH/www/ext/cordova-$VERSION.jar" ] && [ -d "$BUILD_PATH/framework" ]
+then
+    if [ ! -e "$BUILD_PATH"/bin/templates/project/lib/ant-contrib/ant-contrib-1.0b3.jar ]; then
+        echo "Downloading ant-contrib"
+        # Use curl to get the jar
+        curl -OL http://central.maven.org/maven2/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar &> /dev/null
+        mkdir -p "$BUILD_PATH"/bin/templates/project/lib/ant-contrib
+        mv ant-contrib-1.0b3.jar "$BUILD_PATH"/bin/templates/project/lib/ant-contrib
+    fi
+    
+	echo "Creating BlackBerry project..."
+	("$ANT" create -Dproject.path="$PROJECT_PATH" -f "$BUILD_PATH/build.xml" &> /dev/null)
+    # interpolate the activity and package into config.xml
+    echo "Updating config.xml ..."
+    replace "s/__NAME__/${NAME}/g" "$MANIFEST_PATH"
+    replace "s/__PACKAGE__/${PACKAGE}/g" "$MANIFEST_PATH"
+else
+	# copy project template if in distribution
+	echo "Copying assets and resources ..."
+	cp -r "$BUILD_PATH/sample/." "$PROJECT_PATH"
+    echo "Updating config.xml ..."
+    replace "s/cordovaExample/${NAME}/g" "$MANIFEST_PATH"
+    replace "s/org.apache.cordova.example/${PACKAGE}/g" "$MANIFEST_PATH"
+fi

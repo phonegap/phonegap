@@ -77,9 +77,7 @@ fi
 cp -r "$BINDIR/templates/project/" "$PROJECT_PATH"
 
 # Copy in the JS.
-cp "$CORDOVAFRAMEWORK_DIR/cordova.osx.js" "$PROJECT_PATH/www/cordova-$CDV_VER.js"
-# Change the filename reference in the html from cordova.osx.js -> cordova-VERSION.js.
-/usr/bin/sed -i "" "s/src[ 	]*=[ 	]*[\\'\"]cordova.osx.js[\\'\"]/src=\"cordova-${CDV_VER}.js\"/g" "$PROJECT_PATH/www/index.html"
+cp "$CORDOVAFRAMEWORK_DIR/cordova.js" "$PROJECT_PATH/www/cordova.js"
 
 # I've tried to be thorough in my documentation of the manual actions below...
 # on first brush it would seem that the right solution would be to brute force
@@ -132,6 +130,7 @@ else
     mkdir -p "$PROJECT_PATH/CordovaFramework/CordovaFramework/"
     cp -r "$BINDIR/../CordovaFramework/CordovaFramework/" "$PROJECT_PATH/CordovaFramework/CordovaFramework/"
     cp "$BINDIR/../CordovaFramework/VERSION" "$PROJECT_PATH/CordovaFramework"
+    cp "$BINDIR/../CordovaFramework/cordova.js" "$PROJECT_PATH/CordovaFramework"
     cp "$BINDIR/../CordovaFramework/CordovaFramework.xcodeproj/project.pbxproj" "$PROJECT_PATH/CordovaFramework/CordovaFramework.xcodeproj"
     # Make the sub-project reference to Cordova have the correct path.
     "$BINDIR/update_cordova_subproject" "$R.xcodeproj/project.pbxproj" "$PROJECT_PATH/CordovaFramework/CordovaFramework.xcodeproj/project.pbxproj" > /dev/null

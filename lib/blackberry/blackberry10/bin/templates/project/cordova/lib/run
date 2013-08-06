@@ -1,0 +1,296 @@
+#!/usr/bin/env node
+
+/*
+ *  Copyright 2012 Research In Motion Limited.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+var childProcess = require("child_process"),
+    fs = require("fs"),
+    path = require("path"),
+    util = require("util"),
+    wrench = require("wrench"),
+    conf = require("./conf"),
+    utils = require("./utils"),
+    localize = require("./localize"),
+    pkgrUtils = require("./packager-utils"),
+    debugTokenHelper = require("./debugtoken-helper"),
+    targets = utils.getProperties(),
+    program = require('commander'),
+    xml2js = require('xml2js'),
+    jWorkflow = require("jWorkflow"),
+    logger = require("./logger"),
+    pin,
+    needCreateDebugToken = false,
+    needDeployDebugToken = false,
+    commandStr,
+    target,
+    ip,
+    password,
+    workingdir = path.normalize(__dirname + "/..");
+
+function generateBarName() {
+    // temporary stub
+    prop = require(path.join("..","..","project.json"));
+    return prop.barName;
+}
+
+function generateOptions(uninstall) {
+    var options = [];
+    barPath = pkgrUtils.escapeStringForShell(path.normalize(__dirname + "/../../build/" + targets.targets[target].type + "/" + generateBarName() + ".bar"));
+
+    options.push("-device");
+    options.push(ip);
+
+    if (password) {
+        options.push("-password");
+        options.push(password);
+    }
+
+    options.push("-package");
+    options.push(barPath);
+
+    if (uninstall) {
+        options.push("-uninstallApp");
+        return options;
+    } else {
+
+        options.push("-installApp");
+
+        if (program.launch) {
+            options.push("-launchApp");
+        }
+
+        return options;
+    }
+}
+
+function execNativeDeploy(optionsArray, callback) {
+    var script = "blackberry-deploy",
+        nativeDeploy;
+        options = optionsArray.join(" ");
+
+    if (pkgrUtils.isWindows()) {
+        script += ".bat";
+    }
+
+    nativeDeploy = childProcess.exec(path.normalize(script +" "+ options), {
+        "cwd": workingdir,
+        "env": process.env
+    });
+
+    nativeDeploy.stdout.on("data", pkgrUtils.handleProcessOutput);
+
+    nativeDeploy.stderr.on("data", pkgrUtils.handleProcessOutput);
+
+    nativeDeploy.on("exit", function (code) {
+        if (callback && typeof callback === "function") {
+            callback(code);
+        }
+    });
+}
+
+function checkTarget() {
+    if (!target) {
+        console.log("No target exists, to add that target please run target add <name> <ip> [-t | --type <device | simulator>] [-p <password>] [--pin <devicepin>]");
+        console.log(program.helpInformation());
+        return false;
+    }
+    if (!targets.targets[target]) {
+        console.log("The target \""+target+"\" does not exist, to add that target please run target add "+target+" <ip> [-t | --type <device | simulator>] [-p <password>] [--pin <devicepin>]");
+        console.log(program.helpInformation());
+        return false;
+    }
+    if (targets.targets[target].ip) {
+       ip = targets.targets[target].ip;
+    } else {
+        console.log("IP is not defined in target \""+target+"\"");
+        console.log(program.helpInformation());
+        return false;
+    }
+    if (targets.targets[target].password) {
+       password = targets.targets[target].password;
+    }
+    return true;
+}
+
+function uninstall() {
+    var script = "/bin/blackberry-deploy",
+        nativeDeploy;
+
+    if (pkgrUtils.isWindows()) {
+        script += ".bat";
+    }
+
+    nativeDeploy = childProcess.exec(script +" -listInstalledApps -device " +ip+ " -password " +password, {
+        "cwd": workingdir,
+        "env": process.env
+    }, function (error, stdout, stderr) {
+        var parser = new xml2js.Parser();
+        fs.readFile(path.join(__dirname + "/../../www/", "config.xml"), function(err, data) {
+            parser.parseString(data, function (err, result) {
+                if (stdout.indexOf(result['@'].id) != -1) {
+                    var options = generateOptions(true);
+                    execNativeDeploy(options,
+                        function(){
+                            deploy();
+                    });
+                } else {
+                    deploy();
+                }
+            });
+        });
+    });
+}
+
+function deploy() {
+    options = generateOptions(false);
+    execNativeDeploy(options, function (code) {
+        if (code) {
+            process.exit(2);
+        } else {
+            process.exit(0);
+        }
+    });
+}
+
+function checkDebugtoken(previous, baton) {
+    baton.take();
+
+    // if target has no pin, skip the debug token feature
+    if (targets.targets[target].pin) {
+        debugTokenHelper.checkDebugToken(targets.targets[target].pin, function (valid) {
+            // If the debug token is not valid, we need create new debug token
+            if (valid) {
+                // No need to create the debug token
+                logger.info(localize.translate("PROGRESS_DEBUG_TOKEN_IS_VALID"));
+                needDeployDebugToken = true;
+            } else {
+                needCreateDebugToken = true;
+            }
+            baton.pass();
+        });
+    } else {
+        baton.pass();
+    }
+}
+
+function createDebugToken(previous, baton) {
+    var keystorepass = program["keystorepass"] ? program["keystorepass"] : targets.keystorepass;
+
+    baton.take();
+
+    if (needCreateDebugToken) {
+        debugTokenHelper.createToken(targets, "all", keystorepass, function (code) {
+            if (code === 0) {
+                // Deploy the debug token if created
+                needDeployDebugToken = true;
+            }
+
+            baton.pass();
+        });
+    } else {
+            baton.pass();
+    }
+}
+
+function deployDebugToken(previous, baton) {
+    baton.take();
+
+    // If in debug build and debug token was created, deploy the debug token and wait until the deployment is finished
+    if (needDeployDebugToken) {
+        debugTokenHelper.deployToken(targets, target, function () {
+            baton.pass();
+        });
+    } else {
+        baton.pass();
+    }
+}
+
+function handleBuildOutput(data) {
+    var msg = data.toString().replace(/[\n\r]/g, '');
+    console.log(msg);
+}
+
+function build(previous, baton) {
+    var nativeDeploy,
+        execName = "./build";
+
+    baton.take();
+
+    if (pkgrUtils.isWindows()) {
+        execName = "build";
+    }
+
+    nativeDeploy = childProcess.exec(execName, {
+        "cwd": path.normalize(__dirname + "/.."),
+        "env": process.env
+    });
+
+    nativeDeploy.stdout.on("data", handleBuildOutput);
+
+    nativeDeploy.stderr.on("data", handleBuildOutput);
+
+    nativeDeploy.on("exit", function (code) {
+        // If error happened during building the bar, exit
+        if (code === 2) {
+            process.exit(2);
+        }
+
+        baton.pass();
+    });
+}
+
+function postBuild() {
+    if (program.uninstall) {
+        uninstall();
+    } else {
+        deploy();
+    }
+}
+
+function exec() {
+    program
+        .usage('[--target=<id>] [-k | --keystorepass] [--no-launch] [--no-uninstall] [--no-build]')
+        .option('-k, --keystorepass <password>', 'the password of signing key; needed for creating debug token')
+        .option('--target', 'specifies the target to run the application')
+        .option('--no-uninstall', 'does not uninstall application from device')
+        .option('--no-launch', 'do not launch the application on device')
+        .option('--no-build', 'deploy the pre-built bar file and skip building');
+
+    commandStr = typeof process.argv[2] === "string" ? process.argv[2] : undefined;
+    if (commandStr && commandStr.indexOf("--target=") === 0) {
+        // Convert "--target=<id>" into "--target id"
+        process.argv[2] = "--target";
+        process.argv.splice(3, 0, commandStr.substring("--target=".length));
+    }
+
+    program.parse(process.argv);
+    target = program.args[0] ? program.args[0] : targets.defaultTarget;
+
+    if (checkTarget()) {
+        if (program.build) {
+            jWorkflow.order(checkDebugtoken)
+                     .andThen(createDebugToken)
+                     .andThen(deployDebugToken)
+                     .andThen(build)
+                     .andThen(postBuild)
+                     .start();
+        } else {
+            postBuild();
+        }
+    }
+}
+
+exec();

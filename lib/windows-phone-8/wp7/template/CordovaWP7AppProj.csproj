@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License. 
+-->
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3677C1B7-D68B-4CF9-BF8A-E869D437A6DF}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <AssemblyName>$safeprojectname$</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>$safeprojectname$.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>$safeprojectname$.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;WP7</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Devices.Sensors" />
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Servicemodel.Web" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="cordovalib\BaseCommand.cs" />
+    <Compile Include="cordovalib\BrowserMouseHelper.cs" />
+    <Compile Include="cordovalib\CommandFactory.cs" />
+    <Compile Include="cordovalib\ConfigHandler.cs" />
+    <Compile Include="cordovalib\CordovaCommandCall.cs" />
+    <Compile Include="cordovalib\CordovaView.xaml.cs">
+      <DependentUpon>CordovaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="cordovalib\DOMStorageHelper.cs" />
+    <Compile Include="cordovalib\ImageExifHelper.cs" />
+    <Compile Include="cordovalib\JSON\JsonHelper.cs" />
+    <Compile Include="cordovalib\NativeExecution.cs" />
+    <Compile Include="cordovalib\OrientationHelper.cs" />
+    <Compile Include="cordovalib\PluginResult.cs" />
+    <Compile Include="cordovalib\ScriptCallback.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Capture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="cordovalib\CordovaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cordova\lib\build.js" />
+    <None Include="cordova\lib\clean.js" />
+    <None Include="cordova\lib\deploy.js" />
+    <None Include="cordova\lib\log.js" />
+    <None Include="cordova\lib\target-list.js" />
+    <Content Include="www\**" />
+    <Content Include="config.xml" />
+    <Content Include="Images\**" />
+    <Content Include="resources\notification-beep.wav" />
+    <None Include="cordova\build.bat" />
+    <None Include="cordova\clean.bat" />
+    <None Include="cordova\lib\install-device.bat" />
+    <None Include="cordova\lib\install-emulator.bat" />
+    <None Include="cordova\lib\list-devices.bat" />
+    <None Include="cordova\lib\list-emulator-images.bat" />
+    <None Include="cordova\lib\list-started-emulators.bat" />
+    <None Include="cordova\lib\start-emulator.bat" />
+    <None Include="cordova\log.bat" />
+    <None Include="cordova\run.bat" />
+    <None Include="cordova\version.bat" />
+    <None Include="VERSION" />
+    <Content Include="CordovaSourceDictionary.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="BuildManifestProcessor.js" />
+    <None Include="Properties\AppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Plugins\Accelerometer.cs" />
+    <Compile Include="Plugins\AudioFormatsHelper.cs" />
+    <Compile Include="Plugins\AudioPlayer.cs" />
+    <Compile Include="Plugins\Battery.cs" />
+    <Compile Include="Plugins\Camera.cs" />
+    <Compile Include="Plugins\Compass.cs" />
+    <Compile Include="Plugins\Contacts.cs" />
+    <Compile Include="Plugins\DebugConsole.cs" />
+    <Compile Include="Plugins\Device.cs" />
+    <Compile Include="Plugins\File.cs" />
+    <Compile Include="Plugins\FileTransfer.cs" />
+    <Compile Include="Plugins\GeoLocation.cs" />
+    <Compile Include="Plugins\Globalization.cs" />
+    <Compile Include="Plugins\InAppBrowser.cs" />
+    <Compile Include="Plugins\Media.cs" />
+    <Compile Include="Plugins\MimeTypeMapper.cs" />
+    <Compile Include="Plugins\NetworkStatus.cs" />
+    <Compile Include="Plugins\Notification.cs" />
+    <Compile Include="Plugins\UI\AudioCaptureTask.cs" />
+    <Compile Include="Plugins\UI\AudioRecorder.xaml.cs">
+      <DependentUpon>AudioRecorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\UI\ImageCapture.xaml.cs">
+      <DependentUpon>ImageCapture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\UI\NotificationBox.xaml.cs">
+      <DependentUpon>NotificationBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\UI\VideoCaptureTask.cs" />
+    <Compile Include="Plugins\UI\VideoRecorder.xaml.cs">
+      <DependentUpon>VideoRecorder.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Plugins\UI\AudioRecorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\UI\ImageCapture.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\UI\NotificationBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\UI\VideoRecorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+  <PropertyGroup>
+    <PreBuildEvent>CScript "$(ProjectDir)/BuildManifestProcessor.js" "$(ProjectPath)"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -290,4 +290,22 @@
     STAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"http://www.google.com"]], nil);
 }
 
+- (void)testWildcardPlusOtherUrls
+{
+    // test for https://issues.apache.org/jira/browse/CB-3394
+
+    NSArray* allowedHosts = [NSArray arrayWithObjects:
+        @"*",
+        @"cordova.apache.org",
+        nil];
+
+    CDVWhitelist* whitelist = [[CDVWhitelist alloc] initWithArray:allowedHosts];
+
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://*.apache.org"]], nil);
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"https://www.google.com"]], nil);
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"ftp://cordova.apache.org"]], nil);
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://cordova.apache.org"]], nil);
+    STAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"https://cordova.apache.org"]], nil);
+}
+
 @end

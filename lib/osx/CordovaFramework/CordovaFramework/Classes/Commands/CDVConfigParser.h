@@ -17,7 +17,10 @@
  under the License.
  */
 
-@interface CDVConfigParser : NSObject <NSXMLParserDelegate>{}
+@interface CDVConfigParser : NSObject <NSXMLParserDelegate>
+{
+    NSString* featureName;
+}
 
 @property (nonatomic, readonly, strong) NSMutableDictionary* pluginsDict;
 @property (nonatomic, readonly, strong) NSMutableDictionary* settings;

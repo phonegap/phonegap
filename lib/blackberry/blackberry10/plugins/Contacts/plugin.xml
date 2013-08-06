@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+     specific language governing permissions and limitations
+      under the License.
+
+-->
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    id="org.apache.cordova.core.Contacts"
+    version="0.0.1">
+
+    <name>Contacts</name>
+
+    <platform name="blackberry10">
+        <config-file target="www/config.xml" parent="/widget">
+            <feature name="Contacts" value="Contacts"/>
+        </config-file>
+        <source-file src="src/blackberry10/index.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactActivity.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactAddress.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/contactConsts.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactError.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactField.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactFindOptions.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactName.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactNews.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactOrganization.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/ContactPhoto.js" target-dir="Contacts"></source-file>
+        <source-file src="src/blackberry10/contactUtils.js" target-dir="Contacts"></source-file>
+      </platform>
+</plugin>

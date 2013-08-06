@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -179,8 +182,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -195,10 +201,15 @@
                 <h1><a name="Storage">Storage</a></h1>
 
 <blockquote>
-  <p>Provides access to the devices storage options.</p>
+  <p>Provides access to the device's storage options.</p>
 </blockquote>
 
-<p>This API is based on the <a class="external" href="http://dev.w3.org/html5/webdatabase/">W3C Web SQL </a><a href="cordova_storage_storage.md.html#Database">Database</a> Specification and <a class="external" href="http://dev.w3.org/html5/webstorage/">W3C Web </a><a href="cordova_storage_storage.md.html#Storage">Storage</a> API Specification. Some devices already provide an implementation of this spec. For those devices, the built-in support is used instead of replacing it with Cordova's implementation. For devices that don't have storage support, Cordova's implementation should be compatible with the W3C specification.</p>
+<p>This API is based on the <a class="external" href="http://dev.w3.org/html5/webdatabase/">W3C Web SQL </a><a href="cordova_storage_storage.md.html#Database">Database</a>
+Specification and <a class="external" href="http://dev.w3.org/html5/webstorage/">W3C Web
+</a><a href="cordova_storage_storage.md.html#Storage">Storage</a> API Specification. Some
+devices already provide an implementation of these specifications, in
+which case the built-in support applies.  Cordova's implementation
+offers compatible support for those that don't.</p>
 
 <h2>
 <a name="Storage_methods">Methods</a>
@@ -240,11 +251,6 @@
 <pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_storage_storage.md.html#Storage">Storage</a>" value="org.apache.cordova.<a href="cordova_storage_storage.md.html#Storage">Storage</a>" /&gt;
 </code></pre>
 
-<h3>Bada</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
-</code></pre>
-
 <h3>BlackBerry WebWorks</h3>
 
 <h4>www/config.xml</h4>
@@ -253,11 +259,6 @@
 </code></pre>
 
 <h3>iOS</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
-</code></pre>
-
-<h3>webOS</h3>
 
 <pre class="prettyprint"><code>No permissions are required.
 </code></pre>
@@ -275,7 +276,7 @@
 <hr>
 <h1><a name="openDatabase">openDatabase</a></h1>
 
-<p>Returns a new <a href="cordova_storage_storage.md.html#Database">Database</a> object.</p>
+<p>Returns a new <code><a href="cordova_storage_storage.md.html#Database">Database</a></code> object.</p>
 
 <pre class="prettyprint"><code>var dbShell = window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>(<a href="cordova_storage_storage.md.html#database_name">database_name</a>, <a href="cordova_storage_storage.md.html#database_version">database_version</a>, <a href="cordova_storage_storage.md.html#database_displayname">database_displayname</a>, <a href="cordova_storage_storage.md.html#database_size">database_size</a>);
 </code></pre>
@@ -284,9 +285,8 @@
 <a name="openDatabase_description">Description</a>
 </h2>
 
-<p>window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a> returns a new <a href="cordova_storage_storage.md.html#Database">Database</a> object.</p>
-
-<p>This method will create a new SQL Lite <a href="cordova_storage_storage.md.html#Database">Database</a> and return a <a href="cordova_storage_storage.md.html#Database">Database</a> object.  Use the <a href="cordova_storage_storage.md.html#Database">Database</a> Object to manipulate the data.</p>
+<p>The method creates a new SQL Lite <a href="cordova_storage_storage.md.html#Database">Database</a> and returns a <code><a href="cordova_storage_storage.md.html#Database">Database</a></code>
+object that allows manipulation of the data.</p>
 
 <h2>
 <a name="openDatabase_supported_platforms">Supported Platforms</a>
@@ -295,8 +295,7 @@
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 6.0 and higher)</li>
-<li>iPhone</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
 </ul>
 <h2>
@@ -318,11 +317,11 @@
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         var db = window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>("test", "1.0", "Test DB", 1000000);
@@ -360,7 +359,7 @@
 <hr>
 <h1><a name="Database">Database</a></h1>
 
-<p>Contains methods that allow the user to manipulate the <a href="cordova_storage_storage.md.html#Database">Database</a></p>
+<p>Provides access to an SQL database.</p>
 
 <h2>
 <a name="Database_methods">Methods</a>
@@ -368,15 +367,15 @@
 
 <ul>
 <li>
-<strong>transaction</strong>: Runs a database transaction. </li>
+<strong>transaction</strong>: Runs a database transaction.</li>
 <li>
-<strong>changeVersion</strong>: method allows scripts to atomically verify the version number and change it at the same time as doing a schema update. </li>
+<strong>changeVersion</strong>: Allows scripts to automatically verify the version number and change it when updating a schema.</li>
 </ul>
 <h2>
 <a name="Database_details">Details</a>
 </h2>
 
-<p>A <a href="cordova_storage_storage.md.html#Database">Database</a> object is returned from a call to <code>window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>()</code>.</p>
+<p>The <code>window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>()</code> method returns a <code><a href="cordova_storage_storage.md.html#Database">Database</a></code> object.</p>
 
 <h2>
 <a name="Database_supported_platforms">Supported Platforms</a>
@@ -385,8 +384,7 @@
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 6.0 and higher)</li>
-<li>iPhone</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
 </ul>
 <h2>
@@ -394,10 +392,10 @@
 </h2>
 
 <pre class="prettyprint"><code>function populateDB(tx) {
-     tx.executeSql('DROP TABLE IF EXISTS DEMO');
-     tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-     tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-     tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    tx.executeSql('DROP TABLE IF EXISTS DEMO');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+    tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+    tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
 }
 
 function errorCB(err) {
@@ -432,24 +430,24 @@ db.changeVersion("1.0", "1.1");
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         var db = window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>("<a href="cordova_storage_storage.md.html#Database">Database</a>", "1.0", "Cordova Demo", 200000);
         db.transaction(populateDB, errorCB, successCB);
     }
 
-    // Populate the database 
+    // Populate the database
     //
     function populateDB(tx) {
-         tx.executeSql('DROP TABLE IF EXISTS DEMO');
-         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+        tx.executeSql('DROP TABLE IF EXISTS DEMO');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
     }
 
     // Transaction error callback
@@ -476,7 +474,7 @@ db.changeVersion("1.0", "1.1");
 <hr>
 <h1><a name="SQLTransaction">SQLTransaction</a></h1>
 
-<p>Contains methods that allow the user to execute SQL statements against the <a href="cordova_storage_storage.md.html#Database">Database</a>.</p>
+<p>Allows execution of SQL statements against the <a href="cordova_storage_storage.md.html#Database">Database</a>.</p>
 
 <h2>
 <a name="SQLTransaction_methods">Methods</a>
@@ -484,13 +482,14 @@ db.changeVersion("1.0", "1.1");
 
 <ul>
 <li>
-<strong>executeSql</strong>: executes a SQL statement</li>
+<strong>executeSql</strong>: executes a SQL statement.</li>
 </ul>
 <h2>
 <a name="SQLTransaction_details">Details</a>
 </h2>
 
-<p>When you call a <a href="cordova_storage_storage.md.html#Database">Database</a> objects transaction method it's callback methods will be called with a <a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a> object.  The user can build up a database transaction by calling the executeSql method multiple times.  </p>
+<p>Calling a <code><a href="cordova_storage_storage.md.html#Database">Database</a></code> object's transaction method, passes a
+<code><a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a></code> object to the specified callback method.</p>
 
 <h2>
 <a name="SQLTransaction_supported_platforms">Supported Platforms</a>
@@ -499,8 +498,7 @@ db.changeVersion("1.0", "1.1");
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 6.0 and higher)</li>
-<li>iPhone</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
 </ul>
 <h2>
@@ -508,10 +506,10 @@ db.changeVersion("1.0", "1.1");
 </h2>
 
 <pre class="prettyprint"><code>function populateDB(tx) {
-     tx.executeSql('DROP TABLE IF EXISTS DEMO');
-     tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-     tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-     tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    tx.executeSql('DROP TABLE IF EXISTS DEMO');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+    tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+    tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
 }
 
 function errorCB(err) {
@@ -538,24 +536,24 @@ db.transaction(populateDB, errorCB, successCB);
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         var db = window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>("<a href="cordova_storage_storage.md.html#Database">Database</a>", "1.0", "Cordova Demo", 200000);
         db.transaction(populateDB, errorCB, successCB);
     }
 
-    // Populate the database 
+    // Populate the database
     //
     function populateDB(tx) {
-         tx.executeSql('DROP TABLE IF EXISTS DEMO');
-         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+        tx.executeSql('DROP TABLE IF EXISTS DEMO');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
     }
 
     // Transaction error callback
@@ -582,7 +580,8 @@ db.transaction(populateDB, errorCB, successCB);
 <hr>
 <h1><a name="SQLResultSet">SQLResultSet</a></h1>
 
-<p>When the executeSql method of a <a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a> is called it will invoke it's callback with a <a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a>.</p>
+<p>When a <code><a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a></code> object's <code>executeSql</code> method is called, the
+specified callback executes with a <code><a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a></code> parameter.</p>
 
 <h2>
 <a name="SQLResultSet_properties">Properties</a>
@@ -590,18 +589,30 @@ db.transaction(populateDB, errorCB, successCB);
 
 <ul>
 <li>
-<strong>insertId</strong>: the row ID of the row that the <a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a> object's SQL statement inserted into the database</li>
+<strong>insertId</strong>: The row ID of the row that the <code><a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a></code> object's SQL statement inserted into the database.</li>
 <li>
-<strong>rowsAffected</strong>: the number of rows that were changed by the SQL statement.  If the statement did not affect any rows then it is set to 0. </li>
+<strong>rowsAffected</strong>: The number of rows changed by the SQL statement, zero if the statement did not affect any rows.</li>
 <li>
-<strong>rows</strong>: a <a href="cordova_storage_storage.md.html#SQLResultSetRowList">SQLResultSetRowList</a> representing the rows returned.  If no rows are returned the object will be empty.</li>
+<strong>rows</strong>: a <code><a href="cordova_storage_storage.md.html#SQLResultSetRowList">SQLResultSetRowList</a></code> representing the rows returned, empty if no rows are returned.</li>
 </ul>
 <h2>
 <a name="SQLResultSet_details">Details</a>
 </h2>
 
-<p>When you call the <a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a> executeSql method its callback methods will be called with a <a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a> object.  The result object has three properties.  The first is the <code>insertId</code> which will return the row number of a success SQL insert statement.  If the SQL statement is not an insert then the <code>insertId</code> is not set.  The <code>rowsAffected</code> is always 0 for a SQL select statement.  For insert or update statements it returns the number of rows that have been modified.  The final property is of type SQLResultSetList and it contains the data returned from a SQL select statement.</p>
+<p>When a <code><a href="cordova_storage_storage.md.html#SQLTransaction">SQLTransaction</a></code> object's <code>executeSql</code> method is called, the
+specified callback executes with a <code><a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a></code> parameter containing
+three properties:</p>
 
+<ul>
+<li><p>The <code>insertId</code> returns the row number of a successly SQL insertion
+statement.  If the SQL does not insert any rows, the <code>insertId</code> is
+not set.</p></li>
+<li><p>The <code>rowsAffected</code> is always <code>0</code> for a SQL <code>select</code> statement.  For
+<code>insert</code> or <code>update</code> statements it returns the number of modified
+rows.</p></li>
+<li><p>The final <code>SQLResultSetList</code> contains the data returned from a SQL
+select statement.</p></li>
+</ul>
 <h2>
 <a name="SQLResultSet_supported_platforms">Supported Platforms</a>
 </h2>
@@ -609,8 +620,7 @@ db.transaction(populateDB, errorCB, successCB);
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 6.0 and higher)</li>
-<li>iPhone</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
 </ul>
 <h2>
@@ -652,11 +662,11 @@ db.transaction(queryDB, errorCB);
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Populate the database 
+    // Populate the database
     //
     function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS DEMO');
@@ -697,7 +707,7 @@ db.transaction(queryDB, errorCB);
         db.transaction(queryDB, errorCB);
     }
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         var db = window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>("<a href="cordova_storage_storage.md.html#Database">Database</a>", "1.0", "Cordova Demo", 200000);
@@ -716,7 +726,8 @@ db.transaction(queryDB, errorCB);
 <hr>
 <h1><a name="SQLResultSetRowList">SQLResultSetRowList</a></h1>
 
-<p>One of the properties of the <a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a> containing the rows returned from a SQL query.</p>
+<p>One of the properties of the <code><a href="cordova_storage_storage.md.html#SQLResultSet">SQLResultSet</a></code> containing the rows
+returned from a SQL query.</p>
 
 <h2>
 <a name="SQLResultSetRowList_properties">Properties</a>
@@ -724,7 +735,7 @@ db.transaction(queryDB, errorCB);
 
 <ul>
 <li>
-<strong>length</strong>: the number of rows returned by the SQL query</li>
+<strong>length</strong>: the number of rows returned by the SQL query.</li>
 </ul>
 <h2>
 <a name="SQLResultSetRowList_methods">Methods</a>
@@ -738,7 +749,12 @@ db.transaction(queryDB, errorCB);
 <a name="SQLResultSetRowList_details">Details</a>
 </h2>
 
-<p>The <a href="cordova_storage_storage.md.html#SQLResultSetRowList">SQLResultSetRowList</a> contains the data returned from a SQL select statement.  The object contains a length property letting you know how many rows the select statement has been returned.  To get a row of data you would call the <code>item</code> method specifying an index.  The item method returns a JavaScript Object who's properties are the columns of the database the select statement was executed against.</p>
+<p>The <code><a href="cordova_storage_storage.md.html#SQLResultSetRowList">SQLResultSetRowList</a></code> contains the data returned from a SQL
+<code>select</code> statement.  The object contains a <code>length</code> property
+indicating how many rows the <code>select</code> statement returns.  To get a row
+of data, call the <code>item</code> method to specify an index.  It returns a
+JavaScript <code>Object</code> whose properties are the database columns the
+<code>select</code> statement was executed against.</p>
 
 <h2>
 <a name="SQLResultSetRowList_supported_platforms">Supported Platforms</a>
@@ -747,8 +763,7 @@ db.transaction(queryDB, errorCB);
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 6.0 and higher)</li>
-<li>iPhone</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
 </ul>
 <h2>
@@ -761,18 +776,18 @@ db.transaction(queryDB, errorCB);
 
 function querySuccess(tx, results) {
     var len = results.rows.length;
-    console.log("DEMO table: " + len + " rows found.");
-    for (var i=0; i&lt;len; i++){
-        console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+        console.log("DEMO table: " + len + " rows found.");
+        for (var i=0; i&lt;len; i++){
+            console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+        }
     }
-}
 
-function errorCB(err) {
-    alert("Error processing SQL: "+err.code);
-}
+    function errorCB(err) {
+        alert("Error processing SQL: "+err.code);
+    }
 
-var db = window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>("<a href="cordova_storage_storage.md.html#Database">Database</a>", "1.0", "Cordova Demo", 200000);
-db.transaction(queryDB, errorCB);
+    var db = window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>("<a href="cordova_storage_storage.md.html#Database">Database</a>", "1.0", "Cordova Demo", 200000);
+    db.transaction(queryDB, errorCB);
 </code></pre>
 
 <h2>
@@ -787,11 +802,11 @@ db.transaction(queryDB, errorCB);
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Populate the database 
+    // Populate the database
     //
     function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS DEMO');
@@ -829,7 +844,7 @@ db.transaction(queryDB, errorCB);
         db.transaction(queryDB, errorCB);
     }
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         var db = window.<a href="cordova_storage_storage.md.html#openDatabase">openDatabase</a>("<a href="cordova_storage_storage.md.html#Database">Database</a>", "1.0", "Cordova Demo", 200000);
@@ -856,9 +871,9 @@ db.transaction(queryDB, errorCB);
 
 <ul>
 <li>
-<strong>code:</strong> One of the predefined error codes listed below.</li>
+<strong>code</strong>: One of the predefined error codes listed below.</li>
 <li>
-<strong>message:</strong> A description of the error.</li>
+<strong>message</strong>: A description of the error.</li>
 </ul>
 <h2>
 <a name="SQLError_constants">Constants</a>
@@ -883,7 +898,7 @@ db.transaction(queryDB, errorCB);
 <hr>
 <h1><a name="localStorage">localStorage</a></h1>
 
-<p>Provides access to a W3C <a href="cordova_storage_storage.md.html#Storage">Storage</a> interface (http://dev.w3.org/html5/webstorage/#the-localstorage-attribute)</p>
+<p>Provides access to a <a class="external" href="http://dev.w3.org/html5/webstorage/#the-localstorage-attribute">W3C </a><a href="cordova_storage_storage.md.html#Storage">Storage</a> interface</p>
 
 <pre class="prettyprint"><code>var storage = window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>;
 </code></pre>
@@ -894,23 +909,24 @@ db.transaction(queryDB, errorCB);
 
 <ul>
 <li>
-<strong>key</strong>: Returns the name of the key at the position specified. </li>
+<strong>key</strong>: Returns the name of the key at the specified position.</li>
 <li>
-<strong>getItem</strong>: Returns the item identified by it's key.</li>
+<strong>getItem</strong>: Returns the item identified by the specified key.</li>
 <li>
-<strong>setItem</strong>: Saves and item at the key provided.</li>
+<strong>setItem</strong>: Assigns a keyed item's value.</li>
 <li>
-<strong>removeItem</strong>: Removes the item identified by it's key.</li>
+<strong>removeItem</strong>: Removes the item identified by the specified key.</li>
 <li>
-<strong>clear</strong>: Removes all of the key value pairs.</li>
+<strong>clear</strong>: Removes all of the key/value pairs.</li>
 </ul>
 <h2>
 <a name="localStorage_details">Details</a>
 </h2>
 
-<p><a href="cordova_storage_storage.md.html#localStorage">localStorage</a> provides an interface to a W3C <a href="cordova_storage_storage.md.html#Storage">Storage</a> interface.  It allows one to save data as key-value pairs.</p>
-
-<p>Note: window.sessionStorage provides the same interface, but is cleared between app launches.</p>
+<p>The <code>window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a></code> interface is based on the W3C Web <a href="cordova_storage_storage.md.html#Storage">Storage</a>
+interface.  An app can use it to save persistent data using key-value
+pairs.  The <code>window.sessionStorage</code> interface works the same way, but
+all data is cleared each time the app closes.</p>
 
 <h2>
 <a name="localStorage_supported_platforms">Supported Platforms</a>
@@ -919,10 +935,9 @@ db.transaction(queryDB, errorCB);
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 6.0 and higher)</li>
-<li>iPhone</li>
-<li>Windows Phone 7 and 8</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 </ul>
 <h2>
 <a name="localStorage_key_quick_example">Key Quick Example</a>
@@ -942,22 +957,22 @@ db.transaction(queryDB, errorCB);
 <a name="localStorage_get_item_quick_example">Get Item Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>var value = window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.getItem("key");
-// value is now equal to "value"
+<pre class="prettyprint"><code>    var value = window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.getItem("key");
+    // value is now equal to "value"
 </code></pre>
 
 <h2>
 <a name="localStorage_remove_item_quick_example">Remove Item Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.removeItem("key");
+<pre class="prettyprint"><code>    window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.removeItem("key");
 </code></pre>
 
 <h2>
 <a name="localStorage_clear_quick_example">Clear Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.clear();
+<pre class="prettyprint"><code>    window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.clear();
 </code></pre>
 
 <h2>
@@ -972,11 +987,11 @@ db.transaction(queryDB, errorCB);
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.setItem("key", "value");
@@ -989,7 +1004,6 @@ db.transaction(queryDB, errorCB);
         window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.clear();
         // <a href="cordova_storage_storage.md.html#localStorage">localStorage</a> is now empty
     }
-
 
     &lt;/script&gt;
   &lt;/head&gt;
@@ -1004,10 +1018,11 @@ db.transaction(queryDB, errorCB);
 <a name="localStorage_windows_phone_7_quirks">Windows Phone 7 Quirks</a>
 </h2>
 
-<ul>
-<li>dot notation is NOT available on Windows Phone 7. Be sure to use : window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.setItem/getItem, and not the w3 spec defined calls to window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.someKey = 'someValue';</li>
-</ul>
-</div>
+<p>Dot notation is <em>not</em> available on Windows Phone 7. Be sure to use
+<code>setItem</code> or <code>getItem</code>, rather than accessing keys directly from the
+storage object, such as <code>window.<a href="cordova_storage_storage.md.html#localStorage">localStorage</a>.someKey</code>.</p>
+
+            </div>
         </div>
 
         <!-- Functionality and Syntax Highlighting -->

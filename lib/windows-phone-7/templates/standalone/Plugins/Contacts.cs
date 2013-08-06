@@ -396,11 +396,16 @@ namespace WPCordovaClassLib.Cordova.Commands
                 return;
             }
 
+            //Deal with case where caller has specified no options
             if (searchParams.options == null)
             {
                 searchParams.options = new SearchOptions();
                 searchParams.options.filter = "";
                 searchParams.options.multiple = true;
+            }
+            else if (searchParams.options.filter == null) // Deal with the case where caller has specified partial options
+            {
+                searchParams.options.filter = "";
             }
 
             DeviceContacts deviceContacts = new DeviceContacts();
@@ -623,7 +628,7 @@ namespace WPCordovaClassLib.Cordova.Commands
             }
             else
             {
-                retVal = string.Format(formatStr,"","","","","","");
+                retVal = string.Format(formatStr, "", "", "", "", "", "");
             }
 
             return "{" + retVal + "}";

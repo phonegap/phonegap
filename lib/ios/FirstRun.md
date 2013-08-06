@@ -43,7 +43,7 @@ Please see the **Cordova Plugin Upgrade Guide.md** document included in the **gu
 ## Project Upgrades
 	
 1. Please see the [**Upgrading Cordova iOS**](http://docs.cordova.io/en/edge/guide_upgrading_index.md.html) document on [http://docs.cordova.io](http://docs.cordova.io)
-2. See the FAQ in the README.md as well included in the source distribution
+2. See the **FAQ** in the README.md as well included in the source distribution
 
 <br />
 

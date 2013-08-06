@@ -531,6 +531,10 @@
 					armv7,
 					armv7s,
 				);
+				"ARCHS[sdk=iphoneos7.*]" = (
+					armv7,
+					armv7s,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
@@ -560,6 +564,10 @@
 					armv7,
 					armv7s,
 				);
+				"ARCHS[sdk=iphoneos7.*]" = (
+					armv7,
+					armv7s,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = "/tmp/$(PROJECT_NAME).dst";
@@ -585,6 +593,10 @@
 					armv7,
 					armv7s,
 				);
+				"ARCHS[sdk=iphoneos7.*]" = (
+					armv7,
+					armv7s,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -598,7 +610,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DDEBUG";
 				PUBLIC_HEADERS_FOLDER_PATH = include/Cordova;
@@ -618,6 +630,10 @@
 					armv7,
 					armv7s,
 				);
+				"ARCHS[sdk=iphoneos7.*]" = (
+					armv7,
+					armv7s,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -630,7 +646,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PUBLIC_HEADERS_FOLDER_PATH = include/Cordova;
 				SDKROOT = iphoneos;

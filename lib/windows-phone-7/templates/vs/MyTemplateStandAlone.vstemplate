@@ -1,13 +1,13 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>CordovaWP7_2_7_0</Name>
-    <Description>Cordova 2.7.0 for Windows Phone 7.5 using the Cordova source code directly.</Description>
+    <Name>CordovaWP7_2_9_0</Name>
+    <Description>Cordova 2.9.0 for Windows Phone 7.5 using the Cordova source code directly.</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>CordovaWP7_2_7_0</DefaultName>
+    <DefaultName>CordovaWP7_2_9_0</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
@@ -23,16 +23,15 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="BuildManifestProcessor.js">BuildManifestProcessor.js</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="config.xml">config.xml</ProjectItem>
       <Folder Name="cordovalib" TargetFolderName="cordovalib">
+        <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommand.cs">BaseCommand.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="BrowserMouseHelper.cs">BrowserMouseHelper.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="CommandFactory.cs">CommandFactory.cs</ProjectItem>
-        <Folder Name="Commands" TargetFolderName="Commands">
-          <ProjectItem ReplaceParameters="true" TargetFileName="BaseCommand.cs">BaseCommand.cs</ProjectItem>
-        </Folder>
         <ProjectItem ReplaceParameters="true" TargetFileName="ConfigHandler.cs">ConfigHandler.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="CordovaCommandCall.cs">CordovaCommandCall.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="CordovaView.xaml">CordovaView.xaml</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="CordovaView.xaml.cs">CordovaView.xaml.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="DOMStorageHelper.cs">DOMStorageHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ImageExifHelper.cs">ImageExifHelper.cs</ProjectItem>
         <Folder Name="JSON" TargetFolderName="JSON">
           <ProjectItem ReplaceParameters="true" TargetFileName="JsonHelper.cs">JsonHelper.cs</ProjectItem>
         </Folder>
@@ -67,7 +66,6 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="FileTransfer.cs">FileTransfer.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="GeoLocation.cs">GeoLocation.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="Globalization.cs">Globalization.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="ImageExifHelper.cs">ImageExifHelper.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="InAppBrowser.cs">InAppBrowser.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="Media.cs">Media.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="MimeTypeMapper.cs">MimeTypeMapper.cs</ProjectItem>
@@ -98,7 +96,7 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.jpg">SplashScreenImage.jpg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="VERSION">VERSION</ProjectItem>
       <Folder Name="www" TargetFolderName="www">
-        <ProjectItem ReplaceParameters="true" TargetFileName="cordova-2.7.0.js">cordova-2.7.0.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="cordova.js">cordova.js</ProjectItem>
         <Folder Name="css" TargetFolderName="css">
           <ProjectItem ReplaceParameters="true" TargetFileName="index.css">index.css</ProjectItem>
         </Folder>
@@ -108,6 +106,36 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="index.html">index.html</ProjectItem>
         <Folder Name="js" TargetFolderName="js">
           <ProjectItem ReplaceParameters="true" TargetFileName="index.js">index.js</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="cordova" TargetFolderName="cordova">
+        <ProjectItem ReplaceParameters="false" TargetFileName="build.bat">build.bat</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="clean.bat">clean.bat</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="log.bat">log.bat</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="run.bat">run.bat</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="version.bat">version.bat</ProjectItem>
+        <Folder Name="lib" TargetFolderName="lib">
+          <ProjectItem ReplaceParameters="false" TargetFileName="build.js">build.js</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="clean.js">clean.js</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="deploy.js">deploy.js</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="install-device.bat">install-device.bat</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="install-emulator.bat">install-emulator.bat</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="list-devices.bat">list-devices.bat</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="list-emulator-images.bat">list-emulator-images.bat</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="list-started-emulators.bat">list-started-emulators.bat</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="log.js">log.js</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="start-emulator.bat">start-emulator.bat</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="target-list.js">target-list.js</ProjectItem>
+          <Folder Name="CordovaDeploy" TargetFolderName="CordovaDeploy">
+            <ProjectItem ReplaceParameters="false" TargetFileName="CordovaDeploy.sln">CordovaDeploy.sln</ProjectItem>
+            <Folder Name="CordovaDeploy" TargetFolderName="CordovaDeploy">
+              <ProjectItem ReplaceParameters="false" TargetFileName="CordovaDeploy.csproj">CordovaDeploy.csproj</ProjectItem>
+              <ProjectItem ReplaceParameters="false" TargetFileName="Program.cs">Program.cs</ProjectItem>
+              <Folder Name="Properties" TargetFolderName="Properties">
+                <ProjectItem ReplaceParameters="false" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+              </Folder>
+            </Folder>
+          </Folder>
         </Folder>
       </Folder>
     </Project>

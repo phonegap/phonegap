@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -201,8 +204,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -216,7 +222,8 @@
             <div id="content">
                 <h1><a name="Globalization">Globalization</a></h1>
 
-<p>The <code>globalization</code> object obtains information and performs operations specific to the user's locale and timezone.</p>
+<p>Obtains information and performs operations specific to the user's
+locale and timezone.</p>
 
 <h2>
 <a name="Globalization_objects">Objects</a>
@@ -247,7 +254,8 @@
 <a name="Globalization_variable_scope">Variable Scope</a>
 </h2>
 
-<p>The <code>globalization</code> object is a child of the <code>navigator</code> object, and therefore has global scope.</p>
+<p>The <code>globalization</code> object is a child of the <code>navigator</code> object, and
+therefore has global scope.</p>
 
 <pre class="prettyprint"><code>// The global globalization object
 var globalization = navigator.globalization;
@@ -269,17 +277,20 @@ var globalization = navigator.globalization;
 
 <p>Get the string identifier for the client's current language.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getPreferredLanguage">globalization.getPreferredLanguage</a>(successCB, errorCB);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getPreferredLanguage">globalization.getPreferredLanguage</a>(successCallback, errorCallback);
 </code></pre>
 
 <h2>
 <a name="globalization.getPreferredLanguage_description">Description</a>
 </h2>
 
-<p>It returns the language identifier string to the successCB callback with a
-properties object as a parameter. That object should have a <code>value</code> property with a String value.</p>
+<p>Returns the language identifier string to the <code>successCallback</code> with a
+<code>properties</code> object as a parameter. That object should have a <code>value</code>
+property with a <code>String</code> value.</p>
 
-<p>If there is an error getting the language, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN_ERROR.</p>
+<p>If there is an error getting the language, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN\_ERROR</code>.</p>
 
 <h2>
 <a name="globalization.getPreferredLanguage_supported_platforms">Supported Platforms</a>
@@ -288,18 +299,19 @@ properties object as a parameter. That object should have a <code>value</code> p
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getPreferredLanguage_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with the text "language: English".</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this should display a
+popup dialog with the text <code>language: English</code>:</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getPreferredLanguage">globalization.getPreferredLanguage</a>(
-  function (language) {alert('language: ' + language.value + '\n');},
-  function () {alert('Error getting language\n');}
+    function (language) {alert('language: ' + language.value + '\n');},
+    function () {alert('Error getting language\n');}
 );
 </code></pre>
 
@@ -310,7 +322,7 @@ properties object as a parameter. That object should have a <code>value</code> p
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;getPreferredLanguage Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -340,17 +352,20 @@ properties object as a parameter. That object should have a <code>value</code> p
 
 <p>Get the string identifier for the client's current locale setting.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getLocaleName">globalization.getLocaleName</a>(successCB, errorCB);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getLocaleName">globalization.getLocaleName</a>(successCallback, errorCallback);
 </code></pre>
 
 <h2>
 <a name="globalization.getLocaleName_description">Description</a>
 </h2>
 
-<p>It returns the locale identifier string to the successCB callback with a
-properties object as a parameter. That object should have a <code>value</code> property with a String value.</p>
+<p>Returns the locale identifier string to the <code>successCallback</code> with a
+<code>properties</code> object as a parameter. That object should have a <code>value</code>
+property with a <code>String</code> value.</p>
 
-<p>If there is an error getting the locale, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN_ERROR.</p>
+<p>If there is an error getting the locale, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN\_ERROR</code>.</p>
 
 <h2>
 <a name="globalization.getLocaleName_supported_platforms">Supported Platforms</a>
@@ -359,18 +374,19 @@ properties object as a parameter. That object should have a <code>value</code> p
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getLocaleName_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with the text "locale: en_US".</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this displays a popup
+dialog with the text <code>locale: en\_US</code>.</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getLocaleName">globalization.getLocaleName</a>(
-  function (locale) {alert('locale: ' + locale.value + '\n');},
-  function () {alert('Error getting locale\n');}
+    function (locale) {alert('locale: ' + locale.value + '\n');},
+    function () {alert('Error getting locale\n');}
 );
 </code></pre>
 
@@ -381,7 +397,7 @@ properties object as a parameter. That object should have a <code>value</code> p
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;getLocaleName Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -411,24 +427,30 @@ properties object as a parameter. That object should have a <code>value</code> p
 
 <p>Returns a date formatted as a string according to the client's locale and timezone.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.dateToString">globalization.dateToString</a>(date, successCB, errorCB, options);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.dateToString">globalization.dateToString</a>(date, successCallback, errorCallback, options);
 </code></pre>
 
 <h2>
 <a name="globalization.dateToString_description">Description</a>
 </h2>
 
-<p>It returns the formatted date string to the successCB callback with a properties object as a parameter. That object should have a <code>value</code> property with a String value.</p>
+<p>Returns the formatted date <code>String</code> via a <code>value</code> property accessible
+from the object passed as a parameter to the <code>successCallback</code>.</p>
 
 <p>The inbound <code>date</code> parameter should be of type <code>Date</code>.</p>
 
-<p>If there is an error formatting the date, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.FORMATTING_ERROR.</p>
+<p>If there is an error formatting the date, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.FORMATTING\_ERROR</code>.</p>
 
-<p><code>options.formatLength</code> can be 'short', 'medium', 'long', or 'full'.
-<code>options.selector</code> can be 'date', 'time' or 'date and time'.</p>
+<p>The <code>options</code> parameter is optional, and its default values are:</p>
 
-<p>The default options are <code>{formatLength:'short', selector:'date and time'}</code>.
-The <code>options</code> parameter is optional.</p>
+<pre class="prettyprint"><code>{formatLength:'short', selector:'date and time'}
+</code></pre>
+
+<p>The <code>options.formatLength</code> can be <code>short</code>, <code>medium</code>, <code>long</code>, or <code>full</code>.</p>
+
+<p>The <code>options.selector</code> can be <code>date</code>, <code>time</code> or <code>date and time</code>.</p>
 
 <h2>
 <a name="globalization.dateToString_supported_platforms">Supported Platforms</a>
@@ -437,20 +459,22 @@ The <code>options</code> parameter is optional.</p>
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.dateToString_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with text similar to "date: 9/25/2012 4:21PM" using the default options.</p>
+<p>If the browser is set to the <code>en\_US</code> locale, this displays a popup
+dialog with text similar to <code>date: 9/25/2012 4:21PM</code> using the default
+options:</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.dateToString">globalization.dateToString</a>(
-  new Date(),
-  function (date) {alert('date:' + date.value + '\n');},
-  function () {alert('Error getting dateString\n');},
-  {formatLength:'short', selector:'date and time'}
+    new Date(),
+    function (date) { alert('date: ' + date.value + '\n'); },
+    function () { alert('Error getting dateString\n'); },
+    { formatLength: 'short', selector: 'date and time' }
 );
 </code></pre>
 
@@ -461,7 +485,7 @@ The <code>options</code> parameter is optional.</p>
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;dateToString Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -486,43 +510,63 @@ The <code>options</code> parameter is optional.</p>
 </h2>
 
 <ul>
-<li>
-<code>formatLength</code> option supports only short and full values</li>
+<li>The <code>formatLength</code> option supports only <code>short</code> and <code>full</code> values.</li>
 </ul>
 <hr>
 <h1><a name="globalization.stringToDate">globalization.stringToDate</a></h1>
 
-<p>Parses a date formatted as a string according to the client's user
-preferences and calendar using the time zone of the client and returns
-the corresponding date object.</p>
+<p>Parses a date formatted as a string, according to the client's user
+preferences and calendar using the time zone of the client, and
+returns the corresponding date object.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.stringToDate">globalization.stringToDate</a>(dateString, successCB, errorCB, options);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.stringToDate">globalization.stringToDate</a>(dateString, successCallback, errorCallback, options);
 </code></pre>
 
 <h2>
 <a name="globalization.stringToDate_description">Description</a>
 </h2>
 
-<p>It returns the date to the success callback with a properties object as a parameter. That object should have the following properties:</p>
+<p>Returns the date to the success callback with a <code>properties</code> object as
+a parameter. That object should have the following properties:</p>
 
 <ul>
-<li>year {Number}: The four digit year</li>
-<li>month {Number}: The month from (0 - 11)</li>
-<li>day {Number}: The day from (1 - 31)</li>
-<li>hour {Number}: The hour from (0 - 23)</li>
-<li>minute {Number}: The minute from (0 - 59)</li>
-<li>second {Number}: The second from (0 - 59)</li>
-<li>millisecond {Number}: The milliseconds (from 0 - 999), not available on all platforms</li>
+<li>
+<strong>year</strong>: The four digit year. <em>(Number)</em>
+</li>
+<li>
+<strong>month</strong>: The month from (0 - 11). <em>(Number)</em>
+</li>
+<li>
+<strong>day</strong>: The day from (1 - 31). <em>(Number)</em>
+</li>
+<li>
+<strong>hour</strong>: The hour from (0 - 23). <em>(Number)</em>
+</li>
+<li>
+<strong>minute</strong>: The minute from (0 - 59). <em>(Number)</em>
+</li>
+<li>
+<strong>second</strong>: The second from (0 - 59). <em>(Number)</em>
+</li>
+<li>
+<strong>millisecond</strong>: The milliseconds (from 0 - 999), not available on all platforms. <em>(Number)</em>
+</li>
 </ul>
 <p>The inbound <code>dateString</code> parameter should be of type <code>String</code>.</p>
 
-<p><code>options.formatLength</code> can be 'short', 'medium', 'long', or 'full'.
-<code>options.selector</code> can be 'date', 'time' or 'date and time'.</p>
+<p>The <code>options</code> parameter is optional, and defaults to the following
+values:</p>
 
-<p>The default options are <code>{formatLength:'short', selector:'date and time'}</code>.
-The options parameter is optional.</p>
+<pre class="prettyprint"><code>{formatLength:'short', selector:'date and time'}
+</code></pre>
 
-<p>If there is an error parsing the date string, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.PARSING_ERROR.</p>
+<p>The <code>options.formatLength</code> can be <code>short</code>, <code>medium</code>, <code>long</code>, or
+<code>full</code>.  The <code>options.selector</code> can be <code>date</code>, <code>time</code> or <code>date and
+time</code>.</p>
+
+<p>If there is an error parsing the date string, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.PARSING\_ERROR</code>.</p>
 
 <h2>
 <a name="globalization.stringToDate_supported_platforms">Supported Platforms</a>
@@ -531,22 +575,25 @@ The options parameter is optional.</p>
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.stringToDate_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with text similar to "month:8 day:25 year:2012". Note that the month integer is one less than the string, as the month integer represents an index.</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this displays a
+popup dialog with text similar to <code>month:8 day:25 year:2012</code>. Note
+that the month integer is one less than the string, as the month
+integer represents an array index.</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.stringToDate">globalization.stringToDate</a>(
-  '9/25/2012',
-  function (date) {alert('month:' + date.month +
-                         ' day:' + date.day + 
-                         ' year:' + date.year + '\n');},
-  function () {alert('Error getting date\n');},
-  {selector:'date'}
+    '9/25/2012',
+    function (date) {alert('month:' + date.month +
+                           ' day:'  + date.day   +
+                           ' year:' + date.year  + '\n');},
+    function () {alert('Error getting date\n');},
+    {selector: 'date'}
 );
 </code></pre>
 
@@ -557,7 +604,7 @@ The options parameter is optional.</p>
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;stringToDate Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -565,7 +612,7 @@ The options parameter is optional.</p>
       navigator.<a href="cordova_globalization_globalization.md.html#globalization.stringToDate">globalization.stringToDate</a>(
         '9/25/2012',
         function (date) {alert('month:' + date.month +
-                               ' day:' + date.day + 
+                               ' day:' + date.day +
                                ' year:' + date.year + '\n');},
         function () {alert('Error getting date\n');},
         {selector:'date'}
@@ -585,37 +632,50 @@ The options parameter is optional.</p>
 </h2>
 
 <ul>
-<li>
-<code>formatLength</code> option supports only short and full values</li>
+<li>The <code>formatLength</code> option supports only <code>short</code> and <code>full</code> values.</li>
 </ul>
 <hr>
 <h1><a name="globalization.getDatePattern">globalization.getDatePattern</a></h1>
 
-<p>Returns a pattern string for formatting and parsing dates according to the client's user preferences.</p>
+<p>Returns a pattern string to format and parse dates according to the
+client's user preferences.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getDatePattern">globalization.getDatePattern</a>(successCB, errorCB, options);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getDatePattern">globalization.getDatePattern</a>(successCallback, errorCallback, options);
 </code></pre>
 
 <h2>
 <a name="globalization.getDatePattern_description">Description</a>
 </h2>
 
-<p>It returns the pattern to the successCB callback with a properties object as a parameter. That object should have the following properties:</p>
+<p>Returns the pattern to the <code>successCallback</code>. The object passed in as
+a parameter contains the following properties:</p>
 
 <ul>
-<li>pattern {String}: The date and time pattern for formatting and parsing dates.  The patterns follow Unicode Technical Standard #35. <a class="external" href="http://unicode.org/reports/tr35/tr35-4.html">http://unicode.org/reports/tr35/tr35-4.html</a>
+<li>
+<strong>pattern</strong>: The date and time pattern to format and parse dates.  The patterns follow Unicode Technical Standard #35. <a class="external" href="http://unicode.org/reports/tr35/tr35-4.html">http://unicode.org/reports/tr35/tr35-4.html</a>. <em>(String)</em>
 </li>
-<li>timezone {String}: The abbreviated name of the time zone on the client</li>
-<li>utc_offset {Number}: The current difference in seconds between the client's time zone and coordinated universal time.</li>
-<li>dst_offset {Number}: The current daylight saving time offset in seconds between the client's non-daylight saving's time zone and the client's daylight saving's time zone.</li>
+<li>
+<strong>timezone</strong>: The abbreviated name of the time zone on the client. <em>(String)</em>
+</li>
+<li>
+<strong>utc_offset</strong>: The current difference in seconds between the client's time zone and coordinated universal time. <em>(Number)</em>
+</li>
+<li>
+<strong>dst_offset</strong>: The current daylight saving time offset in seconds between the client's non-daylight saving's time zone and the client's daylight saving's time zone. <em>(Number)</em>
+</li>
 </ul>
-<p>If there is an error obtaining the pattern, then the errorCB callback is invokedwith a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.PATTERN_ERROR.</p>
+<p>If there is an error obtaining the pattern, the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.PATTERN\_ERROR</code>.</p>
 
-<p><code>options.formatLength</code> can be 'short', 'medium', 'long', or 'full'.
-<code>options.selector</code> can be 'date', 'time' or 'date and time'.</p>
+<p>The <code>options</code> parameter is optional, and defaults to the following values:</p>
 
-<p>The default options are <code>{formatLength:'short', selector:'date and time'}</code>.
-The options parameter is optional.</p>
+<pre class="prettyprint"><code>{formatLength:'short', selector:'date and time'}
+</code></pre>
+
+<p>The <code>options.formatLength</code> can be <code>short</code>, <code>medium</code>, <code>long</code>, or
+<code>full</code>.  The <code>options.selector</code> can be <code>date</code>, <code>time</code> or <code>date and
+time</code>.</p>
 
 <h2>
 <a name="globalization.getDatePattern_supported_platforms">Supported Platforms</a>
@@ -624,21 +684,22 @@ The options parameter is optional.</p>
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getDatePattern_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with text similar to "pattern: M/d/yyyy h:mm a".</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this example displays
+a popup dialog with text such as <code>pattern: M/d/yyyy h:mm a</code>:</p>
 
 <pre class="prettyprint"><code>function checkDatePattern() {
-  navigator.<a href="cordova_globalization_globalization.md.html#globalization.getDatePattern">globalization.getDatePattern</a>(
-    function (date) {alert('pattern: ' + date.pattern + '\n');},
-    function () {alert('Error getting pattern\n');},
-    {formatLength:'short', selector:'date and time'}
-  );
+    navigator.<a href="cordova_globalization_globalization.md.html#globalization.getDatePattern">globalization.getDatePattern</a>(
+        function (date) { alert('pattern: ' + date.pattern + '\n'); },
+        function () { alert('Error getting pattern\n'); },
+        { formatLength: 'short', selector: 'date and time' }
+    );
 }
 </code></pre>
 
@@ -649,7 +710,7 @@ The options parameter is optional.</p>
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;getDatePattern Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -674,36 +735,42 @@ The options parameter is optional.</p>
 </h2>
 
 <ul>
-<li>
-<code>formatLength</code> option supports only short and full values.</li>
-<li>
-<code>pattern</code> property for <code>date and time</code> pattern returns only full datetime format.</li>
-<li>
-<code>timezone</code> property returns full time zone name</li>
-<li>
-<code>dst_offset</code> returned property is not supported and always returns zero.</li>
+<li>The <code>formatLength</code> supports only <code>short</code> and <code>full</code> values.</li>
+<li>The <code>pattern</code> for <code>date and time</code> pattern returns only full datetime format.</li>
+<li>The <code>timezone</code> returns the full time zone name.</li>
+<li>The <code>dst_offset</code> property is not supported, and always returns zero.</li>
 </ul>
 <hr>
 <h1><a name="globalization.getDateNames">globalization.getDateNames</a></h1>
 
-<p>Returns an array of either the names of the months or days of the week according to the client's user preferences and calendar.</p>
+<p>Returns an array of the names of the months or days of the week,
+depending on the client's user preferences and calendar.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getDateNames">globalization.getDateNames</a>(successCB, errorCB, options);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getDateNames">globalization.getDateNames</a>(successCallback, errorCallback, options);
 </code></pre>
 
 <h2>
 <a name="globalization.getDateNames_description">Description</a>
 </h2>
 
-<p>It returns the array of names to the successCB callback with a properties object as a parameter. That object should have a <code>value</code> property with an Array of Strings. That array will be the names starting from either the first month in the year or the first day of the week, depending on the option selected.</p>
+<p>Returns the array of names to the <code>successCallback</code> with a
+<code>properties</code> object as a parameter. That object contains a <code>value</code>
+property with an <code>Array</code> of <code>String</code> values. The array features names
+starting from either the first month in the year or the first day of
+the week, depending on the option selected.</p>
 
-<p>If there is an error obtaining the names, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN_ERROR.</p>
+<p>If there is an error obtaining the names, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN\_ERROR</code>.</p>
 
-<p><code>options.type</code> can be 'narrow', or 'wide'.
-<code>options.item</code> can be 'months', or 'days'.</p>
+<p>The <code>options</code> parameter is optional, and its default values are:</p>
 
-<p>The default options are <code>{type:'wide', item:'months'}</code>.
-The options parameter is optional.</p>
+<pre class="prettyprint"><code>{type:'wide', item:'months'}
+</code></pre>
+
+<p>The value of <code>options.type</code> can be <code>narrow</code> or <code>wide</code>.</p>
+
+<p>The value of <code>options.item</code> can be <code>months</code> or <code>days</code>.</p>
 
 <h2>
 <a name="globalization.getDateNames_supported_platforms">Supported Platforms</a>
@@ -712,23 +779,25 @@ The options parameter is optional.</p>
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getDateNames_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a series of 12 popup dialogs, one per month, with text similar to "month: January"</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this example displays
+a series of twelve popup dialogs, one per month, with text similar to
+<code>month: January</code>:</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getDateNames">globalization.getDateNames</a>(
-  function (names) {
-    for (var i=0; i&lt;names.value.length; i++) {
-      alert('month: ' + names.value[i] + '\n');
-    }
-  },
-  function () {alert('Error getting names\n');},
-  {type:'wide', item:'months'}
+    function (names) {
+        for (var i = 0; i &lt; names.value.length; i++) {
+            alert('month: ' + names.value[i] + '\n');
+        }
+    },
+    function () { alert('Error getting names\n'); },
+    { type: 'wide', item: 'months' }
 );
 </code></pre>
 
@@ -739,7 +808,7 @@ The options parameter is optional.</p>
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;getDateNames Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -766,20 +835,26 @@ The options parameter is optional.</p>
 <hr>
 <h1><a name="globalization.isDayLightSavingsTime">globalization.isDayLightSavingsTime</a></h1>
 
-<p>Returns whether daylight savings time is in effect for a given date using the client's time zone and calendar.</p>
+<p>Indicates whether daylight savings time is in effect for a given date
+using the client's time zone and calendar.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.isDayLightSavingsTime">globalization.isDayLightSavingsTime</a>(date, successCB, errorCB);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.isDayLightSavingsTime">globalization.isDayLightSavingsTime</a>(date, successCallback, errorCallback);
 </code></pre>
 
 <h2>
 <a name="globalization.isDayLightSavingsTime_description">Description</a>
 </h2>
 
-<p>It returns whether or not daylight savings time is in effect to the successCB callback with a properties object as a parameter. That object should have a <code>dst</code> property with a Boolean value. The value 'true' indicates that daylight savings time is in effect for the given date, and 'false' indicates that it is not.</p>
+<p>Indicates whether or not daylight savings time is in effect to the
+<code>successCallback</code> with a <code>properties</code> object as a parameter. That object
+should have a <code>dst</code> property with a <code>Boolean</code> value. A <code>true</code> value
+indicates that daylight savings time is in effect for the given date,
+and <code>false</code> indicates that it is not.</p>
 
 <p>The inbound parameter <code>date</code> should be of type <code>Date</code>.</p>
 
-<p>If there is an error reading the date, then the errorCB callback is invoked. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN_ERROR.</p>
+<p>If there is an error reading the date, then the <code>errorCallback</code>
+executes. The error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN\_ERROR</code>.</p>
 
 <h2>
 <a name="globalization.isDayLightSavingsTime_supported_platforms">Supported Platforms</a>
@@ -788,19 +863,21 @@ The options parameter is optional.</p>
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.isDayLightSavingsTime_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case during the summer when the browser is set to a DST-enabled timezone, this should display a popup dialog with text similar to "dst: true".</p>
+<p>During the summer, and if the browser is set to a DST-enabled
+timezone, this should display a popup dialog with text similar to
+<code>dst: true</code>:</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.isDayLightSavingsTime">globalization.isDayLightSavingsTime</a>(
-  new Date(),
-  function (date) {alert('dst: ' + date.dst + '\n');},
-  function () {alert('Error getting names\n');}
+    new Date(),
+    function (date) {alert('dst: ' + date.dst + '\n');},
+    function () {alert('Error getting names\n');}
 );
 </code></pre>
 
@@ -811,7 +888,7 @@ The options parameter is optional.</p>
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;isDayLightSavingsTime Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -834,18 +911,24 @@ The options parameter is optional.</p>
 <hr>
 <h1><a name="globalization.getFirstDayOfWeek">globalization.getFirstDayOfWeek</a></h1>
 
-<p>Returns the first day of the week according to the client's user preferences and calendar.</p>
+<p>Returns the first day of the week according to the client's user
+preferences and calendar.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getFirstDayOfWeek">globalization.getFirstDayOfWeek</a>(successCB, errorCB);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getFirstDayOfWeek">globalization.getFirstDayOfWeek</a>(successCallback, errorCallback);
 </code></pre>
 
 <h2>
 <a name="globalization.getFirstDayOfWeek_description">Description</a>
 </h2>
 
-<p>The days of the week are numbered starting from 1 where 1 is considered to be Sunday. It returns the day to the successCB callback with a properties object as a parameter. That object should have a <code>value</code> property with a Number value.</p>
+<p>The days of the week are numbered starting from 1, where 1 is assumed
+to be Sunday.  Returns the day to the <code>successCallback</code> with a
+<code>properties</code> object as a parameter. That object should have a <code>value</code>
+property with a <code>Number</code> value.</p>
 
-<p>If there is an error obtaining the pattern, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN_ERROR.</p>
+<p>If there is an error obtaining the pattern, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN\_ERROR</code>.</p>
 
 <h2>
 <a name="globalization.getFirstDayOfWeek_supported_platforms">Supported Platforms</a>
@@ -854,18 +937,19 @@ The options parameter is optional.</p>
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getFirstDayOfWeek_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with text similar to "day: 1".</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this displays a
+popup dialog with text similar to <code>day: 1</code>.</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getFirstDayOfWeek">globalization.getFirstDayOfWeek</a>(
-  function (day) {alert('day: ' + day.value + '\n');},
-  function () {alert('Error getting day\n');}
+    function (day) {alert('day: ' + day.value + '\n');},
+    function () {alert('Error getting day\n');}
 );
 </code></pre>
 
@@ -876,7 +960,7 @@ The options parameter is optional.</p>
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;getFirstDayOfWeek Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -900,18 +984,27 @@ The options parameter is optional.</p>
 
 <p>Returns a number formatted as a string according to the client's user preferences.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.numberToString">globalization.numberToString</a>(number, successCB, errorCB, options);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.numberToString">globalization.numberToString</a>(number, successCallback, errorCallback, options);
 </code></pre>
 
 <h2>
 <a name="globalization.numberToString_description">Description</a>
 </h2>
 
-<p>It returns the formatted number string to the successCB callback with a properties object as a parameter. That object should have a <code>value</code> property with a String value.</p>
+<p>Returns the formatted number string to the <code>successCallback</code> with a
+<code>properties</code> object as a parameter. That object should have a <code>value</code>
+property with a <code>String</code> value.</p>
 
-<p>If there is an error formatting the number, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.FORMATTING_ERROR.</p>
+<p>If there is an error formatting the number, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.FORMATTING\_ERROR</code>.</p>
 
-<p><code>options.type</code> can be 'decimal', 'percent', or 'currency'. The default options are <code>{type:'decimal'}</code>. The <code>options</code> parameter is optional.</p>
+<p>The <code>options</code> parameter is optional, and its default values are:</p>
+
+<pre class="prettyprint"><code>{type:'decimal'}
+</code></pre>
+
+<p>The <code>options.type</code> can be 'decimal', 'percent', or 'currency'.</p>
 
 <h2>
 <a name="globalization.numberToString_supported_platforms">Supported Platforms</a>
@@ -920,20 +1013,21 @@ The options parameter is optional.</p>
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.numberToString_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with text similar to "number: 3.142"</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this displays a popup
+dialog with text similar to <code>number: 3.142</code>:</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.numberToString">globalization.numberToString</a>(
-  3.1415926,
-  function (number) {alert('number: ' + number.value + '\n');},
-  function () {alert('Error getting number\n');},
-  {type:'decimal'}
+    3.1415926,
+    function (number) {alert('number: ' + number.value + '\n');},
+    function () {alert('Error getting number\n');},
+    {type:'decimal'}
 );
 </code></pre>
 
@@ -944,7 +1038,7 @@ The options parameter is optional.</p>
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;numberToString Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -968,21 +1062,32 @@ The options parameter is optional.</p>
 <hr>
 <h1><a name="globalization.stringToNumber">globalization.stringToNumber</a></h1>
 
-<p>Parses a number formatted as a string according to the client's user preferences and returns the corresponding number.</p>
+<p>Parses a number formatted as a string according to the client's user
+preferences and returns the corresponding number.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.stringToNumber">globalization.stringToNumber</a>(string, successCB, errorCB, options);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.stringToNumber">globalization.stringToNumber</a>(string, successCallback, errorCallback, options);
 </code></pre>
 
 <h2>
 <a name="globalization.stringToNumber_description">Description</a>
 </h2>
 
-<p>It returns the number to the successCB callback with a properties object as a parameter. That object should have a <code>value</code> property with a Number value.</p>
+<p>Returns the number to the <code>successCallback</code> with a <code>properties</code> object
+as a parameter. That object should have a <code>value</code> property with a
+<code>Number</code> value.</p>
 
-<p>If there is an error parsing the number string, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.PARSING_ERROR.</p>
+<p>If there is an error parsing the number string, then the
+<code>errorCallback</code> executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a
+parameter. The error's expected code is
+<code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.PARSING\_ERROR</code>.</p>
 
-<p><code>options.type</code> can be 'decimal', 'percent', or 'currency'.
-The default options are <code>{type:'decimal'}</code>. The <code>options</code> parameter is optional.</p>
+<p>The <code>options</code> parameter is optional, and defaults to the following
+values:</p>
+
+<pre class="prettyprint"><code>{type:'decimal'}
+</code></pre>
+
+<p>The <code>options.type</code> can be <code>decimal</code>, <code>percent</code>, or <code>currency</code>.</p>
 
 <h2>
 <a name="globalization.stringToNumber_supported_platforms">Supported Platforms</a>
@@ -991,20 +1096,21 @@ The default options are <code>{type:'decimal'}</code>. The <code>options</code> 
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.stringToNumber_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with text similar to "number: 1234.56".</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this should display a
+popup dialog with text similar to <code>number: 1234.56</code>:</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.stringToNumber">globalization.stringToNumber</a>(
-  '1234.56',
-  function (number) {alert('number: ' + number.value + '\n');},
-  function () {alert('Error getting number\n');},
-  {type:'decimal'}
+    '1234.56',
+    function (number) {alert('number: ' + number.value + '\n');},
+    function () {alert('Error getting number\n');},
+    {type:'decimal'}
 );
 </code></pre>
 
@@ -1015,7 +1121,7 @@ The default options are <code>{type:'decimal'}</code>. The <code>options</code> 
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;stringToNumber Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
@@ -1039,32 +1145,54 @@ The default options are <code>{type:'decimal'}</code>. The <code>options</code> 
 <hr>
 <h1><a name="globalization.getNumberPattern">globalization.getNumberPattern</a></h1>
 
-<p>Returns a pattern string for formatting and parsing numbers according to the client's user preferences.</p>
+<p>Returns a pattern string to format and parse numbers according to the client's user preferences.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getNumberPattern">globalization.getNumberPattern</a>(successCB, errorCB, options);
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getNumberPattern">globalization.getNumberPattern</a>(successCallback, errorCallback, options);
 </code></pre>
 
 <h2>
 <a name="globalization.getNumberPattern_description">Description</a>
 </h2>
 
-<p>It returns the pattern to the successCB callback with a properties object as a parameter. That object should have the following properties:</p>
+<p>Returns the pattern to the <code>successCallback</code> with a <code>properties</code> object
+as a parameter. That object contains the following properties:</p>
 
 <ul>
-<li>pattern {String}: The number pattern for formatting and parsing numbers.  The patterns follow Unicode Technical Standard #35. <a class="external" href="http://unicode.org/reports/tr35/tr35-4.html">http://unicode.org/reports/tr35/tr35-4.html</a>
+<li>
+<strong>pattern</strong>: The number pattern to format and parse numbers.  The patterns follow Unicode Technical Standard #35. <a class="external" href="http://unicode.org/reports/tr35/tr35-4.html">http://unicode.org/reports/tr35/tr35-4.html</a>. <em>(String)</em>
 </li>
-<li>symbol {String}: The symbol to be used when formatting and parsing e.g., percent or currency symbol.</li>
-<li>fraction {Number}: The number of fractional digits to use when parsing and formatting numbers.</li>
-<li>rounding {Number}: The rounding increment to use when parsing and formatting.</li>
-<li>positive {String}: The symbol to use for positive numbers when parsing and formatting.</li>
-<li>negative: {String}: The symbol to use for negative numbers when parsing and formatting.</li>
-<li>decimal: {String}: The decimal symbol to use for parsing and formatting.</li>
-<li>grouping: {String}: The grouping symbol to use for parsing and formatting.</li>
+<li>
+<strong>symbol</strong>: The symbol to use when formatting and parsing, such as a percent or currency symbol. <em>(String)</em>
+</li>
+<li>
+<strong>fraction</strong>: The number of fractional digits to use when parsing and formatting numbers. <em>(Number)</em>
+</li>
+<li>
+<strong>rounding</strong>: The rounding increment to use when parsing and formatting. <em>(Number)</em>
+</li>
+<li>
+<strong>positive</strong>: The symbol to use for positive numbers when parsing and formatting. <em>(String)</em>
+</li>
+<li>
+<strong>negative</strong>: The symbol to use for negative numbers when parsing and formatting. <em>(String)</em>
+</li>
+<li>
+<strong>decimal</strong>: The decimal symbol to use for parsing and formatting. <em>(String)</em>
+</li>
+<li>
+<strong>grouping</strong>: The grouping symbol to use for parsing and formatting. <em>(String)</em>
+</li>
 </ul>
-<p>If there is an error obtaining the pattern, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.PATTERN_ERROR.</p>
+<p>If there is an error obtaining the pattern, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.PATTERN\_ERROR</code>.</p>
 
-<p><code>options.type</code> can be 'decimal', 'percent', or 'currency'.
-The default options are <code>{type:'decimal'}</code>. The <code>options</code> parameter is optional.</p>
+<p>The <code>options</code> parameter is optional, and default values are:</p>
+
+<pre class="prettyprint"><code>{type:'decimal'}
+</code></pre>
+
+<p>The <code>options.type</code> can be <code>decimal</code>, <code>percent</code>, or <code>currency</code>.</p>
 
 <h2>
 <a name="globalization.getNumberPattern_supported_platforms">Supported Platforms</a>
@@ -1073,39 +1201,40 @@ The default options are <code>{type:'decimal'}</code>. The <code>options</code> 
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 8</li>
 </ul>
 <h2>
 <a name="globalization.getNumberPattern_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale, this should display a popup dialog with text similar to:</p>
+<p>When the browser is set to the <code>en\_US</code> locale, this should display a
+popup dialog with text similar to the results that follow:</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getNumberPattern">globalization.getNumberPattern</a>(
+    function (pattern) {alert('pattern: '  + pattern.pattern  + '\n' +
+                              'symbol: '   + pattern.symbol   + '\n' +
+                              'fraction: ' + pattern.fraction + '\n' +
+                              'rounding: ' + pattern.rounding + '\n' +
+                              'positive: ' + pattern.positive + '\n' +
+                              'negative: ' + pattern.negative + '\n' +
+                              'decimal: '  + pattern.decimal  + '\n' +
+                              'grouping: ' + pattern.grouping);},
+    function () {alert('Error getting pattern\n');},
+    {type:'decimal'}
+);
+</code></pre>
+
+<p>Results:</p>
 
 <pre class="prettyprint"><code>pattern: #,##0.###
 symbol: .
 fraction: 0
 rounding: 0
-positive: 
+positive:
 negative: -
 decimal: .
 grouping: ,
-</code></pre>
-
-<p>.</p>
-
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getNumberPattern">globalization.getNumberPattern</a>(
-  function (pattern) {alert('pattern: ' + pattern.pattern + '\n' +
-                            'symbol: ' + pattern.symbol + '\n' +
-                            'fraction: ' + pattern.fraction + '\n' +
-                            'rounding: ' + pattern.rounding + '\n' +
-                            'positive: ' + pattern.positive + '\n' +
-                            'negative: ' + pattern.negative + '\n' +
-                            'decimal: ' + pattern.decimal + '\n' +
-                            'grouping: ' + pattern.grouping);},
-  function () {alert('Error getting pattern\n');},
-  {type:'decimal'}
-);
 </code></pre>
 
 <h2>
@@ -1115,19 +1244,19 @@ grouping: ,
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;getNumberPattern Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkPattern() {
       navigator.<a href="cordova_globalization_globalization.md.html#globalization.getNumberPattern">globalization.getNumberPattern</a>(
-        function (pattern) {alert('pattern: ' + pattern.pattern + '\n' +
-                                  'symbol: ' + pattern.symbol + '\n' +
+        function (pattern) {alert('pattern: '  + pattern.pattern  + '\n' +
+                                  'symbol: '   + pattern.symbol   + '\n' +
                                   'fraction: ' + pattern.fraction + '\n' +
                                   'rounding: ' + pattern.rounding + '\n' +
                                   'positive: ' + pattern.positive + '\n' +
                                   'negative: ' + pattern.negative + '\n' +
-                                  'decimal: ' + pattern.decimal + '\n' +
+                                  'decimal: '  + pattern.decimal  + '\n' +
                                   'grouping: ' + pattern.grouping);},
         function () {alert('Error getting pattern\n');},
         {type:'decimal'}
@@ -1147,38 +1276,51 @@ grouping: ,
 </h2>
 
 <ul>
-<li>
-<code>pattern</code> property is not supported; empty string is always returned.</li>
-<li>
-<code>fraction</code> property is not supported; zero is always returned.</li>
+<li>The <code>pattern</code> property is not supported, and retuens an empty string.</li>
+<li>The <code>fraction</code> property is not supported, and returns zero.</li>
 </ul>
 <hr>
 <h1><a name="globalization.getCurrencyPattern">globalization.getCurrencyPattern</a></h1>
 
-<p>Returns a pattern string for formatting and parsing currency values according
+<p>Returns a pattern string to format and parse currency values according
 to the client's user preferences and ISO 4217 currency code.</p>
 
-<pre class="prettyprint"><code> navigator.<a href="cordova_globalization_globalization.md.html#globalization.getCurrencyPattern">globalization.getCurrencyPattern</a>(currencyCode, successCB, errorCB);
+<pre class="prettyprint"><code> navigator.<a href="cordova_globalization_globalization.md.html#globalization.getCurrencyPattern">globalization.getCurrencyPattern</a>(currencyCode, successCallback, errorCallback);
 </code></pre>
 
 <h2>
 <a name="globalization.getCurrencyPattern_description">Description</a>
 </h2>
 
-<p>It returns the pattern to the successCB callback with a properties object as a parameter. That object should have the following properties:</p>
+<p>Returns the pattern to the <code>successCallback</code> with a <code>properties</code> object
+as a parameter. That object should contain the following properties:</p>
 
 <ul>
-<li>pattern {String}: The currency pattern for formatting and parsing currency values.  The patterns follow Unicode Technical Standard #35. <a class="external" href="http://unicode.org/reports/tr35/tr35-4.html">http://unicode.org/reports/tr35/tr35-4.html</a>
+<li>
+<strong>pattern</strong>: The currency pattern to format and parse currency values.  The patterns follow Unicode Technical Standard #35. <a class="external" href="http://unicode.org/reports/tr35/tr35-4.html">http://unicode.org/reports/tr35/tr35-4.html</a>. <em>(String)</em>
 </li>
-<li>code {String}: The ISO 4217 currency code for the pattern.</li>
-<li>fraction {Number}: The number of fractional digits to use when parsing and formatting currency.</li>
-<li>rounding {Number}: The rounding increment to use when parsing and formatting.</li>
-<li>decimal: {String}: The decimal symbol to use for parsing and formatting.</li>
-<li>grouping: {String}: The grouping symbol to use for parsing and formatting.</li>
+<li>
+<strong>code</strong>: The ISO 4217 currency code for the pattern. <em>(String)</em>
+</li>
+<li>
+<strong>fraction</strong>: The number of fractional digits to use when parsing and formatting currency. <em>(Number)</em>
+</li>
+<li>
+<strong>rounding</strong>: The rounding increment to use when parsing and formatting. <em>(Number)</em>
+</li>
+<li>
+<strong>decimal</strong>: The decimal symbol to use for parsing and formatting. <em>(String)</em>
+</li>
+<li>
+<strong>grouping</strong>: The grouping symbol to use for parsing and formatting. <em>(String)</em>
+</li>
 </ul>
-<p>The inbound <code>currencyCode</code> parameter should be a String of one of the ISO 4217 currency codes, for example 'USD'.</p>
+<p>The inbound <code>currencyCode</code> parameter should be a <code>String</code> of one of
+the ISO 4217 currency codes, for example 'USD'.</p>
 
-<p>If there is an error obtaining the pattern, then the errorCB callback is invoked with a <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> object as a parameter. The expected code for this error is <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.FORMATTING_ERROR.</p>
+<p>If there is an error obtaining the pattern, then the <code>errorCallback</code>
+executes with a <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a></code> object as a parameter. The
+error's expected code is <code><a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.FORMATTING\_ERROR</code>.</p>
 
 <h2>
 <a name="globalization.getCurrencyPattern_supported_platforms">Supported Platforms</a>
@@ -1187,13 +1329,31 @@ to the client's user preferences and ISO 4217 currency code.</p>
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 </ul>
 <h2>
 <a name="globalization.getCurrencyPattern_quick_example">Quick Example</a>
 </h2>
 
-<p>In the case when the browser is set to the en_US locale and the selected currency is United States Dollars, this should display a popup dialog with text similar to:</p>
+<p>When the browser is set to the <code>en\_US</code> locale and the selected
+currency is United States Dollars, this example displays a popup
+dialog with text similar to the results that follow:</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getCurrencyPattern">globalization.getCurrencyPattern</a>(
+    'USD',
+    function (pattern) {
+        alert('pattern: '  + pattern.pattern  + '\n' +
+              'code: '     + pattern.code     + '\n' +
+              'fraction: ' + pattern.fraction + '\n' +
+              'rounding: ' + pattern.rounding + '\n' +
+              'decimal: '  + pattern.decimal  + '\n' +
+              'grouping: ' + pattern.grouping);
+    },
+    function () { alert('Error getting pattern\n'); }
+);
+</code></pre>
+
+<p>Expected result:</p>
 
 <pre class="prettyprint"><code>pattern: $#,##0.##;($#,##0.##)
 code: USD
@@ -1203,20 +1363,6 @@ decimal: .
 grouping: ,
 </code></pre>
 
-<p>.</p>
-
-<pre class="prettyprint"><code>navigator.<a href="cordova_globalization_globalization.md.html#globalization.getCurrencyPattern">globalization.getCurrencyPattern</a>(
-  'USD',
-  function (pattern) {alert('pattern: ' + pattern.pattern + '\n' +
-                            'code: ' + pattern.code + '\n' +
-                            'fraction: ' + pattern.fraction + '\n' +
-                            'rounding: ' + pattern.rounding + '\n' +
-                            'decimal: ' + pattern.decimal + '\n' +
-                            'grouping: ' + pattern.grouping);},
-  function () {alert('Error getting pattern\n');}
-);
-</code></pre>
-
 <h2>
 <a name="globalization.getCurrencyPattern_full_example">Full Example</a>
 </h2>
@@ -1224,18 +1370,18 @@ grouping: ,
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;getCurrencyPattern Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
     function checkPattern() {
       navigator.<a href="cordova_globalization_globalization.md.html#globalization.getCurrencyPattern">globalization.getCurrencyPattern</a>(
         'USD',
-        function (pattern) {alert('pattern: ' + pattern.pattern + '\n' +
-                                  'code: ' + pattern.code + '\n' +
+        function (pattern) {alert('pattern: '  + pattern.pattern  + '\n' +
+                                  'code: '     + pattern.code     + '\n' +
                                   'fraction: ' + pattern.fraction + '\n' +
                                   'rounding: ' + pattern.rounding + '\n' +
-                                  'decimal: ' + pattern.decimal + '\n' +
+                                  'decimal: '  + pattern.decimal  + '\n' +
                                   'grouping: ' + pattern.grouping);},
         function () {alert('Error getting pattern\n');}
       );
@@ -1260,7 +1406,7 @@ grouping: ,
 
 <ul>
 <li>
-<strong>code:</strong>  One of the following codes representing the error type (<code>Number</code>)
+<strong>code</strong>:  One of the following codes representing the error type <em>(Number)</em>
 <ul>
 <li>
 <a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a>.UNKNOWN_ERROR: 0</li>
@@ -1273,7 +1419,8 @@ grouping: ,
 </ul>
 </li>
 <li>
-<strong>message:</strong>  A text message that includes the error explanation and/or details (<code>String</code>)</li>
+<strong>message</strong>:  A text message that includes the error's explanation and/or details <em>(String)</em>
+</li>
 </ul>
 <h2>
 <a name="GlobalizationError_description">Description</a>
@@ -1294,9 +1441,10 @@ grouping: ,
 <a name="GlobalizationError_quick_example">Quick Example</a>
 </h2>
 
-<p>When the following error callback is invoked, it should display a popup dialog with the text similar to "code: 3" and "message: ".</p>
+<p>When the following error callback executes, it displays a
+popup dialog with the text similar to <code>code: 3</code> and <code>message:</code></p>
 
-<pre class="prettyprint"><code>function errorCB(error) {
+<pre class="prettyprint"><code>function errorCallback(error) {
     alert('code: ' + error.code + '\n' +
           'message: ' + error.message + '\n');
 };
@@ -1309,17 +1457,17 @@ grouping: ,
 <pre class="prettyprint"><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Cordova&lt;/title&gt;
+    &lt;title&gt;<a href="cordova_globalization_globalization.md.html#GlobalizationError">GlobalizationError</a> Example&lt;/title&gt;
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    function successCB(date) {
+    function successCallback(date) {
       alert('month:' + date.month +
-            ' day:' + date.day + 
+            ' day:' + date.day +
             ' year:' + date.year + '\n');
     }
 
-    function errorCB(error) {
+    function errorCallback(error) {
       alert('code: ' + error.code + '\n' +
             'message: ' + error.message + '\n');
     };
@@ -1327,8 +1475,8 @@ grouping: ,
     function checkError() {
       navigator.<a href="cordova_globalization_globalization.md.html#globalization.stringToDate">globalization.stringToDate</a>(
         'notADate',
-        successCB,
-        errorCB,
+        successCallback,
+        errorCallback,
         {selector:'foobar'}
       );
     }

@@ -22,6 +22,7 @@ using System.Windows.Resources;
 using Microsoft.Phone.Controls;
 using Microsoft.Xna.Framework.Audio;
 using WPCordovaClassLib.Cordova.UI;
+using System.Diagnostics;
 
 
 namespace WPCordovaClassLib.Cordova.Commands
@@ -32,6 +33,12 @@ namespace WPCordovaClassLib.Cordova.Commands
         const int DEFAULT_DURATION = 5;
 
         private NotificationBox notifyBox;
+
+        private class NotifBoxData
+        {
+            public NotificationBox previous;
+            public string callbackId;
+        }
 
         private PhoneApplicationPage Page
         {
@@ -48,7 +55,7 @@ namespace WPCordovaClassLib.Cordova.Commands
         }
 
         // blink api - doesn't look like there is an equivalent api we can use...
-        
+
         [DataContract]
         public class AlertOptions
         {
@@ -82,14 +89,15 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         public void alert(string options)
         {
+            string[] args = JSON.JsonHelper.Deserialize<string[]>(options);
+            AlertOptions alertOpts = new AlertOptions();
+            alertOpts.message = args[0];
+            alertOpts.title = args[1];
+            alertOpts.buttonLabel = args[2];
+            string aliasCurrentCommandCallbackId = args[3];
+
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                string[] args = JSON.JsonHelper.Deserialize<string[]>(options);
-                AlertOptions alertOpts = new AlertOptions();
-                alertOpts.message = args[0];
-                alertOpts.title = args[1];
-                alertOpts.buttonLabel = args[2];
-
                 PhoneApplicationPage page = Page;
                 if (page != null)
                 {
@@ -98,7 +106,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                     {
                         var previous = notifyBox;
                         notifyBox = new NotificationBox();
-                        notifyBox.Tag = previous;
+                        notifyBox.Tag = new NotifBoxData{ previous = previous, callbackId = aliasCurrentCommandCallbackId };
                         notifyBox.PageTitle.Text = alertOpts.title;
                         notifyBox.SubTitle.Text = alertOpts.message;
                         Button btnOK = new Button();
@@ -123,14 +131,15 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         public void confirm(string options)
         {
+            string[] args = JSON.JsonHelper.Deserialize<string[]>(options);
+            AlertOptions alertOpts = new AlertOptions();
+            alertOpts.message = args[0];
+            alertOpts.title = args[1];
+            alertOpts.buttonLabel = args[2];
+            string aliasCurrentCommandCallbackId = args[3];
+
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                string[] args = JSON.JsonHelper.Deserialize<string[]>(options);
-                AlertOptions alertOpts = new AlertOptions();
-                alertOpts.message = args[0];
-                alertOpts.title = args[1];
-                alertOpts.buttonLabel = args[2];
-
                 PhoneApplicationPage page = Page;
                 if (page != null)
                 {
@@ -139,7 +148,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                     {
                         var previous = notifyBox;
                         notifyBox = new NotificationBox();
-                        notifyBox.Tag = previous; 
+                        notifyBox.Tag = new NotifBoxData{ previous = previous, callbackId = aliasCurrentCommandCallbackId };
                         notifyBox.PageTitle.Text = alertOpts.title;
                         notifyBox.SubTitle.Text = alertOpts.message;
 
@@ -149,6 +158,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                         {
                             labels = alertOpts.buttonLabel.Split(',');
                         }
+
                         for (int n = 0; n < labels.Length; n++)
                         {
                             Button btn = new Button();
@@ -175,14 +185,16 @@ namespace WPCordovaClassLib.Cordova.Commands
         void page_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
             PhoneApplicationPage page = sender as PhoneApplicationPage;
-
+            string callbackId = "";
             if (page != null && notifyBox != null)
             {
                 Grid grid = page.FindName("LayoutRoot") as Grid;
                 if (grid != null)
                 {
                     grid.Children.Remove(notifyBox);
-                    notifyBox = notifyBox.Tag as NotificationBox;
+                    NotifBoxData notifBoxData = notifyBox.Tag as NotifBoxData;
+                    notifyBox = notifBoxData.previous;
+                    callbackId = notifBoxData.callbackId;
                 }
                 if (notifyBox == null)
                 {
@@ -191,7 +203,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                 e.Cancel = true;
             }
 
-            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, 0));
+            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, 0), callbackId);
         }
 
         void btnOK_Click(object sender, RoutedEventArgs e)
@@ -199,13 +211,14 @@ namespace WPCordovaClassLib.Cordova.Commands
             Button btn = sender as Button;
             FrameworkElement notifBoxParent = null;
             int retVal = 0;
+            string callbackId = "";
             if (btn != null)
             {
                 retVal = (int)btn.Tag + 1;
 
                 notifBoxParent = btn.Parent as FrameworkElement;
                 while ((notifBoxParent = notifBoxParent.Parent as FrameworkElement) != null &&
-                       !(notifBoxParent is NotificationBox));
+                       !(notifBoxParent is NotificationBox)) ;
             }
             if (notifBoxParent != null)
             {
@@ -217,15 +230,19 @@ namespace WPCordovaClassLib.Cordova.Commands
                     {
                         grid.Children.Remove(notifBoxParent);
                     }
-                    notifyBox = notifBoxParent.Tag as NotificationBox;
+
+                    NotifBoxData notifBoxData = notifBoxParent.Tag as NotifBoxData;
+                    notifyBox = notifBoxData.previous;
+                    callbackId = notifBoxData.callbackId;
+
                     if (notifyBox == null)
                     {
                         page.BackKeyPress -= page_BackKeyPress;
                     }
                 }
-                
+
             }
-            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, retVal));
+            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, retVal),callbackId);
         }
 
 
@@ -323,7 +340,7 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         public void vibrate(string vibrateDuration)
         {
-            
+
             int msecs = 200; // set default
 
             try

@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -100,6 +103,10 @@
         <div id="subheader">
             <h1>Upgrading Cordova Android</h1>
             <small><select><option value="Upgrading%2520Cordova%2520Android">Upgrading Cordova Android</option>
+<option value="Upgrading%20Cordova%20Android_upgrade_to_2_9_0_from_2_8_0">      - Upgrade to 2.9.0 from 2.8.0</option>
+<option value="Upgrading%20Cordova%20Android_upgrade_to_2_8_0_from_2_7_0">      - Upgrade to 2.8.0 from 2.7.0</option>
+<option value="Upgrading%20Cordova%20Android_upgrade_to_2_7_0_from_2_6_0">      - Upgrade to 2.7.0 from 2.6.0</option>
+<option value="Upgrading%20Cordova%20Android_upgrade_to_2_6_0_from_2_5_0">      - Upgrade to 2.6.0 from 2.5.0</option>
 <option value="Upgrading%20Cordova%20Android_upgrade_to_2_5_0_from_2_4_0">      - Upgrade to 2.5.0 from 2.4.0</option>
 <option value="Upgrading%20Cordova%20Android_upgrade_to_2_4_0_from_2_3_0">      - Upgrade to 2.4.0 from 2.3.0</option>
 <option value="Upgrading%20Cordova%20Android_upgrade_to_2_3_0_from_2_2_0">      - Upgrade to 2.3.0 from 2.2.0</option>
@@ -144,8 +151,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -160,6 +170,58 @@
                 <h1><a name="Upgrading%20Cordova%20Android">Upgrading Cordova Android</a></h1>
 
 <p>This document is for people who need to upgrade their Cordova versions from an older version to a current version of Cordova.</p>
+
+<h2>
+<a name="Upgrading%20Cordova%20Android_upgrade_to_2_9_0_from_2_8_0">Upgrade to 2.9.0 from 2.8.0</a>
+</h2>
+
+<ol>
+<li>Run bin/update <project_path></project_path>
+</li>
+</ol>
+<h2>
+<a name="Upgrading%20Cordova%20Android_upgrade_to_2_8_0_from_2_7_0">Upgrade to 2.8.0 from 2.7.0</a>
+</h2>
+
+<ol>
+<li>Remove cordova-2.7.0.jar from the libs directory in your project</li>
+<li>Add cordova-2.8.0.jar to the libs directory in your project</li>
+<li>If you are using Eclipse, please refresh your eclipse project and do a clean</li>
+<li>Copy the new cordova.js into your project</li>
+<li>Update your HTML to use the new cordova.js file</li>
+<li>Copy the res/xml/config.xml to be the same as the one found in framework/res/xml/config.xml</li>
+<li>Update framework/res/xml/config.xml to have similar settings as it did previously</li>
+<li>Copy files from bin/templates/cordova to the cordova directory in your project</li>
+</ol>
+<h2>
+<a name="Upgrading%20Cordova%20Android_upgrade_to_2_7_0_from_2_6_0">Upgrade to 2.7.0 from 2.6.0</a>
+</h2>
+
+<ol>
+<li>Remove cordova-2.6.0.jar from the libs directory in your project</li>
+<li>Add cordova-2.7.0.jar to the libs directory in your project</li>
+<li>If you are using Eclipse, please refresh your eclipse project and do a clean</li>
+<li>Copy the new cordova-2.7.0.js into your project</li>
+<li>Update your HTML to use the new cordova-2.7.0.js file</li>
+<li>Copy the res/xml/config.xml to be the same as the one found in framework/res/xml/config.xml</li>
+<li>Update framework/res/xml/config.xml to have similar settings as it did previously</li>
+<li>Copy files from bin/templates/cordova to the cordova directory in your project</li>
+</ol>
+<h2>
+<a name="Upgrading%20Cordova%20Android_upgrade_to_2_6_0_from_2_5_0">Upgrade to 2.6.0 from 2.5.0</a>
+</h2>
+
+<ol>
+<li>Remove cordova-2.5.0.jar from the libs directory in your project</li>
+<li>Add cordova-2.6.0.jar to the libs directory in your project</li>
+<li>If you are using Eclipse, please refresh your eclipse project and do a clean</li>
+<li>Copy the new cordova-2.6.0.js into your project</li>
+<li>Update your HTML to use the new cordova-2.6.0.js file</li>
+<li>Copy the res/xml/config.xml to be the same as the one found in framework/res/xml/config.xml</li>
+<li>Update framework/res/xml/config.xml to have similar settings as it did previously</li>
+<li>Copy files from bin/templates/cordova to the cordova directory in your project</li>
+</ol>
+<p>. Run bin/update <project> with the project path listed in the Cordova Source directory</project></p>
 
 <h2>
 <a name="Upgrading%20Cordova%20Android_upgrade_to_2_5_0_from_2_4_0">Upgrade to 2.5.0 from 2.4.0</a>

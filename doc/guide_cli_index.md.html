@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+<meta name="generator" content="joDoc">
+<title>PhoneGap API Documentation</title>
+<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+<link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+</head>
+<body>
+        <div id="header">
+            <h1><a href="index.html">PhoneGap Documentation</a></h1>
+            <small>
+                <select><optgroup label="English" value="en">
+<option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
+<option value="2.7.0rc1">2.7.0rc1</option>
+<option value="2.7.0">2.7.0</option>
+<option value="2.6.0rc1">2.6.0rc1</option>
+<option value="2.6.0">2.6.0</option>
+<option value="2.5.0rc1">2.5.0rc1</option>
+<option value="2.5.0">2.5.0</option>
+<option value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.4.0">2.4.0</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
+<option value="2.2.0rc2">2.2.0rc2</option>
+<option value="2.2.0rc1">2.2.0rc1</option>
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0rc2">2.1.0rc2</option>
+<option value="2.1.0rc1">2.1.0rc1</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0rc1">2.0.0rc1</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0rc1">1.9.0rc1</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.8.0rc1">1.8.0rc1</option>
+<option value="1.8.0">1.8.0</option>
+<option value="1.7.0rc1">1.7.0rc1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="1.6.1">1.6.1</option>
+<option value="1.6.0rc1">1.6.0rc1</option>
+<option value="1.6.0">1.6.0</option>
+<option value="1.5.0rc1">1.5.0rc1</option>
+<option value="1.5.0">1.5.0</option>
+<option value="1.4.1">1.4.1</option>
+<option value="1.4.0rc1">1.4.0rc1</option>
+<option value="1.4.0">1.4.0</option>
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+<option value="1.0.0rc3">1.0.0rc3</option>
+<option value="1.0.0rc2">1.0.0rc2</option>
+<option value="1.0.0rc1">1.0.0rc1</option>
+<option value="1.0.0">1.0.0</option>
+<option value="0.9.6">0.9.6</option>
+<option value="0.9.5.1">0.9.5.1</option>
+<option value="0.9.5">0.9.5</option>
+<option value="0.9.4">0.9.4</option>
+<option value="0.9.3">0.9.3</option>
+<option value="0.9.2">0.9.2</option>
+</optgroup>
+<optgroup label="Español" value="es"><option value="1.0.0">1.0.0</option></optgroup>
+<optgroup label="Français" value="fr">
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+</optgroup>
+<optgroup label="Japanese" value="jp">
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="0.9.5">0.9.5</option>
+</optgroup>
+<optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
+        </div>
+        <div id="subheader">
+            <h1>The Cordova Command-line Interface</h1>
+            <small><select><option value="The%2520Cordova%2520Command-line%2520Interface">The Cordova Command-line Interface</option>
+<option value="The%20Cordova%20Command-line%20Interface_prerequisites">      - Prerequisites</option>
+<option value="The%20Cordova%20Command-line%20Interface_create_an_app">      - Create an App</option>
+<option value="The%20Cordova%20Command-line%20Interface_add_platforms">      - Add Platforms</option>
+<option value="The%20Cordova%20Command-line%20Interface_build_the_app">      - Build the App</option>
+<option value="The%20Cordova%20Command-line%20Interface_view_the_app_in_an_emulator">      - View the App in an Emulator</option></select></small>
+        </div>
+
+        <div id="sidebar">
+            <div class="vertical_divider"></div>
+        <h1>API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+<li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
+<li><a href="cordova_storage_storage.md.html#Storage">Storage</a></li>
+</ul>
+<h1>Guides</h1>
+<ul>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
+<li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
+<li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
+<li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
+<li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
+<li><a href="guide_whitelist_index.md.html#Domain%20Whitelist%20Guide">Domain Whitelist Guide</a></li>
+<li><a href="guide_cordova-webview_index.md.html#Embedding%20WebView">Embedding WebView</a></li>
+<li><a href="_index.html">Keyword Index</a></li>
+</ul>
+</div>
+
+        <div id="scrollable">
+            <div id="content">
+                <h1><a name="The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></h1>
+
+<p>This guide shows you how to create applications and deploy them to
+various native mobile platforms using the <code>cordova</code> command-line
+interface (CLI). This tool allows you to create new projects, build
+them on different platforms, and run them within an emulator. You can
+also use the CLI to initialize project code, after which you use
+various platforms' IDEs to develop them further.</p>
+
+<h2>
+<a name="The%20Cordova%20Command-line%20Interface_prerequisites">Prerequisites</a>
+</h2>
+
+<p>Before running any command-line tools, you need to install SDKs for
+each platform you wish to target.
+<!-- XREF
+(See the <a href="guide_getting-started_index.md.html#Platform Guides">Platform Guides</a> for more details.)
+XREF --></p>
+
+<p>To add support or rebuild a project for any platform, you need to run
+the command-line interface from the same machine that supports the
+platform's SDK. The CLI supports the following combinations:</p>
+
+<ul>
+<li>iOS             (Mac)</li>
+<li>Android         (Mac, Linux)</li>
+<li>Blackberry      (Mac, Windows)</li>
+<li>Windows Phone 7 (Windows)</li>
+<li>Windows Phone 8 (Windows)</li>
+</ul>
+<p>On the Mac, the command-line is available via the <em>Terminal</em>
+application. On the PC, it's available as <em>Command Prompt</em> under
+<em>Accessories</em>.</p>
+
+<p>The more likely it is that you run the CLI from different machines,
+the more it makes sense to maintain a remote source code repository,
+whose assets you pull down to local working directories.</p>
+
+<p>To install the <code>cordova</code> command-line tool, follow these steps:</p>
+
+<ol>
+<li><p>Download and install <a class="external" href="http://nodejs.org/">Node.js</a>. Following
+installation, you should be able to invoke <code>node</code> or <code>npm</code> on your
+command line.</p></li>
+<li>
+<p>Install the <code>cordova</code> utility. In Unix, prefixing the additional
+<code>sudo</code> command may be necessary to install development utilities in
+otherwise restricted directories:</p>
+
+<pre class="prettyprint"><code>$ sudo npm install -g cordova
+</code></pre>
+
+<p>The installation log may produce errors for any uninstalled
+platform SDKs.  Following installation, you should be able to run
+<code>cordova</code> on the command line.</p>
+</li>
+<li>
+<p>To ensure permissions are correct, run this command on Mac or
+Linux, changing <em>LOGIN</em> to match your account name:</p>
+
+<pre class="prettyprint"><code>$ sudo chown -R LOGIN /usr/local/lib/node_modules/cordova
+</code></pre>
+</li>
+</ol>
+<p>After installing the <code>cordova</code> utility, you can always update it to
+the latest version by running the following command:</p>
+
+<pre class="prettyprint"><code>    $ sudo npm update -g cordova
+</code></pre>
+
+<p>Use this syntax to install a specific version:</p>
+
+<pre class="prettyprint"><code>    $ sudo npm install -g cordova@2.8.0
+</code></pre>
+
+<p>Run the <code>info</code> command for a listing that includes the current version
+along with other available version numbers:</p>
+
+<pre class="prettyprint"><code>    $ npm info cordova
+</code></pre>
+
+<h2>
+<a name="The%20Cordova%20Command-line%20Interface_create_an_app">Create an App</a>
+</h2>
+
+<p>Go to the directory where you maintain your source code, and run a
+command such as the following:</p>
+
+<pre class="prettyprint"><code>    $ cordova create HelloWorld com.example.hello "Hello World"
+</code></pre>
+
+<p>The first argument specifies a <em>HelloWorld</em> directory to be generated
+for your project. Its <code>www</code> subdirectory houses your application's
+home page, along with various resources under <code>css</code>, <code>js</code>, and <code>img</code>,
+which follow common web development file-naming conventions. The
+<code>config.xml</code> file contains important metadata needed to generate and
+distribute the application.</p>
+
+<p>The other two arguments are optional: the <code>com.example.hello</code> argument
+provides your project with a reverse-domain-style identifier, and the
+<code>"Hello World!"</code> provides the application's display text. You can edit
+both of these values later in the <code>config.xml</code> file.</p>
+
+<h2>
+<a name="The%20Cordova%20Command-line%20Interface_add_platforms">Add Platforms</a>
+</h2>
+
+<p>All subsequent commands need to be run within the project's directory,
+or any subdirectories within its scope:</p>
+
+<pre class="prettyprint"><code>    $ cd HelloWorld
+</code></pre>
+
+<p>Before you can build the project, you need to specify a set of target
+platforms. Your ability to run these commands depends on whether your
+machine supports each SDK, and whether you have already installed each
+SDK.  Run any of these from a Mac:</p>
+
+<pre class="prettyprint"><code>    $ cordova platform add ios
+    $ cordova platform add android
+    $ cordova platform add blackberry
+</code></pre>
+
+<p>Run any of these from a Windows machine, where <em>wp</em> refers to
+different versions of the Windows Phone operating system:</p>
+
+<pre class="prettyprint"><code>    $ cordova platform add wp7
+    $ cordova platform add wp8
+    $ cordova platform add android
+    $ cordova platform add blackberry
+</code></pre>
+
+<p>Run this to check your current set of platforms:</p>
+
+<pre class="prettyprint"><code>    $ cordova platforms ls
+</code></pre>
+
+<p>(Note the <code>platform</code> and <code>platforms</code> commands are synonymous.)</p>
+
+<p>Run either of the following synonymous commands to remove a platform:</p>
+
+<pre class="prettyprint"><code>    $ cordova platform remove blackberry
+    $ cordova platform rm android
+</code></pre>
+
+<p>Running commands to add or remove platforms affects the contents of
+the project's <em>platforms</em> directory, where each specified platform
+appears as a subdirectory. The <em>www</em> source directory is reproduced
+within each platform's subdirectory, appearing for example in
+<em>platforms/ios/www</em> or <em>platforms/android/assets/www</em>.  By default,
+each platform's configuration file is set up to be able to access all
+of Cordova's APIs.</p>
+
+<p>If you wish, you can use an SDK at this point to open the project you
+created. However, any edits you make to the project within an SDK
+affect the derivative set of assets, not the original cross-platform
+source files. Use this approach if you simply want to initialize a
+project.
+<!-- XREF
+(See the <a href="guide_getting-started_index.md.html#Platform Guides">Platform Guides</a> for information on how to develop applications within each SDK.)
+XREF -->
+Read on if you wish to use command-line tools for the entire
+development cycle.</p>
+
+<h2>
+<a name="The%20Cordova%20Command-line%20Interface_build_the_app">Build the App</a>
+</h2>
+
+<p>By default, the <code>cordova create</code> script generates a skeletal web-based
+application whose home page is the project's <code>www/index.html</code> file.
+Edit this application however you want, but any initialization should
+be specified as part of the <code><a href="cordova_events_events.md.html#deviceready">deviceready</a></code> event handler, referenced by
+default from <code>www/js/index.js</code>.
+<!-- XREF
+(See API and Configuration Guide for details.)
+XREF --></p>
+
+<p>Run the following command to iteratively build the project:</p>
+
+<pre class="prettyprint"><code>    $ cordova build
+</code></pre>
+
+<p>This generates platform-specific code within the project's <code>platforms</code>
+subdirectory.  You can optionally limit the scope of each build to
+specific platforms:</p>
+
+<pre class="prettyprint"><code>    $ cordova build ios
+</code></pre>
+
+<p>The <code>cordova build</code> command is a shorthand for the following, which in
+this example is also targeted to a single platform:</p>
+
+<pre class="prettyprint"><code>    $ cordova prepare ios
+    $ cordova compile ios
+</code></pre>
+
+<p>In this case, once you run <code>prepare</code>, you can use Apple's Xcode SDK as
+an alternative to modify and compile the platform-specific code that
+Cordova generates within <code>platforms/ios</code>. You can use the same
+approach with other platforms' IDEs.</p>
+
+<!-- NOTE: assume `ripple` command will be removed, along with `serve`
+
+## View the App in a Browser
+
+Since the application uses web-based components, you can often use a
+standard web browser to preview them directly from the source _www_
+directory.  The `ripple` command previews the application within a
+browser-based emulation environment, in this case mimicking how it
+would appear on an iPhone:
+
+        $ cordova ripple ios
+
+![](img/guide/cli/scr_ripple.png)
+
+The _ripple_ emulator provides an outer skin that demonstrates how
+applications work with many device-level features. For example, you
+can simulate changes in location, changes to orientation, and other
+accelerometer-driven shaking gestures. Other platform features, such
+as access to the camera or user contacts, can often be tested on the
+SDK's device emulator, or else on the device itself.
+(See View the App in an Emulator, below.)
+
+The default application Cordova provides demonstrates a handler for
+the custom `<a href="cordova_events_events.md.html#deviceready">deviceready</a>` event, which ordinarily fires once Cordova
+establishes contact with device-level APIs, at which point an
+application can start running. Within the ripple emulator, you must
+fire the event manually:
+
+![](img/guide/cli/scr_ripple_event.png)
+
+As part of its initialization phase, The application displays a new
+log message:
+
+![](img/guide/cli/scr_ripple_ready.png)
+
+Specifying a platform, such as `ios` or `android`, makes the
+application run under `ripple` with a user agent string and screen
+size for a particular device.  You also have the option to modify the
+__Devices__ tab at the top left to change the target device.  For
+example, here is how an application would appear on an iPad that's
+tipped to its side:
+
+![](img/guide/cli/scr_ripple_ipad.png)
+
+The `ripple` command is appropriate if your application responds to
+location, orientation, and varying network conditions, or else if it
+doesn't interact with any of the Cordova APIs at all. The following
+section shows how to run the app in a full platform emulator, which
+may allow access to other device features. Otherwise see Run the App
+on the <a href="cordova_device_device.md.html#Device">Device</a>, below.
+
+-->
+
+<h2>
+<a name="The%20Cordova%20Command-line%20Interface_view_the_app_in_an_emulator">View the App in an Emulator</a>
+</h2>
+
+<p>SDKs for mobile platforms come bundled with emulators that execute a
+device image, so that you can launch the app from the home screen and
+see how it interacts with many platform features.  Run a command such
+as the following to rebuild the app and view it within a specific
+platform's emulator:</p>
+
+<pre class="prettyprint"><code>    $ cordova emulate android
+</code></pre>
+
+<p>Some mobile platforms emulate a particular device by default, such as
+the iPhone for iOS projects. For other platforms, you may need to
+first associate a device with an emulator.
+<!-- XREF
+(See the <a href="guide_getting-started_index.md.html#Platform Guides">Platform Guides</a> for details.)
+XREF -->
+For example, you may first run the <code>android</code> command to launch the
+Android SDK, then run a particular device image, which launches it
+according to its default behavior:</p>
+
+<p><img src="img/guide/cli/android_emulate_init.png" alt="" title=""></p>
+
+<p>Following up with the <code>cordova emulate</code> command refreshes the emulator
+image to display the latest application, which is now available for
+launch from the home screen:</p>
+
+<p><img src="img/guide/cli/android_emulate_install.png" alt="" title=""></p>
+
+<!--
+
+## Run the App on the <a href="cordova_device_device.md.html#Device">Device</a>
+
+## Add a Plug-in
+
+plugin(s) [add|remove|ls [path]] ..... adds or removes a
+         plugin (from the specified path), or lists all
+         currently-added plugins
+
+-->
+
+            </div>
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script><script type="text/javascript" src="prettify/prettify.js"></script>
+</body>
+</html>

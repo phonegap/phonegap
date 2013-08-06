@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -127,7 +130,6 @@
 <option value="capture.captureImage_windows_phone_7_quirks">      - Windows Phone 7 Quirks</option>
 <option value="capture.captureImage_quick_example">      - Quick Example</option>
 <option value="capture.captureImage_full_example">      - Full Example</option>
-<option value="capture.captureImage_bada_quirks">      - Bada Quirks</option>
 <option value="CaptureImageOptions">CaptureImageOptions</option>
 <option value="CaptureImageOptions_properties">      - Properties</option>
 <option value="CaptureImageOptions_quick_example">      - Quick Example</option>
@@ -138,7 +140,6 @@
 <option value="capture.captureVideo_quick_example">      - Quick Example</option>
 <option value="capture.captureVideo_full_example">      - Full Example</option>
 <option value="capture.captureVideo_blackberry_webworks_quirks">      - BlackBerry WebWorks Quirks</option>
-<option value="capture.captureVideo_bada_2_x_quirks">      - Bada 2.x Quirks</option>
 <option value="CaptureVideoOptions">CaptureVideoOptions</option>
 <option value="CaptureVideoOptions_properties">      - Properties</option>
 <option value="CaptureVideoOptions_quick_example">      - Quick Example</option>
@@ -196,8 +197,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -212,8 +216,10 @@
                 <h1><a name="Capture">Capture</a></h1>
 
 <blockquote>
-  <p>Provides access to the audio, image, and video capture capabilities of the device.</p>
+  <p>Provides access to the device's audio, image, and video capture capabilities.</p>
 </blockquote>
+
+<p><strong>Important privacy note:</strong> Collection and use of images, video, or audio from the device's camera or microphone raises important privacy issues.  Your app's <a href="guide_getting-started_index.md.html">privacy policy</a> should discuss how the app uses such sensors and whether the data recorded is shared with any other parties.  In addition, if the app's use of the camera or microphone is not apparent in the user interface, you should provide a just-in-time notice prior to your app accessing the camera or microphone (if the device operating system doesn't do so already). That notice should provide the same information noted above, as well as obtaining the user's permission (e.g., by presenting choices for "OK" and "No Thanks").  Note that some app marketplaces may require your app to provide just-in-time notice and obtain permission from the user prior to accessing the camera or microphone.  For more information, please see the <a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a>.</p>
 
 <h2>
 <a name="Capture_objects">Objects</a>
@@ -224,7 +230,7 @@
 <li><a href="cordova_media_capture_capture.md.html#CaptureAudioOptions">CaptureAudioOptions</a></li>
 <li><a href="cordova_media_capture_capture.md.html#CaptureImageOptions">CaptureImageOptions</a></li>
 <li><a href="cordova_media_capture_capture.md.html#CaptureVideoOptions">CaptureVideoOptions</a></li>
-<li><a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a></li>
+<li>CaptureCallback</li>
 <li><a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a></li>
 <li><a href="cordova_media_capture_capture.md.html#ConfigurationData">ConfigurationData</a></li>
 <li><a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a></li>
@@ -244,7 +250,8 @@
 <a name="Capture_scope">Scope</a>
 </h2>
 
-<p>The <strong>capture</strong> object is assigned to the <strong>navigator.device</strong> object, and therefore has global scope.</p>
+<p>The <code>capture</code> object is assigned to the <code>navigator.device</code> object, and
+therefore has global scope.</p>
 
 <pre class="prettyprint"><code>// The global capture object
 var capture = navigator.device.capture;
@@ -256,11 +263,11 @@ var capture = navigator.device.capture;
 
 <ul>
 <li>
-<strong>supportedAudioModes:</strong> The audio recording formats supported by the device. (<a href="cordova_media_capture_capture.md.html#ConfigurationData">ConfigurationData</a>[])</li>
+<strong>supportedAudioModes</strong>: The audio recording formats supported by the device. (<a href="cordova_media_capture_capture.md.html#ConfigurationData">ConfigurationData</a>[])</li>
 <li>
-<strong>supportedImageModes:</strong> The recording image sizes and formats supported by the device. (<a href="cordova_media_capture_capture.md.html#ConfigurationData">ConfigurationData</a>[])</li>
+<strong>supportedImageModes</strong>: The recording image sizes and formats supported by the device. (<a href="cordova_media_capture_capture.md.html#ConfigurationData">ConfigurationData</a>[])</li>
 <li>
-<strong>supportedVideoModes:</strong> The recording video resolutions and formats supported by the device. (<a href="cordova_media_capture_capture.md.html#ConfigurationData">ConfigurationData</a>[])</li>
+<strong>supportedVideoModes</strong>: The recording video resolutions and formats supported by the device. (<a href="cordova_media_capture_capture.md.html#ConfigurationData">ConfigurationData</a>[])</li>
 </ul>
 <h2>
 <a name="Capture_methods">Methods</a>
@@ -268,11 +275,11 @@ var capture = navigator.device.capture;
 
 <ul>
 <li>
-<a href="cordova_media_capture_capture.md.html#capture.captureAudio">capture.captureAudio</a>: Launch the device audio recording application for recording audio clip(s).</li>
+<code><a href="cordova_media_capture_capture.md.html#capture.captureAudio">capture.captureAudio</a></code>: Launch the device's audio recording application to record audio clips.</li>
 <li>
-<a href="cordova_media_capture_capture.md.html#capture.captureImage">capture.captureImage</a>: Launch the device camera application for taking image(s).</li>
+<code><a href="cordova_media_capture_capture.md.html#capture.captureImage">capture.captureImage</a></code>: Launch the device's camera application to take photos.</li>
 <li>
-<a href="cordova_media_capture_capture.md.html#capture.captureVideo">capture.captureVideo</a>: Launch the device video recorder application for recording video(s).</li>
+<code><a href="cordova_media_capture_capture.md.html#capture.captureVideo">capture.captureVideo</a></code>: Launch the device's video recorder application to record videos.</li>
 </ul>
 <h2>
 <a name="Capture_supported_platforms">Supported Platforms</a>
@@ -302,15 +309,6 @@ var capture = navigator.device.capture;
 &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
 </code></pre>
 
-<h3>Bada</h3>
-
-<h4>manifest.xml</h4>
-
-<pre class="prettyprint"><code>&lt;Privilege&gt;
-    &lt;Name&gt;RECORDING&lt;/Name&gt;
-&lt;/Privilege&gt;
-</code></pre>
-
 <h3>BlackBerry WebWorks</h3>
 
 <h4>www/plugins.xml</h4>
@@ -331,11 +329,6 @@ var capture = navigator.device.capture;
 <pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_media_capture_capture.md.html#Capture">Capture</a>" value="CDVCapture" /&gt;
 </code></pre>
 
-<h3>webOS</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
-</code></pre>
-
 <h3>Windows Phone</h3>
 
 <h4>Properties/WPAppManifest.xml</h4>
@@ -353,10 +346,10 @@ var capture = navigator.device.capture;
 <h1><a name="capture.captureAudio">capture.captureAudio</a></h1>
 
 <blockquote>
-  <p>Start the audio recorder application and return information about captured audio clip file(s).</p>
+  <p>Start the audio recorder application and return information about the captured audio clip file(s).</p>
 </blockquote>
 
-<pre class="prettyprint"><code>navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureAudio">capture.captureAudio</a>( 
+<pre class="prettyprint"><code>navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureAudio">capture.captureAudio</a>(
     <a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a> captureSuccess, <a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a> captureError,  [<a href="cordova_media_capture_capture.md.html#CaptureAudioOptions">CaptureAudioOptions</a> options]
 );
 </code></pre>
@@ -365,11 +358,22 @@ var capture = navigator.device.capture;
 <a name="capture.captureAudio_description">Description</a>
 </h2>
 
-<p>This method starts an asynchronous operation to capture audio recordings using the device's default audio recording application.  The operation allows the device user to capture multiple recordings in a single session.</p>
+<p>Starts an asynchronous operation to capture audio recordings using the
+device's default audio recording application.  The operation allows
+the device user to capture multiple recordings in a single session.</p>
 
-<p>The capture operation ends when either the user exits the audio recording application, or the maximum number of recordings, specified by the <strong>limit</strong> parameter in <a href="cordova_media_capture_capture.md.html#CaptureAudioOptions">CaptureAudioOptions</a>, has been reached.  If no value is provided for the <strong>limit</strong> parameter, a default value of one (1) is used, and the capture operation will terminate after the user records a single audio clip.</p>
+<p>The capture operation ends when either the user exits the audio
+recording application, or the maximum number of recordings specified
+by <code><a href="cordova_media_capture_capture.md.html#CaptureAudioOptions">CaptureAudioOptions</a>.limit</code> is reached.  If no <code>limit</code> parameter
+value is specified, it defaults to one (1), and the capture operation
+terminates after the user records a single audio clip.</p>
 
-<p>When the capture operation is finished, it will invoke the <a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a> callback with an array of <a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a> objects describing each captured audio clip file.  If the operation is terminated by the user before an audio clip is captured, the <a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a> callback will be invoked with a <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a> object with the <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_NO_MEDIA_FILES</code> error code.</p>
+<p>When the capture operation finishes, the <code>CaptureCallback</code> executes
+with an array of <code><a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a></code> objects describing each captured audio
+clip file.  If the user terminates the operation before an audio clip
+is captured, the <code>CaptureErrorCallback</code> executes with a <code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a></code>
+object, featuring the <code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_NO_MEDIA_FILES</code> error
+code.</p>
 
 <h2>
 <a name="capture.captureAudio_supported_platforms">Supported Platforms</a>
@@ -423,11 +427,11 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
         var i, len;
         for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
             uploadFile(mediaFiles[i]);
-        }       
+        }
     }
 
     // Called if something bad happens.
-    // 
+    //
     function captureError(error) {
         var msg = 'An error occurred during capture: ' + error.code;
         navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>(msg, null, 'Uh oh!');
@@ -436,7 +440,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
     // A button will call this function
     //
     function captureAudio() {
-        // Launch device audio recording application, 
+        // Launch device audio recording application,
         // allowing user to capture up to 2 audio clips
         navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureAudio">capture.captureAudio</a>(captureSuccess, captureError, {limit: 2});
     }
@@ -456,7 +460,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
             function(error) {
                 console.log('Error uploading file ' + path + ': ' + error.code);
             },
-            { fileName: name });   
+            { fileName: name });
     }
 
     &lt;/script&gt;
@@ -472,21 +476,21 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
 </h2>
 
 <ul>
-<li>Cordova for BlackBerry WebWorks attempts to launch the <strong>Voice Notes Recorder</strong> application, provided by RIM, to capture the audio recordings.  The developer will receive a <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_NOT_SUPPORTED</code> error code if the application is not installed on the device.</li>
+<li>Cordova for BlackBerry WebWorks attempts to launch the <strong>Voice Notes Recorder</strong> application, provided by RIM, to capture audio recordings. The app receives a <code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_NOT_SUPPORTED</code> error code if the application is not installed on the device.</li>
 </ul>
 <h2>
 <a name="capture.captureAudio_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
-<li>iOS does not have a default audio recording application so a simple user interface is provided.</li>
+<li>iOS does not have a default audio recording application, so a simple user interface is provided.</li>
 </ul>
 <h2>
 <a name="capture.captureAudio_windows_phone_7_and_8_quirks">Windows Phone 7 and 8 Quirks</a>
 </h2>
 
 <ul>
-<li>Windows Phone 7 does not have a default audio recording application so a simple user interface is provided.</li>
+<li>Windows Phone 7 does not have a default audio recording application, so a simple user interface is provided.</li>
 </ul>
 <hr>
 <h1><a name="CaptureAudioOptions">CaptureAudioOptions</a></h1>
@@ -501,9 +505,9 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
 
 <ul>
 <li>
-<strong>limit:</strong> The maximum number of audio clips the device user can record in a single capture operation.  The value must be greater than or equal to 1 (defaults to 1).</li>
+<strong>limit</strong>: The maximum number of audio clips the device user can record in a single capture operation.  The value must be greater than or equal to 1 (defaults to 1).</li>
 <li>
-<strong>duration:</strong> The maximum duration of an audio sound clip, in seconds.</li>
+<strong>duration</strong>: The maximum duration of an audio sound clip, in seconds.</li>
 </ul>
 <h2>
 <a name="CaptureAudioOptions_quick_example">Quick Example</a>
@@ -520,21 +524,21 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
 </h2>
 
 <ul>
-<li>The <strong>duration</strong> parameter is not supported.  Recording lengths cannot be limited programmatically.</li>
+<li>The <code>duration</code> parameter is not supported.  Recording lengths cannot be limited programmatically.</li>
 </ul>
 <h2>
 <a name="CaptureAudioOptions_blackberry_webworks_quirks">BlackBerry WebWorks Quirks</a>
 </h2>
 
 <ul>
-<li>The <strong>duration</strong> parameter is not supported.  Recording lengths cannot be limited programmatically.</li>
+<li>The <code>duration</code> parameter is not supported.  Recording lengths cannot be limited programmatically.</li>
 </ul>
 <h2>
 <a name="CaptureAudioOptions_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
-<li>The <strong>limit</strong> parameter is not supported. One recording can be created for each invocation.</li>
+<li>The <code>limit</code> parameter is not supported, so only one recording can be created for each invocation.</li>
 </ul>
 <hr>
 <h1><a name="capture.captureImage">capture.captureImage</a></h1>
@@ -543,7 +547,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
   <p>Start the camera application and return information about captured image file(s).</p>
 </blockquote>
 
-<pre class="prettyprint"><code>navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureImage">capture.captureImage</a>( 
+<pre class="prettyprint"><code>navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureImage">capture.captureImage</a>(
     <a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a> captureSuccess, <a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a> captureError, [<a href="cordova_media_capture_capture.md.html#CaptureImageOptions">CaptureImageOptions</a> options]
 );
 </code></pre>
@@ -552,11 +556,21 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
 <a name="capture.captureImage_description">Description</a>
 </h2>
 
-<p>This method starts an asynchronous operation to capture images using the device camera application.  The operation allows the device user to capture multiple images in a single session.</p>
+<p>Starts an asynchronous operation to capture images using the device's
+camera application.  The operation allows users to capture more than
+one image in a single session.</p>
 
-<p>The capture operation ends when either the user exits the camera application, or the maximum number of images, specified by the <strong>limit</strong> parameter in <a href="cordova_media_capture_capture.md.html#CaptureImageOptions">CaptureImageOptions</a>, has been reached.  If no value is provided for the <strong>limit</strong> parameter, a default value of one (1) is used, and the capture operation will terminate after the user captures a single image.</p>
+<p>The capture operation ends either when the user closes the camera
+application, or the maximum number of recordings specified by
+<code><a href="cordova_media_capture_capture.md.html#CaptureAudioOptions">CaptureAudioOptions</a>.limit</code> is reached.  If no <code>limit</code> value is
+specified, it defaults to one (1), and the capture operation
+terminates after the user captures a single image.</p>
 
-<p>When the capture operation is finished, it will invoke the <a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a> callback with an array of <a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a> objects describing each captured image file.  If the operation is terminated by the user before an image is captured, the <a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a> callback will be invoked with a <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a> object with the <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_NO_MEDIA_FILES</code> error code.</p>
+<p>When the capture operation finishes, it invokes the <code><a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a></code>
+callback with an array of <code><a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a></code> objects describing each captured
+image file.  If the user terminates the operation before capturing an
+image, the <code><a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a></code> callback executes with a <code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a></code>
+object featuring a <code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_NO_MEDIA_FILES</code> error code.</p>
 
 <h2>
 <a name="capture.captureImage_supported_platforms">Supported Platforms</a>
@@ -567,7 +581,6 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
 <li>Windows Phone 7 and 8</li>
-<li>Bada 2.x</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -575,7 +588,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureA
 </h2>
 
 <p>Invoking the native camera application while your device is connected
-via Zune will not work, and the error callback will be triggered.</p>
+via Zune does not work, and the error callback executes.</p>
 
 <h2>
 <a name="capture.captureImage_quick_example">Quick Example</a>
@@ -618,11 +631,11 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
         var i, len;
         for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
             uploadFile(mediaFiles[i]);
-        }       
+        }
     }
 
     // Called if something bad happens.
-    // 
+    //
     function captureError(error) {
         var msg = 'An error occurred during capture: ' + error.code;
         navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>(msg, null, 'Uh oh!');
@@ -631,7 +644,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
     // A button will call this function
     //
     function captureImage() {
-        // Launch device camera application, 
+        // Launch device camera application,
         // allowing user to capture up to 2 images
         navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureImage">capture.captureImage</a>(captureSuccess, captureError, {limit: 2});
     }
@@ -651,7 +664,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
             function(error) {
                 console.log('Error uploading file ' + path + ': ' + error.code);
             },
-            { fileName: name });   
+            { fileName: name });
     }
 
     &lt;/script&gt;
@@ -662,41 +675,6 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
 &lt;/html&gt;
 </code></pre>
 
-<h2>
-<a name="capture.captureImage_bada_quirks">Bada Quirks</a>
-</h2>
-
-<p>Bada supports <em>captureImage</em> just like the other platforms. However there is <em>another</em> mode where you can capture a video or an image straight in the webview without launching any camera app. In order to do that you need to:</p>
-
-<ol>
-<li>
-<p>create a <em>&lt;div&gt;</em> element somewhere in your document and give it an id (such as "preview"). </p>
-
-<pre class="prettyprint"><code>&lt;div id="preview"&gt;&lt;/div&gt;
-</code></pre>
-</li>
-<li>
-<p>Initialize the camera preview with the following method</p>
-
-<pre class="prettyprint"><code>navigator.camera.showPreview("preview");
-</code></pre>
-</li>
-<li>
-<p>Once you get the preview you can</p>
-
-<p>3.1 <a href="cordova_media_capture_capture.md.html#Capture">Capture</a> an image with</p>
-
-<pre class="prettyprint"><code>var options = { destinationFilename: "images/cam01.jpg", highRes: false};
-navigator.<a href="cordova_media_capture_capture.md.html#capture.captureImage">capture.captureImage</a>(success, fail, options);
-</code></pre>
-</li>
-<li>
-<p>Hide the camera preview with the following method</p>
-
-<pre class="prettyprint"><code>navigator.camera.hidePreview("preview");
-</code></pre>
-</li>
-</ol>
 <hr>
 <h1><a name="CaptureImageOptions">CaptureImageOptions</a></h1>
 
@@ -710,7 +688,7 @@ navigator.<a href="cordova_media_capture_capture.md.html#capture.captureImage">c
 
 <ul>
 <li>
-<strong>limit:</strong> The maximum number of images the device user can capture in a single capture operation.  The value must be greater than or equal to 1 (defaults to 1).</li>
+<strong>limit</strong>: The maximum number of images the user can capture in a single capture operation. The value must be greater than or equal to 1 (defaults to 1).</li>
 </ul>
 <h2>
 <a name="CaptureImageOptions_quick_example">Quick Example</a>
@@ -727,7 +705,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
 </h2>
 
 <ul>
-<li>The <strong>limit</strong> parameter is not supported. One image is taken per invocation.</li>
+<li>The <strong>limit</strong> parameter is not supported, and only one image is taken per invocation.</li>
 </ul>
 <hr>
 <h1><a name="capture.captureVideo">capture.captureVideo</a></h1>
@@ -736,7 +714,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
   <p>Start the video recorder application and return information about captured video clip file(s).</p>
 </blockquote>
 
-<pre class="prettyprint"><code>navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureVideo">capture.captureVideo</a>( 
+<pre class="prettyprint"><code>navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureVideo">capture.captureVideo</a>(
     <a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a> captureSuccess, <a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a> captureError, [<a href="cordova_media_capture_capture.md.html#CaptureVideoOptions">CaptureVideoOptions</a> options]
 );
 </code></pre>
@@ -745,11 +723,22 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
 <a name="capture.captureVideo_description">Description</a>
 </h2>
 
-<p>This method starts an asynchronous operation to capture video recordings using the device video recording application.  The operation allows the device user to capture multiple recordings in a single session.</p>
+<p>Starts an asynchronous operation to capture video recordings using the
+device's video recording application.  The operation allows the user
+to capture more than one recordings in a single session.</p>
 
-<p>The capture operation ends when either the user exits the video recording application, or the maximum number of recordings, specified by the <strong>limit</strong> parameter in <a href="cordova_media_capture_capture.md.html#CaptureVideoOptions">CaptureVideoOptions</a>, has been reached.  If no value is provided for the <strong>limit</strong> parameter, a default value of one (1) is used, and the capture operation will terminate after the user records a single video clip.</p>
+<p>The capture operation ends when either the user exits the video
+recording application, or the maximum number of recordings specified
+by <code><a href="cordova_media_capture_capture.md.html#CaptureVideoOptions">CaptureVideoOptions</a>.limit</code> is reached.  If no <code>limit</code> parameter
+value is specified, it defaults to one (1), and the capture operation
+terminates after the user records a single video clip.</p>
 
-<p>When the capture operation is finished, it will invoke the <a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a> callback with an array of <a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a> objects describing each captured video clip file.  If the operation is terminated by the user before an video clip is captured, the <a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a> callback will be invoked with a <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a> object with the <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_NO_MEDIA_FILES</code> error code.</p>
+<p>When the capture operation finishes, it the <code><a href="cordova_media_capture_capture.md.html#CaptureCB">CaptureCB</a></code> callback
+executes with an array of <code><a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a></code> objects describing each captured
+video clip file.  If the user terminates the operation before
+capturing a video clip, the <code><a href="cordova_media_capture_capture.md.html#CaptureErrorCB">CaptureErrorCB</a></code> callback executes with a
+<code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a></code> object featuring a
+<code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_NO_MEDIA_FILES</code> error code.</p>
 
 <h2>
 <a name="capture.captureVideo_supported_platforms">Supported Platforms</a>
@@ -760,7 +749,6 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureI
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
 <li>iOS</li>
 <li>Windows Phone 7 and 8</li>
-<li>Bada 2.x</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -804,11 +792,11 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
         var i, len;
         for (i = 0, len = mediaFiles.length; i &lt; len; i += 1) {
             uploadFile(mediaFiles[i]);
-        }       
+        }
     }
 
     // Called if something bad happens.
-    // 
+    //
     function captureError(error) {
         var msg = 'An error occurred during capture: ' + error.code;
         navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>(msg, null, 'Uh oh!');
@@ -817,7 +805,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
     // A button will call this function
     //
     function captureVideo() {
-        // Launch device video recording application, 
+        // Launch device video recording application,
         // allowing user to capture up to 2 video clips
         navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureVideo">capture.captureVideo</a>(captureSuccess, captureError, {limit: 2});
     }
@@ -837,7 +825,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
             function(error) {
                 console.log('Error uploading file ' + path + ': ' + error.code);
             },
-            { fileName: name });   
+            { fileName: name });
     }
 
     &lt;/script&gt;
@@ -853,47 +841,8 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
 </h2>
 
 <ul>
-<li>Cordova for BlackBerry WebWorks attempts to launch the <strong>Video Recorder</strong> application, provided by RIM, to capture the video recordings.  The developer will receive a <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_NOT_SUPPORTED</code> error code if the application is not installed on the device.</li>
+<li>Cordova for BlackBerry WebWorks attempts to launch the <strong>Video Recorder</strong> application, provided by RIM, to capture video recordings. The app receives a <code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_NOT_SUPPORTED</code> error code if the application is not installed on the device.</li>
 </ul>
-<h2>
-<a name="capture.captureVideo_bada_2_x_quirks">Bada 2.x Quirks</a>
-</h2>
-
-<p>Bada supports <em>captureVideo</em> just like the other platforms. However there is <em>another</em> mode where you can capture a video or an image straight in the webview without launching any camera apps. In order to do that you need to:</p>
-
-<ol>
-<li>
-<p>create a <em>&lt;div&gt;</em> element somewhere in your document and give it an id (such as "preview"). </p>
-
-<pre class="prettyprint"><code>&lt;div id="preview"&gt;&lt;/div&gt;
-</code></pre>
-</li>
-<li>
-<p>Initialize the camera preview with the following method</p>
-
-<pre class="prettyprint"><code>navigator.camera.showPreview("preview");
-</code></pre>
-</li>
-<li>
-<p>Once you get the preview you can</p>
-
-<p>3.1 Start capturing a video with</p>
-
-<pre class="prettyprint"><code>navigator.capture.startVideoCapture(success, fail, {duration: 5000, destinationFilename: "videos/a.3gp"});
-</code></pre>
-
-<p>3.2 Stop the video capture with</p>
-
-<pre class="prettyprint"><code>navigator.capture.stopVideoCapture();
-</code></pre>
-</li>
-<li>
-<p>Hide the camera preview with the following method</p>
-
-<pre class="prettyprint"><code>navigator.camera.hidePreview("preview");
-</code></pre>
-</li>
-</ol>
 <hr>
 <h1><a name="CaptureVideoOptions">CaptureVideoOptions</a></h1>
 
@@ -907,9 +856,9 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
 
 <ul>
 <li>
-<strong>limit:</strong> The maximum number of video clips the device user can capture in a single capture operation.  The value must be greater than or equal to 1 (defaults to 1).</li>
+<strong>limit</strong>: The maximum number of video clips the device's user can capture in a single capture operation.  The value must be greater than or equal to 1 (defaults to 1).</li>
 <li>
-<strong>duration:</strong> The maximum duration of a video clip, in seconds.</li>
+<strong>duration</strong>: The maximum duration of a video clip, in seconds.</li>
 </ul>
 <h2>
 <a name="CaptureVideoOptions_quick_example">Quick Example</a>
@@ -926,15 +875,14 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
 </h2>
 
 <ul>
-<li>The <strong>duration</strong> parameter is not supported.  Recording lengths cannot be limited programmatically.</li>
+<li>The <strong>duration</strong> parameter is not supported, so the length of recordings cannot be limited programmatically.</li>
 </ul>
 <h2>
 <a name="CaptureVideoOptions_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
-<li>The <strong>limit</strong> parameter is not supported.  One video is recorded per invocation.</li>
-<li>The <strong>duration</strong> parameter is not supported.  Recording lengths cannot be limited programmatically.</li>
+<li>The <strong>limit</strong> parameter is not supported.  Only one video is recorded per invocation.</li>
 </ul>
 <hr>
 <h1><a name="CaptureError">CaptureError</a></h1>
@@ -949,7 +897,7 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
 
 <ul>
 <li>
-<strong>code:</strong> One of the pre-defined error codes listed below.</li>
+<strong>code</strong>: One of the pre-defined error codes listed below.</li>
 </ul>
 <h2>
 <a name="CaptureError_constants">Constants</a>
@@ -957,15 +905,15 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
 
 <ul>
 <li>
-<a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_INTERNAL_ERR</code>: <a href="cordova_camera_camera.md.html#Camera">Camera</a> or microphone failed to capture image or sound. </li>
+<code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_INTERNAL_ERR</code>: The camera or microphone failed to capture image or sound.</li>
 <li>
-<a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_APPLICATION_BUSY</code>: <a href="cordova_camera_camera.md.html#Camera">Camera</a> application or audio capture application is currently serving other capture request.</li>
+<code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_APPLICATION_BUSY</code>: The camera or audio capture application is currently serving another capture request.</li>
 <li>
-<a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_INVALID_ARGUMENT</code>: Invalid use of the API (e.g. limit parameter has value less than one).</li>
+<code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_INVALID_ARGUMENT</code>: Invalid use of the API (e.g. the value of <code>limit</code> is less than one).</li>
 <li>
-<a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_NO_MEDIA_FILES</code>: User exited camera application or audio capture application before capturing anything.</li>
+<code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_NO_MEDIA_FILES</code>: The user exits the camera or audio capture application before capturing anything.</li>
 <li>
-<a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.<code>CAPTURE_NOT_SUPPORTED</code>: The requested capture operation is not supported.</li>
+<code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a>.CAPTURE_NOT_SUPPORTED</code>: The requested capture operation is not supported.</li>
 </ul>
 <hr>
 <h1><a name="CaptureCB">CaptureCB</a></h1>
@@ -981,9 +929,12 @@ navigator.device.<a href="cordova_media_capture_capture.md.html#capture.captureV
 <a name="CaptureCB_description">Description</a>
 </h2>
 
-<p>This function is invoked after a successful capture operation has completed.  This means a media file has been captured, and either the user has exited the media capture application, or the capture limit has been reached.</p>
+<p>This function executes after a successful capture operation completes.
+At this point a media file has been captured, and either the user has
+exited the media capture application, or the capture limit has been
+reached.</p>
 
-<p>Each <a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a> object describes a captured media file.  </p>
+<p>Each <code><a href="cordova_media_capture_capture.md.html#MediaFile">MediaFile</a></code> object describes a captured media file.</p>
 
 <h2>
 <a name="CaptureCB_quick_example">Quick Example</a>
@@ -1013,9 +964,13 @@ function captureSuccess(mediaFiles) {
 <a name="CaptureErrorCB_description">Description</a>
 </h2>
 
-<p>This function is invoked if an error occurs when trying to launch a media capture operation and the capture application is busy, if an error occurs while the capture operation is taking place, or if the capture operation has been canceled by the user before any media files have been captured.</p>
+<p>This function executes if an error occurs when trying to launch a
+media capture operation. Failure scenarios include when the capture
+application is busy, a capture operation is already taking place, or
+the user cancels the operation before any media files are captured.</p>
 
-<p>This function is invoked with a <a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a> object containing an appropriate error code.</p>
+<p>This function executes with a <code><a href="cordova_media_capture_capture.md.html#CaptureError">CaptureError</a></code> object containing an
+appropriate error <code>code</code>.</p>
 
 <h2>
 <a name="CaptureErrorCB_quick_example">Quick Example</a>
@@ -1038,16 +993,18 @@ var captureError = function(error) {
 <a name="ConfigurationData_description">Description</a>
 </h2>
 
-<p>This object is used to describe media capture modes supported by the device.  The configuration data includes the MIME type, and capture dimensions (for video or image capture).  </p>
+<p>Describes media capture modes supported by the device.  The
+configuration data includes the MIME type, and capture dimensions for
+video or image capture.</p>
 
 <p>The MIME types should adhere to <a class="external" href="http://www.ietf.org/rfc/rfc2046.txt">RFC2046</a>.  Examples:</p>
 
 <ul>
-<li>video/3gpp</li>
-<li>video/quicktime</li>
-<li>image/jpeg</li>
-<li>audio/amr</li>
-<li>audio/wav </li>
+<li><code>video/3gpp</code></li>
+<li><code>video/quicktime</code></li>
+<li><code>image/jpeg</code></li>
+<li><code>audio/amr</code></li>
+<li><code>audio/wav</code></li>
 </ul>
 <h2>
 <a name="ConfigurationData_properties">Properties</a>
@@ -1055,11 +1012,11 @@ var captureError = function(error) {
 
 <ul>
 <li>
-<strong>type:</strong> The ASCII-encoded string in lower case representing the media type. (DOMString)</li>
+<strong>type</strong>: The ASCII-encoded lowercase string representing the media type. (DOMString)</li>
 <li>
-<strong>height:</strong> The height of the image or video in pixels.  In the case of a sound clip, this attribute has value 0. (Number)</li>
+<strong>height</strong>: The height of the image or video in pixels.  The value is zero for sound clips. (Number)</li>
 <li>
-<strong>width:</strong> The width of the image or video in pixels.  In the case of a sound clip, this attribute has value 0. (Number)</li>
+<strong>width</strong>: The width of the image or video in pixels.  The value is zero for sound clips. (Number)</li>
 </ul>
 <h2>
 <a name="ConfigurationData_quick_example">Quick Example</a>
@@ -1094,15 +1051,15 @@ for each (var mode in imageModes) {
 
 <ul>
 <li>
-<strong>name:</strong> The name of the file, without path information. (DOMString)</li>
+<strong>name</strong>: The name of the file, without path information. (DOMString)</li>
 <li>
-<strong>fullPath:</strong> The full path of the file, including the name. (DOMString)</li>
+<strong>fullPath</strong>: The full path of the file, including the name. (DOMString)</li>
 <li>
-<strong>type:</strong> The mime type (DOMString)</li>
+<strong>type</strong>: The file's mime type (DOMString)</li>
 <li>
-<strong>lastModifiedDate:</strong> The date and time that the file was last modified. (Date)</li>
+<strong>lastModifiedDate</strong>: The date and time when the file was last modified. (Date)</li>
 <li>
-<strong>size:</strong> The size of the file, in bytes. (Number)</li>
+<strong>size</strong>: The size of the file, in bytes. (Number)</li>
 </ul>
 <h2>
 <a name="MediaFile_methods">Methods</a>
@@ -1110,7 +1067,7 @@ for each (var mode in imageModes) {
 
 <ul>
 <li>
-<strong><a href="cordova_media_capture_capture.md.html#MediaFile.getFormatData">MediaFile.getFormatData</a>:</strong> Retrieves the format information of the media file.</li>
+<strong><a href="cordova_media_capture_capture.md.html#MediaFile.getFormatData">MediaFile.getFormatData</a></strong>: Retrieves the format information of the media file.</li>
 </ul>
 <hr>
 <h1><a name="MediaFile.getFormatData">MediaFile.getFormatData</a></h1>
@@ -1119,8 +1076,8 @@ for each (var mode in imageModes) {
   <p>Retrieves format information about the media capture file.</p>
 </blockquote>
 
-<pre class="prettyprint"><code>mediaFile.getFormatData( 
-    MediaFileDataSuccessCB successCallback, 
+<pre class="prettyprint"><code>mediaFile.getFormatData(
+    MediaFileDataSuccessCB successCallback,
     [MediaFileDataErrorCB errorCallback]
 );
 </code></pre>
@@ -1129,7 +1086,11 @@ for each (var mode in imageModes) {
 <a name="MediaFile.getFormatData_description">Description</a>
 </h2>
 
-<p>This function asynchronously attempts to retrieve the format information for the media file.  If successful, it invokes the MediaFileDataSuccessCB callback with a <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> object.  If the attempt fails, this function will invoke the MediaFileDataErrorCB callback.</p>
+<p>This function asynchronously attempts to retrieve the format
+information for the media file.  If successful, it invokes the
+<code>MediaFileDataSuccessCB</code> callback with a <code><a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a></code> object.  If
+the attempt fails, this function invokes the <code>MediaFileDataErrorCB</code>
+callback.</p>
 
 <h2>
 <a name="MediaFile.getFormatData_supported_platforms">Supported Platforms</a>
@@ -1146,19 +1107,22 @@ for each (var mode in imageModes) {
 <a name="MediaFile.getFormatData_blackberry_webworks_quirks">BlackBerry WebWorks Quirks</a>
 </h2>
 
-<p>There is no API that provides format information of media files.  Therefore, all <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> objects will be returned with default values.  See <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> documentation.</p>
+<p>Does not provide an API for information about media files, so all
+<code><a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a></code> objects return with default values.</p>
 
 <h2>
 <a name="MediaFile.getFormatData_android_quirks">Android Quirks</a>
 </h2>
 
-<p>The API for retrieving media file format information is limited.  Therefore, not all <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> properties are supported.  See <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> documentation.</p>
+<p>The API to access media file format information is limited, so not all
+<code><a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a></code> properties are supported.</p>
 
 <h2>
 <a name="MediaFile.getFormatData_ios_quirks">iOS Quirks</a>
 </h2>
 
-<p>The API for retrieving media file format information is limited.  Therefore, not all <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> properties are supported.  See <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> documentation.</p>
+<p>The API to access media file format information is limited, so not all
+<code><a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a></code> properties are supported.</p>
 
 <hr>
 <h1><a name="MediaFileData">MediaFileData</a></h1>
@@ -1173,69 +1137,71 @@ for each (var mode in imageModes) {
 
 <ul>
 <li>
-<strong>codecs:</strong> The actual format of the audio and video content. (DOMString)</li>
+<strong>codecs</strong>: The actual format of the audio and video content. (DOMString)</li>
 <li>
-<strong>bitrate:</strong> The average bitrate of the content.  In case of an image, this attribute has value 0. (Number)</li>
+<strong>bitrate</strong>: The average bitrate of the content.  The value is zero for images. (Number)</li>
 <li>
-<strong>height:</strong> The height of the image or video in pixels. In the case of a sound clip, this attribute has value 0. (Number)</li>
+<strong>height</strong>: The height of the image or video in pixels. The value is zero for audio clips. (Number)</li>
 <li>
-<strong>width:</strong> The width of the image or video in pixels. In the case of a sound clip, this attribute has value 0. (Number)</li>
+<strong>width</strong>: The width of the image or video in pixels. The value is zero for audio clips. (Number)</li>
 <li>
-<strong>duration:</strong> The length of the video or sound clip in seconds. In the case of an image, this attribute has value 0. (Number)</li>
+<strong>duration</strong>: The length of the video or sound clip in seconds. The value is zero for images. (Number)</li>
 </ul>
 <h2>
 <a name="MediaFileData_blackberry_webworks_quirks">BlackBerry WebWorks Quirks</a>
 </h2>
 
-<p>There is no API that provides format information of media files.  So the <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> object returned by the <a href="cordova_media_capture_capture.md.html#MediaFile.getFormatData">MediaFile.getFormatData</a> function will have the following default values:</p>
+<p>No API provides format information for media files, so the
+<code><a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a></code> object returned by <code><a href="cordova_media_capture_capture.md.html#MediaFile.getFormatData">MediaFile.getFormatData</a></code> features
+the following default values:</p>
 
 <ul>
 <li>
-<strong>codecs:</strong> Not supported. The attribute will always be null.</li>
+<strong>codecs</strong>: Not supported, and returns <code>null</code>.</li>
 <li>
-<strong>bitrate:</strong> Not supported.  The attribute will always be 0.</li>
+<strong>bitrate</strong>: Not supported, and returns zero.</li>
 <li>
-<strong>height:</strong> Not supported.  The attribute will always be 0.</li>
+<strong>height</strong>: Not supported, and returns zero.</li>
 <li>
-<strong>width:</strong> Not supported.  The attribute will always be 0.</li>
+<strong>width</strong>: Not supported, and returns zero.</li>
 <li>
-<strong>duration:</strong> Not supported.  The attribute will always be 0.</li>
+<strong>duration</strong>: Not supported, and returns zero.</li>
 </ul>
 <h2>
 <a name="MediaFileData_android_quirks">Android Quirks</a>
 </h2>
 
-<p>Support for the <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> properties is as follows:</p>
+<p>Supports the following <code><a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a></code> properties:</p>
 
 <ul>
 <li>
-<strong>codecs:</strong> Not supported.  The attribute will always be null.</li>
+<strong>codecs</strong>: Not supported, and returns <code>null</code>.</li>
 <li>
-<strong>bitrate:</strong> Not supported.  The attribute will always be 0.</li>
+<strong>bitrate</strong>: Not supported, and returns zero.</li>
 <li>
-<strong>height:</strong> Supported.  (Image and video files only).  </li>
+<strong>height</strong>: Supported: image and video files only.</li>
 <li>
-<strong>width:</strong> Supported.  (Image and video files only). </li>
+<strong>width</strong>: Supported: image and video files only.</li>
 <li>
-<strong>duration:</strong> Supported.  (Audio and video files only).</li>
+<strong>duration</strong>: Supported: audio and video files only.</li>
 </ul>
 <h2>
 <a name="MediaFileData_ios_quirks">iOS Quirks</a>
 </h2>
 
-<p>Support for the <a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a> properties is as follows:</p>
+<p>Supports the following <code><a href="cordova_media_capture_capture.md.html#MediaFileData">MediaFileData</a></code> properties:</p>
 
 <ul>
 <li>
-<strong>codecs:</strong> Not supported.  The attribute will always be null.</li>
+<strong>codecs</strong>: Not supported, and returns null.</li>
 <li>
-<strong>bitrate:</strong> Supported on iOS4 devices for audio only. The attribute will always be 0 for image and video.</li>
+<strong>bitrate</strong>: Supported on iOS4 devices for audio only. Returns zero for images and videos.</li>
 <li>
-<strong>height:</strong> Supported.  (Image and video files only).  </li>
+<strong>height</strong>: Supported: image and video files only.</li>
 <li>
-<strong>width:</strong> Supported.  (Image and video files only). </li>
+<strong>width</strong>: Supported: image and video files only.</li>
 <li>
-<strong>duration:</strong> Supported.  (Audio and video files only).</li>
+<strong>duration</strong>: Supported: audio and video files only.</li>
 </ul>
 </div>
         </div>

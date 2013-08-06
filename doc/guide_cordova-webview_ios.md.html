@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -129,8 +132,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -144,11 +150,15 @@
             <div id="content">
                 <h1><a name="Embedding%20Cordova%20WebView%20on%20iOS">Embedding Cordova WebView on iOS</a></h1>
 
-<p>Beginning with Cordova 1.4, you can use Cordova as a component in your iOS applications. This component is code-named "Cleaver".</p>
+<p>Beginning with Cordova 1.4, you can use Cordova as a component in your
+iOS applications. This component is code-named 'Cleaver'.</p>
 
-<p>New Cordova-based applications created using the Xcode template provided in Cordova 1.4 or greater use Cleaver, and this template is considered the reference implementation for Cleaver.</p>
+<p>New Cordova-based applications created using the Xcode template
+provided in Cordova 1.4 or greater use Cleaver. (The template is
+Cleaver's reference implementation.)</p>
 
-<p>Beginning with Cordova 2.0.0 and greater, we only support the sub-project based Cleaver implementation from now on.</p>
+<p>Cordova 2.0.0 and subsequent versions only support the sub-project
+based Cleaver implementation.</p>
 
 <h2>
 <a name="Embedding%20Cordova%20WebView%20on%20iOS_prerequisites">Prerequisites</a>
@@ -168,7 +178,7 @@
 
 <ol>
 <li>
-<strong>Download and extract the Cordova source</strong> to a <strong>permanent folder location</strong> on your hard drive (say to ~/Documents/Cordova)</li>
+<strong>Download and extract the Cordova source</strong> to a <strong>permanent folder location</strong> on your hard drive (say to <code>~/Documents/Cordova</code>)</li>
 <li>
 <strong>Quit Xcode</strong> if it is running.</li>
 <li>
@@ -178,19 +188,22 @@
 <li>
 <strong>Drag and drop</strong> the <code>config.xml</code> file into the Project Navigator of Xcode</li>
 <li>
-<strong>Choose</strong> the radio-button <strong>"Create groups for any added folders"</strong>, select the <strong>Finish</strong> button</li>
+<strong>Choose</strong> the <strong>Create groups for any added folders</strong> radio button and press <strong>Finish</strong>
+</li>
 <li>
 <strong>Drag and drop</strong> the <code>CordovaLib.xcodeproj</code> file into the Project Navigator of Xcode (from the permanent folder location above, and it should be in the CordovaLib sub-folder)</li>
 <li>Select <code>CordovaLib.xcodeproj</code> in the Project Navigator</li>
-<li>Press the key combination <strong>Option-Command-1</strong> to <a href="cordova_splashscreen_splashscreen.md.html#show">show</a> the <strong><a href="cordova_file_file.md.html#File">File</a> Inspector</strong>
+<li>Type the <strong>Option-Command-1</strong> key combination to show the <strong><a href="cordova_file_file.md.html#File">File</a> Inspector</strong>
 </li>
-<li>Choose <strong>"Relative to Group"</strong> in the <strong><a href="cordova_file_file.md.html#File">File</a> Inspector</strong> for the drop-down menu for <strong>Location</strong> </li>
-<li>Select the <strong>project icon</strong> in the Project Navigator, select your <strong>Target</strong>, then select the <strong>"Build Settings"</strong> tab</li>
-<li>Add <code>-all_load</code> and <code>-Obj-C</code> - for the <strong>"Other Linker <a href="cordova_file_file.md.html#Flags">Flags</a>"</strong> value</li>
-<li>Click on the <strong>project icon</strong> in the Project Navigator, select your <strong>Target</strong>, then select the <strong>"Build Phases"</strong> tab</li>
-<li>Expand <strong>"Link Binaries with Libraries"</strong> </li>
+<li>Choose <strong>Relative to Group</strong> in the <strong><a href="cordova_file_file.md.html#File">File</a> Inspector</strong> for the drop-down menu for <strong>Location</strong>
+</li>
+<li>Select the <strong>project icon</strong> in the Project Navigator, select your <strong>Target</strong>, then select the <strong>Build Settings</strong> tab</li>
+<li>Add <code>-all_load</code> and <code>-Obj-C</code> for the <strong>Other Linker <a href="cordova_file_file.md.html#Flags">Flags</a></strong> value</li>
+<li>Click on the <strong>project icon</strong> in the Project Navigator, select your <strong>Target</strong>, then select the <strong>Build Phases</strong> tab</li>
+<li>Expand <strong>Link Binaries with Libraries</strong>
+</li>
 <li>
-<p>Select the <strong>"+" button</strong>, and add these <strong>frameworks</strong> (and optionally in the Project Navigator, <strong>move</strong> them under the Frameworks group):</p>
+<p>Select the <strong>+</strong> button, and add these <strong>frameworks</strong> (and optionally in the Project Navigator, <strong>move</strong> them under the Frameworks group):</p>
 
 <pre class="prettyprint"><code>AddressBook.framework
 AddressBookUI.framework
@@ -204,28 +217,24 @@ MobileCoreServices.framework
 CoreMedia.framework
 </code></pre>
 </li>
-<li><p>Expand <strong>"Target Dependencies"</strong> - the top box labeled like this if you have multiple boxes!</p></li>
-<li>Select the <strong>"+" button</strong>, and add the <code>CordovaLib</code> build product</li>
-<li>Expand <strong>"Link Binaries with Libraries"</strong> - the top box labeled like
+<li><p>Expand <strong>Target Dependencies</strong> - the top box labeled like this if you have multiple boxes!</p></li>
+<li>Select the <strong>+</strong> button, and add the <code>CordovaLib</code> build product</li>
+<li>Expand <strong>Link Binaries with Libraries</strong> - the top box labeled like
 this if you have multiple boxes!</li>
-<li>Select the <strong>"+" button</strong>, and add <code>libCordova.a</code>
+<li>Select the <strong>+</strong> button, and add <code>libCordova.a</code>
 </li>
-<li>Set the Xcode preference <strong>"Xcode Preferences -&gt; Locations -&gt; Derived Data -&gt; Advanced…"</strong> to <strong>"Unique"</strong>
+<li>Set the Xcode preference <strong>Xcode Preferences → Locations → Derived Data → Advanced...</strong> to <strong>Unique</strong>
 </li>
-<li>Select the <strong>project icon</strong> in the Project Navigator, select your <strong>Target</strong>, then select the <strong>"Build Settings"</strong> tab</li>
+<li>Select the <strong>project icon</strong> in the Project Navigator, select your <strong>Target</strong>, then select the <strong>Build Settings</strong> tab</li>
 <li>
-<p>Search for <strong>"Header Search Paths"</strong>. For that setting, add these three values below (with quotes):</p>
+<p>Search for <strong>Header Search Paths</strong>. For that setting, add these three values below (with quotes):</p>
 
-<pre class="prettyprint"><code>"$(TARGET_BUILD_DIR)/usr/local/lib/include"
-
-
+<pre class="prettyprint"><code>"$(TARGET_BUILD_DIR)/usr/local/lib/include"        
 "$(OBJROOT)/UninstalledProducts/include"
-
-
 "$(BUILT_PRODUCTS_DIR)"
 </code></pre>
 
-<p>With <strong>Cordova 2.1.0</strong>, CordovaLib has been upgraded to use <strong>Automatic Reference Counting (ARC)</strong>. You don't need to upgrade to <strong>ARC</strong> to use CordovaLib, but if you want to upgrade your project to use <strong>ARC</strong>, please use the Xcode migration wizard from the menu: <strong>Edit -&gt; Refactor -&gt; Convert to Objective-C ARC…</strong>, <strong>de-select libCordova.a</strong>, then run the wizard to completion. </p>
+<p>With <strong>Cordova 2.1.0</strong>, CordovaLib has been upgraded to use <strong>Automatic Reference Counting (ARC)</strong>. You don't need to upgrade to <strong>ARC</strong> to use CordovaLib, but if you want to upgrade your project to use <strong>ARC</strong>, please use the Xcode migration wizard from the menu: <strong>Edit → Refactor → Convert to Objective-C ARC...</strong>, <strong>de-select libCordova.a</strong>, then run the wizard to completion.</p>
 </li>
 </ol>
 <h2>
@@ -240,13 +249,13 @@ this if you have multiple boxes!</li>
 </code></pre>
 </li>
 <li>
-<p>Instantiate a <strong>new</strong> <code>CDVViewController</code>, and <strong>retain it somewhere</strong> (e.g. to a property in your class): </p>
+<p>Instantiate a <strong>new</strong> <code>CDVViewController</code>, and <strong>retain it somewhere</strong> (e.g. to a property in your class):</p>
 
 <pre class="prettyprint"><code>CDVViewController* viewController = [CDVViewController new];
 </code></pre>
 </li>
 <li>
-<p>(<em>OPTIONAL</em>) Set the <code>wwwFolderName</code> property (defaults to <code>"www"</code>):</p>
+<p>(<em>OPTIONAL</em>) Set the <code>wwwFolderName</code> property (defaults to <code>www</code>):</p>
 
 <pre class="prettyprint"><code>viewController.wwwFolderName = @"myfolder";
 </code></pre>
@@ -286,20 +295,18 @@ this if you have multiple boxes!</li>
 </h2>
 
 <ol>
-<li>Create a <strong>new folder</strong> in your project <strong>on disk</strong>, for example, name it <code>www</code>
-</li>
-<li>Put your <strong>HTML, CSS and JavaScript assets</strong> into this folder</li>
+<li>Create a <strong>new folder</strong> in your project <strong>on disk</strong>, <code>www</code> for example.</li>
+<li>Put your <strong>HTML, CSS and JavaScript</strong> assets into this folder.</li>
 <li>
-<strong>Drag and drop</strong> the folder into the Project Navigator of Xcode</li>
+<strong>Drag and drop</strong> the folder into the Project Navigator of Xcode.</li>
 <li>
-<strong>Choose</strong> the radio-button <strong>"Create folder references for any added folders"</strong>
-</li>
+<strong>Choose</strong> the <strong>Create folder references for any added folders</strong> radio button.</li>
 <li>
 <p><strong>Set the appropriate <code>wwwFolderName</code> and <code>startPage</code> properties</strong> for the folder you created in <strong>(1)</strong> or use the defaults (see previous section) when you instantiate the <code>CDVViewController</code>.</p>
 
 <pre class="prettyprint"><code>/*
  if you created a folder called 'myfolder' and
- you want the file 'mypage.html' in it to be 
+ you want the file 'mypage.html' in it to be
  the startPage
 */
 viewController.wwwFolderName = @"myfolder";

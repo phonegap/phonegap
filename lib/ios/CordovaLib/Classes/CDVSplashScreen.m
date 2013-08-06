@@ -152,7 +152,12 @@
         _curImageName = imageName;
     }
 
-    [self updateBounds];
+    // Check that splash screen's image exists before updating bounds
+    if (_imageView.image) {
+        [self updateBounds];
+    } else {
+        NSLog(@"WARNING: The splashscreen image named %@ was not found", imageName);
+    }
 }
 
 - (void)updateBounds

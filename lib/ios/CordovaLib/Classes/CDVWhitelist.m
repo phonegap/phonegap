@@ -124,7 +124,7 @@ NSString* const kCDVDefaultSchemeName = @"cdv-default-scheme";
 
         // check for single wildcard '*', if found set allowAll to YES
         if ([host isEqualToString:@"*"]) {
-            [_expandedWhitelists setObject:[NSArray arrayWithObject:host] forKey:scheme];
+            [_expandedWhitelists setObject:[NSMutableArray arrayWithObject:host] forKey:scheme];
             continue;
         }
 
@@ -170,19 +170,27 @@ NSString* const kCDVDefaultSchemeName = @"cdv-default-scheme";
 
 - (BOOL)URLIsAllowed:(NSURL*)url
 {
+    return [self URLIsAllowed:url logFailure:YES];
+}
+
+- (BOOL)URLIsAllowed:(NSURL*)url logFailure:(BOOL)logFailure
+{
     NSString* scheme = [url scheme];
 
     // http[s] and ftp[s] should also validate against the common set in the kCDVDefaultSchemeName list
     if ([scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"ftp"] || [scheme isEqualToString:@"ftps"]) {
         NSURL* newUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", kCDVDefaultSchemeName, [url host]]];
         // If it is allowed, we are done.  If not, continue to check for the actual scheme-specific list
-        if ([self URLIsAllowed:newUrl]) {
+        if ([self URLIsAllowed:newUrl logFailure:NO]) {
             return YES;
         }
     }
 
     // Check that the scheme is supported
     if (![self schemeIsAllowed:scheme]) {
+        if (logFailure) {
+            NSLog(@"%@", [self errorStringForURL:url]);
+        }
         return NO;
     }
 
@@ -204,13 +212,20 @@ NSString* const kCDVDefaultSchemeName = @"cdv-default-scheme";
     while (regex = [enumerator nextObject]) {
         NSPredicate* regex_test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
 
+        // if wildcard, break out and allow
+        if ([regex isEqualToString:@"*"]) {
+            return YES;
+        }
+
         if ([regex_test evaluateWithObject:urlHost] == YES) {
             // if it matches at least one rule, return
             return YES;
         }
     }
 
-    NSLog(@"%@", [self errorStringForURL:url]);
+    if (logFailure) {
+        NSLog(@"%@", [self errorStringForURL:url]);
+    }
     // if we got here, the url host is not in the white-list, do nothing
     return NO;
 }

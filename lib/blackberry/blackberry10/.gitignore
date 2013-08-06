@@ -1,0 +1,27 @@
+# OS X
+
+.DS_Store
+
+# Eclipse
+
+deliverables/
+.preprocessed/
+
+# Text Editor Tmp
+
+._*
+
+# Generated libraries
+
+build/
+dist/
+bin/node_modules
+bin/templates/project/lib
+example/
+node_modules/
+
+# OS X
+
+.DS_Store
+
+tags

@@ -108,7 +108,6 @@
     if ([options isKindOfClass:[NSNull class]]) {
         options = [NSDictionary dictionary];
     }
-    NSString* mode = [options objectForKey:@"mode"];
 
     // options could contain limit and mode neither of which are supported at this time
     // taking more than one picture (limit) is only supported if provide own controls via cameraOverlayView property
@@ -139,7 +138,6 @@
         }*/
         // CDVImagePicker specific property
         pickerController.callbackId = callbackId;
-        pickerController.mimeType = mode;
 
         if ([self.viewController respondsToSelector:@selector(presentViewController:::)]) {
             [self.viewController presentViewController:pickerController animated:YES completion:nil];
@@ -206,9 +204,9 @@
         options = [NSDictionary dictionary];
     }
 
-    // options could contain limit, duration and mode, only duration is supported (but is not due to apple bug)
+    // options could contain limit, duration and mode
     // taking more than one video (limit) is only supported if provide own controls via cameraOverlayView property
-    // NSNumber* duration = [options objectForKey:@"duration"];
+    NSNumber* duration = [options objectForKey:@"duration"];
     NSString* mediaType = nil;
 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -240,12 +238,12 @@
         // iOS 3.0
         pickerController.mediaTypes = [NSArray arrayWithObjects:mediaType, nil];
 
-        /*if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]){
+        if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]){
             if (duration) {
                 pickerController.videoMaximumDuration = [duration doubleValue];
             }
             //NSLog(@"pickerController.videoMaximumDuration = %f", pickerController.videoMaximumDuration);
-        }*/
+        }
 
         // iOS 4.0
         if ([pickerController respondsToSelector:@selector(cameraCaptureMode)]) {

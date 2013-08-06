@@ -1,0 +1,10 @@
+{
+EVIL!
+	"blackberry-signer": {
+		"-proxyhost": "abc.com",
+		"-proxyport": "80"
+	},
+	"blackberry-nativepackager": {
+
+	}
+}

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+<meta name="generator" content="joDoc">
+<title>PhoneGap API Documentation</title>
+<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+<link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+</head>
+<body>
+        <div id="header">
+            <h1><a href="index.html">PhoneGap Documentation</a></h1>
+            <small>
+                <select><optgroup label="English" value="en">
+<option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
+<option value="2.7.0rc1">2.7.0rc1</option>
+<option value="2.7.0">2.7.0</option>
+<option value="2.6.0rc1">2.6.0rc1</option>
+<option value="2.6.0">2.6.0</option>
+<option value="2.5.0rc1">2.5.0rc1</option>
+<option value="2.5.0">2.5.0</option>
+<option value="2.4.0rc1">2.4.0rc1</option>
+<option value="2.4.0">2.4.0</option>
+<option value="2.3.0rc2">2.3.0rc2</option>
+<option value="2.3.0rc1">2.3.0rc1</option>
+<option value="2.3.0">2.3.0</option>
+<option value="2.2.0rc2">2.2.0rc2</option>
+<option value="2.2.0rc1">2.2.0rc1</option>
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0rc2">2.1.0rc2</option>
+<option value="2.1.0rc1">2.1.0rc1</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0rc1">2.0.0rc1</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0rc1">1.9.0rc1</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.8.0rc1">1.8.0rc1</option>
+<option value="1.8.0">1.8.0</option>
+<option value="1.7.0rc1">1.7.0rc1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="1.6.1">1.6.1</option>
+<option value="1.6.0rc1">1.6.0rc1</option>
+<option value="1.6.0">1.6.0</option>
+<option value="1.5.0rc1">1.5.0rc1</option>
+<option value="1.5.0">1.5.0</option>
+<option value="1.4.1">1.4.1</option>
+<option value="1.4.0rc1">1.4.0rc1</option>
+<option value="1.4.0">1.4.0</option>
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+<option value="1.0.0rc3">1.0.0rc3</option>
+<option value="1.0.0rc2">1.0.0rc2</option>
+<option value="1.0.0rc1">1.0.0rc1</option>
+<option value="1.0.0">1.0.0</option>
+<option value="0.9.6">0.9.6</option>
+<option value="0.9.5.1">0.9.5.1</option>
+<option value="0.9.5">0.9.5</option>
+<option value="0.9.4">0.9.4</option>
+<option value="0.9.3">0.9.3</option>
+<option value="0.9.2">0.9.2</option>
+</optgroup>
+<optgroup label="Español" value="es"><option value="1.0.0">1.0.0</option></optgroup>
+<optgroup label="Français" value="fr">
+<option value="1.3.0">1.3.0</option>
+<option value="1.2.0">1.2.0</option>
+<option value="1.1.0">1.1.0</option>
+</optgroup>
+<optgroup label="Japanese" value="jp">
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.0">2.0.0</option>
+<option value="1.9.0">1.9.0</option>
+<option value="1.8.1">1.8.1</option>
+<option value="1.7.0">1.7.0</option>
+<option value="0.9.5">0.9.5</option>
+</optgroup>
+<optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
+        </div>
+        <div id="subheader">
+            <h1>Developing a Plugin on BlackBerry 10</h1>
+            <small><select><option value="Developing%2520a%2520Plugin%2520on%2520BlackBerry%252010">Developing a Plugin on BlackBerry 10</option>
+<option value="Developing%20a%20Plugin%20on%20BlackBerry%2010_creating_the_native_part_of_your_plugin">      - Creating the native part of your plugin</option>
+<option value="Developing%20a%20Plugin%20on%20BlackBerry%2010_creating_the_javascript_part_of_your_plugin">      - Creating the JavaScript part of your plugin</option>
+<option value="Developing%20a%20Plugin%20on%20BlackBerry%2010_architecture_of_the_plugin">      - Architecture of the plugin</option>
+<option value="Developing%20a%20Plugin%20on%20BlackBerry%2010_contents_of_the_plugin_xml_file">      - Contents of the plugin.xml file</option></select></small>
+        </div>
+
+        <div id="sidebar">
+            <div class="vertical_divider"></div>
+        <h1>API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+<li><a href="cordova_splashscreen_splashscreen.md.html#Splashscreen">Splashscreen</a></li>
+<li><a href="cordova_storage_storage.md.html#Storage">Storage</a></li>
+</ul>
+<h1>Guides</h1>
+<ul>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
+<li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
+<li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
+<li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
+<li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
+<li><a href="guide_whitelist_index.md.html#Domain%20Whitelist%20Guide">Domain Whitelist Guide</a></li>
+<li><a href="guide_cordova-webview_index.md.html#Embedding%20WebView">Embedding WebView</a></li>
+<li><a href="_index.html">Keyword Index</a></li>
+</ul>
+</div>
+
+        <div id="scrollable">
+            <div id="content">
+                <h1><a name="Developing%20a%20Plugin%20on%20BlackBerry%2010">Developing a Plugin on BlackBerry 10</a></h1>
+
+<p>This is a continuation of the <a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a> for Cordova. Once you have reviewed that content, now let's look at things we need to have the Echo plugin for the BlackBerry 10 platform. Recall that the Echo plugin basically returns whatever string a user provides to the <code>window.echo</code> function:</p>
+
+<pre class="prettyprint"><code>window.echo = function(str, callback) {
+        cordova.exec(callback, function(err) {
+            callback('Nothing to echo.');
+        }, "Echo", "echo", [str]);
+    };
+</code></pre>
+
+<p>A native BlackBerry 10 plugin for Cordova contains JavaScript code and may also contain native code. The Echo plugin example demonstrates how to invoke native functionality from JavaScript. The native and JavaScript code communicate with each other through a framework provided by JNEXT. Every plugin must also include a plugin.xml file.</p>
+
+<h2>
+<a name="Developing%20a%20Plugin%20on%20BlackBerry%2010_creating_the_native_part_of_your_plugin">Creating the native part of your plugin</a>
+</h2>
+
+<p>To create the native portion of your plugin, open the BlackBerry 10 NDK IDE and select <a href="cordova_file_file.md.html#File">File</a> &gt; New &gt; BlackBerry Project &gt; Native Extension &gt; BlackBerry WebWorks. Enter your desired project name / location and click finish.</p>
+
+<p>The project created by the IDE contains sample code for a memory plugin. You may replace or modify these files to include your own functionality.</p>
+
+<ul>
+<li>
+<strong><em>name</em>_js.hpp</strong> - C++ header for the JNEXT code.</li>
+<li>
+<strong><em>name</em>_js.cpp</strong> - C++ code for JNEXT.</li>
+</ul>
+<p>The native interface for the JNEXT extension can be viewed in the plugin header file located in the public folder of your project. It also contains constants and utility functions that can be used in your native code. Your plugin must be derived from JSExt which is defined in plugin.h. That is, you must implement the following class:</p>
+
+<pre class="prettyprint"><code>class JSExt
+{
+public:
+    virtual ~JSExt() {};
+    virtual string InvokeMethod( const string&amp; strCommand ) = 0;
+    virtual bool CanDelete( void ) = 0;
+private:
+    std::string m_id;
+};
+</code></pre>
+
+<p>Therefore, your extension should include the plugin.h header file. In the Echo example, you use JSExt as follows in the echo_js.hpp file:</p>
+
+<pre class="prettyprint"><code>#include "../public/plugin.h"
+#include &lt;string&gt;
+
+#ifndef ECHO_JS_H_
+#define ECHO_JS_H_
+
+class Echo : public JSExt
+{
+public:
+    explicit Echo(const std::string&amp; id);
+    virtual ~Echo();
+    virtual std::string InvokeMethod(const std::string&amp; command);
+    virtual bool CanDelete();
+private:
+    std::string m_id;
+};
+
+#endif // ECHO_JS_H_
+</code></pre>
+
+<p>The <code>m_id</code> is an attribute that contains the JNEXT id for this object. The id is passed to the class as an argument to the constructor. It is needed to trigger events on the JavaScript side from native.
+The CanDelete method is used by JNEXT to determine whether your native object can be deleted.
+The InvokeMethod function is called as a result from a request from JavaScript to invoke a method of this particular object. The only argument to this function is a string passed from JavaScript that this method should parse in order to determine which method of the native object should be executed.
+Now we implement these functions in echo_js.cpp. For the Echo example, we implement InvokeMethod function as follows:</p>
+
+<pre class="prettyprint"><code>string Echo::InvokeMethod(const string&amp; command) {
+
+    //parse command and args from string
+    int index = command.find_first_of(" ");
+    string strCommand = command.substr(0, index);
+    string strValue = command.substr(index + 1, command.length());
+
+    // Determine which function should be executed
+    if (strCommand == "echo") {
+        return strValue;
+    } else {
+        return "Unsupported Method";
+    }
+}
+</code></pre>
+
+<p>Your native plugin must also implement the following callback functions:</p>
+
+<ul>
+<li><code>extern char* onGetObjList( void );</code></li>
+<li><code>extern JSExt* onCreateObject( const string&amp; strClassName, const string&amp; strObjId );</code></li>
+</ul>
+<p>The <code>onGetObjList</code> function returns a comma separated list of classes supported by JNEXT. JNEXT uses this function to determine the set of classes that JNEXT can instantiate. In our Echo plugin, we have the following in <code>echo_js.cpp</code>:</p>
+
+<pre class="prettyprint"><code>char* onGetObjList() {
+    static char name[] = "Echo";
+    return name;
+}
+</code></pre>
+
+<p>The <code>onCreateObject</code> function takes two parameters. The first parameter is the name of the class requested to be created from the JavaScript side. Valid names are those that are returned in <code>onGetObjList</code>. The second parameter is the unique object id for the class. This method returns a pointer to the created plugin object. In our Echo plugin, we have the following in <code>echo_js.cpp</code>:</p>
+
+<pre class="prettyprint"><code>JSExt* onCreateObject(const string&amp; className, const string&amp; id) {
+    if (className == "Echo") {
+        return new Echo(id);
+    }
+    return NULL;
+}
+</code></pre>
+
+<h2>
+<a name="Developing%20a%20Plugin%20on%20BlackBerry%2010_creating_the_javascript_part_of_your_plugin">Creating the JavaScript part of your plugin</a>
+</h2>
+
+<p>The JavaScript portion of your plugin must contain the following files:</p>
+
+<ul>
+<li><p><strong>client.js</strong> – This is considered the client side and contains the API that a Cordova application can call. The API in client.js calls makes calls to index.js. The API in client.js also connects callback functions to the events that fire the callbacks.</p></li>
+<li><p><strong>index.js</strong> – Cordova loads index.js and makes it accessible through the cordova.exec bridge. The client.js file makes calls to the API in the index.js file, which in turn makes call to JNEXT to communicate with the native side.</p></li>
+</ul>
+<p>The client and server side (client.js and index.js) interacts through the <code>Cordova.exec</code>function. So, in client.js you invoke the exec function and provide the necessary arguments. In the Echo plugin, we have the following in the client.js file:</p>
+
+<pre class="prettyprint"><code>var service = "org.apache.cordova.blackberry.echo",
+    exec = cordova.require("cordova/exec");
+
+module.exports = {
+    echo: function (data, success, fail) {
+        exec(success, fail, service, "echo", { data: data });
+    }
+};
+</code></pre>
+
+<p>Now, index.js interacts with the native side using JNEXT. So you attach a constructor function named Echo to JNEXT. Within the constructor you perform the following key operations using the init function:</p>
+
+<ul>
+<li>Specify the required module exported by the native side. The name of the required module must match the name of a shared library file (.so file).</li>
+</ul>
+<p><code>JNEXT.require("libecho")</code></p>
+
+<ul>
+<li>Create an object by using an acquired module and save the ID that's returned by the call.
+self.m_id = JNEXT.createObject("libecho.Echo");
+When your application calls the echo function in client.js, that call in turn calls the echo function in index.js, where the PluginResult object sends a response (data) back to client.js. Since the args argument passed into the functions was converted by JSON.stringfy() and encoded as a URIcomponent, you must call the following:</li>
+</ul>
+<p><code>data = JSON.parse(decodeURIComponent(args.data));</code></p>
+
+<p>You can now send the data back. Let’s put it all together:</p>
+
+<pre class="prettyprint"><code>module.exports = {
+
+    echo: function (success, fail, args, env) {
+
+        var result = new PluginResult(args, env),
+        data = JSON.parse(decodeURIComponent(args.data)),
+        response = echo.getInstance().echo(data);
+        result.ok(response, false);
+    }
+};
+</code></pre>
+
+<h2>
+<a name="Developing%20a%20Plugin%20on%20BlackBerry%2010_architecture_of_the_plugin">Architecture of the plugin</a>
+</h2>
+
+<p>You can place the artifacts of the plugin, which includes the plugin.xml file, the source files (JavaScript, C++), and the binary files (.so) within any directory structure, as long as you correctly specify the file locations in the plugin.xml file. Below we show a typical structure that you can follow:</p>
+
+<p><strong><em>your_project_folder</em></strong> (&gt;plugin.xml)</p>
+
+<ul>
+<li>
+<strong>www</strong> (&gt;client.js)</li>
+<li>
+<strong>src</strong>
+<ul>
+<li>
+<strong>blackberry10</strong> (&gt;index.js, <strong>native</strong> &gt;*.cpp, *.hpp)</li>
+<li>
+<strong>device</strong> (&gt;<em>biary file</em> *.so)</li>
+<li>
+<strong>simulator</strong> (&gt;<em>binary file</em> *.so)</li>
+</ul>
+</li>
+</ul>
+<p>(The list shows the hierarchical relationship among the top level folders. The parenthesis shows the contents of a given folder. All folder names appear in bold text. <a href="cordova_file_file.md.html#File">File</a> names are preceded by the '&gt;' sign.)</p>
+
+<h2>
+<a name="Developing%20a%20Plugin%20on%20BlackBerry%2010_contents_of_the_plugin_xml_file">Contents of the plugin.xml file</a>
+</h2>
+
+<p>The plugin.xml file contains the namespace of the extension and other metadata. Define the namespace and specify other metadata for the Echo plugin as follows:</p>
+
+<pre class="prettyprint"><code>&lt;plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    id="org.apache.cordova.blackberry.echo"
+    version="1.0.0"&gt;
+    &lt;js-module src="www/client.js"&gt;
+        &lt;merges target="navigator" /&gt;
+    &lt;/js-module&gt;
+    &lt;platform name="blackberry10"&gt;
+        &lt;source-file src="src/blackberry10/index.js" /&gt;
+        &lt;lib-file src="src/blackberry10/native/device/libecho.so" arch="device" /&gt;
+        &lt;lib-file src="src/blackberry10/native/simulator/libecho.so" arch="simulator" /&gt;
+        &lt;config-file target="www/config.xml" parent="/widget"&gt;
+            &lt;feature name="org.apache.cordova.blackberry.echo" value="org.apache.cordova.blackberry.echo" /&gt;
+        &lt;/config-file&gt;
+    &lt;/platform&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+            </div>
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script><script type="text/javascript" src="prettify/prettify.js"></script>
+</body>
+</html>

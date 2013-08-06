@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -126,8 +129,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -173,19 +179,19 @@ The <code>config.xml</code> file is located in your <code>&lt;project folder&gt;
 
 <ol>
 <li><p><strong>DisallowOverscroll (boolean, defaults to false)</strong> - set to true if you don't want the WebView to rubber-band</p></li>
-<li><p><strong>TopActivityIndicator (string, defaults to 'gray')</strong> - this is the top spinning throbber in the status/battery bar, valid values are "whiteLarge", "white" and "gray"</p></li>
+<li><p><strong>TopActivityIndicator (string, defaults to 'gray')</strong> - this is the top spinning throbber in the status/battery bar, valid values are <code>whiteLarge</code>, <code>white</code>, and <code>gray</code></p></li>
 <li><p><strong>EnableLocation (boolean, defaults to false)</strong> - set to true, to initialize the <a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a> plugin at start-up (so the fix on your location can be more accurate) <strong>DEPRECATED</strong>: please set the <strong>onload</strong> attribute of the <strong><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></strong> plugin to <strong>true</strong> instead.</p></li>
 <li><p><strong>EnableViewportScale (boolean, defaults to false)</strong> - set to true to prevent viewport scaling through a meta tag</p></li>
 <li><p><strong>AutoHideSplashScreen (boolean, defaults to true)</strong> - set to false to control when the splashscreen is hidden through a JavaScript API</p></li>
 <li><p><strong>FadeSplashScreen (boolean, defaults to true)</strong> - set to false to prevent the splash-screen to fade in and out when showing/hiding it.</p></li>
 <li><p><strong>FadeSplashScreenDuration (float, defaults to 2)</strong> - The splash-screen Fade duration in seconds.</p></li>
-<li><p><strong>ShowSplashScreenSpinner (boolean, defaults to true)</strong> - set to false to <a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a> the splash-screen spinner</p></li>
+<li><p><strong>ShowSplashScreenSpinner (boolean, defaults to true)</strong> - set to false to hide the splash-screen spinner</p></li>
 <li><p><strong>MediaPlaybackRequiresUserAction (boolean, defaults to false)</strong> - set to true to not allow autoplayed HTML5 video</p></li>
 <li><p><strong>AllowInlineMediaPlayback (boolean, defaults to false)</strong> - set to true to allow inline HTML5 media playback, also, the video element in the HTML document must also include the webkit-playsinline attribute</p></li>
 <li><p><strong>BackupWebStorage (string, defaults to 'cloud')</strong> - valid values are 'none', 'cloud' and 'local'. Set to 'cloud' to allow the web storage data to be backed up to iCloud, and set to 'local' to only allow local backups (iTunes sync). Set to 'none' to not allow any backups of web storage.</p></li>
 <li><p><strong>KeyboardDisplayRequiresUserAction (boolean, defaults to true)</strong> - set to false to open the keyboard when form elements get focus via the JavaScript focus() call.</p></li>
 <li><p><strong>SuppressesIncrementalRendering (boolean, defaults to false)</strong> - set to true to wait until all new view content has been received before it is rendered.</p></li>
-<li><p><strong>HideKeyboardFormAccessoryBar (boolean, defaults to false)</strong> - set to true to <a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a> the additional toolbar that is on top of the keyboard (this is the toolbar that has the Prev, Next and Done buttons)</p></li>
+<li><p><strong>HideKeyboardFormAccessoryBar (boolean, defaults to false)</strong> - set to true to hide the additional toolbar that is on top of the keyboard (this is the toolbar that has the Prev, Next and Done buttons)</p></li>
 <li><p><strong>KeyboardShrinksView (boolean, defaults to false)</strong> -  set to true to shrink the WebView when the keyboard comes up. The WebView shrinks instead of the viewport shrinking and the page scrollable. This applies to apps that position their elements relative to the bottom of the WebView. This is the default behaviour on Android, and makes a lot of sense when building apps as opposed to webpages.</p></li>
 </ol>
 </div>

@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -103,17 +106,17 @@
 <option value="Splashscreen_methods">      - Methods</option>
 <option value="Splashscreen_permissions">      - Permissions</option>
 <option value="Splashscreen_setup">      - Setup</option>
-<option value="show">show</option>
-<option value="show_description">      - Description</option>
-<option value="show_supported_platforms">      - Supported Platforms</option>
-<option value="show_quick_example">      - Quick Example</option>
-<option value="show_full_example">      - Full Example</option>
-<option value="hide">hide</option>
-<option value="hide_description">      - Description</option>
-<option value="hide_supported_platforms">      - Supported Platforms</option>
-<option value="hide_quick_example">      - Quick Example</option>
-<option value="hide_full_example">      - Full Example</option>
-<option value="hide_ios_quirk">      - iOS Quirk</option></select></small>
+<option value="splashscreen.show">splashscreen.show</option>
+<option value="splashscreen.show_description">      - Description</option>
+<option value="splashscreen.show_supported_platforms">      - Supported Platforms</option>
+<option value="splashscreen.show_quick_example">      - Quick Example</option>
+<option value="splashscreen.show_full_example">      - Full Example</option>
+<option value="splashscreen.hide">splashscreen.hide</option>
+<option value="splashscreen.hide_description">      - Description</option>
+<option value="splashscreen.hide_supported_platforms">      - Supported Platforms</option>
+<option value="splashscreen.hide_quick_example">      - Quick Example</option>
+<option value="splashscreen.hide_full_example">      - Full Example</option>
+<option value="splashscreen.hide_ios_quirk">      - iOS Quirk</option></select></small>
         </div>
 
         <div id="sidebar">
@@ -139,8 +142,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -155,7 +161,7 @@
                 <h1><a name="Splashscreen">Splashscreen</a></h1>
 
 <blockquote>
-  <p>Enables developers to <a href="cordova_splashscreen_splashscreen.md.html#show">show</a>/<a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a> the application's splash screen.</p>
+  <p>Displays and hides the application's splash screen.</p>
 </blockquote>
 
 <h2>
@@ -163,8 +169,8 @@
 </h2>
 
 <ul>
-<li><a href="cordova_splashscreen_splashscreen.md.html#show">show</a></li>
-<li><a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a></li>
+<li><a href="cordova_splashscreen_splashscreen.md.html#splashscreen.show">splashscreen.show</a></li>
+<li><a href="cordova_splashscreen_splashscreen.md.html#splashscreen.hide">splashscreen.hide</a></li>
 </ul>
 <h2>
 <a name="Splashscreen_permissions">Permissions</a>
@@ -192,32 +198,33 @@
 
 <ol>
 <li>
-<p>Copy your splash screen image into the res/drawable directories of your Android project. The sizes of each image should be:</p>
+<p>Copy the splash screen image into the Android project's <code>res/drawable</code> directory. The size for each image should be:</p>
 
 <ul>
-<li>xlarge (xhdpi): at least 960 x 720</li>
-<li>large (hdpi): at least 640 x 480</li>
-<li>medium (mdpi): at least 470 x 320</li>
-<li>small (ldpi): at least 426 x 320</li>
+<li>xlarge (xhdpi): at least 960 × 720</li>
+<li>large (hdpi): at least 640 × 480</li>
+<li>medium (mdpi): at least 470 × 320</li>
+<li>small (ldpi): at least 426 × 320</li>
 </ul>
-<p>It is highly recommended that you use a <a class="external" href="https://developer.android.com/tools/help/draw9patch.html">9-patch image</a> for your splash screen.</p>
+<p>You should use a <a class="external" href="https://developer.android.com/tools/help/draw9patch.html">9-patch image</a> for your splash screen.</p>
 </li>
 <li>
-<p>In the onCreate method of the class that extends DroidGap add the following two lines:</p>
+<p>In the <code>onCreate</code> method of the class that extends <code>DroidGap</code>, add the following two lines:</p>
 
 <pre class="prettyprint"><code>super.setIntegerProperty("splashscreen", R.drawable.splash);
 super.loadUrl(Config.getStartUrl(), 10000);
 </code></pre>
 
-<p>The first line 'super.setIntegerProperty' sets the image to be displayed as the splashscreen. If you have named your image anything other than splash.png you will have to modify this line.
-The second line is the normal 'super.loadUrl' line but it has a second parameter which is the timeout value for the splash screen. In this example the splash screen will display for 10 seconds. If you want to dismiss the splash screen once you get the "<a href="cordova_events_events.md.html#deviceready">deviceready</a>" event you should call the navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a>() method.</p>
+<p>The first line sets the image to display as the splashscreen. If you name your image anything other than <code>splash.png</code>, you need to modify this line.
+The second line is the normal <code>super.loadUrl</code> line, but it has a second parameter that specifies a timeout value for the splash screen. In this example the splash screen displays for 10 seconds. To dismiss the splash screen once the app receives the <code><a href="cordova_events_events.md.html#deviceready">deviceready</a></code> event, call the <code>navigator.<a href="cordova_splashscreen_splashscreen.md.html#splashscreen.hide">splashscreen.hide</a>()</code> method.</p>
 </li>
 </ol>
 <h3>iOS</h3>
 
-<ol>
-<li>
-<p>Copy your splash screen images into the <strong>Resources/splash</strong> directory of your iOS project. Only add the images for the devices you want to support (iPad screen size or iPhone screen size). The sizes of each image should be:</p>
+<p>Copy your splash screen images into the iOS project's
+<code>Resources/splash</code> directory. Only add the images for the devices you
+want to support, such as iPad or iPhone. The size of each image
+should be:</p>
 
 <ul>
 <li>Default-568h@2x~iphone.png (640x1136 pixels)</li>
@@ -228,24 +235,22 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
 <li>Default@2x~iphone.png (640x960 pixels)</li>
 <li>Default~iphone.png (320x480 pixels)</li>
 </ul>
-</li>
-</ol>
 <hr>
-<h1><a name="show">show</a></h1>
+<h1><a name="splashscreen.show">splashscreen.show</a></h1>
 
 <p>Displays the splash screen.</p>
 
-<pre class="prettyprint"><code>navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#show">show</a>();
+<pre class="prettyprint"><code>navigator.<a href="cordova_splashscreen_splashscreen.md.html#splashscreen.show">splashscreen.show</a>();
 </code></pre>
 
 <h2>
-<a name="show_description">Description</a>
+<a name="splashscreen.show_description">Description</a>
 </h2>
 
-<p>navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#show">show</a>() displays the applications splash screen.</p>
+<p>This method displays the application's splash screen.</p>
 
 <h2>
-<a name="show_supported_platforms">Supported Platforms</a>
+<a name="splashscreen.show_supported_platforms">Supported Platforms</a>
 </h2>
 
 <ul>
@@ -253,14 +258,14 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
 <li>iOS</li>
 </ul>
 <h2>
-<a name="show_quick_example">Quick Example</a>
+<a name="splashscreen.show_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#show">show</a>();
+<pre class="prettyprint"><code>navigator.<a href="cordova_splashscreen_splashscreen.md.html#splashscreen.show">splashscreen.show</a>();
 </code></pre>
 
 <h2>
-<a name="show_full_example">Full Example</a>
+<a name="splashscreen.show_full_example">Full Example</a>
 </h2>
 
 <pre class="prettyprint"><code>&lt;!DOCTYPE html&gt;
@@ -271,14 +276,14 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
-        navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#show">show</a>();
+        navigator.<a href="cordova_splashscreen_splashscreen.md.html#splashscreen.show">splashscreen.show</a>();
     }
 
     &lt;/script&gt;
@@ -290,21 +295,21 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
 </code></pre>
 
 <hr>
-<h1><a name="hide">hide</a></h1>
+<h1><a name="splashscreen.hide">splashscreen.hide</a></h1>
 
 <p>Dismiss the splash screen.</p>
 
-<pre class="prettyprint"><code>navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a>();
+<pre class="prettyprint"><code>navigator.<a href="cordova_splashscreen_splashscreen.md.html#splashscreen.hide">splashscreen.hide</a>();
 </code></pre>
 
 <h2>
-<a name="hide_description">Description</a>
+<a name="splashscreen.hide_description">Description</a>
 </h2>
 
-<p>navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a>() dismisses the applications splash screen.</p>
+<p>This method dismisses the application's splash screen.</p>
 
 <h2>
-<a name="hide_supported_platforms">Supported Platforms</a>
+<a name="splashscreen.hide_supported_platforms">Supported Platforms</a>
 </h2>
 
 <ul>
@@ -312,14 +317,14 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
 <li>iOS</li>
 </ul>
 <h2>
-<a name="hide_quick_example">Quick Example</a>
+<a name="splashscreen.hide_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a>();
+<pre class="prettyprint"><code>navigator.<a href="cordova_splashscreen_splashscreen.md.html#splashscreen.hide">splashscreen.hide</a>();
 </code></pre>
 
 <h2>
-<a name="hide_full_example">Full Example</a>
+<a name="splashscreen.hide_full_example">Full Example</a>
 </h2>
 
 <pre class="prettyprint"><code>&lt;!DOCTYPE html&gt;
@@ -330,14 +335,14 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
-        navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a>();
+        navigator.<a href="cordova_splashscreen_splashscreen.md.html#splashscreen.hide">splashscreen.hide</a>();
     }
 
     &lt;/script&gt;
@@ -349,21 +354,20 @@ The second line is the normal 'super.loadUrl' line but it has a second parameter
 </code></pre>
 
 <h2>
-<a name="hide_ios_quirk">iOS Quirk</a>
+<a name="splashscreen.hide_ios_quirk">iOS Quirk</a>
 </h2>
 
-<ol>
-<li><p>In your <strong>config.xml</strong>, you need to <a href="guide_project-settings_index.md.html#Project%20Settings">modify the value</a> for <strong>"AutoHideSplashScreen”</strong> to false</p></li>
-<li>
-<p>Then, if you want to delay hiding the splash screen for 2 seconds, you can do this in your <strong><a href="cordova_events_events.md.html#deviceready">deviceready</a></strong> event handler:</p>
+<p>The <a href="guide_project-settings_index.md.html#Project%20Settings"><code>config.xml</code> file's setting</a> for
+<code>AutoHideSplashScreen</code> must be <code>false</code>. To delay hiding the splash
+screen for two seconds, add a timer such as the following in the
+<code><a href="cordova_events_events.md.html#deviceready">deviceready</a></code> event handler:</p>
 
-<pre class="prettyprint"><code>setTimeout(function() {
-    navigator.splashscreen.<a href="cordova_splashscreen_splashscreen.md.html#hide">hide</a>();
-}, 2000);
+<pre class="prettyprint"><code>    setTimeout(function() {
+        navigator.<a href="cordova_splashscreen_splashscreen.md.html#splashscreen.hide">splashscreen.hide</a>();
+    }, 2000);
 </code></pre>
-</li>
-</ol>
-</div>
+
+            </div>
         </div>
 
         <!-- Functionality and Syntax Highlighting -->

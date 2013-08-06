@@ -61,6 +61,7 @@ extern NSString* const kOptionsKeyCookie;
 @interface CDVFileTransferDelegate : NSObject {}
 
 - (void)updateBytesExpected:(NSInteger)newBytesExpected;
+- (void)cancelTransfer:(NSURLConnection*)connection;
 
 @property (strong) NSMutableData* responseData; // atomic
 @property (nonatomic, strong) CDVFileTransfer* command;

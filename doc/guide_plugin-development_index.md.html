@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -127,8 +130,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -146,18 +152,17 @@
 powering a Cordova application and the native platform the Cordova
 application is running on. Plugins are composed of a single JavaScript
 interface used across all platforms, and native implementations
-following platform-specific Plugin interfaces that the JavaScript will
-call into. It should be noted that all of the core Cordova APIs are
-implemented using this exact architecture.</p>
+following platform-specific Plugin interfaces that the JavaScript
+calls into. All of the core Cordova APIs are implemented using this
+architecture.</p>
 
-<p>This guide will go through each step necessary to write a simple Echo
-Plugin. The Echo Plugin will pass a string from JavaScript and send it
-into the native environment for the supported platforms. The native code
-will then return the same string back into the callbacks inside the
-plugin's JavaScript.</p>
+<p>This guide steps the process of writing a simple Echo Plugin that
+passes a string from JavaScript and sends it into the native
+environment for the supported platforms. The native code then returns
+the same string back to the callbacks inside the plugin's JavaScript.</p>
 
-<p>This guide should give anyone the necessary overview and level of
-detail to write more complex plugins.</p>
+<p>This guide provides enough overview on which you can build to write
+more complex plugins.</p>
 
 <h2>
 <a name="Plugin%20Development%20Guide_javascript">JavaScript</a>
@@ -177,29 +182,28 @@ thing you <em>must</em> use to communicate between the Cordova JavaScript
              false]);
 </code></pre>
 
-<p>The parameters explained in more detail:</p>
+<p>The parameters are detailed below:</p>
 
 <ol>
 <li>
 <code>function(winParam) {}</code> - Success function callback. Assuming your
-<code>exec</code> call completes successfully, this function will be invoked
-(optionally with any parameters you pass back to it)</li>
+<code>exec</code> call completes successfully, this function is invoked
+(optionally with any parameters you pass back to it).</li>
 <li>
 <code>function(error) {}</code> - Error function callback. If the operation does
-not complete successfully, this function will be invoked (optionally
-with an error parameter)</li>
+not complete successfully, this function is invoked (optionally
+with an error parameter).</li>
 <li>
 <code>"service"</code> - The service name to call into on the native side. This
-will be mapped to a native class. More on this in the native guides
-below</li>
+is mapped to a native class, about which more information is
+available in the native guides listed below.</li>
 <li>
 <code>"action"</code> - The action name to call into. This is picked up by the
 native class receiving the <code>exec</code> call, and, depending on the
-platform, essentially maps to a class's method. For more detail
-please check out the native guides located at the end of this article.</li>
+platform, essentially maps to a class's method.
+The native guides listed below provide details.</li>
 <li>
-<code>[/* arguments */]</code> - Arguments to get passed into the native
-environment</li>
+<code>[/* arguments */]</code> - Arguments to pass into the native environment.</li>
 </ol>
 <h3>Echo Plugin JavaScript Example</h3>
 
@@ -227,28 +231,28 @@ which is the first parameter into the <code>window.echo</code> function.</p>
 <p>The success callback passed into <code>exec</code> is simply a reference to the
 callback function that <code>window.echo</code> takes. We do a bit more for the
 error callback: if the native side fires off the error callback, we
-simply invoke the success callback and pass into it a "default" string.</p>
+simply invoke the success callback and pass into it a "default"
+string.</p>
 
 <h2>
 <a name="Plugin%20Development%20Guide_native">Native</a>
 </h2>
 
-<p>Once you have defined a JavaScript for your plugin, you need to
-complement it with at least one native implementation. Below are
-specific guides for each platform Cordova supports. The below guides
-will continue on building the simple Echo Plugin example we started in
-this guide.</p>
+<p>Once you define JavaScript for your plugin, you need to complement it
+with at least one native implementation. Details to do so for each
+platform are listed below.  These guides continue to build on the
+simple Echo Plugin example discussed above.</p>
 
 <ul>
 <li><a href="guide_plugin-development_android_index.md.html#Developing%20a%20Plugin%20on%20Android">Developing a Plugin on Android</a></li>
-<li><a href="guide_plugin-development_bada_index.md.html#Developing%20a%20Plugin%20on%20Bada">Developing a Plugin on Bada</a></li>
 <li><a href="guide_plugin-development_blackberry_index.md.html#Developing%20a%20Plugin%20on%20BlackBerry">Developing a Plugin on BlackBerry</a></li>
+<li><a href="guide_plugin-development_blackberry10_index.md.html#Developing%20a%20Plugin%20on%20BlackBerry%2010">Developing a Plugin on BlackBerry 10</a></li>
 <li><a href="guide_plugin-development_ios_index.md.html#Developing%20a%20Plugin%20on%20iOS">Developing a Plugin on iOS</a></li>
-<li><a href="guide_plugin-development_webos_index.md.html#Developing%20a%20Plugin%20on%20webOS">Developing a Plugin on webOS</a></li>
 <li><a href="guide_plugin-development_windows-phone_index.md.html#Developing%20a%20Plugin%20on%20Windows%20Phone">Developing a Plugin on Windows Phone</a></li>
-<li><a href="guide_plugin-development_tizen_index.md.html#Developing%20a%20Plugin%20on%20Tizen">Developing a Plugin on Tizen</a></li>
 </ul>
-</div>
+<p>The webOS and Tizen platforms currently do not support plugins.</p>
+
+            </div>
         </div>
 
         <!-- Functionality and Syntax Highlighting -->

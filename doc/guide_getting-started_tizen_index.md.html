@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -98,15 +101,15 @@
 <optgroup label="Korean" value="kr"><option value="2.0.0">2.0.0</option></optgroup></select></small>
         </div>
         <div id="subheader">
-            <h1>Getting Started with Tizen</h1>
-            <small><select><option value="Getting%2520Started%2520with%2520Tizen">Getting Started with Tizen</option>
-<option value="Getting%20Started%20with%20Tizen_1_requirements">      - 1. Requirements</option>
-<option value="Getting%20Started%20with%20Tizen_2_install_sdk_cordova">      - 2. Install SDK + Cordova</option>
-<option value="Getting%20Started%20with%20Tizen_3_setup_new_project">      - 3. Setup New Project</option>
-<option value="Getting%20Started%20with%20Tizen_4_hello_world">      - 4. Hello World</option>
-<option value="Getting%20Started%20with%20Tizen_5a_deploy_to_simulator">      - 5A. Deploy to Simulator</option>
-<option value="Getting%20Started%20with%20Tizen_5b_deploy_to_device_emulator">      - 5B. Deploy to Device/Emulator</option>
-<option value="Getting%20Started%20with%20Tizen_done">      - Done!</option></select></small>
+            <h1>Tizen Platform Guide</h1>
+            <small><select><option value="Tizen%2520Platform%2520Guide">Tizen Platform Guide</option>
+<option value="Tizen%20Platform%20Guide_1_requirements">      - 1. Requirements</option>
+<option value="Tizen%20Platform%20Guide_2_install_sdk_cordova">      - 2. Install SDK + Cordova</option>
+<option value="Tizen%20Platform%20Guide_3_set_up_new_project">      - 3. Set up New Project</option>
+<option value="Tizen%20Platform%20Guide_4_hello_world">      - 4. Hello World</option>
+<option value="Tizen%20Platform%20Guide_5a_deploy_to_simulator">      - 5A. Deploy to Simulator</option>
+<option value="Tizen%20Platform%20Guide_5b_deploy_to_device_emulator">      - 5B. Deploy to Device/Emulator</option>
+<option value="Tizen%20Platform%20Guide_done">      - Done!</option></select></small>
         </div>
 
         <div id="sidebar">
@@ -132,8 +135,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -145,28 +151,28 @@
 
         <div id="scrollable">
             <div id="content">
-                <h1><a name="Getting%20Started%20with%20Tizen">Getting Started with Tizen</a></h1>
+                <h1><a name="Tizen%20Platform%20Guide">Tizen Platform Guide</a></h1>
 
 <p>This guide describes how to set up your development environment for Cordova and run a sample application.  Note that Cordova used to be called PhoneGap, so some of the sites still use the old PhoneGap name.</p>
 
 <h2>
-<a name="Getting%20Started%20with%20Tizen_1_requirements">1. Requirements</a>
+<a name="Tizen%20Platform%20Guide_1_requirements">1. Requirements</a>
 </h2>
 
 <ul>
 <li>Linux Ubuntu 10.04/10.10/11.04/11.10 32-bit, Windows XP SP3/7 32-bit.</li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Tizen_2_install_sdk_cordova">2. Install SDK + Cordova</a>
+<a name="Tizen%20Platform%20Guide_2_install_sdk_cordova">2. Install SDK + Cordova</a>
 </h2>
 
 <ul>
 <li>Download and install the <a class="external" href="https://developer.tizen.org/sdk">Tizen SDK</a>.</li>
-<li>Download the latest copy of [<a class="external" href="http://phonegap.com/download">PhoneGap</a> and extract its contents. We will be working with the tizen directory.</li>
+<li>Download and extract the latest copy of [<a class="external" href="http://phonegap.com/download">PhoneGap</a>. You will be working in the <code>tizen</code> directory.</li>
 <li>(optional) Install Tizen Cordova template projects: copy the <code>/templates</code> directory content into you Tizen Eclipse IDE web templates directory (e.g: <code>/home/my_username/tizen-sdk/IDE/Templates/web</code>).</li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Tizen_3_setup_new_project">3. Setup New Project</a>
+<a name="Tizen%20Platform%20Guide_3_set_up_new_project">3. Set up New Project</a>
 </h2>
 
 <ul>
@@ -175,7 +181,7 @@
 
 <ul>
 <li>Launch Tizen Eclipse IDE</li>
-<li>Select  <strong><a href="cordova_file_file.md.html#File">File</a></strong> -&gt; <strong>Import</strong> -&gt; <strong>Tizen Web Project</strong>
+<li>Select  <strong><a href="cordova_file_file.md.html#File">File</a> → Import → Tizen Web Project</strong>
 </li>
 </ul>
 <p><img src="img/guide/getting-started/tizen/import_project.png" alt="" title=""></p>
@@ -187,7 +193,7 @@
 <li>Make sure <strong>Copy projects into workspace</strong> is checked</li>
 <li>Click <strong>Browse</strong>
 </li>
-<li>Browse to one of the Cordova Tizen "samples" project directory (e.g: <code>/cordova-basic</code>) and select it</li>
+<li>Browse to one of the Cordova Tizen <code>samples</code> project directory (e.g: <code>/cordova-basic</code>) and select it</li>
 </ul>
 <p><img src="img/guide/getting-started/tizen/import_widget.png" alt="" title=""></p>
 
@@ -198,7 +204,7 @@
 <p><img src="img/guide/getting-started/tizen/project_explorer.png" alt="" title=""></p>
 
 <ul>
-<li>Your project should now have been imported and appear <strong>Project Explorer</strong> view</li>
+<li>Your project should now be imported and appear in the <strong>Project Explorer</strong> view</li>
 </ul>
 </li>
 <li>
@@ -206,11 +212,11 @@
 
 <ul>
 <li>Launch Tizen Eclipse IDE</li>
-<li>Select  <strong><a href="cordova_file_file.md.html#File">File</a></strong> -&gt; <strong>New</strong> -&gt; <strong>Tizen Web Project</strong>
+<li>Select  <strong><a href="cordova_file_file.md.html#File">File</a> → New → Tizen Web Project</strong>
 </li>
 <li>Select <strong>User Template</strong> and <strong>User defined</strong> items</li>
 <li>Select one of the Tizen Cordova template (e.g: <strong>CordovaBasicTemplate</strong>)</li>
-<li>Fill-up the <strong>Project name</strong> and its target <strong>Location</strong>
+<li>Fill the <strong>Project name</strong> and its target <strong>Location</strong>
 </li>
 </ul>
 <p><img src="img/guide/getting-started/tizen/project_template.png" alt="" title=""></p>
@@ -222,12 +228,12 @@
 <p><img src="img/guide/getting-started/tizen/project_explorer.png" alt="" title=""></p>
 
 <ul>
-<li>Your project should now have been created and appear <strong>Project Explorer</strong> view</li>
+<li>Your project should now appear in the <strong>Project Explorer</strong> view</li>
 </ul>
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Tizen_4_hello_world">4. Hello World</a>
+<a name="Tizen%20Platform%20Guide_4_hello_world">4. Hello World</a>
 </h2>
 
 <ul>
@@ -242,13 +248,13 @@
 <p><img src="img/guide/getting-started/tizen/build_project.png" alt="" title=""></p>
 
 <ul>
-<li><p>A widget package should have been generated in your project root directory (e.g: <code>cordova-basic.wgt</code>)</p></li>
-<li><p><strong>Note</strong> that the provided samples Tizen Cordova projects are not basic hello world applications. They contain a simple example usage of the Battery Cordova API.</p></li>
+<li><p>A widget package should be generated in your project root directory (e.g: <code>cordova-basic.wgt</code>)</p></li>
+<li><p><strong>NOTE:</strong> The sample Tizen Cordova projects provided go beyond basic "hello world" applications, and feature example usage of the Battery API.</p></li>
 </ul>
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Tizen_5a_deploy_to_simulator">5A. Deploy to Simulator</a>
+<a name="Tizen%20Platform%20Guide_5a_deploy_to_simulator">5A. Deploy to Simulator</a>
 </h2>
 
 <ul>
@@ -259,24 +265,24 @@
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Tizen_5b_deploy_to_device_emulator">5B. Deploy to Device/Emulator</a>
+<a name="Tizen%20Platform%20Guide_5b_deploy_to_device_emulator">5B. Deploy to Device/Emulator</a>
 </h2>
 
 <ul>
-<li>Make sure that your target device is properly launched/connected/configured ("Date and Time" settings must have been set correctly)</li>
+<li>Make sure that your target device is properly launched, connected and configured. Its <strong>Date and Time</strong> settings must be set correctly.</li>
 <li>
-<p>Select your application deployment target with the <strong><a href="cordova_connection_connection.md.html#Connection">Connection</a> Explorer</strong> view (Select <strong>Window</strong> Menu -&gt; <strong>Show View</strong> -&gt; <strong><a href="cordova_connection_connection.md.html#Connection">Connection</a> Explorer</strong> )</p>
+<p>Select your application deployment target with the <strong><a href="cordova_connection_connection.md.html#Connection">Connection</a> Explorer</strong> view (Select <strong>Window → Show View → <a href="cordova_connection_connection.md.html#Connection">Connection</a> Explorer</strong>.)</p>
 
 <p><img src="img/guide/getting-started/tizen/connection_explorer.png" alt="" title=""></p>
 </li>
 <li>
-<p><strong>Right Click</strong> your project in the <strong>Project Explorer</strong> view and Select <strong>Run As</strong> and <strong>Tizen Web Application</strong></p>
+<p><strong>Right-click</strong> your project in the <strong>Project Explorer</strong> view and select <strong>Run As</strong> and <strong>Tizen Web Application</strong></p>
 
 <p><img src="img/guide/getting-started/tizen/runas_web_app.png" alt="" title=""></p>
 </li>
 </ul>
 <h2>
-<a name="Getting%20Started%20with%20Tizen_done">Done!</a>
+<a name="Tizen%20Platform%20Guide_done">Done!</a>
 </h2>
 
             </div>

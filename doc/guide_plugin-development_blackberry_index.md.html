@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -130,8 +133,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -149,19 +155,23 @@
 <a name="Developing%20a%20Plugin%20on%20BlackBerry_how_to_make_the_echo_plugin_on_blackberry">How to make the Echo plugin on Blackberry</a>
 </h2>
 
-<p>In this article, we will explore how to develop the Echo plugin on BlackBerry. If you haven't read the
-top level article about the JavaScript part of the plugin, it would be best if you read that first
-and then this article. In addition, please download the <a class="external" href="https://git-wip-us.apache.org/repos/asf?p=cordova-blackberry-webworks.git;a=summary">Cordova Blackberry repo</a>.</p>
+<p>This guide explores how to develop the Echo plugin on BlackBerry.
+If you haven't read the top-level guide about the JavaScript part of
+the plugin, it would be best if you read that first and then this
+guide. In addition, please download the <a class="external" href="https://git-wip-us.apache.org/repos/asf?p=cordova-blackberry-webworks.git;a=summary">Cordova Blackberry
+repo</a>.</p>
 
-<p>To note, the Cordova-BlackBerry project allows you to deploy to BlackBerry devices like the
-Torch, Bold, etc and as well as the Playbook. There exists a distinction between deploying to
-normal BlackBerry hand held devices (ie, Torch and Bold) and the Playbook. The code base between
-the two are separate so when you develop for one, you have to duplicate your efforts for the other!
-Therefore in this article, the focus will be on the hand held devices and not the tablet. In the future,
-this guide should cover both platforms.</p>
+<p>The Cordova-BlackBerry project allows you to deploy to BlackBerry
+devices such a the Torch and Bold, as well as the Playbook. There's a
+difference between deploying to normal BlackBerry handheld devices and
+the Playbook. They use two different code bases, so when you develop
+for one, you have to duplicate your efforts for the other!  This guide
+focuses on the handheld devices rather than the tablet. (In the future,
+this guide should cover both platforms.)</p>
 
-<p>Continuing on from the previous article, the Echo plugin is essentially returning whatever message a user 
-provides to the <code>window.echo</code> function. </p>
+<p>Continuing on from the previous guide, the Echo plugin essentially
+returns whatever message a user provides to the <code>window.echo</code>
+function.</p>
 
 <p>The Echo function:</p>
 
@@ -176,9 +186,11 @@ provides to the <code>window.echo</code> function. </p>
 <a name="Developing%20a%20Plugin%20on%20BlackBerry_modifying_plugins_xml">Modifying plugins.xml</a>
 </h2>
 
-<p>This file resides in your project's www folder and contains all of the references to the plugins that 
-your Cordova project uses. We are going to add an additional reference so that when cordova.exec is called,
-Cordova will know how to map the "Echo" argument of <code>cordova.exec</code> to the Echo class that we want to write natively.</p>
+<p>Your project's <code>www/plugins.xml</code> folder contains all of the necessary
+references to your Cordova project's plugins. Add an
+additional reference so that when <code>cordova.exec</code> is called, Cordova
+knows how to map the <code>Echo</code> argument of <code>cordova.exec</code> to the <code>Echo</code>
+class that we want to write natively:</p>
 
 <pre class="prettyprint"><code>&lt;plugins&gt;
   ...
@@ -191,22 +203,26 @@ Cordova will know how to map the "Echo" argument of <code>cordova.exec</code> to
 <a name="Developing%20a%20Plugin%20on%20BlackBerry_adding_echo_java">Adding Echo.java</a>
 </h2>
 
-<p>If you notice the structure of the value attribute, you'll see a defined path that leads to the Echo
-plugin. In the root folder of the Cordova BlackBerry WebWorks repo, look for a folder called framework.
-This folder contains all of the source code that runs natively on the BlackBerry. cd into the folder 
-structure until you reach the path: <code>framework/ext/src/org/apache/cordova</code>. At this point, you'll see
-all of the plugin folders and inside each folder is the plugins' source code. So, we will add
-the folder echo to <code>framework/ext/src/org/apache/cordova/echo</code> and create a file called <code>Echo.java</code>
-at <code>framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
+<p>If you notice the structure of the value attribute, you'll see a
+defined path that leads to the Echo plugin. In the root folder of the
+Cordova BlackBerry WebWorks repo, look for a folder called framework.
+This folder contains all of the source code that runs natively on the
+BlackBerry. Navigate to <code>framework/ext/src/org/apache/cordova</code>. At
+this point, you'll see all of the plugin folders, inside of which is
+the source code. So add the folder echo to
+<code>framework/ext/src/org/apache/cordova/echo</code> and create a file called
+<code>Echo.java</code> at <code>framework/ext/src/org/apache/cordova/echo/Echo.java</code>.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20BlackBerry_writing_echo_java">Writing Echo.java</a>
 </h2>
 
-<p>The basic idea of writing a plugin is to create a class that extends the Plugin class and have
-a method called execute to return a PluginResult class. Any call to cordova.exec will pass in 
-the action that we want to execute within the class as well as the arguments. In this case,
-"echo" is the action we want to execute within the class "Echo" and [str] are the arguments we are passing in.</p>
+<p>The basic idea behind writing a plugin is to create a class that
+extends the Plugin class and have a method called <code>execute</code> to return
+a <code>PluginResult</code> class. Any call to <code>cordova.exec</code> passes in the
+action to execute within the class, as well as the arguments. In this
+case, "echo" is the action we want to execute within the class "Echo"
+and [str] are the arguments we are passing in.</p>
 
 <pre class="prettyprint"><code>package org.apache.cordova.echo;
 
@@ -217,7 +233,7 @@ import org.apache.cordova.json4j.JSONException;
 import org.apache.cordova.json4j.JSONObject;
 /**
  * A simple plugin to demonstrate how to build a plugin for Blackberry
- * Basically echos back the msg that a user calls to this plugin 
+ * Basically echos back the msg that a user calls to this plugin
  */
 public final class Echo extends Plugin {
 
@@ -228,7 +244,7 @@ public final class Echo extends Plugin {
         if(action.equals(echo)){
             try {
                 String theMsg = args.getString(0);
-                if(theMsg!= null || theMsg.length()&gt;0){   
+                if(theMsg!= null || theMsg.length()&gt;0){
                     result = new PluginResult(PluginResult.Status.OK, theMsg);
                 }else{
                     result = new PluginResult(PluginResult.Status.ERROR, "Nothing to echo.");
@@ -244,35 +260,42 @@ public final class Echo extends Plugin {
 }
 </code></pre>
 
-<p>So if we look at the code above, we can see that within the execute method, we are first looking for
-what actions are coming in. The Echo plugin has only one action, "echo" so we will be only checking for 
-that. If our plugin had more actions, it's simply a matter of adding more if-conditionals to check
-for those actions.</p>
+<p>So if we look at the code above, we can see that within the execute
+method, we are first looking for what actions are coming in. The Echo
+plugin has only one action, <code>echo</code>, so we will be only checking for
+that. If our plugin had more actions, it's simply a matter of adding
+more conditional tests to check for those actions.</p>
 
-<p>We are then going to grab the message coming in from the arguments which is supplied by the args parameter.
-We can grab the first argument by simply doing <code>String theMsg = args.getString(0);</code>.</p>
+<p>We are then going to grab the message coming in from the arguments
+which is supplied by the args parameter.  We can grab the first
+argument by simply doing <code>String theMsg = args.getString(0);</code>.</p>
 
-<p>We will do some error checking and if the message looks okay, we will instantiate a new PluginResult with
-an ok status: PluginResult.Status.OK and return the message: theMsg. After this, we will then return the 
-result which will then pass back to JavaScript to be fired in the success callback. If something should fail, 
-we can return various status exceptions like PluginResult.Status.ERROR, PluginResult.Status.JSON<em>EXCEPTION,
-or PluginResult.Status.INVALID</em>ACTION. When these types of results are passed back, they will fire the fail 
-callback in JavaScript. </p>
+<p>We will do some error checking and if the message looks okay, we will
+instantiate a new PluginResult with an ok status:
+<code>PluginResult.Status.OK</code> and return the message: <code>theMsg</code>. After this,
+we return the result which to be passed back to JavaScript to be fired
+in the success callback. If something fails, we can return various
+status exceptions like <code>PluginResult.Status.ERROR</code>,
+<code>PluginResult.Status.JSON_EXCEPTION</code>, or
+<code>PluginResult.Status.INVALID_ACTION</code>. When passed back, these types of
+results fire the fail callback in JavaScript.</p>
 
 <h2>
 <a name="Developing%20a%20Plugin%20on%20BlackBerry_updating_the_jar_in_your_project_s_www_folder">Updating the .jar in your project's www folder</a>
 </h2>
 
-<p>The addition of the Echo.java needs to be updated in your project so to build the .jar file, cd
-to the root directory of the BlackBerry WebWorks repo. Use the ant command:</p>
+<p>The added <code>Echo.java</code> needs to be updated in your project.  To build
+the <code>.jar</code> file, Navigate to the BlackBerry WebWorks repo's root
+directory and run the <code>ant</code> command:</p>
 
 <pre class="prettyprint"><code>ant update -Dproject.path="~/path_to_my_project"
 </code></pre>
 
-<p>This will build a new .jar file in the build/ext folder. Copy the <code>build/ext/cordova.jar</code> file into your
-project/www/ext folder. </p>
+<p>This builds a new <code>.jar</code> file in the <code>build/ext</code> directory. Copy the
+<code>build/ext/cordova.jar</code> file into your <code>project/www/ext</code> directory.</p>
 
-<p>If all goes well, that should allow you to use the Echo plugin in BlackBerry.</p>
+<p>If all goes well, that allows you to use the Echo plugin in
+BlackBerry.</p>
 
             </div>
         </div>

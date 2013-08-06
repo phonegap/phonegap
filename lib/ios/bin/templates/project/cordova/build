@@ -43,9 +43,18 @@ cd "$PROJECT_PATH"
 APP=build/$PROJECT_NAME.app
 SDK=`xcodebuild -showsdks | grep Sim | tail -1 | awk '{print $6}'`
 
-xcodebuild -project $PROJECT_NAME.xcodeproj -arch i386 -target $PROJECT_NAME -configuration Debug -sdk $SDK clean build VALID_ARCHS="i386" CONFIGURATION_BUILD_DIR="$PROJECT_PATH/build"
+FLAG=${1:---debug}
+OTHER_FLAGS=$2
+CONFIGURATION=Debug
 
+if [ "$FLAG" == "--release" ]; then
+	CONFIGURATION=Release
+fi
 
+if [ "$OTHER_FLAGS" != "" ]; then
+	echo "More than one flag provided, specify either --debug or --release only"
+	exit 2
+fi
 
-
-
+$CORDOVA_PATH/clean
+xcodebuild -project $PROJECT_NAME.xcodeproj -arch i386 -target $PROJECT_NAME -configuration $CONFIGURATION -sdk $SDK build VALID_ARCHS="i386" CONFIGURATION_BUILD_DIR="$PROJECT_PATH/build"

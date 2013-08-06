@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -128,7 +131,7 @@
 <option value="media.play_quick_example">      - Quick Example</option>
 <option value="media.play_full_example">      - Full Example</option>
 <option value="media.play_blackberry_webworks_quirks">      - BlackBerry WebWorks Quirks</option>
-<option value="media.play_ios_quirk">      - iOS Quirk</option>
+<option value="media.play_ios_quirks">      - iOS Quirks</option>
 <option value="media.release">media.release</option>
 <option value="media.release_description">      - Description</option>
 <option value="media.release_supported_platforms">      - Supported Platforms</option>
@@ -141,6 +144,12 @@
 <option value="media.seekTo_quick_example">      - Quick Example</option>
 <option value="media.seekTo_full_example">      - Full Example</option>
 <option value="media.seekTo_blackberry_webworks_quirks">      - BlackBerry WebWorks Quirks</option>
+<option value="media.setVolume">media.setVolume</option>
+<option value="media.setVolume_paramters">      - Paramters</option>
+<option value="media.setVolume_description">      - Description</option>
+<option value="media.setVolume_supported_platforms">      - Supported Platforms</option>
+<option value="media.setVolume_quick_example">      - Quick Example</option>
+<option value="media.setVolume_full_example">      - Full Example</option>
 <option value="media.startRecord">media.startRecord</option>
 <option value="media.startRecord_description">      - Description</option>
 <option value="media.startRecord_supported_platforms">      - Supported Platforms</option>
@@ -192,8 +201,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -214,7 +226,10 @@
 <pre class="prettyprint"><code>var media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, mediaSuccess, [<a href="cordova_media_media.md.html#mediaError">mediaError</a>], [mediaStatus]);
 </code></pre>
 
-<p>Note: The current implementation does not adhere to a W3C specification for media capture, and is provided for convenience only.  A future implementation will adhere to the latest W3C specification and may deprecate the current APIs.</p>
+<p><strong>NOTE:</strong> The current implementation does not adhere to a W3C
+specification for media capture, and is provided for convenience only.
+A future implementation will adhere to the latest W3C specification
+and may deprecate the current APIs.</p>
 
 <h2>
 <a name="Media_parameters">Parameters</a>
@@ -225,20 +240,21 @@
 <strong>src</strong>: A URI containing the audio content. <em>(DOMString)</em>
 </li>
 <li>
-<strong>mediaSuccess</strong>: (Optional) The callback that is invoked after a <a href="cordova_media_media.md.html#Media">Media</a> object has completed the current play/record or stop action. <em>(Function)</em>
+<strong>mediaSuccess</strong>: (Optional) The callback that executes after a <code><a href="cordova_media_media.md.html#Media">Media</a></code> object has completed the current play, record, or stop action. <em>(Function)</em>
 </li>
 <li>
-<strong><a href="cordova_media_media.md.html#mediaError">mediaError</a></strong>: (Optional) The callback that is invoked if there was an error. <em>(Function)</em>
+<strong><a href="cordova_media_media.md.html#mediaError">mediaError</a></strong>: (Optional) The callback that executes if an error occurs. <em>(Function)</em>
 </li>
 <li>
-<strong>mediaStatus</strong>: (Optional) The callback that is invoked to indicate status changes. <em>(Function)</em>
+<strong>mediaStatus</strong>: (Optional) The callback that executes to indicate status changes. <em>(Function)</em>
 </li>
 </ul>
 <h2>
 <a name="Media_constants">Constants</a>
 </h2>
 
-<p>The following constants are reported as the only parameter to the <strong>mediaStatus</strong> callback function.</p>
+<p>The following constants are reported as the only parameter to the
+<code>mediaStatus</code> callback:</p>
 
 <ul>
 <li>
@@ -258,23 +274,25 @@
 
 <ul>
 <li>
-<a href="cordova_media_media.md.html#media.getCurrentPosition">media.getCurrentPosition</a>: Returns the current position within an audio file.</li>
+<code><a href="cordova_media_media.md.html#media.getCurrentPosition">media.getCurrentPosition</a></code>: Returns the current position within an audio file.</li>
 <li>
-<a href="cordova_media_media.md.html#media.getDuration">media.getDuration</a>: Returns the duration of an audio file.</li>
+<code><a href="cordova_media_media.md.html#media.getDuration">media.getDuration</a></code>: Returns the duration of an audio file.</li>
 <li>
-<a href="cordova_media_media.md.html#media.play">media.play</a>: Start or <a href="cordova_events_events.md.html#resume">resume</a> playing audio file.</li>
+<code><a href="cordova_media_media.md.html#media.play">media.play</a></code>: Start or <a href="cordova_events_events.md.html#resume">resume</a> playing an audio file.</li>
 <li>
-<a href="cordova_media_media.md.html#media.pause">media.pause</a>: Pause playing audio file.</li>
+<code><a href="cordova_media_media.md.html#media.pause">media.pause</a></code>: Pause playback of an audio file.</li>
 <li>
-<a href="cordova_media_media.md.html#media.release">media.release</a>: Releases the underlying OS'es audio resources.</li>
+<code><a href="cordova_media_media.md.html#media.release">media.release</a></code>: Releases the underlying operating system's audio resources.</li>
 <li>
-<a href="cordova_media_media.md.html#media.seekTo">media.seekTo</a>: Moves the position within the audio file.</li>
+<code><a href="cordova_media_media.md.html#media.seekTo">media.seekTo</a></code>: Moves the position within the audio file.</li>
 <li>
-<a href="cordova_media_media.md.html#media.startRecord">media.startRecord</a>: Start recording audio file.</li>
+<code><a href="cordova_media_media.md.html#media.setVolume">media.setVolume</a></code>: Set the volume for audio playback.</li>
 <li>
-<a href="cordova_media_media.md.html#media.stopRecord">media.stopRecord</a>: Stop recording audio file.</li>
+<code><a href="cordova_media_media.md.html#media.startRecord">media.startRecord</a></code>: Start recording an audio file.</li>
 <li>
-<a href="cordova_media_media.md.html#media.stop">media.stop</a>: Stop playing audio file.</li>
+<code><a href="cordova_media_media.md.html#media.stopRecord">media.stopRecord</a></code>: Stop recording an audio file.</li>
+<li>
+<code><a href="cordova_media_media.md.html#media.stop">media.stop</a></code>: Stop playing an audio file.</li>
 </ul>
 <h2>
 <a name="Media_additional_readonly_parameters">Additional ReadOnly Parameters</a>
@@ -282,13 +300,13 @@
 
 <ul>
 <li>
-<strong>position</strong>: The position within the audio playback in seconds.
+<strong>position</strong>: The position within the audio playback, in seconds.
 <ul>
-<li>Not automatically updated during play, call <code>getCurrentPosition</code> to update.</li>
+<li>Not automatically updated during play; call <code>getCurrentPosition</code> to update.</li>
 </ul>
 </li>
 <li>
-<strong>duration</strong>: The duration of the media in seconds.</li>
+<strong>duration</strong>: The duration of the media, in seconds.</li>
 </ul>
 <h2>
 <a name="Media_supported_platforms">Supported Platforms</a>
@@ -320,15 +338,6 @@
 &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
 </code></pre>
 
-<h3>Bada</h3>
-
-<h4>manifest.xml</h4>
-
-<pre class="prettyprint"><code>&lt;Privilege&gt;
-    &lt;Name&gt;RECORDING&lt;/Name&gt;
-&lt;/Privilege&gt;
-</code></pre>
-
 <h3>BlackBerry WebWorks</h3>
 
 <h4>www/plugins.xml</h4>
@@ -341,11 +350,6 @@
 <h4>config.xml</h4>
 
 <pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_media_media.md.html#Media">Media</a>" value="CDVSound" /&gt;
-</code></pre>
-
-<h3>webOS</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
 </code></pre>
 
 <h3>Windows Phone</h3>
@@ -370,10 +374,10 @@
 
 <h3>Windows Phone Quirks</h3>
 
-<pre class="prettyprint"><code>Only one media file can be played back at a time.
-There are strict restrictions as to how your application interacts with other media. See http://msdn.microsoft.com/en-us/library/windowsphone/develop/hh184838(v=vs.92).aspx
-</code></pre>
-
+<ul>
+<li>Only one media file can be played back at a time.</li>
+<li>There are strict restrictions on how your application interacts with other media. See the <a class="external" href="http://msdn.microsoft.com/en-us/library/windowsphone/develop/hh184838(v=vs.92).aspx">Microsoft documentation for details</a>.</li>
+</ul>
 <hr>
 <h1><a name="media.getCurrentPosition">media.getCurrentPosition</a></h1>
 
@@ -388,15 +392,17 @@ There are strict restrictions as to how your application interacts with other me
 
 <ul>
 <li>
-<strong>mediaSuccess</strong>: The callback that is called with the current position in seconds.</li>
+<strong>mediaSuccess</strong>: The callback that is passed the current position in seconds.</li>
 <li>
-<strong><a href="cordova_media_media.md.html#mediaError">mediaError</a></strong>: (Optional) The callback that is called if there was an error.</li>
+<strong><a href="cordova_media_media.md.html#mediaError">mediaError</a></strong>: (Optional) The callback to execute if an error occurs.</li>
 </ul>
 <h2>
 <a name="media.getCurrentPosition_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_media_media.md.html#media.getCurrentPosition">media.getCurrentPosition</a></code> is an asynchronous function that returns the current position of the underlying audio file of a <a href="cordova_media_media.md.html#Media">Media</a> object. Also updates the <strong>_position</strong> parameter within the <a href="cordova_media_media.md.html#Media">Media</a> object. </p>
+<p>An asynchronous function that returns the current position of the
+underlying audio file of a <code><a href="cordova_media_media.md.html#Media">Media</a></code> object. Also updates the <code><a href="cordova_media_media.md.html#Media">Media</a></code>
+object's <code>position</code> parameter.</p>
 
 <h2>
 <a name="media.getCurrentPosition_supported_platforms">Supported Platforms</a>
@@ -414,26 +420,26 @@ There are strict restrictions as to how your application interacts with other me
 <a name="media.getCurrentPosition_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>    // Audio player
-    //
-    var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
+<pre class="prettyprint"><code>// Audio player
+//
+var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
 
-    // Update media position every second
-    var mediaTimer = setInterval(function() {
-        // get media position
-        my_media.getCurrentPosition(
-            // success callback
-            function(position) {
-                if (position &gt; -1) {
-                    console.log((position) + " sec");
-                }
-            },
-            // error callback
-            function(e) {
-                console.log("Error getting pos=" + e);
+// Update media position every second
+var mediaTimer = setInterval(function () {
+    // get media position
+    my_media.getCurrentPosition(
+        // success callback
+        function (position) {
+            if (position &gt; -1) {
+                console.log((position) + " sec");
             }
-        );
-    }, 1000);
+        },
+        // error callback
+        function (e) {
+            console.log("Error getting pos=" + e);
+        }
+    );
+}, 1000);
 </code></pre>
 
 <h2>
@@ -449,11 +455,11 @@ There are strict restrictions as to how your application interacts with other me
         &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
         &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        // Wait for Cordova to load
+        // Wait for device API libraries to load
         //
         document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-        // Cordova is ready
+        // device APIs are available
         //
         function onDeviceReady() {
             playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
@@ -495,7 +501,7 @@ There are strict restrictions as to how your application interacts with other me
         }
 
         // Pause audio
-        // 
+        //
         function pauseAudio() {
             if (my_media) {
                 my_media.<a href="cordova_events_events.md.html#pause">pause</a>();
@@ -503,7 +509,7 @@ There are strict restrictions as to how your application interacts with other me
         }
 
         // Stop audio
-        // 
+        //
         function stopAudio() {
             if (my_media) {
                 my_media.stop();
@@ -518,15 +524,15 @@ There are strict restrictions as to how your application interacts with other me
             console.log("playAudio():Audio Success");
         }
 
-        // onError Callback 
+        // onError Callback
         //
         function onError(error) {
-            alert('code: '    + error.code    + '\n' + 
+            alert('code: '    + error.code    + '\n' +
                   'message: ' + error.message + '\n');
         }
 
         // Set audio position
-        // 
+        //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
         }
@@ -554,7 +560,9 @@ There are strict restrictions as to how your application interacts with other me
 <a name="media.getDuration_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_media_media.md.html#media.getDuration">media.getDuration</a></code> is a synchronous function that returns the duration of the audio file in seconds, if known.  If the duration is unknown, a value of -1 is returned.</p>
+<p>The <code><a href="cordova_media_media.md.html#media.getDuration">media.getDuration</a></code> method executes synchronously, returning the
+duration of the audio file in seconds, if known.  If the duration is
+unknown, it returns a value of -1.</p>
 
 <h2>
 <a name="media.getDuration_supported_platforms">Supported Platforms</a>
@@ -572,23 +580,23 @@ There are strict restrictions as to how your application interacts with other me
 <a name="media.getDuration_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>    // Audio player
-    //
-    var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
+<pre class="prettyprint"><code>// Audio player
+//
+var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
 
-    // Get duration
-    var counter = 0;
-    var timerDur = setInterval(function() {
-        counter = counter + 100;
-        if (counter &gt; 2000) {
-            clearInterval(timerDur);
-        }
-        var dur = my_media.getDuration();
-        if (dur &gt; 0) {
-            clearInterval(timerDur);
-            document.getElementById('audio_duration').innerHTML = (dur) + " sec";
-        }
-   }, 100);
+// Get duration
+var counter = 0;
+var timerDur = setInterval(function() {
+    counter = counter + 100;
+    if (counter &gt; 2000) {
+        clearInterval(timerDur);
+    }
+    var dur = my_media.getDuration();
+    if (dur &gt; 0) {
+        clearInterval(timerDur);
+        document.getElementById('audio_duration').innerHTML = (dur) + " sec";
+    }
+}, 100);
 </code></pre>
 
 <h2>
@@ -604,11 +612,11 @@ There are strict restrictions as to how your application interacts with other me
         &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
         &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        // Wait for Cordova to load
+        // Wait for device API libraries to load
         //
         document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-        // Cordova is ready
+        // device APIs are available
         //
         function onDeviceReady() {
             playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
@@ -650,7 +658,7 @@ There are strict restrictions as to how your application interacts with other me
         }
 
         // Pause audio
-        // 
+        //
         function pauseAudio() {
             if (my_media) {
                 my_media.<a href="cordova_events_events.md.html#pause">pause</a>();
@@ -658,7 +666,7 @@ There are strict restrictions as to how your application interacts with other me
         }
 
         // Stop audio
-        // 
+        //
         function stopAudio() {
             if (my_media) {
                 my_media.stop();
@@ -673,15 +681,15 @@ There are strict restrictions as to how your application interacts with other me
             console.log("playAudio():Audio Success");
         }
 
-        // onError Callback 
+        // onError Callback
         //
         function onError(error) {
-            alert('code: '    + error.code    + '\n' + 
+            alert('code: '    + error.code    + '\n' +
                   'message: ' + error.message + '\n');
         }
 
         // Set audio position
-        // 
+        //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
         }
@@ -709,7 +717,7 @@ There are strict restrictions as to how your application interacts with other me
 <a name="media.pause_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_media_media.md.html#media.pause">media.pause</a></code> is a synchronous function that pauses playing an audio file.</p>
+<p>The <code><a href="cordova_media_media.md.html#media.pause">media.pause</a></code> method executes synchronously, and pauses playing an audio file.</p>
 
 <h2>
 <a name="media.pause_supported_platforms">Supported Platforms</a>
@@ -733,21 +741,18 @@ function playAudio(url) {
     // Play the audio file at url
     var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(url,
         // success callback
-        function() {
-            console.log("playAudio():Audio Success");
-        },
+        function () { console.log("playAudio():Audio Success"); },
         // error callback
-        function(err) {
-            console.log("playAudio():Audio Error: "+err);
-    });
+        function (err) { console.log("playAudio():Audio Error: " + err); }
+    );
 
     // Play audio
     my_media.play();
 
     // Pause after 10 seconds
-    setTimeout(function() {
+    setTimeout(function () {
         <a href="cordova_media_media.md.html#media.pause">media.pause</a>();
-    }, 10000);        
+    }, 10000);
 }
 </code></pre>
 
@@ -764,11 +769,11 @@ function playAudio(url) {
         &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
         &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        // Wait for Cordova to load
+        // Wait for device API libraries to load
         //
         document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-        // Cordova is ready
+        // device APIs are available
         //
         function onDeviceReady() {
             playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
@@ -810,7 +815,7 @@ function playAudio(url) {
         }
 
         // Pause audio
-        // 
+        //
         function pauseAudio() {
             if (my_media) {
                 my_media.<a href="cordova_events_events.md.html#pause">pause</a>();
@@ -818,7 +823,7 @@ function playAudio(url) {
         }
 
         // Stop audio
-        // 
+        //
         function stopAudio() {
             if (my_media) {
                 my_media.stop();
@@ -833,15 +838,15 @@ function playAudio(url) {
             console.log("playAudio():Audio Success");
         }
 
-        // onError Callback 
+        // onError Callback
         //
         function onError(error) {
-            alert('code: '    + error.code    + '\n' + 
+            alert('code: '    + error.code    + '\n' +
                   'message: ' + error.message + '\n');
         }
 
         // Set audio position
-        // 
+        //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
         }
@@ -869,7 +874,8 @@ function playAudio(url) {
 <a name="media.play_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_media_media.md.html#media.play">media.play</a></code> is a synchronous function that starts or resumes playing an audio file.</p>
+<p>The <code><a href="cordova_media_media.md.html#media.play">media.play</a></code> method executes synchronously, and starts or resumes
+playing an audio file.</p>
 
 <h2>
 <a name="media.play_supported_platforms">Supported Platforms</a>
@@ -893,14 +899,14 @@ function playAudio(url) {
     // Play the audio file at url
     var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(url,
         // success callback
-        function() {
+        function () {
             console.log("playAudio():Audio Success");
         },
         // error callback
-        function(err) {
-            console.log("playAudio():Audio Error: "+err);
-    });
-
+        function (err) {
+            console.log("playAudio():Audio Error: " + err);
+        }
+    );
     // Play audio
     my_media.play();
 }
@@ -919,11 +925,11 @@ function playAudio(url) {
         &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
         &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        // Wait for Cordova to load
+        // Wait for device API libraries to load
         //
         document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-        // Cordova is ready
+        // device APIs are available
         //
         function onDeviceReady() {
             playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
@@ -966,7 +972,7 @@ function playAudio(url) {
         }
 
         // Pause audio
-        // 
+        //
         function pauseAudio() {
             if (my_media) {
                 my_media.<a href="cordova_events_events.md.html#pause">pause</a>();
@@ -974,7 +980,7 @@ function playAudio(url) {
         }
 
         // Stop audio
-        // 
+        //
         function stopAudio() {
             if (my_media) {
                 my_media.stop();
@@ -989,15 +995,15 @@ function playAudio(url) {
             console.log("playAudio():Audio Success");
         }
 
-        // onError Callback 
+        // onError Callback
         //
         function onError(error) {
-            alert('code: '    + error.code    + '\n' + 
+            alert('code: '    + error.code    + '\n' +
                   'message: ' + error.message + '\n');
         }
 
         // Set audio position
-        // 
+        //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
         }
@@ -1018,45 +1024,49 @@ function playAudio(url) {
 </h2>
 
 <ul>
-<li>BlackBerry devices support a limited number of simultaneous audio channels. CDMA devices only support a single audio channel. Other devices support up to two simultaneous channels. Attempting to play more audio files then the supported amount will result in previous playback being stopped.</li>
+<li>BlackBerry devices support a limited number of simultaneous audio
+channels. CDMA devices only support a single audio channel. Other
+devices support up to two simultaneous channels. An attempt to play
+more audio files than the supported amount results in previous
+playback being stopped.</li>
 </ul>
 <h2>
-<a name="media.play_ios_quirk">iOS Quirk</a>
+<a name="media.play_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
 <li>
-<p><strong>numberOfLoops</strong></p>
-
-<p>Pass in this option to the <strong>play</strong> method to specify the number of times you want the media file to play. e.g:</p>
+<p><strong>numberOfLoops</strong>: Pass this option to the <code>play</code> method to specify
+the number of times you want the media file to play, e.g.:</p>
 
 <pre class="prettyprint"><code>var myMedia = new <a href="cordova_media_media.md.html#Media">Media</a>("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3")
 myMedia.play({ numberOfLoops: 2 })
 </code></pre>
 </li>
 <li>
-<p><strong>playAudioWhenScreenIsLocked</strong></p>
-
-<p>Pass in this option to the <strong>play</strong> method to specify whether you want to play the audio of the media file when the screen is locked (this defaults to true if not set). If this is set to true, it will ignore the state of the hardware mute button. e.g:</p>
+<p><strong>playAudioWhenScreenIsLocked</strong>: Pass in this option to the <code>play</code>
+method to specify whether you want to allow playback when the screen
+is locked.  If set to <code>true</code> (the default value), the state of the
+hardware mute button is ignored, e.g.:</p>
 
 <pre class="prettyprint"><code>var myMedia = new <a href="cordova_media_media.md.html#Media">Media</a>("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3")
 myMedia.play({ playAudioWhenScreenIsLocked : false })
 </code></pre>
 </li>
 <li>
-<p><strong>order of file search</strong></p>
-
-<p>When only a file name or simple path is provided, iOS will search in the www for the file and then in the application documents/tmp directory.</p>
+<p><strong>order of file search</strong>: When only a file name or simple path is
+provided, iOS searches in the <code>www</code> directory for the file, then in
+the application's <code>documents/tmp</code> directory:</p>
 
 <pre class="prettyprint"><code>var myMedia = new <a href="cordova_media_media.md.html#Media">Media</a>("audio/beer.mp3")
-myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;application&gt;/documents/tmp/audio/beer.mp3
+myMedia.play()  // first looks for file in www/audio/beer.mp3 then in &lt;application&gt;/documents/tmp/audio/beer.mp3
 </code></pre>
 </li>
 </ul>
 <hr>
 <h1><a name="media.release">media.release</a></h1>
 
-<p>Releases the underlying operating systems audio resources.</p>
+<p>Releases the underlying operating system's audio resources.</p>
 
 <pre class="prettyprint"><code><a href="cordova_media_media.md.html#media.release">media.release</a>();
 </code></pre>
@@ -1065,7 +1075,11 @@ myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;ap
 <a name="media.release_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_media_media.md.html#media.release">media.release</a></code> is a synchronous function that releases the underlying operating systems audio resources.  This function is particularly important for Android as there are a finite amount of OpenCore instances for media playback.  Developers should call the 'release' function when they no longer need the <a href="cordova_media_media.md.html#Media">Media</a> resource.</p>
+<p>The <code><a href="cordova_media_media.md.html#media.release">media.release</a></code> method executes synchronously, releasing the
+underlying operating system's audio resources.  This is particularly
+important for Android, since there are a finite amount of OpenCore
+instances for media playback. Applications should call the <code>release</code>
+function for any <code><a href="cordova_media_media.md.html#Media">Media</a></code> resource that is no longer needed.</p>
 
 <h2>
 <a name="media.release_supported_platforms">Supported Platforms</a>
@@ -1083,17 +1097,342 @@ myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;ap
 <a name="media.release_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>    // Audio player
-    //
-    var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
+<pre class="prettyprint"><code>// Audio player
+//
+var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
 
-    my_media.play();
-    my_media.stop();
-    my_media.release();
+my_media.play();
+my_media.stop();
+my_media.release();
 </code></pre>
 
 <h2>
 <a name="media.release_full_example">Full Example</a>
+</h2>
+
+<pre class="prettyprint"><code>    &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+                          "http://www.w3.org/TR/html4/strict.dtd"&gt;
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;<a href="cordova_media_media.md.html#Media">Media</a> Example&lt;/title&gt;
+
+        &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" charset="utf-8"&gt;
+
+        // Wait for device API libraries to load
+        //
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+
+        // device APIs are available
+        //
+        function onDeviceReady() {
+            playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
+        }
+
+        // Audio player
+        //
+        var my_media = null;
+        var mediaTimer = null;
+
+        // Play audio
+        //
+        function playAudio(src) {
+            // Create <a href="cordova_media_media.md.html#Media">Media</a> object from src
+            my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
+
+            // Play audio
+            my_media.play();
+
+            // Update my_media position every second
+            if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                    // get my_media position
+                    my_media.getCurrentPosition(
+                        // success callback
+                        function(position) {
+                            if (position &gt; -1) {
+                                setAudioPosition((position) + " sec");
+                            }
+                        },
+                        // error callback
+                        function(e) {
+                            console.log("Error getting pos=" + e);
+                            setAudioPosition("Error: " + e);
+                        }
+                    );
+                }, 1000);
+            }
+        }
+
+        // Pause audio
+        //
+        function pauseAudio() {
+            if (my_media) {
+                my_media.<a href="cordova_events_events.md.html#pause">pause</a>();
+            }
+        }
+
+        // Stop audio
+        //
+        function stopAudio() {
+            if (my_media) {
+                my_media.stop();
+            }
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+        }
+
+        // onSuccess Callback
+        //
+        function onSuccess() {
+            console.log("playAudio():Audio Success");
+        }
+
+        // onError Callback
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+
+        // Set audio position
+        //
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
+
+        &lt;/script&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;a href="#" class="btn large" onclick="playAudio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');"&gt;Play Audio&lt;/a&gt;
+        &lt;a href="#" class="btn large" onclick="pauseAudio();"&gt;Pause Playing Audio&lt;/a&gt;
+        &lt;a href="#" class="btn large" onclick="stopAudio();"&gt;Stop Playing Audio&lt;/a&gt;
+        &lt;p id="audio_position"&gt;&lt;/p&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+</code></pre>
+
+<hr>
+<h1><a name="media.seekTo">media.seekTo</a></h1>
+
+<p>Sets the current position within an audio file.</p>
+
+<pre class="prettyprint"><code><a href="cordova_media_media.md.html#media.seekTo">media.seekTo</a>(milliseconds);
+</code></pre>
+
+<h2>
+<a name="media.seekTo_parameters">Parameters</a>
+</h2>
+
+<ul>
+<li>
+<strong>milliseconds</strong>: The position to set the playback position within the audio, in milliseconds.</li>
+</ul>
+<h2>
+<a name="media.seekTo_description">Description</a>
+</h2>
+
+<p>The <code><a href="cordova_media_media.md.html#media.seekTo">media.seekTo</a></code> executes asynchronously, updating the current
+playback position within an audio file referenced by a <code><a href="cordova_media_media.md.html#Media">Media</a></code>
+object. Also updates the <code><a href="cordova_media_media.md.html#Media">Media</a></code> object's <code>position</code> parameter.</p>
+
+<h2>
+<a name="media.seekTo_supported_platforms">Supported Platforms</a>
+</h2>
+
+<ul>
+<li>Android</li>
+<li>BlackBerry WebWorks (OS 6.0 and higher)</li>
+<li>iOS</li>
+<li>Windows Phone 7 and 8</li>
+<li>Tizen</li>
+<li>Windows 8</li>
+</ul>
+<h2>
+<a name="media.seekTo_quick_example">Quick Example</a>
+</h2>
+
+<pre class="prettyprint"><code>// Audio player
+//
+var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
+    my_media.play();
+// SeekTo to 10 seconds after 5 seconds
+setTimeout(function() {
+    my_media.seekTo(10000);
+}, 5000);
+</code></pre>
+
+<h2>
+<a name="media.seekTo_full_example">Full Example</a>
+</h2>
+
+<pre class="prettyprint"><code>    &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+                          "http://www.w3.org/TR/html4/strict.dtd"&gt;
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;<a href="cordova_media_media.md.html#Media">Media</a> Example&lt;/title&gt;
+
+        &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" charset="utf-8"&gt;
+
+        // Wait for device API libraries to load
+        //
+        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
+
+        // device APIs are available
+        //
+        function onDeviceReady() {
+            playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
+        }
+
+        // Audio player
+        //
+        var my_media = null;
+        var mediaTimer = null;
+
+        // Play audio
+        //
+        function playAudio(src) {
+            // Create <a href="cordova_media_media.md.html#Media">Media</a> object from src
+            my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
+
+            // Play audio
+            my_media.play();
+
+            // Update media position every second
+            mediaTimer = setInterval(function() {
+                // get media position
+                my_media.getCurrentPosition(
+                    // success callback
+                    function(position) {
+                        if (position &gt; -1) {
+                            setAudioPosition(position + " sec");
+                        }
+                    },
+                    // error callback
+                    function(e) {
+                        console.log("Error getting pos=" + e);
+                    }
+                );
+            }, 1000);
+
+            // SeekTo to 10 seconds after 5 seconds
+            setTimeout(function() {
+                my_media.seekTo(10000);
+            }, 5000);
+        }
+
+        // Stop audio
+        //
+        function stopAudio() {
+            if (my_media) {
+                my_media.stop();
+            }
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+        }
+
+        // onSuccess Callback
+        //
+        function onSuccess() {
+            console.log("playAudio():Audio Success");
+        }
+
+        // onError Callback
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+
+        // Set audio position
+        //
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
+
+        &lt;/script&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;a href="#" class="btn large" onclick="playAudio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');"&gt;Play Audio&lt;/a&gt;
+        &lt;a href="#" class="btn large" onclick="stopAudio();"&gt;Stop Playing Audio&lt;/a&gt;
+        &lt;p id="audio_position"&gt;&lt;/p&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+</code></pre>
+
+<h2>
+<a name="media.seekTo_blackberry_webworks_quirks">BlackBerry WebWorks Quirks</a>
+</h2>
+
+<ul>
+<li>Not supported on BlackBerry OS 5 devices.</li>
+</ul>
+<hr>
+<h1><a name="media.setVolume">media.setVolume</a></h1>
+
+<p>Set the volume for an audio file.</p>
+
+<pre class="prettyprint"><code><a href="cordova_media_media.md.html#media.setVolume">media.setVolume</a>(volume);
+</code></pre>
+
+<h2>
+<a name="media.setVolume_paramters">Paramters</a>
+</h2>
+
+<ul>
+<li>
+<strong>volume</strong>: The volume to set for playback.  The value must be within the range of 0.0 to 1.0.</li>
+</ul>
+<h2>
+<a name="media.setVolume_description">Description</a>
+</h2>
+
+<p>Function <code><a href="cordova_media_media.md.html#media.setVolume">media.setVolume</a></code> is an asynchronous function that sets the volume during audio playback.</p>
+
+<h2>
+<a name="media.setVolume_supported_platforms">Supported Platforms</a>
+</h2>
+
+<ul>
+<li>Android</li>
+<li>iOS</li>
+</ul>
+<h2>
+<a name="media.setVolume_quick_example">Quick Example</a>
+</h2>
+
+<pre class="prettyprint"><code>// Play audio
+//
+function playAudio(url) {
+    // Play the audio file at url
+    var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(url,
+        // success callback
+        function() {
+            console.log("playAudio():Audio Success");
+        },
+        // error callback
+        function(err) {
+            console.log("playAudio():Audio Error: "+err);
+    });
+
+    // Play audio
+    my_media.play();
+
+    // Mute volume after 2 seconds
+    setTimeout(function() {
+        my_media.setVolume('0.0');
+    }, 2000);
+
+    // Set volume to 1.0 after 5 seconds
+    setTimeout(function() {
+        my_media.setVolume('1.0');
+    }, 5000);
+}
+</code></pre>
+
+<h2>
+<a name="media.setVolume_full_example">Full Example</a>
 </h2>
 
 <pre class="prettyprint"><code>    &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -1150,16 +1489,16 @@ myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;ap
             }
         }
 
-        // Pause audio
-        // 
-        function pauseAudio() {
+        // Set audio volume
+        //
+        function setVolume(volume) {
             if (my_media) {
-                my_media.<a href="cordova_events_events.md.html#pause">pause</a>();
+                my_media.setVolume(volume);
             }
         }
 
         // Stop audio
-        // 
+        //
         function stopAudio() {
             if (my_media) {
                 my_media.stop();
@@ -1174,7 +1513,7 @@ myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;ap
             console.log("playAudio():Audio Success");
         }
 
-        // onError Callback 
+        // onError Callback
         //
         function onError(error) {
             alert('code: '    + error.code    + '\n' + 
@@ -1182,7 +1521,7 @@ myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;ap
         }
 
         // Set audio position
-        // 
+        //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
         }
@@ -1191,165 +1530,14 @@ myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;ap
       &lt;/head&gt;
       &lt;body&gt;
         &lt;a href="#" class="btn large" onclick="playAudio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');"&gt;Play Audio&lt;/a&gt;
-        &lt;a href="#" class="btn large" onclick="pauseAudio();"&gt;Pause Playing Audio&lt;/a&gt;
+        &lt;a href="#" class="btn large" onclick="setVolume('0.0');"&gt;Mute Audio&lt;/a&gt;
+        &lt;a href="#" class="btn large" onclick="setVolume('1.0');"&gt;Unmute Audio&lt;/a&gt;
         &lt;a href="#" class="btn large" onclick="stopAudio();"&gt;Stop Playing Audio&lt;/a&gt;
         &lt;p id="audio_position"&gt;&lt;/p&gt;
       &lt;/body&gt;
     &lt;/html&gt;
 </code></pre>
 
-<hr>
-<h1><a name="media.seekTo">media.seekTo</a></h1>
-
-<p>Sets the current position within an audio file.</p>
-
-<pre class="prettyprint"><code><a href="cordova_media_media.md.html#media.seekTo">media.seekTo</a>(milliseconds);
-</code></pre>
-
-<h2>
-<a name="media.seekTo_parameters">Parameters</a>
-</h2>
-
-<ul>
-<li>
-<strong>milliseconds</strong>: The position to set the playback position within the audio in milliseconds. .</li>
-</ul>
-<h2>
-<a name="media.seekTo_description">Description</a>
-</h2>
-
-<p>Function <code><a href="cordova_media_media.md.html#media.seekTo">media.seekTo</a></code> is an asynchronous function that updates the current position of the underlying audio file of a <a href="cordova_media_media.md.html#Media">Media</a> object. Also updates the <strong>_position</strong> parameter within the <a href="cordova_media_media.md.html#Media">Media</a> object. </p>
-
-<h2>
-<a name="media.seekTo_supported_platforms">Supported Platforms</a>
-</h2>
-
-<ul>
-<li>Android</li>
-<li>BlackBerry WebWorks (OS 6.0 and higher)</li>
-<li>iOS</li>
-<li>Windows Phone 7 and 8</li>
-<li>Tizen</li>
-<li>Windows 8</li>
-</ul>
-<h2>
-<a name="media.seekTo_quick_example">Quick Example</a>
-</h2>
-
-<pre class="prettyprint"><code>    // Audio player
-    //
-    var my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
-    my_media.play();
-    // SeekTo to 10 seconds after 5 seconds
-    setTimeout(function() {
-        my_media.seekTo(10000);
-    }, 5000);
-</code></pre>
-
-<h2>
-<a name="media.seekTo_full_example">Full Example</a>
-</h2>
-
-<pre class="prettyprint"><code>    &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-                  "http://www.w3.org/TR/html4/strict.dtd"&gt;
-    &lt;html&gt;
-      &lt;head&gt;
-        &lt;title&gt;<a href="cordova_media_media.md.html#Media">Media</a> Example&lt;/title&gt;
-
-        &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
-        &lt;script type="text/javascript" charset="utf-8"&gt;
-
-        // Wait for Cordova to load
-        //
-        document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
-
-        // Cordova is ready
-        //
-        function onDeviceReady() {
-            playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
-        }
-
-        // Audio player
-        //
-        var my_media = null;
-        var mediaTimer = null;
-
-        // Play audio
-        //
-        function playAudio(src) {
-            // Create <a href="cordova_media_media.md.html#Media">Media</a> object from src
-            my_media = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
-
-            // Play audio
-            my_media.play();
-            // Update media position every second
-            mediaTimer = setInterval(function() {
-                // get media position
-                my_media.getCurrentPosition(
-                    // success callback
-                    function(position) {
-                        if (position &gt; -1) {
-                            setAudioPosition(position + " sec");
-                        }
-                    },
-                    // error callback
-                    function(e) {
-                        console.log("Error getting pos=" + e);
-                    }
-                );
-            }, 1000);
-            // SeekTo to 10 seconds after 5 seconds
-            setTimeout(function() {
-                my_media.seekTo(10000);
-            }, 5000);
-        }
-
-        // Stop audio
-        // 
-        function stopAudio() {
-            if (my_media) {
-                my_media.stop();
-            }
-            clearInterval(mediaTimer);
-            mediaTimer = null;
-        }
-
-        // onSuccess Callback
-        //
-        function onSuccess() {
-            console.log("playAudio():Audio Success");
-        }
-
-        // onError Callback 
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' + 
-                  'message: ' + error.message + '\n');
-        }
-
-        // Set audio position
-        // 
-        function setAudioPosition(position) {
-            document.getElementById('audio_position').innerHTML = position;
-        }
-
-        &lt;/script&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-        &lt;a href="#" class="btn large" onclick="playAudio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');"&gt;Play Audio&lt;/a&gt;
-        &lt;a href="#" class="btn large" onclick="stopAudio();"&gt;Stop Playing Audio&lt;/a&gt;
-        &lt;p id="audio_position"&gt;&lt;/p&gt;
-      &lt;/body&gt;
-    &lt;/html&gt;
-</code></pre>
-
-<h2>
-<a name="media.seekTo_blackberry_webworks_quirks">BlackBerry WebWorks Quirks</a>
-</h2>
-
-<ul>
-<li>This API is not supported on BlackBerry OS 5 devices.</li>
-</ul>
 <hr>
 <h1><a name="media.startRecord">media.startRecord</a></h1>
 
@@ -1362,7 +1550,8 @@ myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;ap
 <a name="media.startRecord_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_media_media.md.html#media.startRecord">media.startRecord</a></code> is a synchronous function that starts recording an audio file.</p>
+<p>The <code><a href="cordova_media_media.md.html#media.startRecord">media.startRecord</a></code> method executes synchronously, starts a
+recording for an audio file.</p>
 
 <h2>
 <a name="media.startRecord_supported_platforms">Supported Platforms</a>
@@ -1380,7 +1569,7 @@ myMedia.play()  // will first look for file in www/audio/beer.mp3 then in &lt;ap
 </h2>
 
 <pre class="prettyprint"><code>// Record audio
-// 
+//
 function recordAudio() {
     var src = "myrecording.mp3";
     var mediaRec = new <a href="cordova_media_media.md.html#Media">Media</a>(src,
@@ -1411,12 +1600,12 @@ function recordAudio() {
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Record audio
-    // 
+    //
     function recordAudio() {
         var src = "myrecording.amr";
         var mediaRec = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
@@ -1436,7 +1625,7 @@ function recordAudio() {
         }, 1000);
     }
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         recordAudio();
@@ -1448,15 +1637,15 @@ function recordAudio() {
         console.log("recordAudio():Audio Success");
     }
 
-    // onError Callback 
+    // onError Callback
     //
     function onError(error) {
-        alert('code: '    + error.code    + '\n' + 
+        alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
 
     // Set audio position
-    // 
+    //
     function setAudioPosition(position) {
         document.getElementById('audio_position').innerHTML = position;
     }
@@ -1475,23 +1664,22 @@ function recordAudio() {
 </h2>
 
 <ul>
-<li>Android devices record audio in Adaptive Multi-Rate format. The specified file should end with a .amr extension.</li>
+<li>Android devices record audio in Adaptive Multi-Rate format. The specified file should end with a <em>.amr</em> extension.</li>
 </ul>
 <h2>
 <a name="media.startRecord_blackberry_webworks_quirks">BlackBerry WebWorks Quirks</a>
 </h2>
 
 <ul>
-<li>BlackBerry devices record audio in Adaptive Multi-Rate format. The specified file must end with a .amr extension.</li>
+<li>BlackBerry devices record audio in Adaptive Multi-Rate format. The specified file must end with a <em>.amr</em> extension.</li>
 </ul>
 <h2>
 <a name="media.startRecord_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
-<li>iOS only records to files of type .wav and returns an error if the file name extension is not correct.</li>
-<li>If a full path is not provided the recording will be placed in the <application>/documents/tmp directory.  This can be accessed via the <a href="cordova_file_file.md.html#File">File</a> apis using <a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.TEMPORARY.  Subdirectories are not created at record time and must already exist.  Thus,  myRecording.wav will work but recordings/myRecording.wav will not if the recordings directory does not already exist at <application>/documents/tmp/.</application></application>
-</li>
+<li>iOS only records to files of type <em>.wav</em> and returns an error if the file name extension is not correct.</li>
+<li>If a full path is not provided, the recording is placed in the application's <em>documents/tmp</em> directory. This can be accessed via the <code><a href="cordova_file_file.md.html#File">File</a></code> API using <code><a href="cordova_file_file.md.html#LocalFileSystem">LocalFileSystem</a>.TEMPORARY</code>. Any subdirectory specified at record time must already exist.</li>
 <li>
 <p>Files can be recorded and played back using the documents URI:</p>
 
@@ -1504,7 +1692,7 @@ function recordAudio() {
 </h2>
 
 <ul>
-<li>This API is not supported on Tizen devices.</li>
+<li>Not supported on Tizen devices.</li>
 </ul>
 <hr>
 <h1><a name="media.stop">media.stop</a></h1>
@@ -1518,7 +1706,8 @@ function recordAudio() {
 <a name="media.stop_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_media_media.md.html#media.stop">media.stop</a></code> is a synchronous function that stops playing an audio file.</p>
+<p>The <code><a href="cordova_media_media.md.html#media.stop">media.stop</a></code> method executes synchronously to stop playing an
+audio file.</p>
 
 <h2>
 <a name="media.stop_supported_platforms">Supported Platforms</a>
@@ -1548,7 +1737,8 @@ function playAudio(url) {
         // error callback
         function(err) {
             console.log("playAudio():Audio Error: "+err);
-    });
+        }
+    );
 
     // Play audio
     my_media.play();
@@ -1556,7 +1746,7 @@ function playAudio(url) {
     // Pause after 10 seconds
     setTimeout(function() {
         my_media.stop();
-    }, 10000);        
+    }, 10000);
 }
 </code></pre>
 
@@ -1573,11 +1763,11 @@ function playAudio(url) {
         &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
         &lt;script type="text/javascript" charset="utf-8"&gt;
 
-        // Wait for Cordova to load
+        // Wait for device API libraries to load
         //
         document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-        // Cordova is ready
+        // device APIs are available
         //
         function onDeviceReady() {
             playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
@@ -1619,7 +1809,7 @@ function playAudio(url) {
         }
 
         // Pause audio
-        // 
+        //
         function pauseAudio() {
             if (my_media) {
                 my_media.<a href="cordova_events_events.md.html#pause">pause</a>();
@@ -1627,7 +1817,7 @@ function playAudio(url) {
         }
 
         // Stop audio
-        // 
+        //
         function stopAudio() {
             if (my_media) {
                 my_media.stop();
@@ -1642,15 +1832,15 @@ function playAudio(url) {
             console.log("playAudio():Audio Success");
         }
 
-        // onError Callback 
+        // onError Callback
         //
         function onError(error) {
-            alert('code: '    + error.code    + '\n' + 
+            alert('code: '    + error.code    + '\n' +
                   'message: ' + error.message + '\n');
         }
 
         // Set audio position
-        // 
+        //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
         }
@@ -1678,7 +1868,8 @@ function playAudio(url) {
 <a name="media.stopRecord_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_media_media.md.html#media.stopRecord">media.stopRecord</a></code> is a synchronous function that stops recording an audio file.</p>
+<p>The <code><a href="cordova_media_media.md.html#media.stopRecord">media.stopRecord</a></code> method executes synchronously, stopping the
+recording of an audio file.</p>
 
 <h2>
 <a name="media.stopRecord_supported_platforms">Supported Platforms</a>
@@ -1696,7 +1887,7 @@ function playAudio(url) {
 </h2>
 
 <pre class="prettyprint"><code>// Record audio
-// 
+//
 function recordAudio() {
     var src = "myrecording.mp3";
     var mediaRec = new <a href="cordova_media_media.md.html#Media">Media</a>(src,
@@ -1708,7 +1899,8 @@ function recordAudio() {
         // error callback
         function(err) {
             console.log("recordAudio():Audio Error: "+ err.code);
-        });
+        }
+    );
 
     // Record audio
     mediaRec.startRecord();
@@ -1732,12 +1924,12 @@ function recordAudio() {
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
     // Record audio
-    // 
+    //
     function recordAudio() {
         var src = "myrecording.mp3";
         var mediaRec = new <a href="cordova_media_media.md.html#Media">Media</a>(src, onSuccess, onError);
@@ -1757,7 +1949,7 @@ function recordAudio() {
         }, 1000);
     }
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         recordAudio();
@@ -1769,15 +1961,15 @@ function recordAudio() {
         console.log("recordAudio():Audio Success");
     }
 
-    // onError Callback 
+    // onError Callback
     //
     function onError(error) {
-        alert('code: '    + error.code    + '\n' + 
+        alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
 
     // Set audio position
-    // 
+    //
     function setAudioPosition(position) {
         document.getElementById('audio_position').innerHTML = position;
     }
@@ -1796,12 +1988,13 @@ function recordAudio() {
 </h2>
 
 <ul>
-<li>This API is not supported on Tizen devices.</li>
+<li>Not supported on Tizen devices.</li>
 </ul>
 <hr>
 <h1><a name="MediaError">MediaError</a></h1>
 
-<p>A <code><a href="cordova_media_media.md.html#MediaError">MediaError</a></code> object is returned to the <code><a href="cordova_media_media.md.html#mediaError">mediaError</a></code> callback function when an error occurs.</p>
+<p>A <code><a href="cordova_media_media.md.html#MediaError">MediaError</a></code> object is returned to the <code><a href="cordova_media_media.md.html#mediaError">mediaError</a></code> callback
+function when an error occurs.</p>
 
 <h2>
 <a name="MediaError_properties">Properties</a>
@@ -1809,9 +2002,9 @@ function recordAudio() {
 
 <ul>
 <li>
-<strong>code:</strong> One of the predefined error codes listed below.</li>
+<strong>code</strong>: One of the predefined error codes listed below.</li>
 <li>
-<strong>message:</strong> Error message describing the details of the error.</li>
+<strong>message</strong>: An error message describing the details of the error.</li>
 </ul>
 <h2>
 <a name="MediaError_constants">Constants</a>
@@ -1827,12 +2020,14 @@ function recordAudio() {
 <a name="MediaError_description">Description</a>
 </h2>
 
-<p>The <code><a href="cordova_media_media.md.html#MediaError">MediaError</a></code> object is returned to the user through the <code><a href="cordova_media_media.md.html#mediaError">mediaError</a></code> callback function when an error occurs.</p>
+<p>The <code><a href="cordova_media_media.md.html#MediaError">MediaError</a></code> object is passed to a <code><a href="cordova_media_media.md.html#mediaError">mediaError</a></code> callback function
+when an error occurs.</p>
 
 <hr>
 <h1><a name="mediaError">mediaError</a></h1>
 
-<p>A user specified callback function that is invoked when there is an error in media functions.</p>
+<p>A user-specified callback function that executes when there is an
+error in media functions.</p>
 
 <pre class="prettyprint"><code>function(error) {
     // Handle the error
@@ -1845,7 +2040,8 @@ function recordAudio() {
 
 <ul>
 <li>
-<strong>error:</strong> The error returned by the device. (<code><a href="cordova_media_media.md.html#MediaError">MediaError</a></code>)</li>
+<strong>error</strong>: The error returned by the device. <em>(<a href="cordova_media_media.md.html#MediaError">MediaError</a>)</em>
+</li>
 </ul>
 </div>
         </div>

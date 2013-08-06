@@ -1,0 +1,148 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF
+ * or more contributor license agreements.  See th
+ * distributed with this work for additional infor
+ * regarding copyright ownership.  The ASF license
+ * to you under the Apache License, Version 2.0 (t
+ * "License"); you may not use this file except in
+ * with the License.  You may obtain a copy of the
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to
+ * software distributed under the License is distr
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * KIND, either express or implied.  See the Licen
+ * specific language governing permissions and lim
+ * under the License.
+ */
+
+var DESC_NEW_LINE = "\n\t\t      #";
+
+var util         = require('util'),
+    fs           = require('fs'),
+    childProcess = require('child_process'),
+    path         = require("path"),
+    rexp_minified = new RegExp("\\.min\\.js$"),
+    rexp_src = new RegExp('\\.js$');
+
+// HELPERS
+// Iterates over a directory
+function forEachFile(root, cbFile, cbDone) {
+    var count = 0;
+
+    function scan(name) {
+        ++count;
+
+        fs.stat(name, function (err, stats) {
+            if (err) cbFile(err);
+
+            if (stats.isDirectory()) {
+                fs.readdir(name, function (err, files) {
+                    if (err) cbFile(err);
+
+                    files.forEach(function (file) {
+                        scan(path.join(name, file));
+                    });
+                    done();
+                });
+            } else if (stats.isFile()) {
+                cbFile(null, name, stats, done);
+            } else {
+                done();
+            }
+        });
+    }
+
+    function done() {
+        --count;
+        if (count === 0 && cbDone) cbDone();
+    }
+
+    scan(root);
+}
+
+desc("runs hint and test");
+task('default', ['hint','test'], function () {});
+
+desc("run all tests in node - jake test [path]");
+task('test', [], function () {
+    require('./scripts/test')(null, process.argv.length >= 4 ? process.argv[3] : null);
+}, true);
+
+desc('check sources with JSHint');
+task('hint', ['complainwhitespace'], function () {
+    var knownWarnings = [
+        "Redefinition of 'FileReader'",
+        "Redefinition of 'require'",
+        "Read only",
+        "Redefinition of 'console'"
+    ];
+    var filterKnownWarnings = function(el, index, array) {
+        var wut = true;
+        // filter out the known warnings listed out above
+        knownWarnings.forEach(function(e) {
+            wut = wut && (el.indexOf(e) == -1);
+        });
+        wut = wut && (!el.match(/\d+ errors/));
+        return wut;
+    };
+
+    childProcess.exec("jshint framework/lib bin/lib bin/test bin/templates/project/cordova bin/templates/project/project.json --config .jshint --extra-ext .json",function(err,stdout,stderr) {
+        var exs = stdout.split('\n');
+        console.log(exs.filter(filterKnownWarnings).join('\n'));
+        complete();
+    });
+}, true);
+
+var complainedAboutWhitespace = false
+
+desc('complain about what fixwhitespace would fix');
+task('complainwhitespace', function() {
+    processWhiteSpace(function(file, newSource) {
+        if (!complainedAboutWhitespace) {
+            console.log("files with whitespace issues: (to fix: `jake fixwhitespace`)")
+            complainedAboutWhitespace = true
+        }
+
+        console.log("   " + file)
+    })
+}, true);
+
+desc('converts tabs to four spaces, eliminates trailing white space, converts newlines to proper form - enforcing style guide ftw!');
+task('fixwhitespace', function() {
+    processWhiteSpace(function(file, newSource) {
+        if (!complainedAboutWhitespace) {
+            console.log("fixed whitespace issues in:")
+            complainedAboutWhitespace = true
+        }
+
+        fs.writeFileSync(file, newSource, 'utf8');
+        console.log("   " + file)
+    })
+}, true);
+
+function processWhiteSpace(processor) {
+    forEachFile('framework', function(err, file, stats, cbDone) {
+        //if (err) throw err;
+        if (rexp_minified.test(file) || !rexp_src.test(file)) {
+            cbDone();
+        } else {
+            var origsrc = src = fs.readFileSync(file, 'utf8');
+
+            // tabs -> four spaces
+            if (src.indexOf('\t') >= 0) {
+                src = src.split('\t').join('    ');
+            }
+
+            // eliminate trailing white space
+            src = src.replace(/ +\n/g, '\n');
+
+            if (origsrc !== src) {
+                // write it out yo
+                processor(file, src);
+            }
+            cbDone();
+        }
+    }, complete);
+}

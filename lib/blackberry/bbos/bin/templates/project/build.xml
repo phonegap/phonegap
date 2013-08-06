@@ -1,0 +1,154 @@
+<project name="Build and Deploy a Cordova BlackBerry WebWorks Project" default="help">
+<!--
+       Licensed to the Apache Software Foundation (ASF) under one
+       or more contributor license agreements.  See the NOTICE file
+       distributed with this work for additional information
+       regarding copyright ownership.  The ASF licenses this file
+       to you under the Apache License, Version 2.0 (the
+       "License"); you may not use this file except in compliance
+       with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing,
+       software distributed under the License is distributed on an
+       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+       KIND, either express or implied.  See the License for the
+       specific language governing permissions and limitations
+       under the License.
+-->
+    <!-- LOAD ANT-CONTRIB LIBRARY -->
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+      <classpath>
+        <pathelement location="./lib/ant-contrib/ant-contrib-1.0b3.jar" />
+      </classpath>
+    </taskdef>
+
+    <!-- LOAD PROPERTIES -->
+
+    <property prefix="properties" file="project.properties" />
+    <property name="build.dir"    location="build" />
+    <property name="widget.dir"   location="${build.dir}/widget" />
+    <property name="code.sign"    value="false" />
+    <property name="globalization" value="false" />
+
+    <target name="blackberry" >
+        <property name="subant.file"  value="blackberry.xml" />
+    </target>
+
+    <target name="playbook" >
+        <property name="subant.file"  value="playbook.xml" />
+    </target>
+
+    <target name="load-device">
+        <subant target="load-device">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <target name="load-simulator">
+        <subant target="load-simulator">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <target name="debug-simulator">
+        <subant target="debug-simulator">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <target name="debug-device">
+        <subant target="debug-device">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <target name="build">
+        <subant target="build">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <target name="clean">
+        <subant target="clean">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <target name="clean-device">
+        <subant target="clean-device">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <target name="package-app">
+        <subant target="package-app">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <target name="clean-simulator">
+        <subant target="clean-simulator">
+            <fileset dir="." includes="${subant.file}"/>
+        </subant>
+    </target>
+
+    <!-- HELP -->
+
+    <target name="help">
+        <echo>
+NAME
+  ${ant.project.name}
+
+SYNOPSIS
+  ant TARGET COMMAND [-D&lt;argument&gt;=&lt;value&gt;]...
+
+DESCRIPTION
+  You can build and deploy your project to a device or simulator.
+
+TARGETS
+  blackberry ........ Builds a cod file and deploys to a device or simulator
+
+  playbook .......... Builds a bar file and deploys to a device or simulator
+
+COMMANDS
+  help .............. Show this help menu.
+                        ant, ant help
+
+  load-device ....... Builds and deploys project to a connected USB device.
+                        ant TARGET load-device
+
+  load-simulator .... Builds and deploys project to default simulator.
+                        ant TARGET load-simulator
+
+  build ............. Compiles and packages the project for deployment.
+                        ant TARGET build
+
+  package-app ....... Packages the app into a WebWorks-compatible .zip file.
+                        ant TARGET package-app
+
+  clean ............. Remove all files from the build/ directory.
+                        ant TARGET clean
+
+  clean-device ...... Remove this project from the connected USB device.
+                        ant TARGET clean-device
+
+  clean-simulator ... Remove this project from the simulator (takes a while).
+                        ant TARGET clean-simulator
+
+GETTING STARTED
+  1. Edit project.properties
+
+  2. &lt;ant load-simulator&gt; to run the project on the simulator
+
+  3. Customize your project by editing www/config.xml
+
+  4. To run the project on a BlackBerry device, you will need to obtain
+     code signing keys from RIM. Once you have the key, a project is
+     installed by connecting a BlackBerry via USB and running
+     &lt;ant load-device&gt;.
+        </echo>
+    </target>
+</project>

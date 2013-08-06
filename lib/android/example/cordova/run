@@ -1,3 +1,4 @@
+#!/bin/bash
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -15,10 +16,66 @@
 # specific language governing permissions and limitations
 # under the License.
 
-#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_PATH=$( cd "$DIR/.." && pwd )
 
-set -e
+function run_on_device_or_emulator {
+    devices=`$DIR/lib/list-devices`
+    if [ $? = 0 ]; then
+        $DIR/lib/install-device
+    else
+        run_on_emulator
+    fi
+}
 
-CORDOVA_PATH=$( cd "$( dirname "$0" )" && pwd )
+function run_on_emulator {
+    emulators=`$DIR/lib/list-started-emulators`
+    if [ $? = 0 ] ; then
+        $DIR/lib/install-emulator
+    else
+        images=`$DIR/lib/list-emulator-images`
+        if [ $? = 0 ] ; then
+            $DIR/lib/start-emulator
+            $DIR/lib/install-emulator
+        else
+            echo "No devices/emulators started nor images available to start. How are we supposed to do this, then?"
+            exit 2
+        fi
+    fi
+}
 
-bash "$CORDOVA_PATH"/cordova run
+
+
+if [[ "$#" -eq 2 ]] ; then
+    # TODO: the order of arguments here may be reversed from the assumption below
+    $DIR/build $2
+    if [[ $1 == "--device" ]] ; then
+        $DIR/lib/install-device
+    elif [[ $1 == "--emulator" ]] ; then
+        run_on_emulator
+    elif [[ $1 =~ "--target=" ]]; then
+        $DIR/lib/install-device $1
+    else
+        echo "Error : '$1' is not recognized as an install option"
+    fi
+elif [[ "$#" -eq 1 ]] ; then
+    if [[ $1 == "--debug" || $1 == "--release" || $1 == "--nobuild" ]] ; then
+        $DIR/build $1
+        run_on_device_or_emulator
+    elif [[ $1 == "--device" ]] ; then
+        $DIR/build
+        $DIR/lib/install-device
+    elif [[ $1 == "--emulator" ]] ; then
+        $DIR/build
+        run_on_emulator
+    elif [[ $1 =~ "--target=" ]]; then
+        $DIR/build
+        $DIR/lib/install-device $1
+    else
+        echo "Error : '$1' is not recognized as an install option"
+    fi
+else
+    echo "Warning : [ --device | --emulate | --target=<targetID> ] not specified, using defaults."
+    $DIR/build
+    run_on_device_or_emulator
+fi

@@ -32,8 +32,11 @@
             <small>
                 <select><optgroup label="English" value="en">
 <option value="edge">edge</option>
+<option value="2.9.0rc1">2.9.0rc1</option>
+<option selected value="2.9.0">2.9.0</option>
+<option value="2.8.0">2.8.0</option>
 <option value="2.7.0rc1">2.7.0rc1</option>
-<option selected value="2.7.0">2.7.0</option>
+<option value="2.7.0">2.7.0</option>
 <option value="2.6.0rc1">2.6.0rc1</option>
 <option value="2.6.0">2.6.0</option>
 <option value="2.5.0rc1">2.5.0rc1</option>
@@ -108,7 +111,6 @@
 <option value="notification.alert_quick_example">      - Quick Example</option>
 <option value="notification.alert_full_example">      - Full Example</option>
 <option value="notification.alert_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
-<option value="notification.alert_bada_2_x_quirks">      - Bada 2.x Quirks</option>
 <option value="notification.confirm">notification.confirm</option>
 <option value="notification.confirm_description">      - Description</option>
 <option value="notification.confirm_confirmcallback">      - confirmCallback</option>
@@ -116,8 +118,6 @@
 <option value="notification.confirm_quick_example">      - Quick Example</option>
 <option value="notification.confirm_full_example">      - Full Example</option>
 <option value="notification.confirm_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
-<option value="notification.confirm_bada_2_x_quirks">      - Bada 2.x Quirks</option>
-<option value="notification.confirm_bada_1_2_quirks">      - Bada 1.2 Quirks</option>
 <option value="notification.prompt">notification.prompt</option>
 <option value="notification.prompt_description">      - Description</option>
 <option value="notification.prompt_promptcallback">      - promptCallback</option>
@@ -130,14 +130,14 @@
 <option value="notification.beep_quick_example">      - Quick Example</option>
 <option value="notification.beep_full_example">      - Full Example</option>
 <option value="notification.beep_android_quirks">      - Android Quirks</option>
-<option value="notification.beep_iphone_quirks">      - iPhone Quirks</option>
+<option value="notification.beep_ios_quirks">      - iOS Quirks</option>
 <option value="notification.beep_windows_phone_7_and_8_quirks">      - Windows Phone 7 and 8 Quirks</option>
 <option value="notification.beep_tizen_quirks">      - Tizen Quirks</option>
 <option value="notification.vibrate">notification.vibrate</option>
 <option value="notification.vibrate_supported_platforms">      - Supported Platforms</option>
 <option value="notification.vibrate_quick_example">      - Quick Example</option>
 <option value="notification.vibrate_full_example">      - Full Example</option>
-<option value="notification.vibrate_iphone_quirks">      - iPhone Quirks</option></select></small>
+<option value="notification.vibrate_ios_quirks">      - iOS Quirks</option></select></small>
         </div>
 
         <div id="sidebar">
@@ -163,8 +163,11 @@
 </ul>
 <h1>Guides</h1>
 <ul>
-<li><a href="guide_getting-started_index.md.html#Getting%20Started%20Guides">Getting Started Guides</a></li>
+<li><a href="guide_overview_index.md.html#Overview">Overview</a></li>
+<li><a href="guide_getting-started_index.md.html#Platform%20Guides">Platform Guides</a></li>
+<li><a href="guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">The Cordova Command-line Interface</a></li>
 <li><a href="guide_command-line_index.md.html#Command-Line%20Usage">Command-Line Usage</a></li>
+<li><a href="guide_privacy_index.md.html#Privacy%20Guide">Privacy Guide</a></li>
 <li><a href="guide_upgrading_index.md.html#Upgrading%20Guides">Upgrading Guides</a></li>
 <li><a href="guide_project-settings_index.md.html#Project%20Settings">Project Settings</a></li>
 <li><a href="guide_plugin-development_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a></li>
@@ -187,11 +190,11 @@
 </h2>
 
 <ul>
-<li><a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a></li>
-<li><a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a></li>
-<li><a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a></li>
-<li><a href="cordova_notification_notification.md.html#notification.beep">notification.beep</a></li>
-<li><a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a></li>
+<li><code><a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a></code></li>
+<li><code><a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a></code></li>
+<li><code><a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a></code></li>
+<li><code><a href="cordova_notification_notification.md.html#notification.beep">notification.beep</a></code></li>
+<li><code><a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a></code></li>
 </ul>
 <h2>
 <a name="Notification_permissions">Permissions</a>
@@ -207,15 +210,6 @@
 <h4>app/AndroidManifest.xml</h4>
 
 <pre class="prettyprint"><code>&lt;uses-permission android:name="android.permission.VIBRATE" /&gt;
-</code></pre>
-
-<h3>Bada</h3>
-
-<h4>manifest.xml</h4>
-
-<pre class="prettyprint"><code>&lt;Privilege&gt;
-    &lt;Name&gt;SYSTEM_SERVICE&lt;/Name&gt;
-&lt;/Privilege&gt;
 </code></pre>
 
 <h3>BlackBerry WebWorks</h3>
@@ -235,11 +229,6 @@
 <h4>config.xml</h4>
 
 <pre class="prettyprint"><code>&lt;plugin name="<a href="cordova_notification_notification.md.html#Notification">Notification</a>" value="CDVNotification" /&gt;
-</code></pre>
-
-<h3>webOS</h3>
-
-<pre class="prettyprint"><code>No permissions are required.
 </code></pre>
 
 <h3>Windows Phone</h3>
@@ -262,19 +251,23 @@
 
 <ul>
 <li>
-<strong>message:</strong> Dialog message (<code>String</code>)</li>
+<strong>message</strong>: Dialog message. <em>(String)</em>
+</li>
 <li>
-<strong>alertCallback:</strong> Callback to invoke when alert dialog is dismissed. (<code>Function</code>)</li>
+<strong>alertCallback</strong>: Callback to invoke when alert dialog is dismissed. <em>(Function)</em>
+</li>
 <li>
-<strong>title:</strong> Dialog title (<code>String</code>) (Optional, Default: "Alert")</li>
+<strong>title</strong>: Dialog title. <em>(String)</em> (Optional, defaults to <code>Alert</code>)</li>
 <li>
-<strong>buttonName:</strong> Button name (<code>String</code>) (Optional, Default: "OK")</li>
+<strong>buttonName</strong>: Button name. <em>(String)</em> (Optional, defaults to <code>OK</code>)</li>
 </ul>
 <h2>
 <a name="notification.alert_description">Description</a>
 </h2>
 
-<p>Most Cordova implementations use a native dialog box for this feature.  However, some platforms simply use the browser's <code>alert</code> function, which is typically less customizable.</p>
+<p>Most Cordova implementations use a native dialog box for this feature,
+but some platforms use the browser's <code>alert</code> function, which is
+typically less customizable.</p>
 
 <h2>
 <a name="notification.alert_supported_platforms">Supported Platforms</a>
@@ -283,18 +276,16 @@
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
-<li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
-<li>webOS</li>
+<li>iOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
 <a name="notification.alert_quick_example">Quick Example</a>
 </h2>
 
-<pre class="prettyprint"><code>// Android / BlackBerry WebWorks (OS 5.0 and higher) / iPhone / Tizen
+<pre class="prettyprint"><code>// Android / BlackBerry WebWorks (OS 5.0 and higher) / iOS / Tizen
 //
 function alertDismissed() {
     // do something
@@ -320,20 +311,20 @@ navigator.<a href="cordova_notification_notification.md.html#notification.alert"
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         // Empty
     }
 
     // alert dialog dismissed
-    function alertDismissed() {
-        // do something
-    }
+        function alertDismissed() {
+            // do something
+        }
 
     // Show a custom alertDismissed
     //
@@ -359,47 +350,51 @@ navigator.<a href="cordova_notification_notification.md.html#notification.alert"
 </h2>
 
 <ul>
-<li>There is no built in browser alert, so if you want to just write alert('foo'); you can assign window.alert = navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>;</li>
-<li>alert + confirm calls are non-blocking, and result is only available asynchronously.</li>
-</ul>
-<h2>
-<a name="notification.alert_bada_2_x_quirks">Bada 2.x Quirks</a>
-</h2>
+<li>
+<p>There is no built-in browser alert, but you can bind one as follows to call <code>alert()</code> in the global scope:</p>
 
-<ul>
-<li>alert uses javascript alert</li>
+<pre class="prettyprint"><code>window.alert = navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>;
+</code></pre>
+</li>
+<li><p>Both <code>alert</code> and <code>confirm</code> are non-blocking calls, results of which are only available asynchronously.</p></li>
 </ul>
 <hr>
 <h1><a name="notification.confirm">notification.confirm</a></h1>
 
-<p>Shows a customizable confirmation dialog box.</p>
+<p>Displays a customizable confirmation dialog box.</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a>(message, confirmCallback, [title], [buttonLabels])
 </code></pre>
 
 <ul>
 <li>
-<strong>message:</strong> Dialog message (<code>String</code>)</li>
+<strong>message</strong>: Dialog message. <em>(String)</em>
+</li>
 <li>
-<strong>confirmCallback:</strong> - Callback to invoke with index of button pressed (1, 2 or 3) or when the dialog is dismissed without a button press (0), (<code>Function</code>)</li>
+<strong>confirmCallback</strong>: Callback to invoke with index of button pressed (1, 2, or 3) or when the dialog is dismissed without a button press (0). <em>(Function)</em>
+</li>
 <li>
-<strong>title:</strong> Dialog title (<code>String</code>) (Optional, Default: "Confirm")</li>
+<strong>title</strong>: Dialog title. <em>(String)</em> (Optional, defaults to <code>Confirm</code>)</li>
 <li>
-<strong>buttonLabels:</strong> Comma separated string with button labels (<code>String</code>) (Optional, Default: "OK,Cancel")</li>
+<strong>buttonLabels</strong>: Comma-separated string specifying button labels. <em>(String)</em> (Optional, defaults to <code>OK,Cancel</code>)</li>
 </ul>
 <h2>
 <a name="notification.confirm_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a></code> displays a native dialog box that is more customizable than the browser's <code>confirm</code> function.</p>
+<p>The <code><a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a></code> method displays a native dialog box that is
+more customizable than the browser's <code>confirm</code> function.</p>
 
 <h2>
 <a name="notification.confirm_confirmcallback">confirmCallback</a>
 </h2>
 
-<p>The <code>confirmCallback</code> is called when the user has pressed one of the buttons on the confirmation dialog box.</p>
+<p>The <code>confirmCallback</code> executes when the user presses one of the
+buttons in the confirmation dialog box.</p>
 
-<p>The callback takes the argument <code>buttonIndex</code> (<code>Number</code>), which is the index of the pressed button. It's important to note that the index uses one-based indexing, so the value will be <code>1</code>, <code>2</code>, <code>3</code>, etc.</p>
+<p>The callback takes the argument <code>buttonIndex</code> <em>(Number)</em>, which is the
+index of the pressed button. Note that the index uses one-based
+indexing, so the value is <code>1</code>, <code>2</code>, <code>3</code>, etc.</p>
 
 <h2>
 <a name="notification.confirm_supported_platforms">Supported Platforms</a>
@@ -408,10 +403,9 @@ navigator.<a href="cordova_notification_notification.md.html#notification.alert"
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
-<li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
+<li>iOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 <li>Windows 8</li>
 </ul>
 <h2>
@@ -427,10 +421,10 @@ function onConfirm(buttonIndex) {
 //
 function showConfirm() {
     navigator.<a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a>(
-        'You are the winner!',  // message
-        onConfirm,              // callback to invoke with index of button pressed
-        'Game Over',            // title
-        'Restart,Exit'          // buttonLabels
+        'You are the winner!', // message
+         onConfirm,            // callback to invoke with index of button pressed
+        'Game Over',           // title
+        'Restart,Exit'         // buttonLabels
     );
 }
 </code></pre>
@@ -447,11 +441,11 @@ function showConfirm() {
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         // Empty
@@ -466,10 +460,10 @@ function showConfirm() {
     //
     function showConfirm() {
         navigator.<a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a>(
-            'You are the winner!',  // message
-            onConfirm,              // callback to invoke with index of button pressed
-            'Game Over',            // title
-            'Restart,Exit'          // buttonLabels
+            'You are the winner!', // message
+             onConfirm,            // callback to invoke with index of button pressed
+            'Game Over',           // title
+            'Restart,Exit'         // buttonLabels
         );
     }
 
@@ -486,65 +480,57 @@ function showConfirm() {
 </h2>
 
 <ul>
-<li>There is no built-in browser function for <code>window.confirm</code>
-<ul>
-<li>You can bind <code>window.confirm</code> by assigning <code>window.confirm = navigator.<a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a>;</code>.</li>
-</ul>
-</li>
-<li>Calls to <code>alert</code> and <code>confirm</code> are non-blocking and result is only available asynchronously.</li>
-</ul>
-<h2>
-<a name="notification.confirm_bada_2_x_quirks">Bada 2.x Quirks</a>
-</h2>
-
-<ul>
 <li>
-<code>confirm</code> uses the browser's built-in <code>alert</code> function.</li>
-</ul>
-<h2>
-<a name="notification.confirm_bada_1_2_quirks">Bada 1.2 Quirks</a>
-</h2>
+<p>There is no built-in browser function for <code>window.confirm</code>, but you can bind it by assigning:</p>
 
-<ul>
-<li>Ignore button names, always <code>'OK|Cancel'</code>.</li>
+<pre class="prettyprint"><code>window.confirm = navigator.<a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a>;
+</code></pre>
+</li>
+<li><p>Calls to <code>alert</code> and <code>confirm</code> are non-blocking, so the result is only available asynchronously.</p></li>
 </ul>
 <hr>
 <h1><a name="notification.prompt">notification.prompt</a></h1>
 
 <p>Shows a customizable prompt dialog box.</p>
 
-<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a>(message, promptCallback, [title], [buttonLabels])
+<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a>(message, promptCallback, [title], [buttonLabels], [defaultText])
 </code></pre>
 
 <ul>
 <li>
-<strong>message:</strong> Dialog message (<code>String</code>)</li>
+<strong>message</strong>: Dialog message. <em>(String)</em>
+</li>
 <li>
-<strong>promptCallback:</strong> - Callback to invoke when a button is pressed (<code>Function</code>)</li>
+<strong>promptCallback</strong>: Callback to invoke when a button is pressed. <em>(Function)</em>
+</li>
 <li>
-<strong>title:</strong> Dialog title (<code>String</code>) (Optional, Default: "Prompt")</li>
+<strong>title</strong>: Dialog title <em>(String)</em> (Optional, defaults to <code>Prompt</code>)</li>
 <li>
-<strong>buttonLabels:</strong> Array of strings for the button labels (<code>Array</code>) (Optional, Default: ["OK","Cancel"])</li>
+<strong>buttonLabels</strong>: Array of strings specifying button labels <em>(Array)</em> (Optional, defaults to <code>["OK","Cancel"]</code>)</li>
+<li>
+<strong>defaultText</strong>: Default textbox input value (<code>String</code>) (Optional, Default: "Default text")</li>
 </ul>
 <h2>
 <a name="notification.prompt_description">Description</a>
 </h2>
 
-<p>Function <code><a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a></code> displays a native dialog box that is more customizable than the browser's <code>prompt</code> function.</p>
+<p>The <code><a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a></code> method displays a native dialog box that is
+more customizable than the browser's <code>prompt</code> function.</p>
 
 <h2>
 <a name="notification.prompt_promptcallback">promptCallback</a>
 </h2>
 
-<p>The <code>promptCallback</code> is called when the user has pressed one of the buttons on the prompt dialog box.</p>
-
-<p>The callback takes the argument <code>results</code> which contains the following properties:</p>
+<p>The <code>promptCallback</code> executes when the user presses one of the buttons
+in the prompt dialog box. The <code>results</code> object passed to the callback
+contains the following properties:</p>
 
 <ul>
 <li>
-<strong>buttonIndex:</strong> (<code>Number</code>), which is the index of the pressed button. It's important to note that the index uses one-based indexing, so the value will be <code>1</code>, <code>2</code>, <code>3</code>, etc.</li>
+<strong>buttonIndex</strong>: The index of the pressed button. <em>(Number)</em> Note that the index uses one-based indexing, so the value is <code>1</code>, <code>2</code>, <code>3</code>, etc.</li>
 <li>
-<strong>input1:</strong> (<code>String</code>), which is the text entered in the prompt dialog box.</li>
+<strong>input1</strong>: The text entered in the prompt dialog box. <em>(String)</em>
+</li>
 </ul>
 <h2>
 <a name="notification.prompt_supported_platforms">Supported Platforms</a>
@@ -552,7 +538,7 @@ function showConfirm() {
 
 <ul>
 <li>Android</li>
-<li>iPhone</li>
+<li>iOS</li>
 </ul>
 <h2>
 <a name="notification.prompt_quick_example">Quick Example</a>
@@ -570,7 +556,8 @@ function showPrompt() {
         'Please enter your name',  // message
         onPrompt,                  // callback to invoke
         'Registration',            // title
-        ['Ok','Exit']              // buttonLabels
+        ['Ok','Exit'],             // buttonLabels
+        'Jane Doe'                 // defaultText
     );
 }
 </code></pre>
@@ -587,11 +574,11 @@ function showPrompt() {
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         // Empty
@@ -609,7 +596,8 @@ function showPrompt() {
             'Please enter your name',  // message
             onPrompt,                  // callback to invoke
             'Registration',            // title
-            ['Ok','Exit']              // buttonLabels
+            ['Ok','Exit'],             // buttonLabels
+            'Jane Doe'                 // defaultText
         );
     }
 
@@ -626,20 +614,21 @@ function showPrompt() {
 </h2>
 
 <ul>
-<li>Android supports up to a maximum of 3 buttons.  Additional button labels over 3 are ignored.</li>
-<li>On Android 3.0 and later, the buttons will be displayed in reverse order for devices using the Holo theme.</li>
+<li>Android supports a maximum of three buttons, and ignores any more than that.</li>
+<li>On Android 3.0 and later, buttons are displayed in reverse order for devices that use the Holo theme.</li>
 </ul>
 <hr>
 <h1><a name="notification.beep">notification.beep</a></h1>
 
-<p>The device will play a beep sound.</p>
+<p>The device plays a beep sound.</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.beep">notification.beep</a>(times);
 </code></pre>
 
 <ul>
 <li>
-<strong>times:</strong> The number of times to repeat the beep (<code>Number</code>)</li>
+<strong>times</strong>: The number of times to repeat the beep. <em>(Number)</em>
+</li>
 </ul>
 <h2>
 <a name="notification.beep_supported_platforms">Supported Platforms</a>
@@ -648,10 +637,9 @@ function showPrompt() {
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
-<li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
+<li>iOS</li>
 <li>Tizen</li>
+<li>Windows Phone 7 and 8</li>
 </ul>
 <h2>
 <a name="notification.beep_quick_example">Quick Example</a>
@@ -673,11 +661,11 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         // Empty
@@ -720,19 +708,19 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
 </h2>
 
 <ul>
-<li>Android plays the default "<a href="cordova_notification_notification.md.html#Notification">Notification</a> ringtone" specified under the "Settings/Sound &amp; Display" panel.</li>
+<li>Android plays the default <strong><a href="cordova_notification_notification.md.html#Notification">Notification</a> ringtone</strong> specified under the <strong>Settings/Sound &amp; Display</strong> panel.</li>
 </ul>
 <h2>
-<a name="notification.beep_iphone_quirks">iPhone Quirks</a>
+<a name="notification.beep_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
 <li>Ignores the beep count argument.</li>
-<li>There is no native beep API for iPhone.
+<li>The iPhone does not feature a native beep API.
 <ul>
-<li>Cordova implements beep by playing an audio file via the media API.</li>
-<li>The user must provide a file with the desired beep tone.</li>
-<li>This file must be less than 30 seconds long, located in the www/ root, and must be named <code>beep.wav</code>.</li>
+<li>Cordova implements beeps by playing an audio file via the media API.</li>
+<li>The app must provide a file with the desired beep tone.</li>
+<li>This file must be less than 30 seconds long, located in the <code>www</code> root directory, and must be named <code>beep.wav</code>.</li>
 </ul>
 </li>
 </ul>
@@ -741,15 +729,15 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
 </h2>
 
 <ul>
-<li>Cordova lib includes a generic beep file that is used. </li>
+<li>Relies on a generic beep file from the Cordova distribution.</li>
 </ul>
 <h2>
 <a name="notification.beep_tizen_quirks">Tizen Quirks</a>
 </h2>
 
 <ul>
-<li>Tizen implements beep by playing an audio file via the media API.</li>
-<li>This beep file must be short, named <code>beep.wav</code> and has to be located in a 'sounds' sub-directory of the application root directory.</li>
+<li>Tizen implements beeps by playing an audio file via the media API.</li>
+<li>The beep file must be short, must be located in a <code>sounds</code> sub-directory of the application's root directory, and must be named <code>beep.wav</code>.</li>
 </ul>
 <hr>
 <h1><a name="notification.vibrate">notification.vibrate</a></h1>
@@ -761,7 +749,8 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
 
 <ul>
 <li>
-<strong>time:</strong> Milliseconds to vibrate the device. 1000 milliseconds equals 1 second (<code>Number</code>)</li>
+<strong>time</strong>: Milliseconds to vibrate the device, where 1000 milliseconds equals 1 second. <em>(Number)</em>
+</li>
 </ul>
 <h2>
 <a name="notification.vibrate_supported_platforms">Supported Platforms</a>
@@ -770,9 +759,8 @@ navigator.<a href="cordova_notification_notification.md.html#notification.beep">
 <ul>
 <li>Android</li>
 <li>BlackBerry WebWorks (OS 5.0 and higher)</li>
-<li>iPhone</li>
+<li>iOS</li>
 <li>Windows Phone 7 and 8</li>
-<li>Bada 1.2 &amp; 2.x</li>
 </ul>
 <h2>
 <a name="notification.vibrate_quick_example">Quick Example</a>
@@ -795,11 +783,11 @@ navigator.<a href="cordova_notification_notification.md.html#notification.vibrat
     &lt;script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"&gt;&lt;/script&gt;
     &lt;script type="text/javascript" charset="utf-8"&gt;
 
-    // Wait for Cordova to load
+    // Wait for device API libraries to load
     //
     document.<a href="cordova_inappbrowser_inappbrowser.md.html#addEventListener">addEventListener</a>("<a href="cordova_events_events.md.html#deviceready">deviceready</a>", onDeviceReady, false);
 
-    // Cordova is ready
+    // device APIs are available
     //
     function onDeviceReady() {
         // Empty
@@ -838,12 +826,12 @@ navigator.<a href="cordova_notification_notification.md.html#notification.vibrat
 </code></pre>
 
 <h2>
-<a name="notification.vibrate_iphone_quirks">iPhone Quirks</a>
+<a name="notification.vibrate_ios_quirks">iOS Quirks</a>
 </h2>
 
 <ul>
 <li>
-<p><strong>time:</strong> Ignores the time and vibrates for a pre-set amount of time.</p>
+<p><strong>time</strong>: Ignores the specified time and vibrates for a pre-set amount of time.</p>
 
 <pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a>();
 navigator.<a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a>(2500);   // 2500 is ignored

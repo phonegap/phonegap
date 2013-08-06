@@ -1,0 +1,45 @@
+#! /bin/sh
+#       Licensed to the Apache Software Foundation (ASF) under one
+#       or more contributor license agreements.  See the NOTICE file
+#       distributed with this work for additional information
+#       regarding copyright ownership.  The ASF licenses this file
+#       to you under the Apache License, Version 2.0 (the
+#       "License"); you may not use this file except in compliance
+#       with the License.  You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#       Unless required by applicable law or agreed to in writing,
+#       software distributed under the License is distributed on an
+#       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#       KIND, either express or implied.  See the License for the
+#       specific language governing permissions and limitations
+#       under the License.
+#
+# create a cordova/blackberry project
+#
+# USAGE
+#   ./create [path package appname]
+#
+#!/bin/sh
+
+CURRENT_DIR=$(pwd)
+BIN_DIR=$(dirname "$0")
+
+#Run check_reqs before doing anything and exit if there's an error
+"$BIN_DIR"/check_reqs
+if [ ${?} -ne 0 ]; then
+    exit 1
+fi
+
+#Run npm install every time (even if node_modules folder is present) to cover platform upgrade
+cd "$BIN_DIR"/..
+#Removed sudo usage so that node modules are not ownder by root
+npm install
+cd "$CURRENT_DIR"
+
+if ! [ $? -eq 0 ]; then
+  echo "NPM install failed. Aborting."
+else
+  node "$BIN_DIR"/create.js "$@"
+fi

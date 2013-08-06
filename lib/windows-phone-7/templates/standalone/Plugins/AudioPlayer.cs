@@ -27,6 +27,7 @@ using System.Windows.Resources;
 
 namespace WPCordovaClassLib.Cordova.Commands
 {
+
     /// <summary>
     /// Implements audio record and play back functionality.
     /// </summary>
@@ -62,6 +63,7 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         #endregion
 
+
         /// <summary>
         /// The AudioHandler object
         /// </summary>
@@ -76,6 +78,8 @@ namespace WPCordovaClassLib.Cordova.Commands
         /// Xna game loop dispatcher
         /// </summary>
         DispatcherTimer dtXna;
+
+        
 
         /// <summary>
         /// Output buffer
@@ -127,6 +131,8 @@ namespace WPCordovaClassLib.Cordova.Commands
             this.handler = handler;
             this.id = id;
         }
+
+       
 
         /// <summary>
         /// Destroys player and stop audio playing or recording
@@ -194,8 +200,26 @@ namespace WPCordovaClassLib.Cordova.Commands
                     this.recorder.BufferDuration = TimeSpan.FromMilliseconds(500);
                     this.buffer = new byte[recorder.GetSampleSizeInBytes(this.recorder.BufferDuration)];
                     this.recorder.BufferReady += new EventHandler<EventArgs>(recorderBufferReady);
-                    this.memoryStream = new MemoryStream();
-                    this.memoryStream.InitializeWavStream(this.recorder.SampleRate);
+                    MemoryStream stream  = new MemoryStream();
+                    this.memoryStream = stream;
+                    int numBits = 16;
+                    int numBytes = numBits / 8;
+
+                    // inline version from AudioFormatsHelper
+                    stream.Write(System.Text.Encoding.UTF8.GetBytes("RIFF"), 0, 4);
+                    stream.Write(BitConverter.GetBytes(0), 0, 4);
+                    stream.Write(System.Text.Encoding.UTF8.GetBytes("WAVE"), 0, 4);
+                    stream.Write(System.Text.Encoding.UTF8.GetBytes("fmt "), 0, 4);
+                    stream.Write(BitConverter.GetBytes(16), 0, 4);
+                    stream.Write(BitConverter.GetBytes((short)1), 0, 2);
+                    stream.Write(BitConverter.GetBytes((short)1), 0, 2);
+                    stream.Write(BitConverter.GetBytes(this.recorder.SampleRate), 0, 4);
+                    stream.Write(BitConverter.GetBytes(this.recorder.SampleRate * numBytes), 0, 4);
+                    stream.Write(BitConverter.GetBytes((short)(numBytes)), 0, 2);
+                    stream.Write(BitConverter.GetBytes((short)(numBits)), 0, 2);
+                    stream.Write(System.Text.Encoding.UTF8.GetBytes("data"), 0, 4);
+                    stream.Write(BitConverter.GetBytes(0), 0, 4);
+
                     this.recorder.Start();
                     FrameworkDispatcher.Update();
                     this.SetState(PlayerState_Running);
@@ -284,7 +308,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                                 {
                                     this.player.Stop(); // stop it!
                                 }
-                                
+
                                 this.player.Source = null; // Garbage collect it.
                                 this.player.MediaOpened += MediaOpened;
                                 this.player.MediaEnded += MediaEnded;
@@ -312,7 +336,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                                 {
                                     using (BinaryReader br = new BinaryReader(fileResourceStreamInfo.Stream))
                                     {
-                                        byte[] data = br.ReadBytes((int)fileResourceStreamInfo.Stream.Length);          
+                                        byte[] data = br.ReadBytes((int)fileResourceStreamInfo.Stream.Length);
 
                                         string[] dirParts = filePath.Split('/');
                                         string dirName = "";
@@ -555,12 +579,17 @@ namespace WPCordovaClassLib.Cordova.Commands
         /// <returns></returns>
         private void SaveAudioClipToLocalStorage()
         {
-            if (this.memoryStream == null || this.memoryStream.Length <= 0)
+            if (memoryStream == null || memoryStream.Length <= 0)
             {
                 return;
             }
 
-            this.memoryStream.UpdateWavStream();
+            long position = memoryStream.Position;
+            memoryStream.Seek(4, SeekOrigin.Begin);
+            memoryStream.Write(BitConverter.GetBytes((int)memoryStream.Length - 8), 0, 4);
+            memoryStream.Seek(40, SeekOrigin.Begin);
+            memoryStream.Write(BitConverter.GetBytes((int)memoryStream.Length - 44), 0, 4);
+            memoryStream.Seek(position, SeekOrigin.Begin);
 
             try
             {
@@ -586,7 +615,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                 //TODO: log or do something else
                 throw;
             }
-        }    
+        }
 
         #region Xna loop
         /// <summary>

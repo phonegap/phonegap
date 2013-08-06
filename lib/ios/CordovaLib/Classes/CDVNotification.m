@@ -31,10 +31,11 @@
  *  message       The alert view message.
  *  title         The alert view title.
  *  buttons       The array of customized strings for the buttons.
+ *  defaultText   The input text for the textbox (if textbox exists).
  *  callbackId    The commmand callback id.
  *  dialogType    The type of alert view [alert | prompt].
  */
-- (void)showDialogWithMessage:(NSString*)message title:(NSString*)title buttons:(NSArray*)buttons callbackId:(NSString*)callbackId dialogType:(NSString*)dialogType
+- (void)showDialogWithMessage:(NSString*)message title:(NSString*)title buttons:(NSArray*)buttons defaultText:(NSString*)defaultText callbackId:(NSString*)callbackId dialogType:(NSString*)dialogType
 {
     CDVAlertView* alertView = [[CDVAlertView alloc]
         initWithTitle:title
@@ -53,6 +54,8 @@
 
     if ([dialogType isEqualToString:DIALOG_TYPE_PROMPT]) {
         alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+        UITextField* textField = [alertView textFieldAtIndex:0];
+        textField.text = defaultText;
     }
 
     [alertView show];
@@ -65,7 +68,7 @@
     NSString* title = [command argumentAtIndex:1];
     NSString* buttons = [command argumentAtIndex:2];
 
-    [self showDialogWithMessage:message title:title buttons:@[buttons] callbackId:callbackId dialogType:DIALOG_TYPE_ALERT];
+    [self showDialogWithMessage:message title:title buttons:@[buttons] defaultText:nil callbackId:callbackId dialogType:DIALOG_TYPE_ALERT];
 }
 
 - (void)confirm:(CDVInvokedUrlCommand*)command
@@ -75,7 +78,7 @@
     NSString* title = [command argumentAtIndex:1];
     NSArray* buttons = [command argumentAtIndex:2];
 
-    [self showDialogWithMessage:message title:title buttons:buttons callbackId:callbackId dialogType:DIALOG_TYPE_ALERT];
+    [self showDialogWithMessage:message title:title buttons:buttons defaultText:nil callbackId:callbackId dialogType:DIALOG_TYPE_ALERT];
 }
 
 - (void)prompt:(CDVInvokedUrlCommand*)command
@@ -84,8 +87,9 @@
     NSString* message = [command argumentAtIndex:0];
     NSString* title = [command argumentAtIndex:1];
     NSArray* buttons = [command argumentAtIndex:2];
+    NSString* defaultText = [command argumentAtIndex:3];
 
-    [self showDialogWithMessage:message title:title buttons:buttons callbackId:callbackId dialogType:DIALOG_TYPE_PROMPT];
+    [self showDialogWithMessage:message title:title buttons:buttons defaultText:defaultText callbackId:callbackId dialogType:DIALOG_TYPE_PROMPT];
 }
 
 /**
