@@ -1326,6 +1326,10 @@ static NSDictionary* org_apache_cordova_contacts_defaultFields = nil;
 
     if (ABPersonHasImageData(self.record)) {
         CFDataRef photoData = ABPersonCopyImageData(self.record);
+        if (!photoData) {
+            return;
+        }
+        
         NSData* data = (__bridge NSData*)photoData;
         // write to temp directory and store URI in photos array
         // get the temp directory path
